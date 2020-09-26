@@ -39,6 +39,6 @@ Public Class InputExcelClass
             Console.WriteLine("DB Query : " + masterQuery)
             funcDB.uploadDB(masterQuery)
         Next
-
+        'test
     End Sub
 End Class
