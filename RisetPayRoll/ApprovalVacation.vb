@@ -25,5 +25,7 @@
                 DGV_ApprovalVacation.Rows(i).DefaultCellStyle.BackColor = Color.LightGray
             End If
         Next
+
+        'EDITED BY RIKI
     End Sub
 End Class
