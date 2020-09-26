@@ -25,5 +25,11 @@
                 DGV_ApprovalVacation.Rows(i).DefaultCellStyle.BackColor = Color.LightGray
             End If
         Next
+
+        'COBA COBA GITHUB'
+    End Sub
+
+    Private Sub DateTimePicker1_ValueChanged(sender As Object, e As EventArgs) Handles DateTimePicker1.ValueChanged
+
     End Sub
 End Class
