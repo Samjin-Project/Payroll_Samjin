@@ -45,9 +45,11 @@
                          '{DateTimeRdate.Value.ToString("yyyy-MM-dd")}')"
         Console.WriteLine("DB Query : " + masterQuery)
         funcDB.uploadDB(masterQuery)
+
+
+        'Hallo Cacing, Saya Dita'
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         uploadData()
     End Sub
-End Class

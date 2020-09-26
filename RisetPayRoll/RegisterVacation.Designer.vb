@@ -22,7 +22,7 @@ Partial Class RegisterVacation
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.DGV_DataModify = New System.Windows.Forms.DataGridView()
         Me.Kolom_Nik = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -43,6 +43,7 @@ Partial Class RegisterVacation
         Me.ComboBox4 = New System.Windows.Forms.ComboBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.DateTimeRdate = New System.Windows.Forms.DateTimePicker()
         Me.DateTimeEdate = New System.Windows.Forms.DateTimePicker()
@@ -64,7 +65,6 @@ Partial Class RegisterVacation
         Me.TextBoxHolidayType = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBoxNama = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.DGV_DataModify, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
@@ -110,8 +110,8 @@ Partial Class RegisterVacation
         'Kolom_Nik
         '
         Me.Kolom_Nik.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Kolom_Nik.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Kolom_Nik.DefaultCellStyle = DataGridViewCellStyle1
         Me.Kolom_Nik.HeaderText = "NIK"
         Me.Kolom_Nik.Name = "Kolom_Nik"
         Me.Kolom_Nik.ReadOnly = True
@@ -294,6 +294,15 @@ Partial Class RegisterVacation
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(490, 467)
         Me.Panel4.TabIndex = 21
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(125, 417)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 47
+        Me.Button1.Text = "Save"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'Label10
         '
@@ -478,15 +487,6 @@ Partial Class RegisterVacation
         Me.TextBoxNama.Name = "TextBoxNama"
         Me.TextBoxNama.Size = New System.Drawing.Size(110, 20)
         Me.TextBoxNama.TabIndex = 0
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(125, 417)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 47
-        Me.Button1.Text = "Save"
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'RegisterVacation
         '
