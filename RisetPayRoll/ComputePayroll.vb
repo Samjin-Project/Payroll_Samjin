@@ -10,4 +10,8 @@
     Private Sub TextBox32_TextChanged(sender As Object, e As EventArgs) Handles TextBox32.TextChanged
 
     End Sub
+
+    Private Sub ComputePayroll_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class
