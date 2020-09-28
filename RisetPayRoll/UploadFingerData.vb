@@ -36,6 +36,7 @@ Public Class UploadFingerData
             Dim Departement As String = DS.Tables(0).Rows(i).Item(8)
             Console.WriteLine(Check_In.Length)
             Console.WriteLine(Check_Out.Length)
+
             If Check_In.Length > 4 And Check_Out.Length > 4 Then
                 Dim masterQuery As String = $"INSERT INTO `finger_employer`(`NIK`, `Nama_Karyawan`, `Date_Finger`, `Shift_Finger`, `On_Duty`, `Off_Duty`, `Check_In`, `Check_Out`, `Departement`) 
                  VALUES ('{DS.Tables(0).Rows(i).Item(0)}',
@@ -55,5 +56,9 @@ Public Class UploadFingerData
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         UploadExcel()
+    End Sub
+
+    Private Sub UploadFingerData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     End Sub
 End Class
