@@ -5,4 +5,6 @@
     'Second Update  By Uing
     'Second Update  By Uing
     'Second Update By Riki
+    'hallo salken kakak
+    'coba lagi nih
 End Class
