@@ -9,10 +9,10 @@
       <Value Profile="(Default)">payroll_db</Value>
     </Setting>
     <Setting Name="DB_User" Type="System.String" Scope="User">
-      <Value Profile="(Default)">client</Value>
+      <Value Profile="(Default)">root</Value>
     </Setting>
     <Setting Name="DB_Pass" Type="System.String" Scope="User">
-      <Value Profile="(Default)">client</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="Reso_Width" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
