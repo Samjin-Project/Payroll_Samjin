@@ -40,5 +40,6 @@ Public Class InputExcelClass
             funcDB.uploadDB(masterQuery)
         Next
         'test
+        'reza sup mencoba
     End Sub
 End Class
