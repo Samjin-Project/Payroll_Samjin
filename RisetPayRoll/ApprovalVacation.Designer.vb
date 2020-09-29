@@ -42,7 +42,6 @@ Partial Class ApprovalVacation
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.RadioButton4 = New System.Windows.Forms.RadioButton()
         Me.RadioButton3 = New System.Windows.Forms.RadioButton()
-        Me.kolom_seq = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.kolom_Aproval = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.Kolom_Approver = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Kolom_NamaKaryawan = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -85,7 +84,7 @@ Partial Class ApprovalVacation
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGV_ApprovalVacation.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DGV_ApprovalVacation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        Me.DGV_ApprovalVacation.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.kolom_seq, Me.kolom_Aproval, Me.Kolom_Approver, Me.Kolom_NamaKaryawan, Me.Kolom_VacCode, Me.Kolom_StartDate, Me.Kolom_EndDate, Me.Kolom_RequestDate, Me.Kolom_Tel})
+        Me.DGV_ApprovalVacation.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.kolom_Aproval, Me.Kolom_Approver, Me.Kolom_NamaKaryawan, Me.Kolom_VacCode, Me.Kolom_StartDate, Me.Kolom_EndDate, Me.Kolom_RequestDate, Me.Kolom_Tel})
         Me.DGV_ApprovalVacation.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DGV_ApprovalVacation.GridColor = System.Drawing.Color.LightGoldenrodYellow
         Me.DGV_ApprovalVacation.Location = New System.Drawing.Point(0, 0)
@@ -229,11 +228,6 @@ Partial Class ApprovalVacation
         Me.RadioButton3.Text = "Approval"
         Me.RadioButton3.UseVisualStyleBackColor = True
         '
-        'kolom_seq
-        '
-        Me.kolom_seq.HeaderText = "Seq"
-        Me.kolom_seq.Name = "kolom_seq"
-        '
         'kolom_Aproval
         '
         Me.kolom_Aproval.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
@@ -339,7 +333,6 @@ Partial Class ApprovalVacation
     Friend WithEvents RadioButton4 As RadioButton
     Friend WithEvents RadioButton3 As RadioButton
     Friend WithEvents Label1 As Label
-    Friend WithEvents kolom_seq As DataGridViewTextBoxColumn
     Friend WithEvents kolom_Aproval As DataGridViewComboBoxColumn
     Friend WithEvents Kolom_Approver As DataGridViewTextBoxColumn
     Friend WithEvents Kolom_NamaKaryawan As DataGridViewTextBoxColumn
