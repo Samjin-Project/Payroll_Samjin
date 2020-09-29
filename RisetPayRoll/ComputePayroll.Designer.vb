@@ -28,10 +28,6 @@ Partial Class ComputePayroll
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.DGV_ReviewDaily = New System.Windows.Forms.DataGridView()
-        Me.KolomPayroll_Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.KolomPayroll_Posisition = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.KolomPayroll_NIK = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.KolomPayroll_Nama = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Label46 = New System.Windows.Forms.Label()
         Me.TextBox33 = New System.Windows.Forms.TextBox()
@@ -126,6 +122,24 @@ Partial Class ComputePayroll
         Me.Label27 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBoxNama = New System.Windows.Forms.TextBox()
+        Me.TextBox35 = New System.Windows.Forms.TextBox()
+        Me.Label48 = New System.Windows.Forms.Label()
+        Me.TextBox36 = New System.Windows.Forms.TextBox()
+        Me.Label49 = New System.Windows.Forms.Label()
+        Me.TextBox37 = New System.Windows.Forms.TextBox()
+        Me.Label50 = New System.Windows.Forms.Label()
+        Me.TextBox38 = New System.Windows.Forms.TextBox()
+        Me.TextBox40 = New System.Windows.Forms.TextBox()
+        Me.TextBox41 = New System.Windows.Forms.TextBox()
+        Me.TextBox42 = New System.Windows.Forms.TextBox()
+        Me.TextBox43 = New System.Windows.Forms.TextBox()
+        Me.TextBox44 = New System.Windows.Forms.TextBox()
+        Me.TextBox45 = New System.Windows.Forms.TextBox()
+        Me.kolom_seq = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.KolomPayroll_Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.KolomPayroll_Posisition = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.KolomPayroll_NIK = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.KolomPayroll_Nama = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.Panel4.SuspendLayout()
         CType(Me.DGV_ReviewDaily, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -174,7 +188,7 @@ Partial Class ComputePayroll
         Me.DGV_ReviewDaily.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DGV_ReviewDaily.ColumnHeadersHeight = 30
         Me.DGV_ReviewDaily.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        Me.DGV_ReviewDaily.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.KolomPayroll_Status, Me.KolomPayroll_Posisition, Me.KolomPayroll_NIK, Me.KolomPayroll_Nama})
+        Me.DGV_ReviewDaily.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.kolom_seq, Me.KolomPayroll_Status, Me.KolomPayroll_Posisition, Me.KolomPayroll_NIK, Me.KolomPayroll_Nama})
         Me.DGV_ReviewDaily.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DGV_ReviewDaily.GridColor = System.Drawing.SystemColors.ButtonFace
         Me.DGV_ReviewDaily.Location = New System.Drawing.Point(0, 0)
@@ -187,34 +201,6 @@ Partial Class ComputePayroll
         Me.DGV_ReviewDaily.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DGV_ReviewDaily.Size = New System.Drawing.Size(320, 318)
         Me.DGV_ReviewDaily.TabIndex = 23
-        '
-        'KolomPayroll_Status
-        '
-        Me.KolomPayroll_Status.HeaderText = "Status"
-        Me.KolomPayroll_Status.Name = "KolomPayroll_Status"
-        Me.KolomPayroll_Status.ReadOnly = True
-        '
-        'KolomPayroll_Posisition
-        '
-        Me.KolomPayroll_Posisition.HeaderText = "Posisition"
-        Me.KolomPayroll_Posisition.Name = "KolomPayroll_Posisition"
-        Me.KolomPayroll_Posisition.ReadOnly = True
-        '
-        'KolomPayroll_NIK
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.KolomPayroll_NIK.DefaultCellStyle = DataGridViewCellStyle2
-        Me.KolomPayroll_NIK.HeaderText = "NIK"
-        Me.KolomPayroll_NIK.Name = "KolomPayroll_NIK"
-        Me.KolomPayroll_NIK.ReadOnly = True
-        Me.KolomPayroll_NIK.Width = 80
-        '
-        'KolomPayroll_Nama
-        '
-        Me.KolomPayroll_Nama.HeaderText = "Nama"
-        Me.KolomPayroll_Nama.Name = "KolomPayroll_Nama"
-        Me.KolomPayroll_Nama.ReadOnly = True
-        Me.KolomPayroll_Nama.Width = 150
         '
         'Panel3
         '
@@ -233,11 +219,11 @@ Partial Class ComputePayroll
         'Label46
         '
         Me.Label46.AutoSize = True
-        Me.Label46.Location = New System.Drawing.Point(121, 44)
+        Me.Label46.Location = New System.Drawing.Point(342, 30)
         Me.Label46.Name = "Label46"
-        Me.Label46.Size = New System.Drawing.Size(34, 13)
+        Me.Label46.Size = New System.Drawing.Size(35, 13)
         Me.Label46.TabIndex = 56
-        Me.Label46.Text = "Posisi"
+        Me.Label46.Text = "Name"
         '
         'TextBox33
         '
@@ -253,9 +239,9 @@ Partial Class ComputePayroll
         Me.Label45.AutoSize = True
         Me.Label45.Location = New System.Drawing.Point(1, 44)
         Me.Label45.Name = "Label45"
-        Me.Label45.Size = New System.Drawing.Size(34, 13)
+        Me.Label45.Size = New System.Drawing.Size(48, 13)
         Me.Label45.TabIndex = 54
-        Me.Label45.Text = "Posisi"
+        Me.Label45.Text = "Emp No."
         '
         'TextBox32
         '
@@ -309,11 +295,11 @@ Partial Class ComputePayroll
         'Label38
         '
         Me.Label38.AutoSize = True
-        Me.Label38.Location = New System.Drawing.Point(14, 134)
+        Me.Label38.Location = New System.Drawing.Point(7, 134)
         Me.Label38.Name = "Label38"
-        Me.Label38.Size = New System.Drawing.Size(80, 13)
+        Me.Label38.Size = New System.Drawing.Size(92, 13)
         Me.Label38.TabIndex = 63
-        Me.Label38.Text = "Nama Lengkap"
+        Me.Label38.Text = "Payment Methods"
         '
         'TextBox27
         '
@@ -327,38 +313,38 @@ Partial Class ComputePayroll
         'Label39
         '
         Me.Label39.AutoSize = True
-        Me.Label39.Location = New System.Drawing.Point(27, 59)
+        Me.Label39.Location = New System.Drawing.Point(16, 59)
         Me.Label39.Name = "Label39"
-        Me.Label39.Size = New System.Drawing.Size(68, 13)
+        Me.Label39.Size = New System.Drawing.Size(83, 13)
         Me.Label39.TabIndex = 61
-        Me.Label39.Text = "Departement"
+        Me.Label39.Text = "Month of Payroll"
         '
         'Label40
         '
         Me.Label40.AutoSize = True
-        Me.Label40.Location = New System.Drawing.Point(27, 84)
+        Me.Label40.Location = New System.Drawing.Point(36, 84)
         Me.Label40.Name = "Label40"
-        Me.Label40.Size = New System.Drawing.Size(69, 13)
+        Me.Label40.Size = New System.Drawing.Size(63, 13)
         Me.Label40.TabIndex = 60
-        Me.Label40.Text = "Tempat Lahir"
+        Me.Label40.Text = "Salary Type"
         '
         'Label41
         '
         Me.Label41.AutoSize = True
-        Me.Label41.Location = New System.Drawing.Point(22, 109)
+        Me.Label41.Location = New System.Drawing.Point(62, 109)
         Me.Label41.Name = "Label41"
-        Me.Label41.Size = New System.Drawing.Size(72, 13)
+        Me.Label41.Size = New System.Drawing.Size(37, 13)
         Me.Label41.TabIndex = 59
-        Me.Label41.Text = "Tanggal Lahir"
+        Me.Label41.Text = "Status"
         '
         'Label42
         '
         Me.Label42.AutoSize = True
-        Me.Label42.Location = New System.Drawing.Point(60, 34)
+        Me.Label42.Location = New System.Drawing.Point(36, 34)
         Me.Label42.Name = "Label42"
-        Me.Label42.Size = New System.Drawing.Size(34, 13)
+        Me.Label42.Size = New System.Drawing.Size(63, 13)
         Me.Label42.TabIndex = 58
-        Me.Label42.Text = "Posisi"
+        Me.Label42.Text = "Workcenter"
         '
         'TextBox28
         '
@@ -410,6 +396,12 @@ Partial Class ComputePayroll
         'Panel6
         '
         Me.Panel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel6.Controls.Add(Me.TextBox40)
+        Me.Panel6.Controls.Add(Me.TextBox41)
+        Me.Panel6.Controls.Add(Me.TextBox42)
+        Me.Panel6.Controls.Add(Me.TextBox43)
+        Me.Panel6.Controls.Add(Me.TextBox44)
+        Me.Panel6.Controls.Add(Me.TextBox45)
         Me.Panel6.Controls.Add(Me.Label47)
         Me.Panel6.Controls.Add(Me.TextBox34)
         Me.Panel6.Controls.Add(Me.Label24)
@@ -468,11 +460,11 @@ Partial Class ComputePayroll
         'Label47
         '
         Me.Label47.AutoSize = True
-        Me.Label47.Location = New System.Drawing.Point(122, 50)
+        Me.Label47.Location = New System.Drawing.Point(97, 50)
         Me.Label47.Name = "Label47"
-        Me.Label47.Size = New System.Drawing.Size(34, 13)
+        Me.Label47.Size = New System.Drawing.Size(65, 13)
         Me.Label47.TabIndex = 75
-        Me.Label47.Text = "Posisi"
+        Me.Label47.Text = "Basic Salary"
         '
         'TextBox34
         '
@@ -486,29 +478,29 @@ Partial Class ComputePayroll
         'Label24
         '
         Me.Label24.AutoSize = True
-        Me.Label24.Location = New System.Drawing.Point(670, 75)
+        Me.Label24.Location = New System.Drawing.Point(681, 75)
         Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(68, 13)
+        Me.Label24.Size = New System.Drawing.Size(60, 13)
         Me.Label24.TabIndex = 73
-        Me.Label24.Text = "Departement"
+        Me.Label24.Text = "Deduct tot."
         '
         'Label25
         '
         Me.Label25.AutoSize = True
-        Me.Label25.Location = New System.Drawing.Point(670, 100)
+        Me.Label25.Location = New System.Drawing.Point(678, 100)
         Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(69, 13)
+        Me.Label25.Size = New System.Drawing.Size(63, 13)
         Me.Label25.TabIndex = 72
-        Me.Label25.Text = "Tempat Lahir"
+        Me.Label25.Text = "Pembulatan"
         '
         'Label26
         '
         Me.Label26.AutoSize = True
-        Me.Label26.Location = New System.Drawing.Point(703, 50)
+        Me.Label26.Location = New System.Drawing.Point(684, 50)
         Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(34, 13)
+        Me.Label26.Size = New System.Drawing.Size(57, 13)
         Me.Label26.TabIndex = 71
-        Me.Label26.Text = "Posisi"
+        Me.Label26.Text = "Supply tot."
         '
         'TextBox16
         '
@@ -540,137 +532,137 @@ Partial Class ComputePayroll
         'Label17
         '
         Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(386, 150)
+        Me.Label17.Location = New System.Drawing.Point(430, 150)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(68, 13)
+        Me.Label17.Size = New System.Drawing.Size(26, 13)
         Me.Label17.TabIndex = 67
-        Me.Label17.Text = "Departement"
+        Me.Label17.Text = "Etc."
         '
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(386, 175)
+        Me.Label18.Location = New System.Drawing.Point(425, 175)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(69, 13)
+        Me.Label18.Size = New System.Drawing.Size(31, 13)
         Me.Label18.TabIndex = 66
-        Me.Label18.Text = "Tempat Lahir"
+        Me.Label18.Text = "Loan"
         '
         'Label19
         '
         Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(381, 200)
+        Me.Label19.Location = New System.Drawing.Point(344, 200)
         Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(72, 13)
+        Me.Label19.Size = New System.Drawing.Size(112, 13)
         Me.Label19.TabIndex = 65
-        Me.Label19.Text = "Tanggal Lahir"
+        Me.Label19.Text = "JAMSOSTEK Pensiun"
         '
         'Label20
         '
         Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(387, 75)
+        Me.Label20.Location = New System.Drawing.Point(385, 75)
         Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(68, 13)
+        Me.Label20.Size = New System.Drawing.Size(71, 13)
         Me.Label20.TabIndex = 64
-        Me.Label20.Text = "Departement"
+        Me.Label20.Text = "JAMSOSTEK"
         '
         'Label21
         '
         Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(387, 100)
+        Me.Label21.Location = New System.Drawing.Point(423, 100)
         Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(69, 13)
+        Me.Label21.Size = New System.Drawing.Size(33, 13)
         Me.Label21.TabIndex = 63
-        Me.Label21.Text = "Tempat Lahir"
+        Me.Label21.Text = "BPJS"
         '
         'Label22
         '
         Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(382, 125)
+        Me.Label22.Location = New System.Drawing.Point(416, 125)
         Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(72, 13)
+        Me.Label22.Size = New System.Drawing.Size(40, 13)
         Me.Label22.TabIndex = 62
-        Me.Label22.Text = "Tanggal Lahir"
+        Me.Label22.Text = "TAX21"
         '
         'Label23
         '
         Me.Label23.AutoSize = True
         Me.Label23.Location = New System.Drawing.Point(420, 50)
         Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(34, 13)
+        Me.Label23.Size = New System.Drawing.Size(36, 13)
         Me.Label23.TabIndex = 61
-        Me.Label23.Text = "Posisi"
+        Me.Label23.Text = "Salary"
         '
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(88, 300)
+        Me.Label14.Location = New System.Drawing.Point(129, 300)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(68, 13)
+        Me.Label14.Size = New System.Drawing.Size(33, 13)
         Me.Label14.TabIndex = 60
-        Me.Label14.Text = "Departement"
+        Me.Label14.Text = "BPJS"
         '
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(88, 325)
+        Me.Label15.Location = New System.Drawing.Point(70, 325)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(69, 13)
+        Me.Label15.Size = New System.Drawing.Size(92, 13)
         Me.Label15.TabIndex = 59
-        Me.Label15.Text = "Tempat Lahir"
+        Me.Label15.Text = "Annual Allowance"
         '
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(83, 350)
+        Me.Label16.Location = New System.Drawing.Point(117, 350)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(72, 13)
+        Me.Label16.Size = New System.Drawing.Size(45, 13)
         Me.Label16.TabIndex = 58
-        Me.Label16.Text = "Tanggal Lahir"
+        Me.Label16.Text = "Pensiun"
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(89, 225)
+        Me.Label9.Location = New System.Drawing.Point(134, 225)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(68, 13)
+        Me.Label9.Size = New System.Drawing.Size(28, 13)
         Me.Label9.TabIndex = 57
-        Me.Label9.Text = "Departement"
+        Me.Label9.Text = "Shift"
         '
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(89, 250)
+        Me.Label10.Location = New System.Drawing.Point(79, 250)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(69, 13)
+        Me.Label10.Size = New System.Drawing.Size(83, 13)
         Me.Label10.TabIndex = 56
-        Me.Label10.Text = "Tempat Lahir"
+        Me.Label10.Text = "Overtime wages"
         '
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(84, 275)
+        Me.Label11.Location = New System.Drawing.Point(105, 275)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(72, 13)
+        Me.Label11.Size = New System.Drawing.Size(57, 13)
         Me.Label11.TabIndex = 55
-        Me.Label11.Text = "Tanggal Lahir"
+        Me.Label11.Text = "Jamsostek"
         '
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(122, 200)
+        Me.Label12.Location = New System.Drawing.Point(132, 200)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(34, 13)
+        Me.Label12.Size = New System.Drawing.Size(30, 13)
         Me.Label12.TabIndex = 54
-        Me.Label12.Text = "Posisi"
+        Me.Label12.Text = "Meal"
         '
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(76, 175)
+        Me.Label13.Location = New System.Drawing.Point(110, 175)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(80, 13)
+        Me.Label13.Size = New System.Drawing.Size(52, 13)
         Me.Label13.TabIndex = 53
-        Me.Label13.Text = "Nama Lengkap"
+        Me.Label13.Text = "Transport"
         '
         'Label5
         '
@@ -840,38 +832,38 @@ Partial Class ComputePayroll
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(89, 100)
+        Me.Label8.Location = New System.Drawing.Point(77, 100)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(68, 13)
+        Me.Label8.Size = New System.Drawing.Size(85, 13)
         Me.Label8.TabIndex = 31
-        Me.Label8.Text = "Departement"
+        Me.Label8.Text = "Other Allowance"
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(89, 125)
+        Me.Label7.Location = New System.Drawing.Point(113, 125)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(69, 13)
+        Me.Label7.Size = New System.Drawing.Size(49, 13)
         Me.Label7.TabIndex = 30
-        Me.Label7.Text = "Tempat Lahir"
+        Me.Label7.Text = "Overtime"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(84, 150)
+        Me.Label6.Location = New System.Drawing.Point(100, 150)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(72, 13)
+        Me.Label6.Size = New System.Drawing.Size(62, 13)
         Me.Label6.TabIndex = 29
-        Me.Label6.Text = "Tanggal Lahir"
+        Me.Label6.Text = "Attendance"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(122, 75)
+        Me.Label2.Location = New System.Drawing.Point(111, 75)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(34, 13)
+        Me.Label2.Size = New System.Drawing.Size(51, 13)
         Me.Label2.TabIndex = 24
-        Me.Label2.Text = "Posisi"
+        Me.Label2.Text = "Posisition"
         '
         'TextBoxTglLahir
         '
@@ -912,6 +904,10 @@ Partial Class ComputePayroll
         'Panel5
         '
         Me.Panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel5.Controls.Add(Me.Label50)
+        Me.Panel5.Controls.Add(Me.TextBox38)
+        Me.Panel5.Controls.Add(Me.Label49)
+        Me.Panel5.Controls.Add(Me.TextBox37)
         Me.Panel5.Controls.Add(Me.Label37)
         Me.Panel5.Controls.Add(Me.Label36)
         Me.Panel5.Controls.Add(Me.TextBox26)
@@ -937,25 +933,25 @@ Partial Class ComputePayroll
         'Label37
         '
         Me.Label37.AutoSize = True
-        Me.Label37.Location = New System.Drawing.Point(316, 149)
+        Me.Label37.Location = New System.Drawing.Point(757, 148)
         Me.Label37.Name = "Label37"
         Me.Label37.Size = New System.Drawing.Size(49, 13)
         Me.Label37.TabIndex = 71
-        Me.Label37.Text = "Total OT"
+        Me.Label37.Text = "OT. Sum"
         '
         'Label36
         '
         Me.Label36.AutoSize = True
-        Me.Label36.Location = New System.Drawing.Point(247, 149)
+        Me.Label36.Location = New System.Drawing.Point(346, 149)
         Me.Label36.Name = "Label36"
-        Me.Label36.Size = New System.Drawing.Size(21, 13)
+        Me.Label36.Size = New System.Drawing.Size(18, 13)
         Me.Label36.TabIndex = 68
-        Me.Label36.Text = "x 7"
+        Me.Label36.Text = "x2"
         '
         'TextBox26
         '
         Me.TextBox26.BackColor = System.Drawing.Color.White
-        Me.TextBox26.Location = New System.Drawing.Point(369, 146)
+        Me.TextBox26.Location = New System.Drawing.Point(810, 145)
         Me.TextBox26.Name = "TextBox26"
         Me.TextBox26.Size = New System.Drawing.Size(36, 20)
         Me.TextBox26.TabIndex = 70
@@ -964,7 +960,7 @@ Partial Class ComputePayroll
         'TextBox25
         '
         Me.TextBox25.BackColor = System.Drawing.Color.White
-        Me.TextBox25.Location = New System.Drawing.Point(270, 145)
+        Me.TextBox25.Location = New System.Drawing.Point(366, 145)
         Me.TextBox25.Name = "TextBox25"
         Me.TextBox25.Size = New System.Drawing.Size(34, 20)
         Me.TextBox25.TabIndex = 67
@@ -973,16 +969,16 @@ Partial Class ComputePayroll
         'Label35
         '
         Me.Label35.AutoSize = True
-        Me.Label35.Location = New System.Drawing.Point(177, 148)
+        Me.Label35.Location = New System.Drawing.Point(193, 148)
         Me.Label35.Name = "Label35"
-        Me.Label35.Size = New System.Drawing.Size(21, 13)
+        Me.Label35.Size = New System.Drawing.Size(27, 13)
         Me.Label35.TabIndex = 66
-        Me.Label35.Text = "x 2"
+        Me.Label35.Text = "x1.5"
         '
         'TextBox24
         '
         Me.TextBox24.BackColor = System.Drawing.Color.White
-        Me.TextBox24.Location = New System.Drawing.Point(201, 145)
+        Me.TextBox24.Location = New System.Drawing.Point(223, 145)
         Me.TextBox24.Name = "TextBox24"
         Me.TextBox24.Size = New System.Drawing.Size(35, 20)
         Me.TextBox24.TabIndex = 65
@@ -990,6 +986,10 @@ Partial Class ComputePayroll
         '
         'Panel8
         '
+        Me.Panel8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel8.Controls.Add(Me.Label48)
+        Me.Panel8.Controls.Add(Me.TextBox36)
+        Me.Panel8.Controls.Add(Me.TextBox35)
         Me.Panel8.Controls.Add(Me.Label33)
         Me.Panel8.Controls.Add(Me.TextBox22)
         Me.Panel8.Controls.Add(Me.Label30)
@@ -998,24 +998,24 @@ Partial Class ComputePayroll
         Me.Panel8.Controls.Add(Me.TextBox19)
         Me.Panel8.Controls.Add(Me.TextBox20)
         Me.Panel8.Controls.Add(Me.TextBox21)
-        Me.Panel8.Location = New System.Drawing.Point(-2, 59)
+        Me.Panel8.Location = New System.Drawing.Point(-2, 56)
         Me.Panel8.Name = "Panel8"
-        Me.Panel8.Size = New System.Drawing.Size(860, 82)
+        Me.Panel8.Size = New System.Drawing.Size(860, 85)
         Me.Panel8.TabIndex = 64
         '
         'Label33
         '
         Me.Label33.AutoSize = True
-        Me.Label33.Location = New System.Drawing.Point(284, 11)
+        Me.Label33.Location = New System.Drawing.Point(328, 47)
         Me.Label33.Name = "Label33"
-        Me.Label33.Size = New System.Drawing.Size(34, 13)
+        Me.Label33.Size = New System.Drawing.Size(41, 13)
         Me.Label33.TabIndex = 69
-        Me.Label33.Text = "Posisi"
+        Me.Label33.Text = "Retired"
         '
         'TextBox22
         '
         Me.TextBox22.BackColor = System.Drawing.Color.White
-        Me.TextBox22.Location = New System.Drawing.Point(325, 8)
+        Me.TextBox22.Location = New System.Drawing.Point(369, 44)
         Me.TextBox22.Name = "TextBox22"
         Me.TextBox22.Size = New System.Drawing.Size(110, 20)
         Me.TextBox22.TabIndex = 68
@@ -1024,29 +1024,29 @@ Partial Class ComputePayroll
         'Label30
         '
         Me.Label30.AutoSize = True
-        Me.Label30.Location = New System.Drawing.Point(29, 33)
+        Me.Label30.Location = New System.Drawing.Point(46, 33)
         Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(68, 13)
+        Me.Label30.Size = New System.Drawing.Size(54, 13)
         Me.Label30.TabIndex = 67
-        Me.Label30.Text = "Departement"
+        Me.Label30.Text = "Admission"
         '
         'Label31
         '
         Me.Label31.AutoSize = True
-        Me.Label31.Location = New System.Drawing.Point(29, 55)
+        Me.Label31.Location = New System.Drawing.Point(24, 55)
         Me.Label31.Name = "Label31"
-        Me.Label31.Size = New System.Drawing.Size(69, 13)
+        Me.Label31.Size = New System.Drawing.Size(76, 13)
         Me.Label31.TabIndex = 66
-        Me.Label31.Text = "Tempat Lahir"
+        Me.Label31.Text = "Payroll method"
         '
         'Label32
         '
         Me.Label32.AutoSize = True
-        Me.Label32.Location = New System.Drawing.Point(62, 11)
+        Me.Label32.Location = New System.Drawing.Point(52, 11)
         Me.Label32.Name = "Label32"
-        Me.Label32.Size = New System.Drawing.Size(34, 13)
+        Me.Label32.Size = New System.Drawing.Size(48, 13)
         Me.Label32.TabIndex = 65
-        Me.Label32.Text = "Posisi"
+        Me.Label32.Text = "Emp No."
         '
         'TextBox19
         '
@@ -1078,11 +1078,11 @@ Partial Class ComputePayroll
         'Label34
         '
         Me.Label34.AutoSize = True
-        Me.Label34.Location = New System.Drawing.Point(27, 147)
+        Me.Label34.Location = New System.Drawing.Point(43, 148)
         Me.Label34.Name = "Label34"
-        Me.Label34.Size = New System.Drawing.Size(69, 13)
+        Me.Label34.Size = New System.Drawing.Size(55, 13)
         Me.Label34.TabIndex = 63
-        Me.Label34.Text = "Tempat Lahir"
+        Me.Label34.Text = "Basic time"
         '
         'TextBox23
         '
@@ -1104,11 +1104,11 @@ Partial Class ComputePayroll
         'Label29
         '
         Me.Label29.AutoSize = True
-        Me.Label29.Location = New System.Drawing.Point(529, 38)
+        Me.Label29.Location = New System.Drawing.Point(511, 38)
         Me.Label29.Name = "Label29"
-        Me.Label29.Size = New System.Drawing.Size(40, 13)
+        Me.Label29.Size = New System.Drawing.Size(62, 13)
         Me.Label29.TabIndex = 52
-        Me.Label29.Text = "Mornth"
+        Me.Label29.Text = "Payroll date"
         Me.Label29.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label28
@@ -1132,21 +1132,21 @@ Partial Class ComputePayroll
         'Label27
         '
         Me.Label27.AutoSize = True
-        Me.Label27.Location = New System.Drawing.Point(292, 38)
+        Me.Label27.Location = New System.Drawing.Point(254, 38)
         Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(40, 13)
+        Me.Label27.Size = New System.Drawing.Size(82, 13)
         Me.Label27.TabIndex = 31
-        Me.Label27.Text = "Mornth"
+        Me.Label27.Text = "Month of payroll"
         Me.Label27.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(14, 38)
+        Me.Label1.Location = New System.Drawing.Point(41, 38)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(80, 13)
+        Me.Label1.Size = New System.Drawing.Size(59, 13)
         Me.Label1.TabIndex = 18
-        Me.Label1.Text = "Nama Lengkap"
+        Me.Label1.Text = "Salary type"
         '
         'TextBoxNama
         '
@@ -1156,6 +1156,157 @@ Partial Class ComputePayroll
         Me.TextBoxNama.Size = New System.Drawing.Size(110, 20)
         Me.TextBoxNama.TabIndex = 17
         Me.TextBoxNama.Text = "12"
+        '
+        'TextBox35
+        '
+        Me.TextBox35.BackColor = System.Drawing.Color.White
+        Me.TextBox35.Location = New System.Drawing.Point(219, 8)
+        Me.TextBox35.Name = "TextBox35"
+        Me.TextBox35.Size = New System.Drawing.Size(110, 20)
+        Me.TextBox35.TabIndex = 70
+        Me.TextBox35.Text = "12"
+        '
+        'Label48
+        '
+        Me.Label48.AutoSize = True
+        Me.Label48.Location = New System.Drawing.Point(518, 7)
+        Me.Label48.Name = "Label48"
+        Me.Label48.Size = New System.Drawing.Size(51, 13)
+        Me.Label48.TabIndex = 72
+        Me.Label48.Text = "Posisition"
+        '
+        'TextBox36
+        '
+        Me.TextBox36.BackColor = System.Drawing.Color.White
+        Me.TextBox36.Location = New System.Drawing.Point(572, 4)
+        Me.TextBox36.Name = "TextBox36"
+        Me.TextBox36.Size = New System.Drawing.Size(110, 20)
+        Me.TextBox36.TabIndex = 71
+        Me.TextBox36.Text = "12"
+        '
+        'Label49
+        '
+        Me.Label49.AutoSize = True
+        Me.Label49.Location = New System.Drawing.Point(497, 149)
+        Me.Label49.Name = "Label49"
+        Me.Label49.Size = New System.Drawing.Size(18, 13)
+        Me.Label49.TabIndex = 73
+        Me.Label49.Text = "x3"
+        '
+        'TextBox37
+        '
+        Me.TextBox37.BackColor = System.Drawing.Color.White
+        Me.TextBox37.Location = New System.Drawing.Point(517, 145)
+        Me.TextBox37.Name = "TextBox37"
+        Me.TextBox37.Size = New System.Drawing.Size(34, 20)
+        Me.TextBox37.TabIndex = 72
+        Me.TextBox37.Text = "12"
+        '
+        'Label50
+        '
+        Me.Label50.AutoSize = True
+        Me.Label50.Location = New System.Drawing.Point(630, 149)
+        Me.Label50.Name = "Label50"
+        Me.Label50.Size = New System.Drawing.Size(18, 13)
+        Me.Label50.TabIndex = 75
+        Me.Label50.Text = "x4"
+        '
+        'TextBox38
+        '
+        Me.TextBox38.BackColor = System.Drawing.Color.White
+        Me.TextBox38.Location = New System.Drawing.Point(651, 145)
+        Me.TextBox38.Name = "TextBox38"
+        Me.TextBox38.Size = New System.Drawing.Size(34, 20)
+        Me.TextBox38.TabIndex = 74
+        Me.TextBox38.Text = "12"
+        '
+        'TextBox40
+        '
+        Me.TextBox40.BackColor = System.Drawing.Color.White
+        Me.TextBox40.Location = New System.Drawing.Point(459, 350)
+        Me.TextBox40.Name = "TextBox40"
+        Me.TextBox40.Size = New System.Drawing.Size(110, 20)
+        Me.TextBox40.TabIndex = 81
+        Me.TextBox40.Text = "12"
+        '
+        'TextBox41
+        '
+        Me.TextBox41.BackColor = System.Drawing.Color.White
+        Me.TextBox41.Location = New System.Drawing.Point(459, 325)
+        Me.TextBox41.Name = "TextBox41"
+        Me.TextBox41.Size = New System.Drawing.Size(110, 20)
+        Me.TextBox41.TabIndex = 80
+        Me.TextBox41.Text = "12"
+        '
+        'TextBox42
+        '
+        Me.TextBox42.BackColor = System.Drawing.Color.White
+        Me.TextBox42.Location = New System.Drawing.Point(459, 300)
+        Me.TextBox42.Name = "TextBox42"
+        Me.TextBox42.Size = New System.Drawing.Size(110, 20)
+        Me.TextBox42.TabIndex = 79
+        Me.TextBox42.Text = "12"
+        '
+        'TextBox43
+        '
+        Me.TextBox43.BackColor = System.Drawing.Color.White
+        Me.TextBox43.Location = New System.Drawing.Point(459, 275)
+        Me.TextBox43.Name = "TextBox43"
+        Me.TextBox43.Size = New System.Drawing.Size(110, 20)
+        Me.TextBox43.TabIndex = 78
+        Me.TextBox43.Text = "12"
+        '
+        'TextBox44
+        '
+        Me.TextBox44.BackColor = System.Drawing.Color.White
+        Me.TextBox44.Location = New System.Drawing.Point(459, 250)
+        Me.TextBox44.Name = "TextBox44"
+        Me.TextBox44.Size = New System.Drawing.Size(110, 20)
+        Me.TextBox44.TabIndex = 77
+        Me.TextBox44.Text = "12"
+        '
+        'TextBox45
+        '
+        Me.TextBox45.BackColor = System.Drawing.Color.White
+        Me.TextBox45.Location = New System.Drawing.Point(459, 225)
+        Me.TextBox45.Name = "TextBox45"
+        Me.TextBox45.Size = New System.Drawing.Size(110, 20)
+        Me.TextBox45.TabIndex = 76
+        Me.TextBox45.Text = "12"
+        '
+        'kolom_seq
+        '
+        Me.kolom_seq.HeaderText = "Seq"
+        Me.kolom_seq.Name = "kolom_seq"
+        Me.kolom_seq.ReadOnly = True
+        '
+        'KolomPayroll_Status
+        '
+        Me.KolomPayroll_Status.HeaderText = "Status"
+        Me.KolomPayroll_Status.Name = "KolomPayroll_Status"
+        Me.KolomPayroll_Status.ReadOnly = True
+        '
+        'KolomPayroll_Posisition
+        '
+        Me.KolomPayroll_Posisition.HeaderText = "Posisition"
+        Me.KolomPayroll_Posisition.Name = "KolomPayroll_Posisition"
+        Me.KolomPayroll_Posisition.ReadOnly = True
+        '
+        'KolomPayroll_NIK
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.KolomPayroll_NIK.DefaultCellStyle = DataGridViewCellStyle2
+        Me.KolomPayroll_NIK.HeaderText = "Emp No."
+        Me.KolomPayroll_NIK.Name = "KolomPayroll_NIK"
+        Me.KolomPayroll_NIK.ReadOnly = True
+        Me.KolomPayroll_NIK.Width = 80
+        '
+        'KolomPayroll_Nama
+        '
+        Me.KolomPayroll_Nama.HeaderText = "Name"
+        Me.KolomPayroll_Nama.Name = "KolomPayroll_Nama"
+        Me.KolomPayroll_Nama.ReadOnly = True
+        Me.KolomPayroll_Nama.Width = 150
         '
         'ComputePayroll
         '
@@ -1191,10 +1342,6 @@ Partial Class ComputePayroll
     Friend WithEvents Panel6 As Panel
     Friend WithEvents Panel5 As Panel
     Friend WithEvents DGV_ReviewDaily As DataGridView
-    Friend WithEvents KolomPayroll_Status As DataGridViewTextBoxColumn
-    Friend WithEvents KolomPayroll_Posisition As DataGridViewTextBoxColumn
-    Friend WithEvents KolomPayroll_NIK As DataGridViewTextBoxColumn
-    Friend WithEvents KolomPayroll_Nama As DataGridViewTextBoxColumn
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents TextBox2 As TextBox
     Friend WithEvents TextBox3 As TextBox
@@ -1285,4 +1432,22 @@ Partial Class ComputePayroll
     Friend WithEvents Label27 As Label
     Friend WithEvents Label47 As Label
     Friend WithEvents TextBox34 As TextBox
+    Friend WithEvents kolom_seq As DataGridViewTextBoxColumn
+    Friend WithEvents KolomPayroll_Status As DataGridViewTextBoxColumn
+    Friend WithEvents KolomPayroll_Posisition As DataGridViewTextBoxColumn
+    Friend WithEvents KolomPayroll_NIK As DataGridViewTextBoxColumn
+    Friend WithEvents KolomPayroll_Nama As DataGridViewTextBoxColumn
+    Friend WithEvents TextBox40 As TextBox
+    Friend WithEvents TextBox41 As TextBox
+    Friend WithEvents TextBox42 As TextBox
+    Friend WithEvents TextBox43 As TextBox
+    Friend WithEvents TextBox44 As TextBox
+    Friend WithEvents TextBox45 As TextBox
+    Friend WithEvents Label50 As Label
+    Friend WithEvents TextBox38 As TextBox
+    Friend WithEvents Label49 As Label
+    Friend WithEvents TextBox37 As TextBox
+    Friend WithEvents Label48 As Label
+    Friend WithEvents TextBox36 As TextBox
+    Friend WithEvents TextBox35 As TextBox
 End Class
