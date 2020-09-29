@@ -39,10 +39,10 @@
                          '{status}',
                          'Putri',
                          '{tb_emp.Text}',
-                         '{TextBoxHolidayType.Text}',
-                         '{DateTimeSdate.Value.ToString("yyyy-MM-dd")}',
-                         '{DateTimeEdate.Value.ToString("yyyy-MM-dd")}',
-                         '{DateTimeRdate.Value.ToString("yyyy-MM-dd")}')"
+                         '{tb_holtype.Text}',
+                         '{dt_startdate.Value.ToString("yyyy-MM-dd")}',
+                         '{dt_anddate.Value.ToString("yyyy-MM-dd")}',
+                         '{dt_reqdate.Value.ToString("yyyy-MM-dd")}')"
         Console.WriteLine("DB Query : " + masterQuery)
         funcDB.uploadDB(masterQuery)
     End Sub

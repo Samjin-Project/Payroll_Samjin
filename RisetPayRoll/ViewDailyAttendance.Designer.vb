@@ -173,9 +173,9 @@ Partial Class ViewDailyAttendance
         Me.Label14.AutoSize = True
         Me.Label14.Location = New System.Drawing.Point(65, 22)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(40, 13)
+        Me.Label14.Size = New System.Drawing.Size(37, 13)
         Me.Label14.TabIndex = 29
-        Me.Label14.Text = "Mornth"
+        Me.Label14.Text = "Month"
         Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label15
@@ -238,14 +238,14 @@ Partial Class ViewDailyAttendance
         '
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         Me.KolomHasil_NIK.DefaultCellStyle = DataGridViewCellStyle2
-        Me.KolomHasil_NIK.HeaderText = "NIK"
+        Me.KolomHasil_NIK.HeaderText = "Emp No."
         Me.KolomHasil_NIK.Name = "KolomHasil_NIK"
         Me.KolomHasil_NIK.ReadOnly = True
         Me.KolomHasil_NIK.Width = 80
         '
         'KolomHasil_Nama
         '
-        Me.KolomHasil_Nama.HeaderText = "Nama"
+        Me.KolomHasil_Nama.HeaderText = "Name"
         Me.KolomHasil_Nama.Name = "KolomHasil_Nama"
         Me.KolomHasil_Nama.ReadOnly = True
         Me.KolomHasil_Nama.Width = 150
@@ -552,6 +552,10 @@ Partial Class ViewDailyAttendance
     Friend WithEvents ComboBox4 As ComboBox
     Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents DGV_ReviewDaily As DataGridView
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents TextBox10 As TextBox
+    Friend WithEvents Label12 As Label
+    Friend WithEvents Label10 As Label
     Friend WithEvents KolomHasil_NIK As DataGridViewTextBoxColumn
     Friend WithEvents KolomHasil_Nama As DataGridViewTextBoxColumn
     Friend WithEvents KolomHasil_Departement As DataGridViewTextBoxColumn
@@ -594,8 +598,4 @@ Partial Class ViewDailyAttendance
     Friend WithEvents KolomHasil_D30 As DataGridViewTextBoxColumn
     Friend WithEvents KolomHasil_D31 As DataGridViewTextBoxColumn
     Friend WithEvents KolomHasil_Total As DataGridViewTextBoxColumn
-    Friend WithEvents Panel3 As Panel
-    Friend WithEvents TextBox10 As TextBox
-    Friend WithEvents Label12 As Label
-    Friend WithEvents Label10 As Label
 End Class
