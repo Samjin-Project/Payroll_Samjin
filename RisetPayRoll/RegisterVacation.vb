@@ -22,8 +22,8 @@
 
     Private Sub DGV_DataModify_RowHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGV_DataModify.RowHeaderMouseClick
         Console.WriteLine($"Clicked Cell {e.RowIndex}")
-        TextBoxNama.Text = DGV_DataModify.Rows(e.RowIndex).Cells(1).Value
-        TextBoxNik.Text = DGV_DataModify.Rows(e.RowIndex).Cells(0).Value
+        tb_emp.Text = DGV_DataModify.Rows(e.RowIndex).Cells(1).Value
+        tb_nama.Text = DGV_DataModify.Rows(e.RowIndex).Cells(0).Value
     End Sub
 
     Sub uploadData()
@@ -35,10 +35,10 @@
         End If
         Dim funcDB As DataBaseClass = New DataBaseClass
         Dim masterQuery As String = $"INSERT INTO `approval_vacation`(`NIK`, `Status_Approval`, `Approver`, `Nama_Karyawan`, `Vacation_Code`, `StartVacation_Date`, `EndVacation_Date`, `ReqVacation_Date`) 
-                 VALUES ('{TextBoxNik.Text}',
+                 VALUES ('{tb_nama.Text}',
                          '{status}',
                          'Putri',
-                         '{TextBoxNama.Text}',
+                         '{tb_emp.Text}',
                          '{TextBoxHolidayType.Text}',
                          '{DateTimeSdate.Value.ToString("yyyy-MM-dd")}',
                          '{DateTimeEdate.Value.ToString("yyyy-MM-dd")}',
@@ -50,4 +50,5 @@
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         uploadData()
     End Sub
+
 End Class
