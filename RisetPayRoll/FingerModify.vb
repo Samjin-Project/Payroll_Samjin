@@ -76,12 +76,13 @@ Public Class FingerModify
         Next
     End Sub
 
-    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
-        If CheckBox1.Checked = True Then
-            For i As Integer = 0 To DGV_DataModify.Rows.Count - 1
-                Console.WriteLine(DGV_DataModify.Rows.Count)
-                DGV_DataModify.Rows(i).Cells(1).Value = True
-            Next
-        End If
+        cmd = con.CreateCommand()
+        cmd.CommandType = CommandType.Text
+        'cmd.CommandText = "update table1 Check In or Out='"DateTimePicker1"'"
+        cmd.ExecuteNonQuery()
+    End Sub
+
+    Private Sub Panel4_Paint(sender As Object, e As PaintEventArgs) Handles Panel4.Paint
+
     End Sub
 End Class
