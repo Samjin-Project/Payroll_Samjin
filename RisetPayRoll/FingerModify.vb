@@ -27,4 +27,8 @@ Public Class FingerModify
         'cmd.CommandText = "update table1 Check In or Out='"DateTimePicker1"'"
         cmd.ExecuteNonQuery()
     End Sub
+
+    Private Sub Panel4_Paint(sender As Object, e As PaintEventArgs) Handles Panel4.Paint
+
+    End Sub
 End Class
