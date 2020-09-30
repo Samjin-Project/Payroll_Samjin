@@ -22,8 +22,8 @@ Partial Class UploadFingerData
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Button1 = New System.Windows.Forms.Button()
@@ -200,8 +200,8 @@ Partial Class UploadFingerData
         'KolomFinger_Nik
         '
         Me.KolomFinger_Nik.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.KolomFinger_Nik.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.KolomFinger_Nik.DefaultCellStyle = DataGridViewCellStyle1
         Me.KolomFinger_Nik.HeaderText = "NIK"
         Me.KolomFinger_Nik.Name = "KolomFinger_Nik"
         Me.KolomFinger_Nik.ReadOnly = True
@@ -234,10 +234,10 @@ Partial Class UploadFingerData
         '
         'KolomFinger_ClockIn
         '
-        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Red
-        DataGridViewCellStyle8.Format = "t"
-        DataGridViewCellStyle8.NullValue = Nothing
-        Me.KolomFinger_ClockIn.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Red
+        DataGridViewCellStyle2.Format = "t"
+        DataGridViewCellStyle2.NullValue = Nothing
+        Me.KolomFinger_ClockIn.DefaultCellStyle = DataGridViewCellStyle2
         Me.KolomFinger_ClockIn.HeaderText = "Clock In"
         Me.KolomFinger_ClockIn.Name = "KolomFinger_ClockIn"
         '
