@@ -130,6 +130,12 @@
     <Compile Include="FingerModify.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form2.Designer.vb">
+      <DependentUpon>Form2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form2.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="InputExcelClass.vb" />
     <Compile Include="MDIParent1.Designer.vb">
       <DependentUpon>MDIParent1.vb</DependentUpon>
@@ -152,12 +158,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="output data.Designer.vb">
-      <DependentUpon>output data.vb</DependentUpon>
-    </Compile>
-    <Compile Include="output data.vb">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="OutputExcelClass1.vb" />
     <Compile Include="RegisterMaster.Designer.vb">
@@ -198,6 +198,9 @@
     <EmbeddedResource Include="FingerModify.resx">
       <DependentUpon>FingerModify.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MDIParent1.resx">
       <DependentUpon>MDIParent1.vb</DependentUpon>
     </EmbeddedResource>
@@ -206,9 +209,6 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="output data.resx">
-      <DependentUpon>output data.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RegisterMaster.resx">
       <DependentUpon>RegisterMaster.vb</DependentUpon>
