@@ -1,4 +1,5 @@
-﻿Imports System.Data.OleDb
+﻿
+Imports System.Data.OleDb
 Public Class RegisterMaster
     Private Sub RegisterMaster_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master_employer`"
