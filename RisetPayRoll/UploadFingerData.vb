@@ -76,11 +76,17 @@ Public Class UploadFingerData
         ElseIf tanggal <> "" And Dep <> "" Then
             querycmd = QuerySortAll
         End If
-        Dim DBClass As DataBaseClass = New DataBaseClass
-        Console.WriteLine(querycmd)
-        Dim ds As DataSet = DBClass.downloadDB(QueryCMD)
-        Dim indexDs As Integer = ds.Tables(0).Rows.Count
-        For i As Integer = 0 To indexDs - 1
+
+        'Dibawah ini Contoh Pengambilan data Dari MySql
+        Dim DBClass As DataBaseClass = New DataBaseClass ' Inisiasi class yg telah di buat
+        Dim ds As DataSet = DBClass.downloadDB(querycmd) ' tabel yg didapat di masukan kedalam variabel ds memiliki tipe data Dataset, queryCMD beris Query SQL atau perintah untuk SELECT atau UPDATE...
+        Dim indexDs As Integer = ds.Tables(0).Rows.Count ' cek Jumlah Rows Tabel
+
+        'Setelah jumalh tabel nya diketahui data pada masing2 tabel di masukan ke damal array bertipe data string
+        For i As Integer = 0 To indexDs - 1 'looping mengambil data perbaris
+            ' ds.tables = nama tabel
+            ' rows = baris
+            ' item = kolom
             Dim row As String() = New String() {ds.Tables(0).Rows(i).Item(0).ToString,
                                                 ds.Tables(0).Rows(i).Item(1).ToString,
                                                 ds.Tables(0).Rows(i).Item(2).ToString,
@@ -90,7 +96,11 @@ Public Class UploadFingerData
                                                 ds.Tables(0).Rows(i).Item(6).ToString,
                                                 ds.Tables(0).Rows(i).Item(7).ToString,
                                                 ds.Tables(0).Rows(i).Item(8).ToString}
+            'Setelah dapat dalam bentuk array, array tersebut dimasukan kedalam fungsi dibawah
+            'DGV_DataModify.Rows.Add(row) : Row tersebut isinya data satu baris yg telah diambil
             DGV_DataModify.Rows.Add(row)
+
+            'Di bawah ini hanya untuk memprecantik
             DGV_DataModify.Rows(i).HeaderCell.Value = (i + 1).ToString
             If i Mod 2 = 1 Then
                 DGV_DataModify.Rows(i).DefaultCellStyle.BackColor = Color.LightGray
@@ -102,5 +112,9 @@ Public Class UploadFingerData
         DGV_DataModify.Rows.Clear()
         insertToDgv("", datePilihan)
         Console.WriteLine("Done")
+    End Sub
+
+    Private Sub UploadFingerData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     End Sub
 End Class
