@@ -22,16 +22,16 @@ Partial Class UploadFingerData
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
+        Me.dt_upfinger = New System.Windows.Forms.DateTimePicker()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.cb_depfinger = New System.Windows.Forms.ComboBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Label17 = New System.Windows.Forms.Label()
@@ -47,6 +47,7 @@ Partial Class UploadFingerData
         Me.KolomFinger_ClockOut = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.KolomFinger_Dep = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OpenFileDialogImport = New System.Windows.Forms.OpenFileDialog()
+        Me.b_showall = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -70,7 +71,7 @@ Partial Class UploadFingerData
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.Button1)
-        Me.GroupBox2.Location = New System.Drawing.Point(556, 5)
+        Me.GroupBox2.Location = New System.Drawing.Point(636, 4)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(150, 76)
         Me.GroupBox2.TabIndex = 24
@@ -88,29 +89,30 @@ Partial Class UploadFingerData
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.DateTimePicker1)
+        Me.GroupBox1.Controls.Add(Me.b_showall)
+        Me.GroupBox1.Controls.Add(Me.dt_upfinger)
         Me.GroupBox1.Controls.Add(Me.Label14)
         Me.GroupBox1.Controls.Add(Me.Label11)
-        Me.GroupBox1.Controls.Add(Me.ComboBox1)
+        Me.GroupBox1.Controls.Add(Me.cb_depfinger)
         Me.GroupBox1.Location = New System.Drawing.Point(4, 4)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(527, 79)
+        Me.GroupBox1.Size = New System.Drawing.Size(613, 79)
         Me.GroupBox1.TabIndex = 23
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Sorting"
         '
-        'DateTimePicker1
+        'dt_upfinger
         '
-        Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.DateTimePicker1.Location = New System.Drawing.Point(354, 49)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(155, 20)
-        Me.DateTimePicker1.TabIndex = 30
+        Me.dt_upfinger.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dt_upfinger.Location = New System.Drawing.Point(337, 49)
+        Me.dt_upfinger.Name = "dt_upfinger"
+        Me.dt_upfinger.Size = New System.Drawing.Size(155, 20)
+        Me.dt_upfinger.TabIndex = 30
         '
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(267, 51)
+        Me.Label14.Location = New System.Drawing.Point(250, 51)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(81, 13)
         Me.Label14.TabIndex = 29
@@ -120,20 +122,21 @@ Partial Class UploadFingerData
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(20, 51)
+        Me.Label11.Location = New System.Drawing.Point(3, 51)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(68, 13)
         Me.Label11.TabIndex = 24
         Me.Label11.Text = "Departement"
         '
-        'ComboBox1
+        'cb_depfinger
         '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"Rubber Forming", "Rubber Printing", "Assembly", "Pcba"})
-        Me.ComboBox1.Location = New System.Drawing.Point(106, 48)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(155, 21)
-        Me.ComboBox1.TabIndex = 23
+        Me.cb_depfinger.FormattingEnabled = True
+        Me.cb_depfinger.Items.AddRange(New Object() {"Inj Group 1 (mahpudin)", "Inj Group 2 (suprayogi)", "Inj Group 3 (samat)", "Qc non shift", "TEAM SEPTI", "QC 2 shift"})
+        Me.cb_depfinger.Location = New System.Drawing.Point(89, 48)
+        Me.cb_depfinger.Name = "cb_depfinger"
+        Me.cb_depfinger.Size = New System.Drawing.Size(155, 21)
+        Me.cb_depfinger.TabIndex = 23
+        Me.cb_depfinger.Text = " "
         '
         'Panel2
         '
@@ -200,8 +203,8 @@ Partial Class UploadFingerData
         'KolomFinger_Nik
         '
         Me.KolomFinger_Nik.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.KolomFinger_Nik.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.KolomFinger_Nik.DefaultCellStyle = DataGridViewCellStyle3
         Me.KolomFinger_Nik.HeaderText = "NIK"
         Me.KolomFinger_Nik.Name = "KolomFinger_Nik"
         Me.KolomFinger_Nik.ReadOnly = True
@@ -234,10 +237,10 @@ Partial Class UploadFingerData
         '
         'KolomFinger_ClockIn
         '
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Red
-        DataGridViewCellStyle2.Format = "t"
-        DataGridViewCellStyle2.NullValue = Nothing
-        Me.KolomFinger_ClockIn.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Red
+        DataGridViewCellStyle4.Format = "t"
+        DataGridViewCellStyle4.NullValue = Nothing
+        Me.KolomFinger_ClockIn.DefaultCellStyle = DataGridViewCellStyle4
         Me.KolomFinger_ClockIn.HeaderText = "Clock In"
         Me.KolomFinger_ClockIn.Name = "KolomFinger_ClockIn"
         '
@@ -254,6 +257,15 @@ Partial Class UploadFingerData
         'OpenFileDialogImport
         '
         Me.OpenFileDialogImport.FileName = "OpenFileDialog1"
+        '
+        'b_showall
+        '
+        Me.b_showall.Location = New System.Drawing.Point(518, 49)
+        Me.b_showall.Name = "b_showall"
+        Me.b_showall.Size = New System.Drawing.Size(77, 19)
+        Me.b_showall.TabIndex = 31
+        Me.b_showall.Text = "Show All"
+        Me.b_showall.UseVisualStyleBackColor = True
         '
         'UploadFingerData
         '
@@ -280,10 +292,10 @@ Partial Class UploadFingerData
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents Button1 As Button
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents DateTimePicker1 As DateTimePicker
+    Friend WithEvents dt_upfinger As DateTimePicker
     Friend WithEvents Label14 As Label
     Friend WithEvents Label11 As Label
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents cb_depfinger As ComboBox
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Panel5 As Panel
     Friend WithEvents Label17 As Label
@@ -299,4 +311,5 @@ Partial Class UploadFingerData
     Friend WithEvents KolomFinger_ClockOut As DataGridViewTextBoxColumn
     Friend WithEvents KolomFinger_Dep As DataGridViewTextBoxColumn
     Friend WithEvents OpenFileDialogImport As OpenFileDialog
+    Friend WithEvents b_showall As Button
 End Class

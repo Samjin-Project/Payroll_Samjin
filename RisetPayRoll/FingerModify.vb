@@ -24,7 +24,7 @@ Public Class FingerModify
 
         cmd = con.CreateCommand()
         cmd.CommandType = CommandType.Text
-        cmd.CommandText = "update table1 Check In or Out='"DateTimePicker1"'"
+        'cmd.CommandText = "update table1 Check In or Out='"DateTimePicker1"'"
         cmd.ExecuteNonQuery()
     End Sub
 End Class

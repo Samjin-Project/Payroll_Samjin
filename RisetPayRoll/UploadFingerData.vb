@@ -1,5 +1,6 @@
 ﻿Imports System.Data.OleDb
 Public Class UploadFingerData
+
     Private Sub UploadExcel()
         Dim CONN As OleDbConnection
         Dim DA As OleDbDataAdapter
@@ -58,9 +59,6 @@ Public Class UploadFingerData
         insertToDgv("", "")
     End Sub
 
-    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
-
-    End Sub
     Private Sub insertToDgv(Dep As String, tanggal As String)
         Dim QueryALL As String = $"SELECT `NIK`, `Nama_Karyawan`, `Date_Finger`, `Shift_Finger`, `On_Duty`, `Off_Duty`, `Check_In`, `Check_Out`, `Departement` FROM `finger_employer` "
         Dim QuerySortTgl As String = $"{QueryALL} WHERE `Date_Finger` = '{tanggal}' "
@@ -76,6 +74,8 @@ Public Class UploadFingerData
         ElseIf tanggal <> "" And Dep <> "" Then
             querycmd = QuerySortAll
         End If
+
+
 
         'Dibawah ini Contoh Pengambilan data Dari MySql
         Dim DBClass As DataBaseClass = New DataBaseClass ' Inisiasi class yg telah di buat
@@ -102,19 +102,35 @@ Public Class UploadFingerData
 
             'Di bawah ini hanya untuk memprecantik
             DGV_DataModify.Rows(i).HeaderCell.Value = (i + 1).ToString
-            If i Mod 2 = 1 Then
+            If i Mod 2 = 0 Then
                 DGV_DataModify.Rows(i).DefaultCellStyle.BackColor = Color.LightGray
             End If
         Next
     End Sub
-    Private Sub DateTimePicker1_ValueChanged(sender As Object, e As EventArgs) Handles DateTimePicker1.ValueChanged
-        Dim datePilihan As String = DateTimePicker1.Value.ToString("M/d/yyyy")
+    Private Sub DateTimePicker1_ValueChanged(sender As Object, e As EventArgs) Handles dt_upfinger.ValueChanged
+        Dim datePilihan As String = dt_upfinger.Value.ToString("M/d/yyyy")
+        Dim depPilihan As String = cb_depfinger.Text
         DGV_DataModify.Rows.Clear()
-        insertToDgv("", datePilihan)
+        insertToDgv(depPilihan, datePilihan)
         Console.WriteLine("Done")
     End Sub
 
     Private Sub UploadFingerData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    End Sub
+
+    Private Sub cb_depfinger_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_depfinger.SelectedIndexChanged
+        Dim datePilihan As String = dt_upfinger.Value.ToString("M/d/yyyy")
+        Dim depPilihan As String = cb_depfinger.Text
+        DGV_DataModify.Rows.Clear()
+        insertToDgv(depPilihan, datePilihan)
+        Console.WriteLine("Done")
+    End Sub
+
+    Private Sub b_showall_Click(sender As Object, e As EventArgs) Handles b_showall.Click
+        dt_upfinger.Value = Now
+        cb_depfinger.Text = ""
+        DGV_DataModify.Rows.Clear()
+        insertToDgv("", "")
     End Sub
 End Class
