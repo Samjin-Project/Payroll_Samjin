@@ -23,17 +23,11 @@ Partial Class RegisterVacation
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.DGV_DataModify = New System.Windows.Forms.DataGridView()
-        Me.Kolom_Nik = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.kolom_emp = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Kolom_Nama = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Kolom_Admision = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.kolom_rehire = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -69,6 +63,10 @@ Partial Class RegisterVacation
         Me.tb_holtype = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tb_emp = New System.Windows.Forms.TextBox()
+        Me.kolom_emp = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Kolom_Nama = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Kolom_Admision = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.kolom_rehire = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.Panel5.SuspendLayout()
         CType(Me.DGV_DataModify, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -125,7 +123,7 @@ Partial Class RegisterVacation
         Me.DGV_DataModify.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DGV_DataModify.BackgroundColor = System.Drawing.SystemColors.Control
         Me.DGV_DataModify.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.DGV_DataModify.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Kolom_Nik, Me.kolom_emp, Me.Kolom_Nama, Me.Kolom_Admision, Me.kolom_rehire})
+        Me.DGV_DataModify.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.kolom_emp, Me.Kolom_Nama, Me.Kolom_Admision, Me.kolom_rehire})
         Me.DGV_DataModify.GridColor = System.Drawing.Color.LightGoldenrodYellow
         Me.DGV_DataModify.Location = New System.Drawing.Point(3, 57)
         Me.DGV_DataModify.MultiSelect = False
@@ -136,46 +134,6 @@ Partial Class RegisterVacation
         Me.DGV_DataModify.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DGV_DataModify.Size = New System.Drawing.Size(540, 442)
         Me.DGV_DataModify.TabIndex = 17
-        '
-        'Kolom_Nik
-        '
-        Me.Kolom_Nik.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Kolom_Nik.DefaultCellStyle = DataGridViewCellStyle1
-        Me.Kolom_Nik.HeaderText = "Seq."
-        Me.Kolom_Nik.Name = "Kolom_Nik"
-        Me.Kolom_Nik.ReadOnly = True
-        Me.Kolom_Nik.Width = 54
-        '
-        'kolom_emp
-        '
-        Me.kolom_emp.FillWeight = 72.07229!
-        Me.kolom_emp.HeaderText = "Emp No."
-        Me.kolom_emp.Name = "kolom_emp"
-        Me.kolom_emp.ReadOnly = True
-        '
-        'Kolom_Nama
-        '
-        Me.Kolom_Nama.FillWeight = 207.1237!
-        Me.Kolom_Nama.HeaderText = "Name"
-        Me.Kolom_Nama.Name = "Kolom_Nama"
-        Me.Kolom_Nama.ReadOnly = True
-        '
-        'Kolom_Admision
-        '
-        Me.Kolom_Admision.FillWeight = 50.87394!
-        Me.Kolom_Admision.HeaderText = "Admision Date"
-        Me.Kolom_Admision.Name = "Kolom_Admision"
-        Me.Kolom_Admision.ReadOnly = True
-        '
-        'kolom_rehire
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.kolom_rehire.DefaultCellStyle = DataGridViewCellStyle2
-        Me.kolom_rehire.FillWeight = 69.93007!
-        Me.kolom_rehire.HeaderText = "Re-hire Date"
-        Me.kolom_rehire.Name = "kolom_rehire"
-        Me.kolom_rehire.ReadOnly = True
         '
         'Panel2
         '
@@ -513,6 +471,36 @@ Partial Class RegisterVacation
         Me.tb_emp.Size = New System.Drawing.Size(110, 20)
         Me.tb_emp.TabIndex = 0
         '
+        'kolom_emp
+        '
+        Me.kolom_emp.FillWeight = 72.07229!
+        Me.kolom_emp.HeaderText = "Emp No."
+        Me.kolom_emp.Name = "kolom_emp"
+        Me.kolom_emp.ReadOnly = True
+        '
+        'Kolom_Nama
+        '
+        Me.Kolom_Nama.FillWeight = 207.1237!
+        Me.Kolom_Nama.HeaderText = "Name"
+        Me.Kolom_Nama.Name = "Kolom_Nama"
+        Me.Kolom_Nama.ReadOnly = True
+        '
+        'Kolom_Admision
+        '
+        Me.Kolom_Admision.FillWeight = 50.87394!
+        Me.Kolom_Admision.HeaderText = "Admision Date"
+        Me.Kolom_Admision.Name = "Kolom_Admision"
+        Me.Kolom_Admision.ReadOnly = True
+        '
+        'kolom_rehire
+        '
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.kolom_rehire.DefaultCellStyle = DataGridViewCellStyle1
+        Me.kolom_rehire.FillWeight = 69.93007!
+        Me.kolom_rehire.HeaderText = "Re-hire Date"
+        Me.kolom_rehire.Name = "kolom_rehire"
+        Me.kolom_rehire.ReadOnly = True
+        '
         'RegisterVacation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -577,10 +565,9 @@ Partial Class RegisterVacation
     Friend WithEvents Label11 As Label
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents Label9 As Label
-    Friend WithEvents Kolom_Nik As DataGridViewTextBoxColumn
+    Friend WithEvents Label15 As Label
     Friend WithEvents kolom_emp As DataGridViewTextBoxColumn
     Friend WithEvents Kolom_Nama As DataGridViewTextBoxColumn
     Friend WithEvents Kolom_Admision As DataGridViewTextBoxColumn
     Friend WithEvents kolom_rehire As DataGridViewTextBoxColumn
-    Friend WithEvents Label15 As Label
 End Class

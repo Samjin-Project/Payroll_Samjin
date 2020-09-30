@@ -22,16 +22,14 @@ Partial Class UploadFingerData
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.Label14 = New System.Windows.Forms.Label()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
@@ -92,8 +90,6 @@ Partial Class UploadFingerData
         '
         Me.GroupBox1.Controls.Add(Me.DateTimePicker1)
         Me.GroupBox1.Controls.Add(Me.Label14)
-        Me.GroupBox1.Controls.Add(Me.Label15)
-        Me.GroupBox1.Controls.Add(Me.ComboBox4)
         Me.GroupBox1.Controls.Add(Me.Label11)
         Me.GroupBox1.Controls.Add(Me.ComboBox1)
         Me.GroupBox1.Location = New System.Drawing.Point(4, 4)
@@ -121,38 +117,20 @@ Partial Class UploadFingerData
         Me.Label14.Text = "Tanggal Masuk"
         Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(20, 51)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(71, 13)
-        Me.Label15.TabIndex = 28
-        Me.Label15.Text = "Jenis Kelamin"
-        '
-        'ComboBox4
-        '
-        Me.ComboBox4.FormattingEnabled = True
-        Me.ComboBox4.Items.AddRange(New Object() {"Laki-Laki", "Perempuan"})
-        Me.ComboBox4.Location = New System.Drawing.Point(97, 48)
-        Me.ComboBox4.Name = "ComboBox4"
-        Me.ComboBox4.Size = New System.Drawing.Size(155, 21)
-        Me.ComboBox4.TabIndex = 27
-        '
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(59, 29)
+        Me.Label11.Location = New System.Drawing.Point(20, 51)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(34, 13)
+        Me.Label11.Size = New System.Drawing.Size(68, 13)
         Me.Label11.TabIndex = 24
-        Me.Label11.Text = "Posisi"
+        Me.Label11.Text = "Departement"
         '
         'ComboBox1
         '
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Items.AddRange(New Object() {"Rubber Forming", "Rubber Printing", "Assembly", "Pcba"})
-        Me.ComboBox1.Location = New System.Drawing.Point(97, 21)
+        Me.ComboBox1.Location = New System.Drawing.Point(106, 48)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(155, 21)
         Me.ComboBox1.TabIndex = 23
@@ -222,8 +200,8 @@ Partial Class UploadFingerData
         'KolomFinger_Nik
         '
         Me.KolomFinger_Nik.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.KolomFinger_Nik.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.KolomFinger_Nik.DefaultCellStyle = DataGridViewCellStyle7
         Me.KolomFinger_Nik.HeaderText = "NIK"
         Me.KolomFinger_Nik.Name = "KolomFinger_Nik"
         Me.KolomFinger_Nik.ReadOnly = True
@@ -256,10 +234,10 @@ Partial Class UploadFingerData
         '
         'KolomFinger_ClockIn
         '
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Red
-        DataGridViewCellStyle2.Format = "t"
-        DataGridViewCellStyle2.NullValue = Nothing
-        Me.KolomFinger_ClockIn.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Red
+        DataGridViewCellStyle8.Format = "t"
+        DataGridViewCellStyle8.NullValue = Nothing
+        Me.KolomFinger_ClockIn.DefaultCellStyle = DataGridViewCellStyle8
         Me.KolomFinger_ClockIn.HeaderText = "Clock In"
         Me.KolomFinger_ClockIn.Name = "KolomFinger_ClockIn"
         '
@@ -304,8 +282,6 @@ Partial Class UploadFingerData
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents DateTimePicker1 As DateTimePicker
     Friend WithEvents Label14 As Label
-    Friend WithEvents Label15 As Label
-    Friend WithEvents ComboBox4 As ComboBox
     Friend WithEvents Label11 As Label
     Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents Panel2 As Panel
