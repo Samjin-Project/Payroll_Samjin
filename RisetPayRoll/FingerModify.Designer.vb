@@ -22,19 +22,32 @@ Partial Class FingerModify
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DGV_DataModify = New System.Windows.Forms.DataGridView()
+        Me.kolom_No = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Kolom_Check = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.Kolom_No_Emp = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Kolom_Nama = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Kolom_Day = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Kolom_Shift = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Kolom_InOut = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Kolom_FingerTime = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Kolom_RecTime = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cb_finger = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.kolom_departement = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.kolom_upload_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.kolom_upload_emp = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Label17 = New System.Windows.Forms.Label()
@@ -62,19 +75,7 @@ Partial Class FingerModify
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.dt_day = New System.Windows.Forms.DateTimePicker()
-        Me.kolom_No = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Kolom_Check = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.Kolom_No_Emp = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Kolom_Nama = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Kolom_Day = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Kolom_Shift = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Kolom_InOut = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Kolom_FingerTime = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Kolom_RecTime = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cb_finger = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.kolom_departement = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.kolom_upload_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.kolom_upload_emp = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.DGV_DataModify, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel5.SuspendLayout()
@@ -101,18 +102,136 @@ Partial Class FingerModify
         Me.DGV_DataModify.MultiSelect = False
         Me.DGV_DataModify.Name = "DGV_DataModify"
         Me.DGV_DataModify.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
-        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle24.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGV_DataModify.RowHeadersDefaultCellStyle = DataGridViewCellStyle24
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGV_DataModify.RowHeadersDefaultCellStyle = DataGridViewCellStyle12
         Me.DGV_DataModify.RowHeadersWidth = 30
         Me.DGV_DataModify.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DGV_DataModify.Size = New System.Drawing.Size(1370, 472)
         Me.DGV_DataModify.TabIndex = 17
+        '
+        'kolom_No
+        '
+        Me.kolom_No.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.kolom_No.DefaultCellStyle = DataGridViewCellStyle1
+        Me.kolom_No.HeaderText = "No"
+        Me.kolom_No.Name = "kolom_No"
+        Me.kolom_No.ReadOnly = True
+        Me.kolom_No.Width = 30
+        '
+        'Kolom_Check
+        '
+        Me.Kolom_Check.FillWeight = 71.42857!
+        Me.Kolom_Check.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Kolom_Check.HeaderText = "Check"
+        Me.Kolom_Check.Name = "Kolom_Check"
+        '
+        'Kolom_No_Emp
+        '
+        Me.Kolom_No_Emp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Kolom_No_Emp.DefaultCellStyle = DataGridViewCellStyle2
+        Me.Kolom_No_Emp.HeaderText = "Emp. No."
+        Me.Kolom_No_Emp.Name = "Kolom_No_Emp"
+        Me.Kolom_No_Emp.ReadOnly = True
+        Me.Kolom_No_Emp.Width = 76
+        '
+        'Kolom_Nama
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Kolom_Nama.DefaultCellStyle = DataGridViewCellStyle3
+        Me.Kolom_Nama.FillWeight = 102.381!
+        Me.Kolom_Nama.HeaderText = "Name"
+        Me.Kolom_Nama.Name = "Kolom_Nama"
+        Me.Kolom_Nama.ReadOnly = True
+        '
+        'Kolom_Day
+        '
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Kolom_Day.DefaultCellStyle = DataGridViewCellStyle4
+        Me.Kolom_Day.FillWeight = 102.381!
+        Me.Kolom_Day.HeaderText = "Day"
+        Me.Kolom_Day.Name = "Kolom_Day"
+        Me.Kolom_Day.ReadOnly = True
+        '
+        'Kolom_Shift
+        '
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Kolom_Shift.DefaultCellStyle = DataGridViewCellStyle5
+        Me.Kolom_Shift.FillWeight = 102.381!
+        Me.Kolom_Shift.HeaderText = "SHIFT"
+        Me.Kolom_Shift.Name = "Kolom_Shift"
+        Me.Kolom_Shift.ReadOnly = True
+        '
+        'Kolom_InOut
+        '
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Kolom_InOut.DefaultCellStyle = DataGridViewCellStyle6
+        Me.Kolom_InOut.FillWeight = 102.381!
+        Me.Kolom_InOut.HeaderText = "Check In Or Out"
+        Me.Kolom_InOut.Name = "Kolom_InOut"
+        Me.Kolom_InOut.ReadOnly = True
+        '
+        'Kolom_FingerTime
+        '
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Kolom_FingerTime.DefaultCellStyle = DataGridViewCellStyle7
+        Me.Kolom_FingerTime.FillWeight = 102.381!
+        Me.Kolom_FingerTime.HeaderText = "Finger Time"
+        Me.Kolom_FingerTime.Name = "Kolom_FingerTime"
+        Me.Kolom_FingerTime.ReadOnly = True
+        '
+        'Kolom_RecTime
+        '
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Red
+        DataGridViewCellStyle8.Format = "t"
+        DataGridViewCellStyle8.NullValue = Nothing
+        Me.Kolom_RecTime.DefaultCellStyle = DataGridViewCellStyle8
+        Me.Kolom_RecTime.FillWeight = 102.381!
+        Me.Kolom_RecTime.HeaderText = "Recognized Time"
+        Me.Kolom_RecTime.Name = "Kolom_RecTime"
+        '
+        'cb_finger
+        '
+        Me.cb_finger.FillWeight = 102.381!
+        Me.cb_finger.HeaderText = "Finger"
+        Me.cb_finger.Name = "cb_finger"
+        Me.cb_finger.ReadOnly = True
+        '
+        'kolom_departement
+        '
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.kolom_departement.DefaultCellStyle = DataGridViewCellStyle9
+        Me.kolom_departement.FillWeight = 102.381!
+        Me.kolom_departement.HeaderText = "Departement"
+        Me.kolom_departement.Name = "kolom_departement"
+        Me.kolom_departement.ReadOnly = True
+        '
+        'kolom_upload_date
+        '
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.kolom_upload_date.DefaultCellStyle = DataGridViewCellStyle10
+        Me.kolom_upload_date.FillWeight = 102.381!
+        Me.kolom_upload_date.HeaderText = "Upload Date"
+        Me.kolom_upload_date.Name = "kolom_upload_date"
+        Me.kolom_upload_date.ReadOnly = True
+        '
+        'kolom_upload_emp
+        '
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.kolom_upload_emp.DefaultCellStyle = DataGridViewCellStyle11
+        Me.kolom_upload_emp.FillWeight = 102.381!
+        Me.kolom_upload_emp.HeaderText = "Upload Emp"
+        Me.kolom_upload_emp.Name = "kolom_upload_emp"
+        Me.kolom_upload_emp.ReadOnly = True
         '
         'Panel1
         '
@@ -176,7 +295,7 @@ Partial Class FingerModify
         'cb_shift
         '
         Me.cb_shift.FormattingEnabled = True
-        Me.cb_shift.Items.AddRange(New Object() {"shift 1", "shift 2", "shift 3", "non shift"})
+        Me.cb_shift.Items.AddRange(New Object() {"SHIFT1", "SHIFT2", "SHIFT3", "SIANG", "MALAM", "NONSHIFT", "ALL"})
         Me.cb_shift.Location = New System.Drawing.Point(91, 30)
         Me.cb_shift.Name = "cb_shift"
         Me.cb_shift.Size = New System.Drawing.Size(156, 21)
@@ -233,6 +352,7 @@ Partial Class FingerModify
         'RadioButton1
         '
         Me.RadioButton1.AutoSize = True
+        Me.RadioButton1.Checked = True
         Me.RadioButton1.Location = New System.Drawing.Point(14, 1)
         Me.RadioButton1.Name = "RadioButton1"
         Me.RadioButton1.Size = New System.Drawing.Size(68, 17)
@@ -258,7 +378,6 @@ Partial Class FingerModify
         Me.RadioButton2.Name = "RadioButton2"
         Me.RadioButton2.Size = New System.Drawing.Size(76, 17)
         Me.RadioButton2.TabIndex = 39
-        Me.RadioButton2.TabStop = True
         Me.RadioButton2.Text = "Check Out"
         Me.RadioButton2.UseVisualStyleBackColor = True
         '
@@ -294,9 +413,9 @@ Partial Class FingerModify
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(587, 6)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(67, 13)
+        Me.Label3.Size = New System.Drawing.Size(68, 13)
         Me.Label3.TabIndex = 42
-        Me.Label3.Text = "Group Name"
+        Me.Label3.Text = "Departement"
         '
         'ComboBox3
         '
@@ -318,6 +437,7 @@ Partial Class FingerModify
         '
         'Panel4
         '
+        Me.Panel4.Controls.Add(Me.Button1)
         Me.Panel4.Controls.Add(Me.rec_time)
         Me.Panel4.Controls.Add(Me.DateTimePicker1)
         Me.Panel4.Controls.Add(Me.Panel6)
@@ -385,123 +505,14 @@ Partial Class FingerModify
         Me.dt_day.Size = New System.Drawing.Size(156, 20)
         Me.dt_day.TabIndex = 20
         '
-        'kolom_No
+        'Button1
         '
-        Me.kolom_No.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.kolom_No.DefaultCellStyle = DataGridViewCellStyle13
-        Me.kolom_No.HeaderText = "No"
-        Me.kolom_No.Name = "kolom_No"
-        Me.kolom_No.ReadOnly = True
-        Me.kolom_No.Width = 30
-        '
-        'Kolom_Check
-        '
-        Me.Kolom_Check.FillWeight = 71.42857!
-        Me.Kolom_Check.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Kolom_Check.HeaderText = "Check"
-        Me.Kolom_Check.Name = "Kolom_Check"
-        '
-        'Kolom_No_Emp
-        '
-        Me.Kolom_No_Emp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Kolom_No_Emp.DefaultCellStyle = DataGridViewCellStyle14
-        Me.Kolom_No_Emp.HeaderText = "Emp. No."
-        Me.Kolom_No_Emp.Name = "Kolom_No_Emp"
-        Me.Kolom_No_Emp.ReadOnly = True
-        Me.Kolom_No_Emp.Width = 76
-        '
-        'Kolom_Nama
-        '
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Kolom_Nama.DefaultCellStyle = DataGridViewCellStyle15
-        Me.Kolom_Nama.FillWeight = 102.381!
-        Me.Kolom_Nama.HeaderText = "Name"
-        Me.Kolom_Nama.Name = "Kolom_Nama"
-        Me.Kolom_Nama.ReadOnly = True
-        '
-        'Kolom_Day
-        '
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Kolom_Day.DefaultCellStyle = DataGridViewCellStyle16
-        Me.Kolom_Day.FillWeight = 102.381!
-        Me.Kolom_Day.HeaderText = "Day"
-        Me.Kolom_Day.Name = "Kolom_Day"
-        Me.Kolom_Day.ReadOnly = True
-        '
-        'Kolom_Shift
-        '
-        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Kolom_Shift.DefaultCellStyle = DataGridViewCellStyle17
-        Me.Kolom_Shift.FillWeight = 102.381!
-        Me.Kolom_Shift.HeaderText = "SHIFT"
-        Me.Kolom_Shift.Name = "Kolom_Shift"
-        Me.Kolom_Shift.ReadOnly = True
-        '
-        'Kolom_InOut
-        '
-        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Kolom_InOut.DefaultCellStyle = DataGridViewCellStyle18
-        Me.Kolom_InOut.FillWeight = 102.381!
-        Me.Kolom_InOut.HeaderText = "Check In Or Out"
-        Me.Kolom_InOut.Name = "Kolom_InOut"
-        Me.Kolom_InOut.ReadOnly = True
-        '
-        'Kolom_FingerTime
-        '
-        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Kolom_FingerTime.DefaultCellStyle = DataGridViewCellStyle19
-        Me.Kolom_FingerTime.FillWeight = 102.381!
-        Me.Kolom_FingerTime.HeaderText = "Finger Time"
-        Me.Kolom_FingerTime.Name = "Kolom_FingerTime"
-        Me.Kolom_FingerTime.ReadOnly = True
-        '
-        'Kolom_RecTime
-        '
-        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle20.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle20.ForeColor = System.Drawing.Color.Red
-        DataGridViewCellStyle20.Format = "t"
-        DataGridViewCellStyle20.NullValue = Nothing
-        Me.Kolom_RecTime.DefaultCellStyle = DataGridViewCellStyle20
-        Me.Kolom_RecTime.FillWeight = 102.381!
-        Me.Kolom_RecTime.HeaderText = "Recognized Time"
-        Me.Kolom_RecTime.Name = "Kolom_RecTime"
-        '
-        'cb_finger
-        '
-        Me.cb_finger.FillWeight = 102.381!
-        Me.cb_finger.HeaderText = "Finger"
-        Me.cb_finger.Name = "cb_finger"
-        Me.cb_finger.ReadOnly = True
-        '
-        'kolom_departement
-        '
-        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.kolom_departement.DefaultCellStyle = DataGridViewCellStyle21
-        Me.kolom_departement.FillWeight = 102.381!
-        Me.kolom_departement.HeaderText = "Departement"
-        Me.kolom_departement.Name = "kolom_departement"
-        Me.kolom_departement.ReadOnly = True
-        '
-        'kolom_upload_date
-        '
-        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.kolom_upload_date.DefaultCellStyle = DataGridViewCellStyle22
-        Me.kolom_upload_date.FillWeight = 102.381!
-        Me.kolom_upload_date.HeaderText = "Upload Date"
-        Me.kolom_upload_date.Name = "kolom_upload_date"
-        Me.kolom_upload_date.ReadOnly = True
-        '
-        'kolom_upload_emp
-        '
-        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.kolom_upload_emp.DefaultCellStyle = DataGridViewCellStyle23
-        Me.kolom_upload_emp.FillWeight = 102.381!
-        Me.kolom_upload_emp.HeaderText = "Upload Emp"
-        Me.kolom_upload_emp.Name = "kolom_upload_emp"
-        Me.kolom_upload_emp.ReadOnly = True
+        Me.Button1.Location = New System.Drawing.Point(1022, 3)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(82, 50)
+        Me.Button1.TabIndex = 50
+        Me.Button1.Text = "SAVE"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'FingerModify
         '
@@ -568,4 +579,5 @@ Partial Class FingerModify
     Friend WithEvents kolom_departement As DataGridViewTextBoxColumn
     Friend WithEvents kolom_upload_date As DataGridViewTextBoxColumn
     Friend WithEvents kolom_upload_emp As DataGridViewTextBoxColumn
+    Friend WithEvents Button1 As Button
 End Class
