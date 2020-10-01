@@ -27,6 +27,7 @@ Partial Class ViewDailyAttendance
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.TextBox10 = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
@@ -97,6 +98,7 @@ Partial Class ViewDailyAttendance
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Button2)
         Me.GroupBox1.Controls.Add(Me.Panel3)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.DateTimePicker1)
@@ -110,6 +112,15 @@ Partial Class ViewDailyAttendance
         Me.GroupBox1.TabIndex = 24
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Sorting"
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(697, 45)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 23)
+        Me.Button2.TabIndex = 42
+        Me.Button2.Text = "EXPORT"
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'Panel3
         '
@@ -207,8 +218,6 @@ Partial Class ViewDailyAttendance
         '
         'DGV_ReviewDaily
         '
-        Me.DGV_ReviewDaily.AllowUserToAddRows = False
-        Me.DGV_ReviewDaily.AllowUserToDeleteRows = False
         Me.DGV_ReviewDaily.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
@@ -598,4 +607,5 @@ Partial Class ViewDailyAttendance
     Friend WithEvents KolomHasil_D30 As DataGridViewTextBoxColumn
     Friend WithEvents KolomHasil_D31 As DataGridViewTextBoxColumn
     Friend WithEvents KolomHasil_Total As DataGridViewTextBoxColumn
+    Friend WithEvents Button2 As Button
 End Class
