@@ -41,6 +41,48 @@
         Ws = Wb.Worksheets(sheetIndex)
         'Ws.name = "Test10"
         Dim excelRange As String = String.Format("A1:{0}{1}", finalColLetter, DGV_ReviewDaily.Rows.Count + 1)
+        Ws.Columns(1).ColumnWidth = 10
+        Ws.Columns(2).ColumnWidth = 15
+        Ws.Columns(3).ColumnWidth = 15
+        Ws.Columns(4).ColumnWidth = 15
+        Ws.Columns(5).ColumnWidth = 15
+        Ws.Columns(6).ColumnWidth = 8
+        Ws.Columns(7).ColumnWidth = 10
+        Ws.Columns(8).ColumnWidth = 10
+        Ws.Columns(9).ColumnWidth = 10
+        Ws.Columns(10).ColumnWidth = 15
+        Ws.Columns(11).ColumnWidth = 5
+        Ws.Columns(12).ColumnWidth = 5
+        Ws.Columns(13).ColumnWidth = 5
+        Ws.Columns(14).ColumnWidth = 5
+        Ws.Columns(15).ColumnWidth = 5
+        Ws.Columns(16).ColumnWidth = 5
+        Ws.Columns(17).ColumnWidth = 5
+        Ws.Columns(18).ColumnWidth = 5
+        Ws.Columns(19).ColumnWidth = 5
+        Ws.Columns(20).ColumnWidth = 5
+        Ws.Columns(21).ColumnWidth = 5
+        Ws.Columns(22).ColumnWidth = 5
+        Ws.Columns(23).ColumnWidth = 5
+        Ws.Columns(24).ColumnWidth = 5
+        Ws.Columns(25).ColumnWidth = 5
+        Ws.Columns(26).ColumnWidth = 5
+        Ws.Columns(27).ColumnWidth = 5
+        Ws.Columns(28).ColumnWidth = 5
+        Ws.Columns(29).ColumnWidth = 5
+        Ws.Columns(30).ColumnWidth = 5
+        Ws.Columns(31).ColumnWidth = 5
+        Ws.Columns(32).ColumnWidth = 5
+        Ws.Columns(33).ColumnWidth = 5
+        Ws.Columns(34).ColumnWidth = 5
+        Ws.Columns(35).ColumnWidth = 5
+        Ws.Columns(36).ColumnWidth = 5
+        Ws.Columns(37).ColumnWidth = 5
+        Ws.Columns(38).ColumnWidth = 5
+        Ws.Columns(39).ColumnWidth = 5
+        Ws.Columns(40).ColumnWidth = 5
+        Ws.Columns(41).ColumnWidth = 5
+        Ws.Columns(42).ColumnWidth = 15
 
         Ws.Range(excelRange, Type.Missing).Value2 = rawData
         Ws.Range(excelRange, Type.Missing).WrapText = True
@@ -48,7 +90,7 @@
         Ws = Nothing
 
 
-        Wb.SaveAs("D:\Test11.xlsx", Type.Missing, Type.Missing,
+        Wb.SaveAs("D:\Test12.xlsx", Type.Missing, Type.Missing,
          Type.Missing, Type.Missing, Type.Missing, Type.Missing,
          Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing)
         Wb.Close(True, Type.Missing, Type.Missing)
