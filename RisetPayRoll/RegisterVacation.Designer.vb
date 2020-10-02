@@ -32,6 +32,7 @@ Partial Class RegisterVacation
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.b_filter = New System.Windows.Forms.Button()
         Me.b_showall = New System.Windows.Forms.Button()
         Me.cb_dep = New System.Windows.Forms.ComboBox()
         Me.Label15 = New System.Windows.Forms.Label()
@@ -63,7 +64,7 @@ Partial Class RegisterVacation
         Me.tb_holtype = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tb_emp = New System.Windows.Forms.TextBox()
-        Me.b_filter = New System.Windows.Forms.Button()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         CType(Me.DGV_DataModify, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
@@ -187,6 +188,15 @@ Partial Class RegisterVacation
         Me.Panel2.Size = New System.Drawing.Size(925, 57)
         Me.Panel2.TabIndex = 20
         '
+        'b_filter
+        '
+        Me.b_filter.Location = New System.Drawing.Point(555, 29)
+        Me.b_filter.Name = "b_filter"
+        Me.b_filter.Size = New System.Drawing.Size(63, 22)
+        Me.b_filter.TabIndex = 13
+        Me.b_filter.Text = "Search"
+        Me.b_filter.UseVisualStyleBackColor = True
+        '
         'b_showall
         '
         Me.b_showall.Location = New System.Drawing.Point(555, 3)
@@ -298,6 +308,7 @@ Partial Class RegisterVacation
         '
         Me.Panel4.BackColor = System.Drawing.SystemColors.Control
         Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel4.Controls.Add(Me.Label5)
         Me.Panel4.Controls.Add(Me.b_save)
         Me.Panel4.Controls.Add(Me.Label10)
         Me.Panel4.Controls.Add(Me.dt_reqdate)
@@ -475,14 +486,14 @@ Partial Class RegisterVacation
         Me.tb_emp.Size = New System.Drawing.Size(110, 20)
         Me.tb_emp.TabIndex = 0
         '
-        'b_filter
+        'Label5
         '
-        Me.b_filter.Location = New System.Drawing.Point(555, 29)
-        Me.b_filter.Name = "b_filter"
-        Me.b_filter.Size = New System.Drawing.Size(63, 22)
-        Me.b_filter.TabIndex = 13
-        Me.b_filter.Text = "Search"
-        Me.b_filter.UseVisualStyleBackColor = True
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(31, 62)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(39, 13)
+        Me.Label5.TabIndex = 48
+        Me.Label5.Text = "Label5"
         '
         'RegisterVacation
         '
@@ -548,4 +559,5 @@ Partial Class RegisterVacation
     Friend WithEvents total_data As Label
     Friend WithEvents b_showall As Button
     Friend WithEvents b_filter As Button
+    Friend WithEvents Label5 As Label
 End Class

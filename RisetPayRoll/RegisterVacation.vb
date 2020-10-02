@@ -7,6 +7,7 @@
         If tb_emp.Text = "" Or tb_nama.Text = "" Then
             b_save.Enabled = False
         End If
+ 
     End Sub
 
     Private Sub dataOnSide(QueryOnReview As String)
@@ -78,7 +79,8 @@
             AND (`TanggalMasuk_Karyawan` BETWEEN  '{stDate}' AND '{endDate}')"
 
         Dim querycmd As String = ""
-        If stDate = "" And endDate = "" Then
+        If stDate = endDate Then
+            Label15.Text = "DEFAULT"
             If dep = "" And emp = "" Then
                 querycmd = QueryALL
             ElseIf dep = "" And emp <> "" Then
@@ -89,7 +91,8 @@
                 querycmd = QuerySortAll
             End If
 
-        ElseIf stDate <> "" And endDate <> "" Then
+        ElseIf Not stDate = endDate Then
+            Label15.Text = "PERIOD"
             If dep = "" And emp = "" Then
                 querycmd = QueryALLwTime
             ElseIf dep = "" And emp <> "" Then
