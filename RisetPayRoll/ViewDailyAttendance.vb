@@ -43,10 +43,12 @@
         Dim excelRange As String = String.Format("A1:{0}{1}", finalColLetter, DGV_ReviewDaily.Rows.Count + 1)
 
         Ws.Range(excelRange, Type.Missing).Value2 = rawData
+        Ws.Range(excelRange, Type.Missing).WrapText = True
+        Ws.Range(excelRange, Type.Missing).Borders.Color = RGB(0, 0, 0)
         Ws = Nothing
 
 
-        Wb.SaveAs("D:\Test10.xlsx", Type.Missing, Type.Missing,
+        Wb.SaveAs("D:\Test11.xlsx", Type.Missing, Type.Missing,
          Type.Missing, Type.Missing, Type.Missing, Type.Missing,
          Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing)
         Wb.Close(True, Type.Missing, Type.Missing)

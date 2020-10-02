@@ -235,7 +235,6 @@ Partial Class ViewDailyAttendance
         Me.DGV_ReviewDaily.Location = New System.Drawing.Point(0, 88)
         Me.DGV_ReviewDaily.MultiSelect = False
         Me.DGV_ReviewDaily.Name = "DGV_ReviewDaily"
-        Me.DGV_ReviewDaily.ReadOnly = True
         Me.DGV_ReviewDaily.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         Me.DGV_ReviewDaily.RowsDefaultCellStyle = DataGridViewCellStyle3
@@ -249,289 +248,247 @@ Partial Class ViewDailyAttendance
         Me.KolomHasil_NIK.DefaultCellStyle = DataGridViewCellStyle2
         Me.KolomHasil_NIK.HeaderText = "Emp No."
         Me.KolomHasil_NIK.Name = "KolomHasil_NIK"
-        Me.KolomHasil_NIK.ReadOnly = True
         Me.KolomHasil_NIK.Width = 80
         '
         'KolomHasil_Nama
         '
         Me.KolomHasil_Nama.HeaderText = "Name"
         Me.KolomHasil_Nama.Name = "KolomHasil_Nama"
-        Me.KolomHasil_Nama.ReadOnly = True
         Me.KolomHasil_Nama.Width = 150
         '
         'KolomHasil_Departement
         '
         Me.KolomHasil_Departement.HeaderText = "Departement"
         Me.KolomHasil_Departement.Name = "KolomHasil_Departement"
-        Me.KolomHasil_Departement.ReadOnly = True
         '
         'KolomHasil_Transport
         '
         Me.KolomHasil_Transport.HeaderText = "Transport"
         Me.KolomHasil_Transport.Name = "KolomHasil_Transport"
-        Me.KolomHasil_Transport.ReadOnly = True
         Me.KolomHasil_Transport.Width = 80
         '
         'KolomHasil_TransportAmount
         '
         Me.KolomHasil_TransportAmount.HeaderText = "Transport Amount"
         Me.KolomHasil_TransportAmount.Name = "KolomHasil_TransportAmount"
-        Me.KolomHasil_TransportAmount.ReadOnly = True
         '
         'KolomHasil_Shift
         '
         Me.KolomHasil_Shift.HeaderText = "Shift"
         Me.KolomHasil_Shift.Name = "KolomHasil_Shift"
-        Me.KolomHasil_Shift.ReadOnly = True
         Me.KolomHasil_Shift.Width = 50
         '
         'KolomHasil_ShiftAmount
         '
         Me.KolomHasil_ShiftAmount.HeaderText = "Shift Amount"
         Me.KolomHasil_ShiftAmount.Name = "KolomHasil_ShiftAmount"
-        Me.KolomHasil_ShiftAmount.ReadOnly = True
         '
         'KolomHasil_Meal
         '
         Me.KolomHasil_Meal.HeaderText = "Meal"
         Me.KolomHasil_Meal.Name = "KolomHasil_Meal"
-        Me.KolomHasil_Meal.ReadOnly = True
         '
         'KolomHasil_MealAmount
         '
         Me.KolomHasil_MealAmount.HeaderText = "Meal Amount"
         Me.KolomHasil_MealAmount.Name = "KolomHasil_MealAmount"
-        Me.KolomHasil_MealAmount.ReadOnly = True
         '
         'KolomHasil_Attendance
         '
         Me.KolomHasil_Attendance.HeaderText = "Attendance"
         Me.KolomHasil_Attendance.Name = "KolomHasil_Attendance"
-        Me.KolomHasil_Attendance.ReadOnly = True
         Me.KolomHasil_Attendance.Width = 80
         '
         'KolomHasil_D1
         '
         Me.KolomHasil_D1.HeaderText = "1"
         Me.KolomHasil_D1.Name = "KolomHasil_D1"
-        Me.KolomHasil_D1.ReadOnly = True
         Me.KolomHasil_D1.Width = 25
         '
         'KolomHasil_D2
         '
         Me.KolomHasil_D2.HeaderText = "2"
         Me.KolomHasil_D2.Name = "KolomHasil_D2"
-        Me.KolomHasil_D2.ReadOnly = True
         Me.KolomHasil_D2.Width = 25
         '
         'KolomHasil_D3
         '
         Me.KolomHasil_D3.HeaderText = "3"
         Me.KolomHasil_D3.Name = "KolomHasil_D3"
-        Me.KolomHasil_D3.ReadOnly = True
         Me.KolomHasil_D3.Width = 25
         '
         'KolomHasil_D4
         '
         Me.KolomHasil_D4.HeaderText = "4"
         Me.KolomHasil_D4.Name = "KolomHasil_D4"
-        Me.KolomHasil_D4.ReadOnly = True
         Me.KolomHasil_D4.Width = 25
         '
         'KolomHasil_D5
         '
         Me.KolomHasil_D5.HeaderText = "5"
         Me.KolomHasil_D5.Name = "KolomHasil_D5"
-        Me.KolomHasil_D5.ReadOnly = True
         Me.KolomHasil_D5.Width = 25
         '
         'KolomHasil_D6
         '
         Me.KolomHasil_D6.HeaderText = "6"
         Me.KolomHasil_D6.Name = "KolomHasil_D6"
-        Me.KolomHasil_D6.ReadOnly = True
         Me.KolomHasil_D6.Width = 25
         '
         'KolomHasil_D7
         '
         Me.KolomHasil_D7.HeaderText = "7"
         Me.KolomHasil_D7.Name = "KolomHasil_D7"
-        Me.KolomHasil_D7.ReadOnly = True
         Me.KolomHasil_D7.Width = 25
         '
         'KolomHasil_D8
         '
         Me.KolomHasil_D8.HeaderText = "8"
         Me.KolomHasil_D8.Name = "KolomHasil_D8"
-        Me.KolomHasil_D8.ReadOnly = True
         Me.KolomHasil_D8.Width = 25
         '
         'KolomHasil_D9
         '
         Me.KolomHasil_D9.HeaderText = "9"
         Me.KolomHasil_D9.Name = "KolomHasil_D9"
-        Me.KolomHasil_D9.ReadOnly = True
         Me.KolomHasil_D9.Width = 25
         '
         'KolomHasil_D10
         '
         Me.KolomHasil_D10.HeaderText = "10"
         Me.KolomHasil_D10.Name = "KolomHasil_D10"
-        Me.KolomHasil_D10.ReadOnly = True
         Me.KolomHasil_D10.Width = 25
         '
         'KolomHasil_D11
         '
         Me.KolomHasil_D11.HeaderText = "11"
         Me.KolomHasil_D11.Name = "KolomHasil_D11"
-        Me.KolomHasil_D11.ReadOnly = True
         Me.KolomHasil_D11.Width = 25
         '
         'KolomHasil_D12
         '
         Me.KolomHasil_D12.HeaderText = "12"
         Me.KolomHasil_D12.Name = "KolomHasil_D12"
-        Me.KolomHasil_D12.ReadOnly = True
         Me.KolomHasil_D12.Width = 25
         '
         'KolomHasil_D13
         '
         Me.KolomHasil_D13.HeaderText = "13"
         Me.KolomHasil_D13.Name = "KolomHasil_D13"
-        Me.KolomHasil_D13.ReadOnly = True
         Me.KolomHasil_D13.Width = 25
         '
         'KolomHasil_D14
         '
         Me.KolomHasil_D14.HeaderText = "14"
         Me.KolomHasil_D14.Name = "KolomHasil_D14"
-        Me.KolomHasil_D14.ReadOnly = True
         Me.KolomHasil_D14.Width = 25
         '
         'KolomHasil_D15
         '
         Me.KolomHasil_D15.HeaderText = "15"
         Me.KolomHasil_D15.Name = "KolomHasil_D15"
-        Me.KolomHasil_D15.ReadOnly = True
         Me.KolomHasil_D15.Width = 25
         '
         'KolomHasil_D16
         '
         Me.KolomHasil_D16.HeaderText = "16"
         Me.KolomHasil_D16.Name = "KolomHasil_D16"
-        Me.KolomHasil_D16.ReadOnly = True
         Me.KolomHasil_D16.Width = 25
         '
         'KolomHasil_D17
         '
         Me.KolomHasil_D17.HeaderText = "17"
         Me.KolomHasil_D17.Name = "KolomHasil_D17"
-        Me.KolomHasil_D17.ReadOnly = True
         Me.KolomHasil_D17.Width = 25
         '
         'KolomHasil_D18
         '
         Me.KolomHasil_D18.HeaderText = "18"
         Me.KolomHasil_D18.Name = "KolomHasil_D18"
-        Me.KolomHasil_D18.ReadOnly = True
         Me.KolomHasil_D18.Width = 25
         '
         'KolomHasil_D19
         '
         Me.KolomHasil_D19.HeaderText = "19"
         Me.KolomHasil_D19.Name = "KolomHasil_D19"
-        Me.KolomHasil_D19.ReadOnly = True
         Me.KolomHasil_D19.Width = 25
         '
         'KolomHasil_D20
         '
         Me.KolomHasil_D20.HeaderText = "20"
         Me.KolomHasil_D20.Name = "KolomHasil_D20"
-        Me.KolomHasil_D20.ReadOnly = True
         Me.KolomHasil_D20.Width = 25
         '
         'KolomHasil_D21
         '
         Me.KolomHasil_D21.HeaderText = "21"
         Me.KolomHasil_D21.Name = "KolomHasil_D21"
-        Me.KolomHasil_D21.ReadOnly = True
         Me.KolomHasil_D21.Width = 25
         '
         'KolomHasil_D22
         '
         Me.KolomHasil_D22.HeaderText = "22"
         Me.KolomHasil_D22.Name = "KolomHasil_D22"
-        Me.KolomHasil_D22.ReadOnly = True
         Me.KolomHasil_D22.Width = 25
         '
         'KolomHasil_D23
         '
         Me.KolomHasil_D23.HeaderText = "23"
         Me.KolomHasil_D23.Name = "KolomHasil_D23"
-        Me.KolomHasil_D23.ReadOnly = True
         Me.KolomHasil_D23.Width = 25
         '
         'KolomHasil_D24
         '
         Me.KolomHasil_D24.HeaderText = "24"
         Me.KolomHasil_D24.Name = "KolomHasil_D24"
-        Me.KolomHasil_D24.ReadOnly = True
         Me.KolomHasil_D24.Width = 25
         '
         'KolomHasil_D25
         '
         Me.KolomHasil_D25.HeaderText = "25"
         Me.KolomHasil_D25.Name = "KolomHasil_D25"
-        Me.KolomHasil_D25.ReadOnly = True
         Me.KolomHasil_D25.Width = 25
         '
         'KolomHasil_D26
         '
         Me.KolomHasil_D26.HeaderText = "26"
         Me.KolomHasil_D26.Name = "KolomHasil_D26"
-        Me.KolomHasil_D26.ReadOnly = True
         Me.KolomHasil_D26.Width = 25
         '
         'KolomHasil_D27
         '
         Me.KolomHasil_D27.HeaderText = "27"
         Me.KolomHasil_D27.Name = "KolomHasil_D27"
-        Me.KolomHasil_D27.ReadOnly = True
         Me.KolomHasil_D27.Width = 25
         '
         'KolomHasil_D28
         '
         Me.KolomHasil_D28.HeaderText = "28"
         Me.KolomHasil_D28.Name = "KolomHasil_D28"
-        Me.KolomHasil_D28.ReadOnly = True
         Me.KolomHasil_D28.Width = 25
         '
         'KolomHasil_D29
         '
         Me.KolomHasil_D29.HeaderText = "29"
         Me.KolomHasil_D29.Name = "KolomHasil_D29"
-        Me.KolomHasil_D29.ReadOnly = True
         Me.KolomHasil_D29.Width = 25
         '
         'KolomHasil_D30
         '
         Me.KolomHasil_D30.HeaderText = "30"
         Me.KolomHasil_D30.Name = "KolomHasil_D30"
-        Me.KolomHasil_D30.ReadOnly = True
         Me.KolomHasil_D30.Width = 25
         '
         'KolomHasil_D31
         '
         Me.KolomHasil_D31.HeaderText = "31"
         Me.KolomHasil_D31.Name = "KolomHasil_D31"
-        Me.KolomHasil_D31.ReadOnly = True
         Me.KolomHasil_D31.Width = 25
         '
         'KolomHasil_Total
         '
         Me.KolomHasil_Total.HeaderText = "Total"
         Me.KolomHasil_Total.Name = "KolomHasil_Total"
-        Me.KolomHasil_Total.ReadOnly = True
         '
         'ViewDailyAttendance
         '
