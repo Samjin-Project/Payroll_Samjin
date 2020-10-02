@@ -22,14 +22,22 @@ Partial Class ApprovalVacation
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.DGV_ApprovalVacation = New System.Windows.Forms.DataGridView()
+        Me.kolom_Aproval = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.Kolom_Approver = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Kolom_NamaKaryawan = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Kolom_VacCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Kolom_StartDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Kolom_EndDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Kolom_RequestDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Kolom_Tel = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -40,16 +48,9 @@ Partial Class ApprovalVacation
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.RadioButton4 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
-        Me.kolom_Aproval = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.Kolom_Approver = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Kolom_NamaKaryawan = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Kolom_VacCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Kolom_StartDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Kolom_EndDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Kolom_RequestDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Kolom_Tel = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RbUnapproved = New System.Windows.Forms.RadioButton()
+        Me.RbApproved = New System.Windows.Forms.RadioButton()
+        Me.RbAll = New System.Windows.Forms.RadioButton()
         Me.Panel1.SuspendLayout()
         CType(Me.DGV_ApprovalVacation, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
@@ -75,14 +76,14 @@ Partial Class ApprovalVacation
         Me.DGV_ApprovalVacation.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DGV_ApprovalVacation.BackgroundColor = System.Drawing.SystemColors.Control
         Me.DGV_ApprovalVacation.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGV_ApprovalVacation.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGV_ApprovalVacation.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.DGV_ApprovalVacation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DGV_ApprovalVacation.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.kolom_Aproval, Me.Kolom_Approver, Me.Kolom_NamaKaryawan, Me.Kolom_VacCode, Me.Kolom_StartDate, Me.Kolom_EndDate, Me.Kolom_RequestDate, Me.Kolom_Tel})
         Me.DGV_ApprovalVacation.Dock = System.Windows.Forms.DockStyle.Fill
@@ -91,18 +92,90 @@ Partial Class ApprovalVacation
         Me.DGV_ApprovalVacation.MultiSelect = False
         Me.DGV_ApprovalVacation.Name = "DGV_ApprovalVacation"
         Me.DGV_ApprovalVacation.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGV_ApprovalVacation.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGV_ApprovalVacation.RowHeadersDefaultCellStyle = DataGridViewCellStyle12
         Me.DGV_ApprovalVacation.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader
         Me.DGV_ApprovalVacation.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DGV_ApprovalVacation.Size = New System.Drawing.Size(1084, 469)
         Me.DGV_ApprovalVacation.TabIndex = 17
+        '
+        'kolom_Aproval
+        '
+        Me.kolom_Aproval.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.kolom_Aproval.HeaderText = "Aproval Y/N"
+        Me.kolom_Aproval.Items.AddRange(New Object() {"Yes", "No"})
+        Me.kolom_Aproval.Name = "kolom_Aproval"
+        Me.kolom_Aproval.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.kolom_Aproval.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.kolom_Aproval.Width = 91
+        '
+        'Kolom_Approver
+        '
+        Me.Kolom_Approver.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Kolom_Approver.DefaultCellStyle = DataGridViewCellStyle8
+        Me.Kolom_Approver.HeaderText = "Approver"
+        Me.Kolom_Approver.Name = "Kolom_Approver"
+        Me.Kolom_Approver.ReadOnly = True
+        Me.Kolom_Approver.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.Kolom_Approver.Width = 75
+        '
+        'Kolom_NamaKaryawan
+        '
+        Me.Kolom_NamaKaryawan.HeaderText = "Nama Karyawan"
+        Me.Kolom_NamaKaryawan.Name = "Kolom_NamaKaryawan"
+        Me.Kolom_NamaKaryawan.ReadOnly = True
+        Me.Kolom_NamaKaryawan.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'Kolom_VacCode
+        '
+        Me.Kolom_VacCode.HeaderText = "Vacation Code"
+        Me.Kolom_VacCode.Name = "Kolom_VacCode"
+        Me.Kolom_VacCode.ReadOnly = True
+        Me.Kolom_VacCode.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'Kolom_StartDate
+        '
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle9.NullValue = Nothing
+        Me.Kolom_StartDate.DefaultCellStyle = DataGridViewCellStyle9
+        Me.Kolom_StartDate.HeaderText = "Start Date"
+        Me.Kolom_StartDate.Name = "Kolom_StartDate"
+        Me.Kolom_StartDate.ReadOnly = True
+        Me.Kolom_StartDate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'Kolom_EndDate
+        '
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle10.NullValue = Nothing
+        Me.Kolom_EndDate.DefaultCellStyle = DataGridViewCellStyle10
+        Me.Kolom_EndDate.HeaderText = "End Date"
+        Me.Kolom_EndDate.Name = "Kolom_EndDate"
+        Me.Kolom_EndDate.ReadOnly = True
+        Me.Kolom_EndDate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'Kolom_RequestDate
+        '
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle11.NullValue = Nothing
+        Me.Kolom_RequestDate.DefaultCellStyle = DataGridViewCellStyle11
+        Me.Kolom_RequestDate.HeaderText = "Request Date"
+        Me.Kolom_RequestDate.Name = "Kolom_RequestDate"
+        Me.Kolom_RequestDate.ReadOnly = True
+        Me.Kolom_RequestDate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'Kolom_Tel
+        '
+        Me.Kolom_Tel.HeaderText = "Telephone"
+        Me.Kolom_Tel.Name = "Kolom_Tel"
+        Me.Kolom_Tel.ReadOnly = True
+        Me.Kolom_Tel.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         '
         'Panel5
         '
@@ -173,10 +246,11 @@ Partial Class ApprovalVacation
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.SystemColors.Control
+        Me.Panel3.Controls.Add(Me.RbAll)
         Me.Panel3.Controls.Add(Me.Label1)
         Me.Panel3.Controls.Add(Me.CheckBox1)
-        Me.Panel3.Controls.Add(Me.RadioButton4)
-        Me.Panel3.Controls.Add(Me.RadioButton3)
+        Me.Panel3.Controls.Add(Me.RbUnapproved)
+        Me.Panel3.Controls.Add(Me.RbApproved)
         Me.Panel3.Controls.Add(Me.DateTimePicker1)
         Me.Panel3.Controls.Add(Me.Label14)
         Me.Panel3.Controls.Add(Me.ComboBox3)
@@ -199,106 +273,44 @@ Partial Class ApprovalVacation
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(887, 15)
+        Me.CheckBox1.Location = New System.Drawing.Point(930, 16)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(81, 17)
         Me.CheckBox1.TabIndex = 59
         Me.CheckBox1.Text = "Full Aproval"
         Me.CheckBox1.UseVisualStyleBackColor = True
         '
-        'RadioButton4
+        'RbUnapproved
         '
-        Me.RadioButton4.AutoSize = True
-        Me.RadioButton4.Location = New System.Drawing.Point(638, 15)
-        Me.RadioButton4.Name = "RadioButton4"
-        Me.RadioButton4.Size = New System.Drawing.Size(84, 17)
-        Me.RadioButton4.TabIndex = 58
-        Me.RadioButton4.TabStop = True
-        Me.RadioButton4.Text = "Unapproved"
-        Me.RadioButton4.UseVisualStyleBackColor = True
+        Me.RbUnapproved.AutoSize = True
+        Me.RbUnapproved.Location = New System.Drawing.Point(632, 14)
+        Me.RbUnapproved.Name = "RbUnapproved"
+        Me.RbUnapproved.Size = New System.Drawing.Size(84, 17)
+        Me.RbUnapproved.TabIndex = 58
+        Me.RbUnapproved.Text = "Unapproved"
+        Me.RbUnapproved.UseVisualStyleBackColor = True
         '
-        'RadioButton3
+        'RbApproved
         '
-        Me.RadioButton3.AutoSize = True
-        Me.RadioButton3.Location = New System.Drawing.Point(550, 14)
-        Me.RadioButton3.Name = "RadioButton3"
-        Me.RadioButton3.Size = New System.Drawing.Size(67, 17)
-        Me.RadioButton3.TabIndex = 57
-        Me.RadioButton3.TabStop = True
-        Me.RadioButton3.Text = "Approval"
-        Me.RadioButton3.UseVisualStyleBackColor = True
+        Me.RbApproved.AutoSize = True
+        Me.RbApproved.Location = New System.Drawing.Point(550, 14)
+        Me.RbApproved.Name = "RbApproved"
+        Me.RbApproved.Size = New System.Drawing.Size(71, 17)
+        Me.RbApproved.TabIndex = 57
+        Me.RbApproved.Text = "Approved"
+        Me.RbApproved.UseVisualStyleBackColor = True
         '
-        'kolom_Aproval
+        'RbAll
         '
-        Me.kolom_Aproval.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.kolom_Aproval.HeaderText = "Aproval Y/N"
-        Me.kolom_Aproval.Items.AddRange(New Object() {"Yes", "No"})
-        Me.kolom_Aproval.Name = "kolom_Aproval"
-        Me.kolom_Aproval.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.kolom_Aproval.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.kolom_Aproval.Width = 91
-        '
-        'Kolom_Approver
-        '
-        Me.Kolom_Approver.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Kolom_Approver.DefaultCellStyle = DataGridViewCellStyle2
-        Me.Kolom_Approver.HeaderText = "Approver"
-        Me.Kolom_Approver.Name = "Kolom_Approver"
-        Me.Kolom_Approver.ReadOnly = True
-        Me.Kolom_Approver.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.Kolom_Approver.Width = 75
-        '
-        'Kolom_NamaKaryawan
-        '
-        Me.Kolom_NamaKaryawan.HeaderText = "Nama Karyawan"
-        Me.Kolom_NamaKaryawan.Name = "Kolom_NamaKaryawan"
-        Me.Kolom_NamaKaryawan.ReadOnly = True
-        Me.Kolom_NamaKaryawan.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'Kolom_VacCode
-        '
-        Me.Kolom_VacCode.HeaderText = "Vacation Code"
-        Me.Kolom_VacCode.Name = "Kolom_VacCode"
-        Me.Kolom_VacCode.ReadOnly = True
-        Me.Kolom_VacCode.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'Kolom_StartDate
-        '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        DataGridViewCellStyle3.NullValue = Nothing
-        Me.Kolom_StartDate.DefaultCellStyle = DataGridViewCellStyle3
-        Me.Kolom_StartDate.HeaderText = "Start Date"
-        Me.Kolom_StartDate.Name = "Kolom_StartDate"
-        Me.Kolom_StartDate.ReadOnly = True
-        Me.Kolom_StartDate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'Kolom_EndDate
-        '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        DataGridViewCellStyle4.NullValue = Nothing
-        Me.Kolom_EndDate.DefaultCellStyle = DataGridViewCellStyle4
-        Me.Kolom_EndDate.HeaderText = "End Date"
-        Me.Kolom_EndDate.Name = "Kolom_EndDate"
-        Me.Kolom_EndDate.ReadOnly = True
-        Me.Kolom_EndDate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'Kolom_RequestDate
-        '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
-        DataGridViewCellStyle5.NullValue = Nothing
-        Me.Kolom_RequestDate.DefaultCellStyle = DataGridViewCellStyle5
-        Me.Kolom_RequestDate.HeaderText = "Request Date"
-        Me.Kolom_RequestDate.Name = "Kolom_RequestDate"
-        Me.Kolom_RequestDate.ReadOnly = True
-        Me.Kolom_RequestDate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'Kolom_Tel
-        '
-        Me.Kolom_Tel.HeaderText = "Telephone"
-        Me.Kolom_Tel.Name = "Kolom_Tel"
-        Me.Kolom_Tel.ReadOnly = True
-        Me.Kolom_Tel.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.RbAll.AutoSize = True
+        Me.RbAll.Checked = True
+        Me.RbAll.Location = New System.Drawing.Point(727, 14)
+        Me.RbAll.Name = "RbAll"
+        Me.RbAll.Size = New System.Drawing.Size(44, 17)
+        Me.RbAll.TabIndex = 60
+        Me.RbAll.TabStop = True
+        Me.RbAll.Text = "ALL"
+        Me.RbAll.UseVisualStyleBackColor = True
         '
         'ApprovalVacation
         '
@@ -330,8 +342,8 @@ Partial Class ApprovalVacation
     Friend WithEvents Label14 As Label
     Friend WithEvents Panel3 As Panel
     Friend WithEvents CheckBox1 As CheckBox
-    Friend WithEvents RadioButton4 As RadioButton
-    Friend WithEvents RadioButton3 As RadioButton
+    Friend WithEvents RbUnapproved As RadioButton
+    Friend WithEvents RbApproved As RadioButton
     Friend WithEvents Label1 As Label
     Friend WithEvents kolom_Aproval As DataGridViewComboBoxColumn
     Friend WithEvents Kolom_Approver As DataGridViewTextBoxColumn
@@ -341,4 +353,5 @@ Partial Class ApprovalVacation
     Friend WithEvents Kolom_EndDate As DataGridViewTextBoxColumn
     Friend WithEvents Kolom_RequestDate As DataGridViewTextBoxColumn
     Friend WithEvents Kolom_Tel As DataGridViewTextBoxColumn
+    Friend WithEvents RbAll As RadioButton
 End Class
