@@ -47,7 +47,7 @@ Public Class RegisterMaster
                          '{DS.Tables(0).Rows(i).Item(6)}',
                          '{DS.Tables(0).Rows(i).Item(7)}',
                          '{DS.Tables(0).Rows(i).Item(8)}',
-                         {admisionDate.ToString("yyyy/MM/dd")},
+                         '{admisionDate.ToString("yyyy-MM-dd")}',
                          '{DS.Tables(0).Rows(i).Item(10)}',
             '{DS.Tables(0).Rows(i).Item(11)}')"
             Console.WriteLine("DB Query : " + masterQuery)
