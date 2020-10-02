@@ -77,6 +77,7 @@ Public Class UploadFingerData
 
 
 
+
         'Dibawah ini Contoh Pengambilan data Dari MySql
         Dim DBClass As DataBaseClass = New DataBaseClass ' Inisiasi class yg telah di buat
         Dim ds As DataSet = DBClass.downloadDB(querycmd) ' tabel yg didapat di masukan kedalam variabel ds memiliki tipe data Dataset, queryCMD beris Query SQL atau perintah untuk SELECT atau UPDATE...
@@ -105,6 +106,9 @@ Public Class UploadFingerData
             If i Mod 2 = 0 Then
                 DGV_DataModify.Rows(i).DefaultCellStyle.BackColor = Color.LightGray
             End If
+
+            'menampilkan total data dalan datagrid
+            total_data.Text = DGV_DataModify.Rows.Count
         Next
     End Sub
     Private Sub DateTimePicker1_ValueChanged(sender As Object, e As EventArgs) Handles dt_upfinger.ValueChanged
@@ -133,4 +137,5 @@ Public Class UploadFingerData
         DGV_DataModify.Rows.Clear()
         insertToDgv("", "")
     End Sub
+
 End Class

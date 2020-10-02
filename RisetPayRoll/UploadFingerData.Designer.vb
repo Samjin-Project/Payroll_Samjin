@@ -22,18 +22,20 @@ Partial Class UploadFingerData
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.b_showall = New System.Windows.Forms.Button()
         Me.dt_upfinger = New System.Windows.Forms.DateTimePicker()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.cb_depfinger = New System.Windows.Forms.ComboBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.total_data = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.DGV_DataModify = New System.Windows.Forms.DataGridView()
@@ -47,7 +49,6 @@ Partial Class UploadFingerData
         Me.KolomFinger_ClockOut = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.KolomFinger_Dep = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OpenFileDialogImport = New System.Windows.Forms.OpenFileDialog()
-        Me.b_showall = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -101,6 +102,15 @@ Partial Class UploadFingerData
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Sorting"
         '
+        'b_showall
+        '
+        Me.b_showall.Location = New System.Drawing.Point(518, 49)
+        Me.b_showall.Name = "b_showall"
+        Me.b_showall.Size = New System.Drawing.Size(77, 19)
+        Me.b_showall.TabIndex = 31
+        Me.b_showall.Text = "Show All"
+        Me.b_showall.UseVisualStyleBackColor = True
+        '
         'dt_upfinger
         '
         Me.dt_upfinger.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
@@ -131,7 +141,7 @@ Partial Class UploadFingerData
         'cb_depfinger
         '
         Me.cb_depfinger.FormattingEnabled = True
-        Me.cb_depfinger.Items.AddRange(New Object() {"Inj Group 1 (mahpudin)", "Inj Group 2 (suprayogi)", "Inj Group 3 (samat)", "Qc non shift", "TEAM SEPTI", "QC 2 shift"})
+        Me.cb_depfinger.Items.AddRange(New Object() {"PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING", ""})
         Me.cb_depfinger.Location = New System.Drawing.Point(89, 48)
         Me.cb_depfinger.Name = "cb_depfinger"
         Me.cb_depfinger.Size = New System.Drawing.Size(155, 21)
@@ -151,6 +161,7 @@ Partial Class UploadFingerData
         'Panel5
         '
         Me.Panel5.BackColor = System.Drawing.Color.Blue
+        Me.Panel5.Controls.Add(Me.total_data)
         Me.Panel5.Controls.Add(Me.Label17)
         Me.Panel5.Controls.Add(Me.Label18)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Bottom
@@ -158,6 +169,15 @@ Partial Class UploadFingerData
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(904, 25)
         Me.Panel5.TabIndex = 19
+        '
+        'total_data
+        '
+        Me.total_data.AutoSize = True
+        Me.total_data.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.total_data.Location = New System.Drawing.Point(144, 6)
+        Me.total_data.Name = "total_data"
+        Me.total_data.Size = New System.Drawing.Size(0, 13)
+        Me.total_data.TabIndex = 20
         '
         'Label17
         '
@@ -203,8 +223,8 @@ Partial Class UploadFingerData
         'KolomFinger_Nik
         '
         Me.KolomFinger_Nik.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.KolomFinger_Nik.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.KolomFinger_Nik.DefaultCellStyle = DataGridViewCellStyle1
         Me.KolomFinger_Nik.HeaderText = "NIK"
         Me.KolomFinger_Nik.Name = "KolomFinger_Nik"
         Me.KolomFinger_Nik.ReadOnly = True
@@ -237,10 +257,10 @@ Partial Class UploadFingerData
         '
         'KolomFinger_ClockIn
         '
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Red
-        DataGridViewCellStyle4.Format = "t"
-        DataGridViewCellStyle4.NullValue = Nothing
-        Me.KolomFinger_ClockIn.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Red
+        DataGridViewCellStyle2.Format = "t"
+        DataGridViewCellStyle2.NullValue = Nothing
+        Me.KolomFinger_ClockIn.DefaultCellStyle = DataGridViewCellStyle2
         Me.KolomFinger_ClockIn.HeaderText = "Clock In"
         Me.KolomFinger_ClockIn.Name = "KolomFinger_ClockIn"
         '
@@ -257,15 +277,6 @@ Partial Class UploadFingerData
         'OpenFileDialogImport
         '
         Me.OpenFileDialogImport.FileName = "OpenFileDialog1"
-        '
-        'b_showall
-        '
-        Me.b_showall.Location = New System.Drawing.Point(518, 49)
-        Me.b_showall.Name = "b_showall"
-        Me.b_showall.Size = New System.Drawing.Size(77, 19)
-        Me.b_showall.TabIndex = 31
-        Me.b_showall.Text = "Show All"
-        Me.b_showall.UseVisualStyleBackColor = True
         '
         'UploadFingerData
         '
@@ -312,4 +323,5 @@ Partial Class UploadFingerData
     Friend WithEvents KolomFinger_Dep As DataGridViewTextBoxColumn
     Friend WithEvents OpenFileDialogImport As OpenFileDialog
     Friend WithEvents b_showall As Button
+    Friend WithEvents total_data As Label
 End Class
