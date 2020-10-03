@@ -3,56 +3,125 @@ Public Class Form2
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
+    Function GetTable() As DataTable
+        ' Create new DataTable instance.
+        Dim table As New DataTable
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Try
-            Dim ExcelApp As Excel.Application
-            Dim ExcelWorkBook As Excel.Workbook
-            Dim ExcelWorkSheet As Excel.Worksheet
-            Dim misValue As Object = System.Reflection.Missing.Value
-            Dim a As Integer
-            Dim b As Integer
+        ' Create four typed columns in the DataTable.
+        table.Columns.Add("NO", GetType(Integer))
+        table.Columns.Add("EMPL NO.", GetType(String))
+        table.Columns.Add("NAME", GetType(String))
+        table.Columns.Add("POSITION", GetType(String))
+        table.Columns.Add("DEPT", GetType(String))
+        table.Columns.Add("HIRE OF DATE", GetType(String))
+        table.Columns.Add("STATUS", GetType(String))
+        table.Columns.Add("SUB TOTAL (GROSS SALARY)", GetType(Integer))
+        table.Columns.Add("MANAGM FEE 8% X BASIC SALARY", GetType(Integer))
+        table.Columns.Add("TOTAL", GetType(Integer))
+        table.Columns.Add("GROSS SALARY", GetType(Integer))
+        table.Columns.Add("JAMSOST(1.19% x BS)", GetType(Integer))
+        table.Columns.Add("BPJS KESEHATAN", GetType(Integer))
+        table.Columns.Add("SUB TOTAL", GetType(Integer))
+        table.Columns.Add("TAKE HOME PAY", GetType(Integer))
 
-            ExcelApp = New Excel.Application
-            ExcelWorkBook = ExcelApp.Workbooks.Add(misValue)
-            ExcelWorkSheet = ExcelWorkBook.Sheets("sheet1")
+        ' Add five rows with those columns filled in the DataTable.
+        table.Rows.Add(1, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
+        table.Rows.Add(1, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
+        table.Rows.Add(1, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
+        table.Rows.Add(1, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
+        table.Rows.Add(1, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
+        table.Rows.Add(1, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
+        table.Rows.Add(1, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
+        table.Rows.Add(1, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
+        table.Rows.Add(1, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
+        table.Rows.Add(1, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
+        table.Rows.Add(1, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
+        table.Rows.Add(1, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
+        table.Rows.Add(1, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
+        table.Rows.Add(1, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
+        Return table
+    End Function
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Dim table As DataTable = GetTable()
+        Dim sheetIndex As Integer
+        Dim Ex As Object
+        Dim Wb As Object
+        Dim Ws As Object
+        Ex = CreateObject("Excel.Application")
+        Wb = Ex.workbooks.add
 
-            For a = 0 To DataGridView1.RowCount - 2
-                For b = 0 To DataGridView1.ColumnCount - 1
-                    For c As Integer = 1 To DataGridView1.Columns.Count
-                        ExcelWorkSheet.Cells(1, c) = DataGridView1.Columns(c - 1).HeaderText
-                        ExcelWorkSheet.Cells(a + 2, b + 1) = DataGridView1(b, a).Value.ToString()
-                    Next
-                Next
+        ' Copy each DataTable as a new Sheet
+
+        'On Error Resume Next
+        Dim col, row As Integer
+        ' Copy the DataTable to an object array
+        Dim rawData(table.Rows.Count, table.Columns.Count - 1) As Object
+
+        ' Copy the column names to the first row of the object array
+
+        For col = 0 To table.Columns.Count - 1
+            rawData(0, col) = table.Columns(col).ColumnName.ToUpper
+        Next
+
+        For col = 0 To table.Columns.Count - 1
+            For row = 0 To table.Rows.Count - 1
+                rawData(row + 1, col) = table.Rows(row).ItemArray(col)
+
             Next
+        Next
 
-            ExcelWorkSheet.SaveAs("D:\Test.xls")
-            ExcelWorkBook.Close()
-            ExcelApp.Quit()
 
-            releaseObject(ExcelApp)
-            releaseObject(ExcelWorkBook)
-            releaseObject(ExcelWorkSheet)
+        ' Calculate the final column letter
+        Dim finalColLetter As String = String.Empty
+        finalColLetter = ExcelColName(table.Columns.Count) 'Generate Excel Column Name (Column ID)
 
-            MsgBox("Hasil export tersimpan di D:\DB, dengan nama Test.xlsx")
-        Catch ex As Exception
 
-        End Try
+        sheetIndex += 1
+        Ws = Wb.Worksheets(sheetIndex)
+        'Ws.name = "Test10"
+        Dim excelRange As String = String.Format("A1:{0}{1}", finalColLetter, table.Rows.Count + 1)
 
+        Ws.Range(excelRange, Type.Missing).Value2 = rawData
+        Ws.Range(excelRange, Type.Missing).Borders.Color = RGB(0, 0, 0)
+        Ws.Range("A1:J1").interior.colorindex = 6
+        Ws.Range("K1:O1").interior.colorindex = 45
+        Ws = Nothing
+
+
+        Wb.SaveAs("D:\test5.xlsx", Type.Missing, Type.Missing,
+         Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+         Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing)
+        Wb.Close(True, Type.Missing, Type.Missing)
+        Wb = Nothing
+        ' Release the Application object
+        Ex.Quit()
+        Ex = Nothing
+        ' Collect the unreferenced objects
+        GC.Collect()
+        MsgBox("Exported Successfully.", MsgBoxStyle.Information)
     End Sub
-    Private Sub releaseObject(ByVal obj As Object)
-        Try
-            Runtime.InteropServices.Marshal.ReleaseComObject(obj)
-            obj = Nothing
-        Catch ex As Exception
-            obj = Nothing
-        Finally
-            GC.Collect()
-        End Try
 
-    End Sub
+    Public Function ExcelColName(ByVal Col As Integer) As String
+        If Col < 0 And Col > 256 Then
+            MsgBox("Invalid Argument", MsgBoxStyle.Critical)
+            Return Nothing
+            Exit Function
+        End If
+        Dim i As Int16
+        Dim r As Int16
+        Dim S As String
+        If Col <= 26 Then
+            S = Chr(Col + 64)
+        Else
+            r = Col Mod 26
+            i = System.Math.Floor(Col / 26)
+            If r = 0 Then
+                r = 26
+                i = i - 1
+            End If
+            S = Chr(i + 64) & Chr(r + 64)
+        End If
+        ExcelColName = S
+    End Function
 
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
-
-    End Sub
 End Class
