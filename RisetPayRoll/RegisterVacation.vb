@@ -80,7 +80,6 @@
 
         Dim querycmd As String = ""
         If stDate = endDate Then
-            Label15.Text = "DEFAULT"
             If dep = "" And emp = "" Then
                 querycmd = QueryALL
             ElseIf dep = "" And emp <> "" Then
@@ -92,7 +91,6 @@
             End If
 
         ElseIf Not stDate = endDate Then
-            Label15.Text = "PERIOD"
             If dep = "" And emp = "" Then
                 querycmd = QueryALLwTime
             ElseIf dep = "" And emp <> "" Then

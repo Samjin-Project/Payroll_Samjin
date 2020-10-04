@@ -46,6 +46,7 @@ Partial Class RegisterVacation
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.b_save = New System.Windows.Forms.Button()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.dt_reqdate = New System.Windows.Forms.DateTimePicker()
@@ -64,7 +65,6 @@ Partial Class RegisterVacation
         Me.tb_holtype = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tb_emp = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         CType(Me.DGV_DataModify, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
@@ -333,6 +333,14 @@ Partial Class RegisterVacation
         Me.Panel4.Size = New System.Drawing.Size(490, 510)
         Me.Panel4.TabIndex = 21
         '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(31, 62)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(0, 13)
+        Me.Label5.TabIndex = 48
+        '
         'b_save
         '
         Me.b_save.Location = New System.Drawing.Point(204, 421)
@@ -485,15 +493,6 @@ Partial Class RegisterVacation
         Me.tb_emp.Name = "tb_emp"
         Me.tb_emp.Size = New System.Drawing.Size(110, 20)
         Me.tb_emp.TabIndex = 0
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(31, 62)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(39, 13)
-        Me.Label5.TabIndex = 48
-        Me.Label5.Text = "Label5"
         '
         'RegisterVacation
         '
