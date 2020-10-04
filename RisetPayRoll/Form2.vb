@@ -26,19 +26,19 @@ Public Class Form2
 
         ' Add five rows with those columns filled in the DataTable.
         table.Rows.Add(1, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
-        table.Rows.Add(1, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
-        table.Rows.Add(1, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
-        table.Rows.Add(1, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
-        table.Rows.Add(1, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
-        table.Rows.Add(1, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
-        table.Rows.Add(1, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
-        table.Rows.Add(1, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
-        table.Rows.Add(1, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
-        table.Rows.Add(1, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
-        table.Rows.Add(1, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
-        table.Rows.Add(1, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
-        table.Rows.Add(1, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
-        table.Rows.Add(1, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
+        table.Rows.Add(2, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
+        table.Rows.Add(3, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
+        table.Rows.Add(4, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
+        table.Rows.Add(5, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
+        table.Rows.Add(6, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
+        table.Rows.Add(7, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
+        table.Rows.Add(8, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
+        table.Rows.Add(9, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
+        table.Rows.Add(10, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
+        table.Rows.Add(11, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
+        table.Rows.Add(12, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
+        table.Rows.Add(13, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
+        table.Rows.Add(14, "K216441019", "Reza Sup", "Supervisor", "Produksi", "22 September 2020", "Aktif", 10000000, 800000, 10800000, 10000000, 119000, 100000, 9900000, 10000000)
         Return table
     End Function
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -79,16 +79,39 @@ Public Class Form2
         sheetIndex += 1
         Ws = Wb.Worksheets(sheetIndex)
         'Ws.name = "Test10"
-        Dim excelRange As String = String.Format("A1:{0}{1}", finalColLetter, table.Rows.Count + 1)
-
+        Dim excelRange As String = String.Format("A5:{0}{1}", finalColLetter, table.Rows.Count + 1)
+        Ws.Cells(1, 2).Value = "Dept :"
+        Ws.Cells(1, 3).Value = "Assembly"
+        Ws.Cells(2, 2).Value = "Bulan :"
+        Ws.Cells(2, 3).Value = "Oktober"
+        Ws.Cells(3, 2).Value = "Date Export"
+        Ws.Cells(3, 3).Value = DateTime.Now
         Ws.Range(excelRange, Type.Missing).Value2 = rawData
+        Ws.Range("A5:O5").WrapText = True
+        Ws.Range("A5:O5").VerticalAlignment = 2
         Ws.Range(excelRange, Type.Missing).Borders.Color = RGB(0, 0, 0)
-        Ws.Range("A1:J1").interior.colorindex = 6
-        Ws.Range("K1:O1").interior.colorindex = 45
+        Ws.Range("A5:J5").interior.colorindex = 6
+        Ws.Range("K5:O5").interior.colorindex = 45
+        Ws.Rows(5).RowHeight = 45
+        Ws.Columns(1).ColumnWidth = 5
+        Ws.Columns(2).ColumnWidth = 15
+        Ws.Columns(3).ColumnWidth = 15
+        Ws.Columns(4).ColumnWidth = 12
+        Ws.Columns(5).ColumnWidth = 12
+        Ws.Columns(6).ColumnWidth = 12
+        Ws.Columns(7).ColumnWidth = 8
+        Ws.Columns(8).ColumnWidth = 15
+        Ws.Columns(9).ColumnWidth = 15
+        Ws.Columns(10).ColumnWidth = 15
+        Ws.Columns(11).ColumnWidth = 15
+        Ws.Columns(12).ColumnWidth = 15
+        Ws.Columns(13).ColumnWidth = 15
+        Ws.Columns(14).ColumnWidth = 15
+        Ws.Columns(15).ColumnWidth = 15
         Ws = Nothing
 
 
-        Wb.SaveAs("D:\test5.xlsx", Type.Missing, Type.Missing,
+        Wb.SaveAs("D:\ujike5.xlsx", Type.Missing, Type.Missing,
          Type.Missing, Type.Missing, Type.Missing, Type.Missing,
          Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing)
         Wb.Close(True, Type.Missing, Type.Missing)
