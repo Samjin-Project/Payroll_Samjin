@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class DailyAttendance
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,19 +20,17 @@ Partial Class DailyAttendance
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.cb_statusSearch = New System.Windows.Forms.ComboBox()
+        Me.b_clear = New System.Windows.Forms.Button()
         Me.cb_depSearch = New System.Windows.Forms.ComboBox()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.dt_end = New System.Windows.Forms.DateTimePicker()
@@ -41,10 +39,7 @@ Partial Class DailyAttendance
         Me.tb_empSearch = New System.Windows.Forms.TextBox()
         Me.dt_start = New System.Windows.Forms.DateTimePicker()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.Label16 = New System.Windows.Forms.Label()
-        Me.cb_groupSearch = New System.Windows.Forms.ComboBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.cb_statusCreate = New System.Windows.Forms.ComboBox()
         Me.cb_depCreate = New System.Windows.Forms.ComboBox()
@@ -91,7 +86,6 @@ Partial Class DailyAttendance
         Me.total_data = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
-        Me.b_clear = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -116,11 +110,8 @@ Partial Class DailyAttendance
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.b_clear)
-        Me.GroupBox2.Controls.Add(Me.cb_statusSearch)
         Me.GroupBox2.Controls.Add(Me.cb_depSearch)
         Me.GroupBox2.Controls.Add(Me.Label6)
-        Me.GroupBox2.Controls.Add(Me.Label7)
-        Me.GroupBox2.Controls.Add(Me.Label8)
         Me.GroupBox2.Controls.Add(Me.Label9)
         Me.GroupBox2.Controls.Add(Me.Label10)
         Me.GroupBox2.Controls.Add(Me.dt_end)
@@ -129,10 +120,7 @@ Partial Class DailyAttendance
         Me.GroupBox2.Controls.Add(Me.tb_empSearch)
         Me.GroupBox2.Controls.Add(Me.dt_start)
         Me.GroupBox2.Controls.Add(Me.Label12)
-        Me.GroupBox2.Controls.Add(Me.Label13)
-        Me.GroupBox2.Controls.Add(Me.ComboBox2)
         Me.GroupBox2.Controls.Add(Me.Label16)
-        Me.GroupBox2.Controls.Add(Me.cb_groupSearch)
         Me.GroupBox2.ForeColor = System.Drawing.SystemColors.HotTrack
         Me.GroupBox2.Location = New System.Drawing.Point(572, 3)
         Me.GroupBox2.Name = "GroupBox2"
@@ -141,20 +129,21 @@ Partial Class DailyAttendance
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Search Conditions"
         '
-        'cb_statusSearch
+        'b_clear
         '
-        Me.cb_statusSearch.FormattingEnabled = True
-        Me.cb_statusSearch.Items.AddRange(New Object() {"Tetap", "Magang"})
-        Me.cb_statusSearch.Location = New System.Drawing.Point(451, 10)
-        Me.cb_statusSearch.Name = "cb_statusSearch"
-        Me.cb_statusSearch.Size = New System.Drawing.Size(99, 21)
-        Me.cb_statusSearch.TabIndex = 43
+        Me.b_clear.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.b_clear.Location = New System.Drawing.Point(399, 63)
+        Me.b_clear.Name = "b_clear"
+        Me.b_clear.Size = New System.Drawing.Size(68, 20)
+        Me.b_clear.TabIndex = 44
+        Me.b_clear.Text = "Clear"
+        Me.b_clear.UseVisualStyleBackColor = True
         '
         'cb_depSearch
         '
         Me.cb_depSearch.FormattingEnabled = True
         Me.cb_depSearch.Items.AddRange(New Object() {"PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING"})
-        Me.cb_depSearch.Location = New System.Drawing.Point(284, 12)
+        Me.cb_depSearch.Location = New System.Drawing.Point(71, 63)
         Me.cb_depSearch.Name = "cb_depSearch"
         Me.cb_depSearch.Size = New System.Drawing.Size(118, 21)
         Me.cb_depSearch.TabIndex = 42
@@ -163,39 +152,18 @@ Partial Class DailyAttendance
         '
         Me.Label6.AutoSize = True
         Me.Label6.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label6.Location = New System.Drawing.Point(445, 44)
+        Me.Label6.Location = New System.Drawing.Point(420, 23)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(14, 13)
         Me.Label6.TabIndex = 41
         Me.Label6.Text = "~"
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label7.Location = New System.Drawing.Point(281, 66)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(67, 13)
-        Me.Label7.TabIndex = 40
-        Me.Label7.Text = "Admin Name"
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label8.Location = New System.Drawing.Point(408, 15)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(37, 13)
-        Me.Label8.TabIndex = 39
-        Me.Label8.Text = "Status"
-        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
         'Label9
         '
         Me.Label9.AutoSize = True
         Me.Label9.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label9.Location = New System.Drawing.Point(210, 16)
+        Me.Label9.Location = New System.Drawing.Point(5, 68)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(68, 13)
         Me.Label9.TabIndex = 38
@@ -205,7 +173,7 @@ Partial Class DailyAttendance
         '
         Me.Label10.AutoSize = True
         Me.Label10.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label10.Location = New System.Drawing.Point(10, 18)
+        Me.Label10.Location = New System.Drawing.Point(13, 18)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(59, 13)
         Me.Label10.TabIndex = 37
@@ -213,8 +181,9 @@ Partial Class DailyAttendance
         '
         'dt_end
         '
-        Me.dt_end.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dt_end.Location = New System.Drawing.Point(468, 37)
+        Me.dt_end.CustomFormat = "MM/yyyy"
+        Me.dt_end.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dt_end.Location = New System.Drawing.Point(443, 16)
         Me.dt_end.Name = "dt_end"
         Me.dt_end.Size = New System.Drawing.Size(82, 20)
         Me.dt_end.TabIndex = 34
@@ -247,8 +216,9 @@ Partial Class DailyAttendance
         '
         'dt_start
         '
-        Me.dt_start.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dt_start.Location = New System.Drawing.Point(356, 37)
+        Me.dt_start.CustomFormat = "MM/yyyy"
+        Me.dt_start.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dt_start.Location = New System.Drawing.Point(331, 16)
         Me.dt_start.Name = "dt_start"
         Me.dt_start.Size = New System.Drawing.Size(82, 20)
         Me.dt_start.TabIndex = 30
@@ -257,52 +227,22 @@ Partial Class DailyAttendance
         '
         Me.Label12.AutoSize = True
         Me.Label12.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label12.Location = New System.Drawing.Point(313, 40)
+        Me.Label12.Location = New System.Drawing.Point(288, 19)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(37, 13)
         Me.Label12.TabIndex = 29
         Me.Label12.Text = "Period"
         Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label13.Location = New System.Drawing.Point(31, 64)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(36, 13)
-        Me.Label13.TabIndex = 28
-        Me.Label13.Text = "Group"
-        '
-        'ComboBox2
-        '
-        Me.ComboBox2.BackColor = System.Drawing.Color.White
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Items.AddRange(New Object() {"Laki-Laki", "Perempuan"})
-        Me.ComboBox2.Location = New System.Drawing.Point(356, 63)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(155, 21)
-        Me.ComboBox2.TabIndex = 27
-        '
         'Label16
         '
         Me.Label16.AutoSize = True
         Me.Label16.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label16.Location = New System.Drawing.Point(21, 41)
+        Me.Label16.Location = New System.Drawing.Point(25, 41)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(48, 13)
         Me.Label16.TabIndex = 24
         Me.Label16.Text = "Emp. No"
-        '
-        'cb_groupSearch
-        '
-        Me.cb_groupSearch.BackColor = System.Drawing.Color.White
-        Me.cb_groupSearch.FormattingEnabled = True
-        Me.cb_groupSearch.Items.AddRange(New Object() {"1", "2", "3"})
-        Me.cb_groupSearch.Location = New System.Drawing.Point(72, 63)
-        Me.cb_groupSearch.Name = "cb_groupSearch"
-        Me.cb_groupSearch.Size = New System.Drawing.Size(155, 21)
-        Me.cb_groupSearch.TabIndex = 23
         '
         'GroupBox1
         '
@@ -520,8 +460,8 @@ Partial Class DailyAttendance
         Me.DGV_SideDaily.Name = "DGV_SideDaily"
         Me.DGV_SideDaily.ReadOnly = True
         Me.DGV_SideDaily.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DGV_SideDaily.RowsDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DGV_SideDaily.RowsDefaultCellStyle = DataGridViewCellStyle14
         Me.DGV_SideDaily.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DGV_SideDaily.Size = New System.Drawing.Size(246, 517)
         Me.DGV_SideDaily.TabIndex = 2
@@ -529,8 +469,8 @@ Partial Class DailyAttendance
         'Kolom_emp
         '
         Me.Kolom_emp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Kolom_emp.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Kolom_emp.DefaultCellStyle = DataGridViewCellStyle13
         Me.Kolom_emp.HeaderText = "Emp No."
         Me.Kolom_emp.Name = "Kolom_emp"
         Me.Kolom_emp.ReadOnly = True
@@ -557,14 +497,14 @@ Partial Class DailyAttendance
         Me.DGV_ReviewDaily.AllowUserToAddRows = False
         Me.DGV_ReviewDaily.AllowUserToDeleteRows = False
         Me.DGV_ReviewDaily.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGV_ReviewDaily.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGV_ReviewDaily.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle15
         Me.DGV_ReviewDaily.ColumnHeadersHeight = 30
         Me.DGV_ReviewDaily.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DGV_ReviewDaily.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.KolomView_NIK, Me.KolomView_Nama, Me.KolomView_Type, Me.KolomView_AttendDate, Me.KolomView_DayNumber, Me.KolomView_Shift, Me.KolomView_CheckIn, Me.KolomView_CheckOut, Me.KolomView_CheckOutDate, Me.KolomView_Latness, Me.KolomView_EarlyCheckOut, Me.KolomView_BasicTime, Me.kolom_dep, Me.KolomView_x1, Me.KolomView_x2, Me.KolomView_x3, Me.KolomView, Me.KolomView_Transport})
@@ -575,8 +515,8 @@ Partial Class DailyAttendance
         Me.DGV_ReviewDaily.Name = "DGV_ReviewDaily"
         Me.DGV_ReviewDaily.ReadOnly = True
         Me.DGV_ReviewDaily.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DGV_ReviewDaily.RowsDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DGV_ReviewDaily.RowsDefaultCellStyle = DataGridViewCellStyle16
         Me.DGV_ReviewDaily.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DGV_ReviewDaily.Size = New System.Drawing.Size(903, 492)
         Me.DGV_ReviewDaily.TabIndex = 21
@@ -741,16 +681,6 @@ Partial Class DailyAttendance
         Me.Label18.TabIndex = 13
         Me.Label18.Text = "Total"
         '
-        'b_clear
-        '
-        Me.b_clear.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.b_clear.Location = New System.Drawing.Point(517, 64)
-        Me.b_clear.Name = "b_clear"
-        Me.b_clear.Size = New System.Drawing.Size(40, 20)
-        Me.b_clear.TabIndex = 44
-        Me.b_clear.Text = "Clear"
-        Me.b_clear.UseVisualStyleBackColor = True
-        '
         'DailyAttendance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -802,8 +732,6 @@ Partial Class DailyAttendance
     Friend WithEvents DGV_ReviewDaily As DataGridView
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents Label6 As Label
-    Friend WithEvents Label7 As Label
-    Friend WithEvents Label8 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents Label10 As Label
     Friend WithEvents dt_end As DateTimePicker
@@ -812,14 +740,10 @@ Partial Class DailyAttendance
     Friend WithEvents tb_empSearch As TextBox
     Friend WithEvents dt_start As DateTimePicker
     Friend WithEvents Label12 As Label
-    Friend WithEvents Label13 As Label
-    Friend WithEvents ComboBox2 As ComboBox
     Friend WithEvents Label16 As Label
-    Friend WithEvents cb_groupSearch As ComboBox
     Friend WithEvents Kolom_emp As DataGridViewTextBoxColumn
     Friend WithEvents Kolom_Nama As DataGridViewTextBoxColumn
     Friend WithEvents cb_depSearch As ComboBox
-    Friend WithEvents cb_statusSearch As ComboBox
     Friend WithEvents cb_statusCreate As ComboBox
     Friend WithEvents cb_depCreate As ComboBox
     Friend WithEvents KolomView_NIK As DataGridViewTextBoxColumn

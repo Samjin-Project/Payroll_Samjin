@@ -22,26 +22,27 @@ Partial Class RegisterMaster
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
+        Me.b_clear = New System.Windows.Forms.Button()
+        Me.dt_masuk = New System.Windows.Forms.DateTimePicker()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
-        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
+        Me.cb_jk = New System.Windows.Forms.ComboBox()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.cb_posisi = New System.Windows.Forms.ComboBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.TextBox10 = New System.Windows.Forms.TextBox()
+        Me.tb_emp = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.TextBoxSalary = New System.Windows.Forms.TextBox()
-        Me.TextBoxStatus = New System.Windows.Forms.TextBox()
-        Me.TextBoxPend = New System.Windows.Forms.TextBox()
+        Me.tb_salary = New System.Windows.Forms.TextBox()
+        Me.tb_stat = New System.Windows.Forms.TextBox()
+        Me.tb_pend = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -50,21 +51,23 @@ Partial Class RegisterMaster
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.TextBoxTglLahir = New System.Windows.Forms.TextBox()
-        Me.TextBoxTmptLahir = New System.Windows.Forms.TextBox()
-        Me.TextBoxJKelamin = New System.Windows.Forms.TextBox()
-        Me.TextBoxDep = New System.Windows.Forms.TextBox()
-        Me.TextBoxPosisi = New System.Windows.Forms.TextBox()
+        Me.tb_dob = New System.Windows.Forms.TextBox()
+        Me.tb_pob = New System.Windows.Forms.TextBox()
+        Me.tb_jk = New System.Windows.Forms.TextBox()
+        Me.tb_dep = New System.Windows.Forms.TextBox()
+        Me.tb_posisi = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.TextBoxNama = New System.Windows.Forms.TextBox()
+        Me.tb_nama = New System.Windows.Forms.TextBox()
         Me.DGV_ReviewMaster = New System.Windows.Forms.DataGridView()
+        Me.Kolom_Nik = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Kolom_Nama = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.kolom_posisi = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.total_data = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.OpenFileDialogImport = New System.Windows.Forms.OpenFileDialog()
-        Me.Kolom_Nik = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Kolom_Nama = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -121,31 +124,41 @@ Partial Class RegisterMaster
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.DateTimePicker1)
+        Me.GroupBox1.Controls.Add(Me.b_clear)
+        Me.GroupBox1.Controls.Add(Me.dt_masuk)
         Me.GroupBox1.Controls.Add(Me.Label14)
         Me.GroupBox1.Controls.Add(Me.Label15)
-        Me.GroupBox1.Controls.Add(Me.ComboBox4)
+        Me.GroupBox1.Controls.Add(Me.cb_jk)
         Me.GroupBox1.Controls.Add(Me.Label11)
-        Me.GroupBox1.Controls.Add(Me.ComboBox1)
+        Me.GroupBox1.Controls.Add(Me.cb_posisi)
         Me.GroupBox1.Location = New System.Drawing.Point(4, 10)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(527, 79)
         Me.GroupBox1.TabIndex = 23
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Sorting"
+        Me.GroupBox1.Text = "Filter"
         '
-        'DateTimePicker1
+        'b_clear
         '
-        Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.DateTimePicker1.Location = New System.Drawing.Point(354, 49)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(155, 20)
-        Me.DateTimePicker1.TabIndex = 30
+        Me.b_clear.Location = New System.Drawing.Point(348, 50)
+        Me.b_clear.Name = "b_clear"
+        Me.b_clear.Size = New System.Drawing.Size(57, 19)
+        Me.b_clear.TabIndex = 31
+        Me.b_clear.Text = "Clear"
+        Me.b_clear.UseVisualStyleBackColor = True
+        '
+        'dt_masuk
+        '
+        Me.dt_masuk.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dt_masuk.Location = New System.Drawing.Point(348, 23)
+        Me.dt_masuk.Name = "dt_masuk"
+        Me.dt_masuk.Size = New System.Drawing.Size(155, 20)
+        Me.dt_masuk.TabIndex = 30
         '
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(267, 51)
+        Me.Label14.Location = New System.Drawing.Point(267, 25)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(81, 13)
         Me.Label14.TabIndex = 29
@@ -161,14 +174,14 @@ Partial Class RegisterMaster
         Me.Label15.TabIndex = 28
         Me.Label15.Text = "Jenis Kelamin"
         '
-        'ComboBox4
+        'cb_jk
         '
-        Me.ComboBox4.FormattingEnabled = True
-        Me.ComboBox4.Items.AddRange(New Object() {"Laki-Laki", "Perempuan"})
-        Me.ComboBox4.Location = New System.Drawing.Point(97, 48)
-        Me.ComboBox4.Name = "ComboBox4"
-        Me.ComboBox4.Size = New System.Drawing.Size(155, 21)
-        Me.ComboBox4.TabIndex = 27
+        Me.cb_jk.FormattingEnabled = True
+        Me.cb_jk.Items.AddRange(New Object() {"Laki-Laki", "Perempuan"})
+        Me.cb_jk.Location = New System.Drawing.Point(97, 48)
+        Me.cb_jk.Name = "cb_jk"
+        Me.cb_jk.Size = New System.Drawing.Size(155, 21)
+        Me.cb_jk.TabIndex = 27
         '
         'Label11
         '
@@ -179,19 +192,19 @@ Partial Class RegisterMaster
         Me.Label11.TabIndex = 24
         Me.Label11.Text = "Posisi"
         '
-        'ComboBox1
+        'cb_posisi
         '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"Rubber Forming", "Rubber Printing", "Assembly", "Pcba"})
-        Me.ComboBox1.Location = New System.Drawing.Point(97, 21)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(155, 21)
-        Me.ComboBox1.TabIndex = 23
+        Me.cb_posisi.FormattingEnabled = True
+        Me.cb_posisi.Items.AddRange(New Object() {"Rubber Forming", "Rubber Printing", "Assembly", "Pcba", "Operator"})
+        Me.cb_posisi.Location = New System.Drawing.Point(97, 21)
+        Me.cb_posisi.Name = "cb_posisi"
+        Me.cb_posisi.Size = New System.Drawing.Size(155, 21)
+        Me.cb_posisi.TabIndex = 23
         '
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.Blue
-        Me.Panel3.Controls.Add(Me.TextBox10)
+        Me.Panel3.Controls.Add(Me.tb_emp)
         Me.Panel3.Controls.Add(Me.Label12)
         Me.Panel3.Controls.Add(Me.Label10)
         Me.Panel3.Location = New System.Drawing.Point(4, 101)
@@ -199,24 +212,23 @@ Partial Class RegisterMaster
         Me.Panel3.Size = New System.Drawing.Size(289, 26)
         Me.Panel3.TabIndex = 15
         '
-        'TextBox10
+        'tb_emp
         '
-        Me.TextBox10.BackColor = System.Drawing.Color.White
-        Me.TextBox10.Location = New System.Drawing.Point(130, 3)
-        Me.TextBox10.Name = "TextBox10"
-        Me.TextBox10.Size = New System.Drawing.Size(155, 20)
-        Me.TextBox10.TabIndex = 11
-        Me.TextBox10.Text = "RIKI TARDIANSYAH"
+        Me.tb_emp.BackColor = System.Drawing.Color.White
+        Me.tb_emp.Location = New System.Drawing.Point(130, 3)
+        Me.tb_emp.Name = "tb_emp"
+        Me.tb_emp.Size = New System.Drawing.Size(155, 20)
+        Me.tb_emp.TabIndex = 11
         '
         'Label12
         '
         Me.Label12.AutoSize = True
         Me.Label12.ForeColor = System.Drawing.Color.White
-        Me.Label12.Location = New System.Drawing.Point(89, 6)
+        Me.Label12.Location = New System.Drawing.Point(79, 6)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(35, 13)
+        Me.Label12.Size = New System.Drawing.Size(48, 13)
         Me.Label12.TabIndex = 14
-        Me.Label12.Text = "Name"
+        Me.Label12.Text = "Emp No."
         '
         'Label10
         '
@@ -232,9 +244,9 @@ Partial Class RegisterMaster
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Panel2.Controls.Add(Me.TextBoxSalary)
-        Me.Panel2.Controls.Add(Me.TextBoxStatus)
-        Me.Panel2.Controls.Add(Me.TextBoxPend)
+        Me.Panel2.Controls.Add(Me.tb_salary)
+        Me.Panel2.Controls.Add(Me.tb_stat)
+        Me.Panel2.Controls.Add(Me.tb_pend)
         Me.Panel2.Controls.Add(Me.Label9)
         Me.Panel2.Controls.Add(Me.Label8)
         Me.Panel2.Controls.Add(Me.Label7)
@@ -243,45 +255,42 @@ Partial Class RegisterMaster
         Me.Panel2.Controls.Add(Me.Label4)
         Me.Panel2.Controls.Add(Me.Label3)
         Me.Panel2.Controls.Add(Me.Label2)
-        Me.Panel2.Controls.Add(Me.TextBoxTglLahir)
-        Me.Panel2.Controls.Add(Me.TextBoxTmptLahir)
-        Me.Panel2.Controls.Add(Me.TextBoxJKelamin)
-        Me.Panel2.Controls.Add(Me.TextBoxDep)
-        Me.Panel2.Controls.Add(Me.TextBoxPosisi)
+        Me.Panel2.Controls.Add(Me.tb_dob)
+        Me.Panel2.Controls.Add(Me.tb_pob)
+        Me.Panel2.Controls.Add(Me.tb_jk)
+        Me.Panel2.Controls.Add(Me.tb_dep)
+        Me.Panel2.Controls.Add(Me.tb_posisi)
         Me.Panel2.Controls.Add(Me.Label1)
-        Me.Panel2.Controls.Add(Me.TextBoxNama)
+        Me.Panel2.Controls.Add(Me.tb_nama)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(354, 134)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(638, 433)
         Me.Panel2.TabIndex = 2
         '
-        'TextBoxSalary
+        'tb_salary
         '
-        Me.TextBoxSalary.BackColor = System.Drawing.Color.Aqua
-        Me.TextBoxSalary.Location = New System.Drawing.Point(387, 189)
-        Me.TextBoxSalary.Name = "TextBoxSalary"
-        Me.TextBoxSalary.Size = New System.Drawing.Size(110, 20)
-        Me.TextBoxSalary.TabIndex = 16
-        Me.TextBoxSalary.Text = "12"
+        Me.tb_salary.BackColor = System.Drawing.Color.Aqua
+        Me.tb_salary.Location = New System.Drawing.Point(387, 189)
+        Me.tb_salary.Name = "tb_salary"
+        Me.tb_salary.Size = New System.Drawing.Size(110, 20)
+        Me.tb_salary.TabIndex = 16
         '
-        'TextBoxStatus
+        'tb_stat
         '
-        Me.TextBoxStatus.BackColor = System.Drawing.Color.Aqua
-        Me.TextBoxStatus.Location = New System.Drawing.Point(387, 148)
-        Me.TextBoxStatus.Name = "TextBoxStatus"
-        Me.TextBoxStatus.Size = New System.Drawing.Size(110, 20)
-        Me.TextBoxStatus.TabIndex = 15
-        Me.TextBoxStatus.Text = "12"
+        Me.tb_stat.BackColor = System.Drawing.Color.Aqua
+        Me.tb_stat.Location = New System.Drawing.Point(387, 148)
+        Me.tb_stat.Name = "tb_stat"
+        Me.tb_stat.Size = New System.Drawing.Size(110, 20)
+        Me.tb_stat.TabIndex = 15
         '
-        'TextBoxPend
+        'tb_pend
         '
-        Me.TextBoxPend.BackColor = System.Drawing.Color.Aqua
-        Me.TextBoxPend.Location = New System.Drawing.Point(387, 107)
-        Me.TextBoxPend.Name = "TextBoxPend"
-        Me.TextBoxPend.Size = New System.Drawing.Size(110, 20)
-        Me.TextBoxPend.TabIndex = 14
-        Me.TextBoxPend.Text = "12"
+        Me.tb_pend.BackColor = System.Drawing.Color.Aqua
+        Me.tb_pend.Location = New System.Drawing.Point(387, 107)
+        Me.tb_pend.Name = "tb_pend"
+        Me.tb_pend.Size = New System.Drawing.Size(110, 20)
+        Me.tb_pend.TabIndex = 14
         '
         'Label9
         '
@@ -295,7 +304,7 @@ Partial Class RegisterMaster
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(43, 155)
+        Me.Label8.Location = New System.Drawing.Point(43, 154)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(68, 13)
         Me.Label8.TabIndex = 13
@@ -304,7 +313,7 @@ Partial Class RegisterMaster
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(42, 196)
+        Me.Label7.Location = New System.Drawing.Point(42, 195)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(69, 13)
         Me.Label7.TabIndex = 12
@@ -313,7 +322,7 @@ Partial Class RegisterMaster
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(39, 237)
+        Me.Label6.Location = New System.Drawing.Point(39, 236)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(72, 13)
         Me.Label6.TabIndex = 11
@@ -349,74 +358,68 @@ Partial Class RegisterMaster
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(77, 114)
+        Me.Label2.Location = New System.Drawing.Point(77, 113)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(34, 13)
         Me.Label2.TabIndex = 7
         Me.Label2.Text = "Posisi"
         '
-        'TextBoxTglLahir
+        'tb_dob
         '
-        Me.TextBoxTglLahir.BackColor = System.Drawing.Color.Aqua
-        Me.TextBoxTglLahir.Location = New System.Drawing.Point(125, 230)
-        Me.TextBoxTglLahir.Name = "TextBoxTglLahir"
-        Me.TextBoxTglLahir.Size = New System.Drawing.Size(110, 20)
-        Me.TextBoxTglLahir.TabIndex = 6
-        Me.TextBoxTglLahir.Text = "12"
+        Me.tb_dob.BackColor = System.Drawing.Color.Aqua
+        Me.tb_dob.Location = New System.Drawing.Point(125, 230)
+        Me.tb_dob.Name = "tb_dob"
+        Me.tb_dob.Size = New System.Drawing.Size(110, 20)
+        Me.tb_dob.TabIndex = 6
         '
-        'TextBoxTmptLahir
+        'tb_pob
         '
-        Me.TextBoxTmptLahir.BackColor = System.Drawing.Color.Aqua
-        Me.TextBoxTmptLahir.Location = New System.Drawing.Point(125, 189)
-        Me.TextBoxTmptLahir.Name = "TextBoxTmptLahir"
-        Me.TextBoxTmptLahir.Size = New System.Drawing.Size(110, 20)
-        Me.TextBoxTmptLahir.TabIndex = 5
-        Me.TextBoxTmptLahir.Text = "12"
+        Me.tb_pob.BackColor = System.Drawing.Color.Aqua
+        Me.tb_pob.Location = New System.Drawing.Point(125, 189)
+        Me.tb_pob.Name = "tb_pob"
+        Me.tb_pob.Size = New System.Drawing.Size(110, 20)
+        Me.tb_pob.TabIndex = 5
         '
-        'TextBoxJKelamin
+        'tb_jk
         '
-        Me.TextBoxJKelamin.BackColor = System.Drawing.Color.Aqua
-        Me.TextBoxJKelamin.Location = New System.Drawing.Point(387, 66)
-        Me.TextBoxJKelamin.Name = "TextBoxJKelamin"
-        Me.TextBoxJKelamin.Size = New System.Drawing.Size(110, 20)
-        Me.TextBoxJKelamin.TabIndex = 4
-        Me.TextBoxJKelamin.Text = "12"
+        Me.tb_jk.BackColor = System.Drawing.Color.Aqua
+        Me.tb_jk.Location = New System.Drawing.Point(387, 66)
+        Me.tb_jk.Name = "tb_jk"
+        Me.tb_jk.Size = New System.Drawing.Size(110, 20)
+        Me.tb_jk.TabIndex = 4
         '
-        'TextBoxDep
+        'tb_dep
         '
-        Me.TextBoxDep.BackColor = System.Drawing.Color.Aqua
-        Me.TextBoxDep.Location = New System.Drawing.Point(125, 148)
-        Me.TextBoxDep.Name = "TextBoxDep"
-        Me.TextBoxDep.Size = New System.Drawing.Size(110, 20)
-        Me.TextBoxDep.TabIndex = 3
-        Me.TextBoxDep.Text = "12"
+        Me.tb_dep.BackColor = System.Drawing.Color.Aqua
+        Me.tb_dep.Location = New System.Drawing.Point(125, 148)
+        Me.tb_dep.Name = "tb_dep"
+        Me.tb_dep.Size = New System.Drawing.Size(110, 20)
+        Me.tb_dep.TabIndex = 3
         '
-        'TextBoxPosisi
+        'tb_posisi
         '
-        Me.TextBoxPosisi.BackColor = System.Drawing.Color.Aqua
-        Me.TextBoxPosisi.Location = New System.Drawing.Point(125, 107)
-        Me.TextBoxPosisi.Name = "TextBoxPosisi"
-        Me.TextBoxPosisi.Size = New System.Drawing.Size(110, 20)
-        Me.TextBoxPosisi.TabIndex = 2
-        Me.TextBoxPosisi.Text = "12"
+        Me.tb_posisi.BackColor = System.Drawing.Color.Aqua
+        Me.tb_posisi.Location = New System.Drawing.Point(125, 107)
+        Me.tb_posisi.Name = "tb_posisi"
+        Me.tb_posisi.Size = New System.Drawing.Size(110, 20)
+        Me.tb_posisi.TabIndex = 2
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(31, 73)
+        Me.Label1.Location = New System.Drawing.Point(31, 72)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(80, 13)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Nama Lengkap"
         '
-        'TextBoxNama
+        'tb_nama
         '
-        Me.TextBoxNama.BackColor = System.Drawing.Color.Aqua
-        Me.TextBoxNama.Location = New System.Drawing.Point(125, 66)
-        Me.TextBoxNama.Name = "TextBoxNama"
-        Me.TextBoxNama.Size = New System.Drawing.Size(110, 20)
-        Me.TextBoxNama.TabIndex = 0
-        Me.TextBoxNama.Text = "12"
+        Me.tb_nama.BackColor = System.Drawing.Color.Aqua
+        Me.tb_nama.Location = New System.Drawing.Point(125, 66)
+        Me.tb_nama.Name = "tb_nama"
+        Me.tb_nama.Size = New System.Drawing.Size(150, 20)
+        Me.tb_nama.TabIndex = 0
         '
         'DGV_ReviewMaster
         '
@@ -428,7 +431,7 @@ Partial Class RegisterMaster
         Me.DGV_ReviewMaster.BackgroundColor = System.Drawing.SystemColors.Control
         Me.DGV_ReviewMaster.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.DGV_ReviewMaster.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        Me.DGV_ReviewMaster.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Kolom_Nik, Me.Kolom_Nama})
+        Me.DGV_ReviewMaster.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Kolom_Nik, Me.Kolom_Nama, Me.kolom_posisi})
         Me.DGV_ReviewMaster.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DGV_ReviewMaster.GridColor = System.Drawing.Color.LightGoldenrodYellow
         Me.DGV_ReviewMaster.Location = New System.Drawing.Point(0, 0)
@@ -440,6 +443,28 @@ Partial Class RegisterMaster
         Me.DGV_ReviewMaster.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DGV_ReviewMaster.Size = New System.Drawing.Size(350, 429)
         Me.DGV_ReviewMaster.TabIndex = 1
+        '
+        'Kolom_Nik
+        '
+        Me.Kolom_Nik.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Kolom_Nik.DefaultCellStyle = DataGridViewCellStyle5
+        Me.Kolom_Nik.HeaderText = "NIK"
+        Me.Kolom_Nik.Name = "Kolom_Nik"
+        Me.Kolom_Nik.ReadOnly = True
+        Me.Kolom_Nik.Width = 50
+        '
+        'Kolom_Nama
+        '
+        Me.Kolom_Nama.HeaderText = "Nama Lengkap"
+        Me.Kolom_Nama.Name = "Kolom_Nama"
+        Me.Kolom_Nama.ReadOnly = True
+        '
+        'kolom_posisi
+        '
+        Me.kolom_posisi.HeaderText = "Posisi Karyawan"
+        Me.kolom_posisi.Name = "kolom_posisi"
+        Me.kolom_posisi.ReadOnly = True
         '
         'Panel4
         '
@@ -456,6 +481,7 @@ Partial Class RegisterMaster
         'Panel5
         '
         Me.Panel5.BackColor = System.Drawing.Color.Blue
+        Me.Panel5.Controls.Add(Me.total_data)
         Me.Panel5.Controls.Add(Me.Label17)
         Me.Panel5.Controls.Add(Me.Label18)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Bottom
@@ -463,6 +489,15 @@ Partial Class RegisterMaster
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(350, 26)
         Me.Panel5.TabIndex = 16
+        '
+        'total_data
+        '
+        Me.total_data.AutoSize = True
+        Me.total_data.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.total_data.Location = New System.Drawing.Point(145, 6)
+        Me.total_data.Name = "total_data"
+        Me.total_data.Size = New System.Drawing.Size(0, 13)
+        Me.total_data.TabIndex = 17
         '
         'Label17
         '
@@ -486,22 +521,6 @@ Partial Class RegisterMaster
         'OpenFileDialogImport
         '
         Me.OpenFileDialogImport.FileName = "OpenFileDialog1"
-        '
-        'Kolom_Nik
-        '
-        Me.Kolom_Nik.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Kolom_Nik.DefaultCellStyle = DataGridViewCellStyle2
-        Me.Kolom_Nik.HeaderText = "NIK"
-        Me.Kolom_Nik.Name = "Kolom_Nik"
-        Me.Kolom_Nik.ReadOnly = True
-        Me.Kolom_Nik.Width = 50
-        '
-        'Kolom_Nama
-        '
-        Me.Kolom_Nama.HeaderText = "Nama Lengkap"
-        Me.Kolom_Nama.Name = "Kolom_Nama"
-        Me.Kolom_Nama.ReadOnly = True
         '
         'RegisterMaster
         '
@@ -533,7 +552,7 @@ Partial Class RegisterMaster
 
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents TextBoxNama As TextBox
+    Friend WithEvents tb_nama As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents Label8 As Label
@@ -543,24 +562,24 @@ Partial Class RegisterMaster
     Friend WithEvents Label4 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
-    Friend WithEvents TextBoxTglLahir As TextBox
-    Friend WithEvents TextBoxTmptLahir As TextBox
-    Friend WithEvents TextBoxJKelamin As TextBox
-    Friend WithEvents TextBoxDep As TextBox
-    Friend WithEvents TextBoxPosisi As TextBox
-    Friend WithEvents TextBoxSalary As TextBox
-    Friend WithEvents TextBoxStatus As TextBox
-    Friend WithEvents TextBoxPend As TextBox
+    Friend WithEvents tb_dob As TextBox
+    Friend WithEvents tb_pob As TextBox
+    Friend WithEvents tb_jk As TextBox
+    Friend WithEvents tb_dep As TextBox
+    Friend WithEvents tb_posisi As TextBox
+    Friend WithEvents tb_salary As TextBox
+    Friend WithEvents tb_stat As TextBox
+    Friend WithEvents tb_pend As TextBox
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents DateTimePicker1 As DateTimePicker
+    Friend WithEvents dt_masuk As DateTimePicker
     Friend WithEvents Label14 As Label
     Friend WithEvents Label15 As Label
-    Friend WithEvents ComboBox4 As ComboBox
+    Friend WithEvents cb_jk As ComboBox
     Friend WithEvents Label11 As Label
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents cb_posisi As ComboBox
     Friend WithEvents Panel3 As Panel
-    Friend WithEvents TextBox10 As TextBox
+    Friend WithEvents tb_emp As TextBox
     Friend WithEvents Label12 As Label
     Friend WithEvents Label10 As Label
     Friend WithEvents Button1 As Button
@@ -571,6 +590,9 @@ Partial Class RegisterMaster
     Friend WithEvents Label17 As Label
     Friend WithEvents Label18 As Label
     Friend WithEvents OpenFileDialogImport As OpenFileDialog
+    Friend WithEvents total_data As Label
+    Friend WithEvents b_clear As Button
     Friend WithEvents Kolom_Nik As DataGridViewTextBoxColumn
     Friend WithEvents Kolom_Nama As DataGridViewTextBoxColumn
+    Friend WithEvents kolom_posisi As DataGridViewTextBoxColumn
 End Class

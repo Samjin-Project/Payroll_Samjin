@@ -1,7 +1,9 @@
 ﻿Public Class DailyAttendance
     Dim queryAll As String = "SELECT `NIK`, `Name`, `Type`, `Date`, `Day`, `Shift`, `Check In`, `Check Out`, `Check Out Date`, `Lateness`, `Early Check Out`, `Basic Time`, `Department` FROM `tabel_harian_karyawan1`"
+    Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `Departement_Karyawan` FROM `master_employer`"
+    Dim flag As Boolean = False
+    Dim nik As String
     Private Sub DailyAttendance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`FROM `master_employer`"
         showEmploye(QueryCMD)
         showDaily(queryAll)
     End Sub
@@ -22,9 +24,12 @@
 
     Private Sub DGV_SideDaily_RowHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGV_SideDaily.RowHeaderMouseClick
         DGV_ReviewDaily.Rows.Clear()
-        Dim nik As String = DGV_SideDaily.Rows(e.RowIndex).Cells(0).Value
+        nik = DGV_SideDaily.Rows(e.RowIndex).Cells(0).Value
+        dt_start.Value = Now
+        dt_end.Value = Now
         Dim queryGetData As String = $"{queryAll} WHERE `NIK` = '{nik}'"
         showDaily(queryGetData)
+        flag = True
     End Sub
     Private Sub showDaily(QueryDaily As String)
         Dim DBClass As DataBaseClass = New DataBaseClass
@@ -52,134 +57,53 @@
         Next
 
     End Sub
-    Private Sub filterDataGroup(dep As String, group As String, stDate As Date, endDate As Date)
 
-        Dim QuerySortDep As String = $"{queryAll} WHERE `Department` = '{dep}' "
-        Dim QuerySortGroup As String = $"{queryAll} WHERE `shift` = '{group}' "
-        Dim QuerySortAll As String = $"{queryAll} WHERE `shift` = '{group}' AND `Department` = '{dep}' "
-
-        Dim QueryAllwTime As String = $"{queryAll} WHERE `Date` BETWEEN '{stDate}' AND '{endDate}'"
-        Dim QuerySortDepwTime As String = $"{queryAll} WHERE (`Department` = '{dep}') 
-            AND (`Date` BETWEEN  '{stDate}' AND '{endDate}')"
-        Dim QuerySortGroupwTime As String = $"{queryAll} WHERE (`shift` = '{group}') 
-            AND (`Date` BETWEEN  '{stDate}' AND '{endDate}')"
-        Dim QuerySortAllwTime As String = $"{queryAll} WHERE `shift` = '{group}' AND `Department` = '{dep}'
-            AND (`Date` BETWEEN  '{stDate}' AND '{endDate}')"
-
-        Dim querycmd As String = ""
-        If stDate = endDate Then
-            If dep = "" And group = "" Then
-                querycmd = queryAll
-            ElseIf dep = "" And group <> "" Then
-                querycmd = QuerySortGroup
-            ElseIf dep <> "" And group = "" Then
-                querycmd = QuerySortDep
-            ElseIf dep <> "" And group <> "" Then
-                querycmd = QuerySortAll
-            End If
-        End If
-
-        If Not stDate = endDate Then
-            If dep = "" And group = "" Then
-                querycmd = QueryAllwTime
-            ElseIf dep = "" And group <> "" Then
-                querycmd = QuerySortGroupwTime
-            ElseIf dep <> "" And group = "" Then
-                querycmd = QuerySortDepwTime
-            ElseIf dep <> "" And group <> "" Then
-                querycmd = QuerySortAllwTime
-            End If
-        End If
-
-        showDaily(querycmd)
-        'menampilkan total data dalan datagrid
-        total_data.Text = DGV_ReviewDaily.Rows.Count
-    End Sub
-    Private Sub filterDataPerson(emp As String, name As String, stDate As Date, endDate As Date)
-        Dim QuerySortEmp As String = $"{queryAll} WHERE `NIK` = '{emp}' "
-        Dim QuerySortName As String = $"{queryAll} WHERE `Name` = '{name}' "
-        Dim QuerySortAll As String = $"{queryAll} WHERE `NIK` = '{emp}' AND `Name` = '{name}' "
-
-        Dim QueryAllwTime As String = $"{queryAll} WHERE `Date` BETWEEN '{stDate}' AND '{endDate}'"
-        Dim QuerySortEmpwTime As String = $"{queryAll} WHERE (`NIK` = '{emp}') 
-            AND (`Date` BETWEEN  '{stDate}' AND '{endDate}')"
-        Dim QuerySortNamewTime As String = $"{queryAll} WHERE (`Name` = '{name}') 
-            AND (`Date` BETWEEN  '{stDate}' AND '{endDate}')"
-        Dim QuerySortAllwTime As String = $"{queryAll} WHERE `Name` = '{name}' AND `NIK` = '{emp}'
-            AND (`Date` BETWEEN  '{stDate}' AND '{endDate}')"
-
-        Dim querycmd As String = ""
-        If stDate = endDate Then
-            If name = "" And emp = "" Then
-                querycmd = queryAll
-            ElseIf name = "" And emp <> "" Then
-                querycmd = QuerySortEmp
-            ElseIf name <> "" And emp = "" Then
-                querycmd = QuerySortName
-            ElseIf name <> "" And emp <> "" Then
-                querycmd = QuerySortAll
-            End If
-        End If
-
-        If Not stDate = endDate Then
-            If name = "" And emp = "" Then
-                querycmd = queryAll
-            ElseIf name = "" And emp <> "" Then
-                querycmd = QuerySortEmpwTime
-            ElseIf name <> "" And emp = "" Then
-                querycmd = QuerySortNamewTime
-            ElseIf name <> "" And emp <> "" Then
-                querycmd = QuerySortAllwTime
-            End If
-        End If
-
-        showDaily(querycmd)
-        'menampilkan total data dalan datagrid
-        total_data.Text = DGV_ReviewDaily.Rows.Count
-    End Sub
     Private Sub cb_depSearch_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_depSearch.SelectedIndexChanged
+        tb_empSearch.Text = ""
+        tb_namaSearch.Text = ""
+        DGV_SideDaily.Rows.Clear()
         DGV_ReviewDaily.Rows.Clear()
-        Dim dep As String = cb_depSearch.Text
-        Dim group As String = cb_groupSearch.Text
-        Dim stDate As String = dt_start.Value.ToString("yyyy-MM-dd")
-        Dim endDate As String = dt_end.Value.ToString("yyyy-MM-dd")
-
-        filterDataGroup(dep, group, stDate, endDate)
+        Dim dep = cb_depSearch.Text
+        dt_start.Value = Now
+        dt_end.Value = Now
+        Dim querydep As String = $"{QueryCMD} WHERE `Departement_Karyawan` = '{dep}'"
+        showEmploye(querydep)
+        total_data.Text = DGV_SideDaily.Rows.Count
         Console.WriteLine("Done")
-    End Sub
-
-    Private Sub cb_groupSearch_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_groupSearch.SelectedIndexChanged
-        DGV_ReviewDaily.Rows.Clear()
-        Dim dep As String = cb_depSearch.Text
-        Dim group As String = cb_groupSearch.Text
-        Dim stDate As String = dt_start.Value.ToString("yyyy-MM-dd")
-        Dim endDate As String = dt_end.Value.ToString("yyyy-MM-dd")
-
-        filterDataGroup(dep, group, stDate, endDate)
-        Console.WriteLine("Done")
+        flag = False
     End Sub
 
     Private Sub tb_empSearch_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles tb_empSearch.PreviewKeyDown
         If e.KeyCode = Keys.Enter Then
+            tb_namaSearch.Text = ""
+            cb_depSearch.Text = ""
+            DGV_SideDaily.Rows.Clear()
             DGV_ReviewDaily.Rows.Clear()
+            dt_start.Value = Now
+            dt_end.Value = Now
             Dim emp As String = tb_empSearch.Text
-            Dim name As String = tb_namaSearch.Text
-            Dim stDate As String = dt_start.Value.ToString("yyyy-MM-dd")
-            Dim endDate As String = dt_end.Value.ToString("yyyy-MM-dd")
-            filterDataPerson(emp, name, stDate, endDate)
+            Dim queryemp As String = $"{QueryCMD} WHERE `NIK` = '{emp}' "
+            showEmploye(queryemp)
+            total_data.Text = DGV_SideDaily.Rows.Count
             Console.WriteLine("Done")
+            flag = False
         End If
     End Sub
 
     Private Sub tb_namaSearch_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles tb_namaSearch.PreviewKeyDown
         If e.KeyCode = Keys.Enter Then
+            tb_empSearch.Text = ""
+            cb_depSearch.Text = ""
+            DGV_SideDaily.Rows.Clear()
             DGV_ReviewDaily.Rows.Clear()
-            Dim emp As String = tb_empSearch.Text
+            dt_start.Value = Now
+            dt_end.Value = Now
             Dim name As String = tb_namaSearch.Text
-            Dim stDate As String = dt_start.Value.ToString("yyyy-MM-dd")
-            Dim endDate As String = dt_end.Value.ToString("yyyy-MM-dd")
-            filterDataPerson(emp, name, stDate, endDate)
+            Dim queryname As String = $"{QueryCMD} WHERE `Nama_Karyawan` = '{name}' "
+            showEmploye(queryname)
+            total_data.Text = DGV_SideDaily.Rows.Count
             Console.WriteLine("Done")
+            flag = False
         End If
     End Sub
 
@@ -187,8 +111,13 @@
         Dim stDate As String = dt_start.Value.ToString("yyyy-MM-dd")
         Dim endDate As String = dt_end.Value.ToString("yyyy-MM-dd")
         DGV_ReviewDaily.Rows.Clear()
-        Dim queryCmd As String = $"{queryAll} WHERE `Date` BETWEEN '{stDate}' AND '{endDate}'"
-        showDaily(queryCmd)
+        If flag = True Then
+            Dim queryCmd As String = $"{queryAll} WHERE `NIK` = '{nik}' AND `Date` BETWEEN '{stDate}' AND '{endDate}'"
+            showDaily(queryCmd)
+        Else
+            Dim queryCmd As String = $"{queryAll} WHERE `Date` BETWEEN '{stDate}' AND '{endDate}'"
+            showDaily(queryCmd)
+        End If
         total_data.Text = DGV_ReviewDaily.Rows.Count
     End Sub
 
@@ -196,8 +125,14 @@
         Dim stDate As String = dt_start.Value.ToString("yyyy-MM-dd")
         Dim endDate As String = dt_end.Value.ToString("yyyy-MM-dd")
         DGV_ReviewDaily.Rows.Clear()
-        Dim queryCmd As String = $"{queryAll} WHERE `Date` BETWEEN '{stDate}' AND '{endDate}'"
-        showDaily(queryCmd)
+        If flag = True Then
+            Dim queryCmd As String = $"{queryAll} WHERE `NIK` = '{nik}' AND `Date` BETWEEN '{stDate}' AND '{endDate}'"
+            showDaily(queryCmd)
+        Else
+            Dim queryCmd As String = $"{queryAll} WHERE `Date` BETWEEN '{stDate}' AND '{endDate}'"
+            showDaily(queryCmd)
+        End If
+
         total_data.Text = DGV_ReviewDaily.Rows.Count
     End Sub
 
@@ -205,9 +140,12 @@
         tb_empSearch.Text = ""
         tb_namaSearch.Text = ""
         cb_depSearch.Text = ""
-        cb_groupSearch.Text = ""
         dt_start.Value = Now
         dt_end.Value = Now
+        DGV_SideDaily.Rows.Clear()
+        DGV_ReviewDaily.Rows.Clear()
         showDaily(queryAll)
+        showEmploye(QueryCMD)
+        flag = False
     End Sub
 End Class

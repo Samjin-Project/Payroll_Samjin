@@ -32,7 +32,6 @@ Partial Class RegisterVacation
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.b_filter = New System.Windows.Forms.Button()
         Me.b_showall = New System.Windows.Forms.Button()
         Me.cb_dep = New System.Windows.Forms.ComboBox()
         Me.Label15 = New System.Windows.Forms.Label()
@@ -169,7 +168,6 @@ Partial Class RegisterVacation
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Panel2.Controls.Add(Me.b_filter)
         Me.Panel2.Controls.Add(Me.b_showall)
         Me.Panel2.Controls.Add(Me.cb_dep)
         Me.Panel2.Controls.Add(Me.Label15)
@@ -187,15 +185,6 @@ Partial Class RegisterVacation
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(925, 57)
         Me.Panel2.TabIndex = 20
-        '
-        'b_filter
-        '
-        Me.b_filter.Location = New System.Drawing.Point(555, 29)
-        Me.b_filter.Name = "b_filter"
-        Me.b_filter.Size = New System.Drawing.Size(63, 22)
-        Me.b_filter.TabIndex = 13
-        Me.b_filter.Text = "Search"
-        Me.b_filter.UseVisualStyleBackColor = True
         '
         'b_showall
         '
@@ -557,6 +546,5 @@ Partial Class RegisterVacation
     Friend WithEvents Kolom_Admision As DataGridViewTextBoxColumn
     Friend WithEvents total_data As Label
     Friend WithEvents b_showall As Button
-    Friend WithEvents b_filter As Button
     Friend WithEvents Label5 As Label
 End Class

@@ -106,17 +106,19 @@
         total_data.Text = DGV_DataModify.Rows.Count
     End Sub
     Private Sub b_showall_Click(sender As Object, e As EventArgs) Handles b_showall.Click
+        tb_emp.Text = ""
+        tb_nama.Text = ""
         cb_dep.Text = ""
         fil_emp.Text = ""
         dt_start.Value = Now
         dt_end.Value = Now
         DGV_DataModify.Rows.Clear()
+        b_save.Enabled = False
         Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `TanggalMasuk_Karyawan` FROM `master_employer`"
         dataOnSide(QueryCMD)
         Console.WriteLine("Done")
     End Sub
-
-    Private Sub b_filter_Click(sender As Object, e As EventArgs) Handles b_filter.Click
+    Private Sub cb_dep_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_dep.SelectedIndexChanged
         Dim stDate As String = dt_start.Value.ToString("yyy-MM-dd")
         Dim endDate As String = dt_end.Value.ToString("yyy-MM-dd")
         Dim depPilihan As String = cb_dep.Text
@@ -124,5 +126,35 @@
         DGV_DataModify.Rows.Clear()
         filterData(depPilihan, emp, stDate, endDate)
         Console.WriteLine("Done")
+    End Sub
+
+    Private Sub fil_emp_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles fil_emp.PreviewKeyDown
+        If e.KeyCode = Keys.Enter Then
+            Dim stDate As String = dt_start.Value.ToString("yyy-MM-dd")
+            Dim endDate As String = dt_end.Value.ToString("yyy-MM-dd")
+            Dim depPilihan As String = cb_dep.Text
+            Dim emp As String = fil_emp.Text
+            DGV_DataModify.Rows.Clear()
+            filterData(depPilihan, emp, stDate, endDate)
+            Console.WriteLine("Done")
+        End If
+    End Sub
+
+    Private Sub dt_start_ValueChanged(sender As Object, e As EventArgs) Handles dt_start.ValueChanged
+        Dim stDate As String = dt_start.Value.ToString("yyyy-MM-dd")
+        Dim endDate As String = dt_end.Value.ToString("yyyy-MM-dd")
+        Dim queryCmd As String = $"SELECT `NIK`, `Nama_Karyawan`, `TanggalMasuk_Karyawan` FROM `master_employer` WHERE `TanggalMasuk_Karyawan` BETWEEN '{stDate}' AND '{endDate}'"
+        DGV_DataModify.Rows.Clear()
+        dataOnSide(queryCmd)
+        total_data.Text = DGV_DataModify.Rows.Count
+    End Sub
+
+    Private Sub dt_end_ValueChanged(sender As Object, e As EventArgs) Handles dt_end.ValueChanged
+        Dim stDate As String = dt_start.Value.ToString("yyyy-MM-dd")
+        Dim endDate As String = dt_end.Value.ToString("yyyy-MM-dd")
+        Dim queryCmd As String = $"SELECT `NIK`, `Nama_Karyawan`, `TanggalMasuk_Karyawan` FROM `master_employer` WHERE `TanggalMasuk_Karyawan` BETWEEN '{stDate}' AND '{endDate}'"
+        DGV_DataModify.Rows.Clear()
+        dataOnSide(queryCmd)
+        total_data.Text = DGV_DataModify.Rows.Count
     End Sub
 End Class
