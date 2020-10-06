@@ -1,6 +1,8 @@
 ﻿Public Class ViewDailyAttendance
+    Dim flag As Boolean = False
+    Dim QueryCMD As String = "SELECT * FROM `tabel_bulanan_karyawan`"
     Private Sub ViewDailyAttendance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        showData(QueryCMD)
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -125,4 +127,132 @@
         End If
         ExcelColName = S
     End Function
+    Private Sub showData(QueryOnReview As String)
+        DGV_ReviewDaily.Rows.Clear()
+        Dim DBClass As DataBaseClass = New DataBaseClass
+        Dim ds As DataSet = DBClass.downloadDB(QueryOnReview)
+        Dim indexDs As Integer = ds.Tables(0).Rows.Count
+        For i As Integer = 0 To indexDs - 1
+            Dim row As String() = New String() {ds.Tables(0).Rows(i).Item(0),
+            ds.Tables(0).Rows(i).Item(1),
+            ds.Tables(0).Rows(i).Item(2),
+            ds.Tables(0).Rows(i).Item(3),
+            ds.Tables(0).Rows(i).Item(4),
+            ds.Tables(0).Rows(i).Item(5),
+            ds.Tables(0).Rows(i).Item(6),
+            ds.Tables(0).Rows(i).Item(7),
+            ds.Tables(0).Rows(i).Item(8),
+            ds.Tables(0).Rows(i).Item(9),
+            ds.Tables(0).Rows(i).Item(10),
+            ds.Tables(0).Rows(i).Item(11),
+            ds.Tables(0).Rows(i).Item(12),
+            ds.Tables(0).Rows(i).Item(13),
+            ds.Tables(0).Rows(i).Item(14),
+            ds.Tables(0).Rows(i).Item(15),
+            ds.Tables(0).Rows(i).Item(16),
+            ds.Tables(0).Rows(i).Item(17),
+            ds.Tables(0).Rows(i).Item(18),
+            ds.Tables(0).Rows(i).Item(19),
+            ds.Tables(0).Rows(i).Item(20),
+            ds.Tables(0).Rows(i).Item(21),
+            ds.Tables(0).Rows(i).Item(22),
+            ds.Tables(0).Rows(i).Item(23),
+            ds.Tables(0).Rows(i).Item(24),
+            ds.Tables(0).Rows(i).Item(25),
+            ds.Tables(0).Rows(i).Item(26),
+            ds.Tables(0).Rows(i).Item(27),
+            ds.Tables(0).Rows(i).Item(28),
+            ds.Tables(0).Rows(i).Item(29),
+            ds.Tables(0).Rows(i).Item(30),
+            ds.Tables(0).Rows(i).Item(31),
+            ds.Tables(0).Rows(i).Item(32),
+            ds.Tables(0).Rows(i).Item(33),
+            ds.Tables(0).Rows(i).Item(34),
+            ds.Tables(0).Rows(i).Item(35),
+            ds.Tables(0).Rows(i).Item(36),
+            ds.Tables(0).Rows(i).Item(37),
+            ds.Tables(0).Rows(i).Item(38),
+            ds.Tables(0).Rows(i).Item(39),
+            ds.Tables(0).Rows(i).Item(40),
+            ds.Tables(0).Rows(i).Item(41),
+            ds.Tables(0).Rows(i).Item(42)}
+            DGV_ReviewDaily.Rows.Add(row)
+            DGV_ReviewDaily.Rows(i).HeaderCell.Value = (i + 1).ToString
+            If i Mod 2 = 1 Then
+                DGV_ReviewDaily.Rows(i).DefaultCellStyle.BackColor = Color.LightGray
+            End If
+            DGV_ReviewDaily.Columns(1).Frozen = True
+        Next
+    End Sub
+    Private Sub filterDataDep(dep As String, tgl As String)
+        Dim queryAll As String = "SELECT * FROM `tabel_bulanan_karyawan`"
+        Dim queryDep As String = $"{queryAll} WHERE `Department` ='{dep}' "
+        Dim querySortAll As String = $"{queryAll} WHERE `Department` ='{dep}' AND `Period` = '{tgl}'"
+
+        Dim querycmd As String = ""
+        If dep = "" And flag = False Then
+            querycmd = queryAll
+        ElseIf dep <> "" And flag = False Then
+            querycmd = queryDep
+        ElseIf dep <> "" And flag = True Then
+            querycmd = querySortAll
+        End If
+        showData(querycmd)
+    End Sub
+
+    Private Sub filterDataEmp(emp As String, tgl As String)
+        Dim queryAll As String = "SELECT * FROM `tabel_bulanan_karyawan`"
+        Dim queryEmp As String = $"{queryAll} WHERE `NIK` ='{emp}' "
+        Dim querySortAll As String = $"{queryAll} WHERE `NIK` ='{emp}' AND `Period` = '{tgl}'"
+
+        Dim querycmd As String = ""
+        If emp = "" And flag = False Then
+            querycmd = queryAll
+        ElseIf emp <> "" And flag = False Then
+            querycmd = queryEmp
+        ElseIf emp <> "" And flag = True Then
+            querycmd = querySortAll
+        End If
+        showData(querycmd)
+    End Sub
+
+    Private Sub b_clear_Click(sender As Object, e As EventArgs) Handles b_clear.Click
+        tb_emp.Text = ""
+        dt_filter.Value = Now
+        cb_dep.Text = ""
+        showData(QueryCMD)
+        flag = False
+    End Sub
+
+    Private Sub dt_filter_ValueChanged(sender As Object, e As EventArgs) Handles dt_filter.ValueChanged
+        Dim tgl As String = dt_filter.Value.ToString("MMM yyy")
+        Dim dep As String = cb_dep.Text
+        Dim emp As String = tb_emp.Text
+        Dim queryDate As String = ""
+        If emp = "" And dep = "" Then
+            queryDate = $"{QueryCMD} WHERE `Period` = '{tgl}'"
+        ElseIf emp <> "" Then
+            queryDate = $"{QueryCMD} WHERE `Period` = '{tgl}' AND `NIK` = '{emp}'"
+        ElseIf dep <> "" Then
+            queryDate = $"{QueryCMD} WHERE `Period` = '{tgl}' AND `Department` = '{dep}'"
+        End If
+        showData(queryDate)
+        flag = True
+    End Sub
+
+    Private Sub cb_dep_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_dep.SelectedIndexChanged
+        tb_emp.Text = ""
+        Dim dep As String = cb_dep.Text
+        Dim tgl As String = dt_filter.Value.ToString("MMM yyy")
+        filterDataDep(dep, tgl)
+    End Sub
+
+    Private Sub tb_emp_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles tb_emp.PreviewKeyDown
+        If e.KeyCode = Keys.Enter Then
+            cb_dep.Text = ""
+            Dim emp As String = tb_emp.Text
+            Dim tgl As String = dt_filter.Value.ToString("MMM yyyy")
+            filterDataEmp(emp, tgl)
+        End If
+    End Sub
 End Class
