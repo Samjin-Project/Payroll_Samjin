@@ -24,6 +24,7 @@ Public Class UploadFingerData
         Dim indexCell As Integer = DS.Tables(0).Columns.Count
         Console.WriteLine($"Row Count {indexRows}")
         Console.WriteLine($"Cell Count {indexCell}")
+        Console.WriteLine(DS.GetXml.ToString)
 
         For i As Integer = 0 To indexRows - 1
             Dim nik As String = DS.Tables(0).Rows(i).Item(0)
@@ -35,21 +36,41 @@ Public Class UploadFingerData
             Dim Check_In As String = DS.Tables(0).Rows(i).Item(6)
             Dim Check_Out As String = DS.Tables(0).Rows(i).Item(7)
             Dim Departement As String = DS.Tables(0).Rows(i).Item(8)
-            Console.WriteLine(Check_In.Length)
-            Console.WriteLine(Check_Out.Length)
-            If Check_In.Length > 4 And Check_Out.Length > 4 Then
-                Dim masterQuery As String = $"INSERT INTO `finger_employer`(`NIK`, `Nama_Karyawan`, `Date_Finger`, `Shift_Finger`, `On_Duty`, `Off_Duty`, `Check_In`, `Check_Out`, `Departement`) 
+            'Console.WriteLine(Check_In.Length)
+            'Console.WriteLine(Check_Out.Length)
+            Dim edate = Date_Finger
+            Dim expenddt As Date = Date.ParseExact(edate, "M/d/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
+            If Check_In Is Nothing Then
+                Dim masterQuery As String = $"INSERT INTO `finger_employer`(`NIK`, `Nama_Karyawan`, `Date_Finger`, `Shift_Finger`, `On_Duty`, `Off_Duty`, `Check_In`, `Check_Out`, `Departement`,`Finger Status`) 
                  VALUES ('{DS.Tables(0).Rows(i).Item(0)}',
                          '{DS.Tables(0).Rows(i).Item(1)}',
-                         '{DS.Tables(0).Rows(i).Item(2)}',
+                         '{expenddt.ToString("yyyy/dd/MM")}',
                          '{DS.Tables(0).Rows(i).Item(3)}',
                          '{DS.Tables(0).Rows(i).Item(4)}',
                          '{DS.Tables(0).Rows(i).Item(5)}',
                          '{DS.Tables(0).Rows(i).Item(6)}',
                          '{DS.Tables(0).Rows(i).Item(7)}',
-                         '{DS.Tables(0).Rows(i).Item(8)}')"
+                         '{DS.Tables(0).Rows(i).Item(8)}',
+                         '0')"
                 Console.WriteLine("DB Query : " + masterQuery)
                 funcDB.uploadDB(masterQuery)
+            Else
+                If Check_In.Length > 4 And Check_Out.Length > 4 Then
+                    Dim masterQuery As String = $"INSERT INTO `finger_employer`(`NIK`, `Nama_Karyawan`, `Date_Finger`, `Shift_Finger`, `On_Duty`, `Off_Duty`, `Check_In`, `Check_Out`, `Departement`,`Finger Status`) 
+                 VALUES ('{DS.Tables(0).Rows(i).Item(0)}',
+                         '{DS.Tables(0).Rows(i).Item(1)}',
+                         '{expenddt.ToString("yyyy/dd/MM")}',
+                         '{DS.Tables(0).Rows(i).Item(3)}',
+                         '{DS.Tables(0).Rows(i).Item(4)}',
+                         '{DS.Tables(0).Rows(i).Item(5)}',
+                         '{DS.Tables(0).Rows(i).Item(6)}',
+                         '{DS.Tables(0).Rows(i).Item(7)}',
+                         '{DS.Tables(0).Rows(i).Item(8)}',
+                         '1')"
+                    Console.WriteLine("DB Query : " + masterQuery)
+                    funcDB.uploadDB(masterQuery)
+                End If
+
             End If
         Next
     End Sub
@@ -60,7 +81,7 @@ Public Class UploadFingerData
     End Sub
 
     Private Sub insertToDgv(Dep As String, tanggal As String)
-        Dim QueryALL As String = $"SELECT `NIK`, `Nama_Karyawan`, `Date_Finger`, `Shift_Finger`, `On_Duty`, `Off_Duty`, `Check_In`, `Check_Out`, `Departement` FROM `finger_employer` "
+        Dim QueryALL As String = $"SELECT `NIK`, `Nama_Karyawan`, DATE_FORMAT(`Date_Finger`,""%d/%m/%Y""), `Shift_Finger`, `On_Duty`, `Off_Duty`, `Check_In`, `Check_Out`, `Departement` FROM `finger_employer` "
         Dim QuerySortTgl As String = $"{QueryALL} WHERE `Date_Finger` = '{tanggal}' "
         Dim QuerySortDep As String = $"{QueryALL} WHERE `Departement` = '{Dep}' "
         Dim QuerySortAll As String = $"{QueryALL} WHERE `Departement` = '{Dep}' AND `Date_Finger` = '{tanggal}'"

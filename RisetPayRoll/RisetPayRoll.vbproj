@@ -175,6 +175,12 @@
     <Compile Include="RegisterVacation.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Setting.Designer.vb">
+      <DependentUpon>Setting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Setting.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UploadFingerData.Designer.vb">
       <DependentUpon>UploadFingerData.vb</DependentUpon>
     </Compile>
@@ -218,6 +224,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RegisterVacation.resx">
       <DependentUpon>RegisterVacation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Setting.resx">
+      <DependentUpon>Setting.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UploadFingerData.resx">
       <DependentUpon>UploadFingerData.vb</DependentUpon>
