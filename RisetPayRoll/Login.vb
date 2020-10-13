@@ -13,7 +13,7 @@ Public Class Login
 
         Dim table As New DataTable
 
-        adapter.Fill()(table)
+        'adapter.Fill()(table)
 
         If table.Rows.Count() <= 0 Then
             MessageBox.Show("username atau password salah !")

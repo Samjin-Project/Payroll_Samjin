@@ -113,7 +113,6 @@
     <Compile Include="ApprovalVacation.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BackEndClass1.vb" />
     <Compile Include="ComputePayroll.Designer.vb">
       <DependentUpon>ComputePayroll.vb</DependentUpon>
     </Compile>
@@ -139,6 +138,7 @@
     <Compile Include="Form2.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="GlobalVar.vb" />
     <Compile Include="InputExcelClass.vb" />
     <Compile Include="Login.Designer.vb">
       <DependentUpon>Login.vb</DependentUpon>
@@ -168,7 +168,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="OutputExcelClass1.vb" />
     <Compile Include="RegisterMaster.Designer.vb">
       <DependentUpon>RegisterMaster.vb</DependentUpon>
     </Compile>
@@ -179,6 +178,12 @@
       <DependentUpon>RegisterVacation.vb</DependentUpon>
     </Compile>
     <Compile Include="RegisterVacation.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingCon.Designer.vb">
+      <DependentUpon>SettingCon.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SettingCon.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UploadFingerData.Designer.vb">
@@ -227,6 +232,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RegisterVacation.resx">
       <DependentUpon>RegisterVacation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingCon.resx">
+      <DependentUpon>SettingCon.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UploadFingerData.resx">
       <DependentUpon>UploadFingerData.vb</DependentUpon>
