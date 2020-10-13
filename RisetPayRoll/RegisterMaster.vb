@@ -3,7 +3,7 @@ Imports System.Data.OleDb
 Public Class RegisterMaster
     Dim flag As Boolean = False
     Private Sub RegisterMaster_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master_employer`"
+        Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master employer`"
         dataOnReview(QueryCMD)
         DGV_Setting_Display()
 
@@ -40,7 +40,7 @@ Public Class RegisterMaster
         Console.WriteLine("Tanggal Masuk : " + DS.Tables(0).Rows(2).Item(9))
         For i As Integer = 2 To indexRows - 1
             Dim admisionDate As Date = Date.ParseExact(DS.Tables(0).Rows(i).Item(9), "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
-            Dim masterQuery As String = $"INSERT INTO `master_employer`(`NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Departement_Karyawan`, `TempatLahir_Karyawan`, `TanggalLahir_Karyawan`, `JenisKelamin_Karyawan`, `Pendidikan_Karyawan`, `TanggalMasuk_Karyawan`, `Status_Karyawan`, `Salary_Karyawan`) 
+            Dim masterQuery As String = $"INSERT INTO `master employer`(`NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Department`, `Tempat_Lahir`, `Tanggal_Lahir`, `Jenis_Kelamin`, `Pendidikan_Karyawan`, `Tanggal_Masuk`, `Status_Karyawan`, `Salary`) 
                  VALUES ('{DS.Tables(0).Rows(i).Item(1)}',
                          '{DS.Tables(0).Rows(i).Item(2)}',
                          '{DS.Tables(0).Rows(i).Item(3)}',
@@ -55,6 +55,7 @@ Public Class RegisterMaster
             Console.WriteLine("DB Query : " + masterQuery)
             funcDB.uploadDB(masterQuery)
         Next
+        MsgBox("Upload Selesai")
     End Sub
 
     Private Sub dataOnReview(QueryOnReview As String)
@@ -73,9 +74,9 @@ Public Class RegisterMaster
     End Sub
 
     Private Sub detailDataMaster(Nik As String)
-        Dim QueryCMD As String = $"SELECT `Nama_Karyawan`, `Posisi_Karyawan`, `Departement_Karyawan`, `TempatLahir_Karyawan`, `TanggalLahir_Karyawan`, 
-        `JenisKelamin_Karyawan`, `Pendidikan_Karyawan`, 
-        `Status_Karyawan`, `Salary_Karyawan`FROM `master_employer` WHERE `NIK` = '{Nik}'"
+        Dim QueryCMD As String = $"SELECT `Nama_Karyawan`, `Posisi_Karyawan`, `Department`, `Tempat_Lahir`, `Tanggal_Lahir`, 
+        `Jenis_Kelamin`, `Pendidikan_Karyawan`, 
+        `Status_Karyawan`, `Salary`FROM `master employer` WHERE `NIK` = '{Nik}'"
         Dim DBClass As DataBaseClass = New DataBaseClass
         Dim ds As DataSet = DBClass.downloadDB(QueryCMD)
         Dim indexDs As Integer = ds.Tables(0).Rows.Count
@@ -101,15 +102,15 @@ Public Class RegisterMaster
         UploadExcel()
     End Sub
     Private Sub filterData(posisi As String, jk As String, masuk As String)
-        Dim queryAll As String = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master_employer`"
+        Dim queryAll As String = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master employer`"
         Dim querySortPosisi As String = $"{queryAll} WHERE `Posisi_Karyawan` = '{posisi}'"
-        Dim querySortJK As String = $"{queryAll} WHERE `JenisKelamin_Karyawan` = '{jk}'"
-        Dim querySortAll As String = $"{queryAll} WHERE `JenisKelamin_Karyawan` = '{jk}'AND `Posisi_Karyawan` = '{posisi}'"
+        Dim querySortJK As String = $"{queryAll} WHERE `Jenis_Kelamin` = '{jk}'"
+        Dim querySortAll As String = $"{queryAll} WHERE `Jenis_Kelamin` = '{jk}'AND `Posisi_Karyawan` = '{posisi}'"
 
-        Dim queryAllwTime As String = $"{queryAll} WHERE `TanggalMasuk_Karyawan` = '{masuk}' AND `TanggalMasuk_Karyawan` = '{masuk}'"
-        Dim querySortPosisiwTime As String = $"{queryAll} WHERE `Posisi_Karyawan` = '{posisi}' AND `TanggalMasuk_Karyawan` = '{masuk}'"
-        Dim querySortJKwTime As String = $"{queryAll} WHERE `JenisKelamin_Karyawan` = '{jk}' AND `TanggalMasuk_Karyawan` = '{masuk}'"
-        Dim querySortAllwTime As String = $"{queryAll} WHERE `JenisKelamin_Karyawan` = '{jk}'AND `Posisi_Karyawan` = '{posisi}' AND `TanggalMasuk_Karyawan` = '{masuk}'"
+        Dim queryAllwTime As String = $"{queryAll} WHERE `Tanggal_Masuk` = '{masuk}' AND `Tanggal_Masuk` = '{masuk}'"
+        Dim querySortPosisiwTime As String = $"{queryAll} WHERE `Posisi_Karyawan` = '{posisi}' AND `Tanggal_Masuk` = '{masuk}'"
+        Dim querySortJKwTime As String = $"{queryAll} WHERE `Jenis_Kelamin` = '{jk}' AND `Tanggal_Masuk` = '{masuk}'"
+        Dim querySortAllwTime As String = $"{queryAll} WHERE `Jenis_Kelamin` = '{jk}'AND `Posisi_Karyawan` = '{posisi}' AND `Tanggal_Masuk` = '{masuk}'"
 
         Dim querycmd As String = ""
         If flag = False Then
@@ -143,7 +144,7 @@ Public Class RegisterMaster
         cb_posisi.Text = ""
         tb_emp.Text = ""
         DGV_ReviewMaster.Rows.Clear()
-        Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master_employer`"
+        Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master employer`"
         dataOnReview(QueryCMD)
         DGV_Setting_Display()
         flag = False
@@ -206,7 +207,7 @@ Public Class RegisterMaster
             cb_jk.Text = ""
             cb_posisi.Text = ""
             Dim nik As String = tb_emp.Text
-            Dim querycmd As String = $"SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master_employer` WHERE `NIK` = '{nik}'"
+            Dim querycmd As String = $"SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master employer` WHERE `NIK` = '{nik}'"
             dataOnReview(querycmd)
             clearData()
         End If

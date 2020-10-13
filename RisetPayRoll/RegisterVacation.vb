@@ -1,7 +1,7 @@
 ﻿Public Class RegisterVacation
 
     Private Sub RegisterVacation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `TanggalMasuk_Karyawan` FROM `master_employer`"
+        Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `Tanggal_Masuk` FROM `master employer`"
         dataOnSide(QueryCMD)
         total_data.Text = DGV_DataModify.Rows.Count
         If tb_emp.Text = "" Or tb_nama.Text = "" Then

@@ -22,10 +22,10 @@ Partial Class DailyAttendance
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.b_clear = New System.Windows.Forms.Button()
@@ -41,6 +41,7 @@ Partial Class DailyAttendance
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.cb_statusCreate = New System.Windows.Forms.ComboBox()
         Me.cb_depCreate = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -60,8 +61,6 @@ Partial Class DailyAttendance
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.DGV_SideDaily = New System.Windows.Forms.DataGridView()
-        Me.Kolom_emp = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Kolom_Nama = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.DGV_ReviewDaily = New System.Windows.Forms.DataGridView()
         Me.KolomView_NIK = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -76,16 +75,14 @@ Partial Class DailyAttendance
         Me.KolomView_Latness = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.KolomView_EarlyCheckOut = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.KolomView_BasicTime = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.kolom_dep = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.KolomView_x1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.KolomView_x2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.KolomView_x3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.KolomView = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.KolomView_Transport = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.kolom_dep = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.total_data = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
+        Me.Kolom_emp = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Kolom_Nama = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -246,6 +243,7 @@ Partial Class DailyAttendance
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Button1)
         Me.GroupBox1.Controls.Add(Me.cb_statusCreate)
         Me.GroupBox1.Controls.Add(Me.cb_depCreate)
         Me.GroupBox1.Controls.Add(Me.Label5)
@@ -270,6 +268,15 @@ Partial Class DailyAttendance
         Me.GroupBox1.TabIndex = 24
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Create Conditions"
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(517, 63)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(45, 22)
+        Me.Button1.TabIndex = 45
+        Me.Button1.Text = "Create"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'cb_statusCreate
         '
@@ -460,27 +467,11 @@ Partial Class DailyAttendance
         Me.DGV_SideDaily.Name = "DGV_SideDaily"
         Me.DGV_SideDaily.ReadOnly = True
         Me.DGV_SideDaily.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DGV_SideDaily.RowsDefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DGV_SideDaily.RowsDefaultCellStyle = DataGridViewCellStyle6
         Me.DGV_SideDaily.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DGV_SideDaily.Size = New System.Drawing.Size(246, 517)
         Me.DGV_SideDaily.TabIndex = 2
-        '
-        'Kolom_emp
-        '
-        Me.Kolom_emp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Kolom_emp.DefaultCellStyle = DataGridViewCellStyle13
-        Me.Kolom_emp.HeaderText = "Emp No."
-        Me.Kolom_emp.Name = "Kolom_emp"
-        Me.Kolom_emp.ReadOnly = True
-        Me.Kolom_emp.Width = 73
-        '
-        'Kolom_Nama
-        '
-        Me.Kolom_Nama.HeaderText = "Name"
-        Me.Kolom_Nama.Name = "Kolom_Nama"
-        Me.Kolom_Nama.ReadOnly = True
         '
         'Panel3
         '
@@ -497,17 +488,17 @@ Partial Class DailyAttendance
         Me.DGV_ReviewDaily.AllowUserToAddRows = False
         Me.DGV_ReviewDaily.AllowUserToDeleteRows = False
         Me.DGV_ReviewDaily.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGV_ReviewDaily.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGV_ReviewDaily.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.DGV_ReviewDaily.ColumnHeadersHeight = 30
         Me.DGV_ReviewDaily.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        Me.DGV_ReviewDaily.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.KolomView_NIK, Me.KolomView_Nama, Me.KolomView_Type, Me.KolomView_AttendDate, Me.KolomView_DayNumber, Me.KolomView_Shift, Me.KolomView_CheckIn, Me.KolomView_CheckOut, Me.KolomView_CheckOutDate, Me.KolomView_Latness, Me.KolomView_EarlyCheckOut, Me.KolomView_BasicTime, Me.kolom_dep, Me.KolomView_x1, Me.KolomView_x2, Me.KolomView_x3, Me.KolomView, Me.KolomView_Transport})
+        Me.DGV_ReviewDaily.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.KolomView_NIK, Me.KolomView_Nama, Me.KolomView_Type, Me.KolomView_AttendDate, Me.KolomView_DayNumber, Me.KolomView_Shift, Me.KolomView_CheckIn, Me.KolomView_CheckOut, Me.KolomView_CheckOutDate, Me.KolomView_Latness, Me.KolomView_EarlyCheckOut, Me.KolomView_BasicTime, Me.KolomView_x2, Me.kolom_dep})
         Me.DGV_ReviewDaily.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DGV_ReviewDaily.GridColor = System.Drawing.Color.Gainsboro
         Me.DGV_ReviewDaily.Location = New System.Drawing.Point(0, 0)
@@ -515,8 +506,8 @@ Partial Class DailyAttendance
         Me.DGV_ReviewDaily.Name = "DGV_ReviewDaily"
         Me.DGV_ReviewDaily.ReadOnly = True
         Me.DGV_ReviewDaily.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DGV_ReviewDaily.RowsDefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DGV_ReviewDaily.RowsDefaultCellStyle = DataGridViewCellStyle8
         Me.DGV_ReviewDaily.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DGV_ReviewDaily.Size = New System.Drawing.Size(903, 492)
         Me.DGV_ReviewDaily.TabIndex = 21
@@ -604,42 +595,17 @@ Partial Class DailyAttendance
         Me.KolomView_BasicTime.ReadOnly = True
         Me.KolomView_BasicTime.Width = 80
         '
-        'kolom_dep
-        '
-        Me.kolom_dep.HeaderText = "Departement"
-        Me.kolom_dep.Name = "kolom_dep"
-        Me.kolom_dep.ReadOnly = True
-        '
-        'KolomView_x1
-        '
-        Me.KolomView_x1.HeaderText = "x 1.5"
-        Me.KolomView_x1.Name = "KolomView_x1"
-        Me.KolomView_x1.ReadOnly = True
-        Me.KolomView_x1.Width = 80
-        '
         'KolomView_x2
         '
         Me.KolomView_x2.HeaderText = "x2"
         Me.KolomView_x2.Name = "KolomView_x2"
         Me.KolomView_x2.ReadOnly = True
         '
-        'KolomView_x3
+        'kolom_dep
         '
-        Me.KolomView_x3.HeaderText = "x3"
-        Me.KolomView_x3.Name = "KolomView_x3"
-        Me.KolomView_x3.ReadOnly = True
-        '
-        'KolomView
-        '
-        Me.KolomView.HeaderText = "x4"
-        Me.KolomView.Name = "KolomView"
-        Me.KolomView.ReadOnly = True
-        '
-        'KolomView_Transport
-        '
-        Me.KolomView_Transport.HeaderText = "Transport"
-        Me.KolomView_Transport.Name = "KolomView_Transport"
-        Me.KolomView_Transport.ReadOnly = True
+        Me.kolom_dep.HeaderText = "Departement"
+        Me.kolom_dep.Name = "kolom_dep"
+        Me.kolom_dep.ReadOnly = True
         '
         'Panel5
         '
@@ -680,6 +646,24 @@ Partial Class DailyAttendance
         Me.Label18.Size = New System.Drawing.Size(45, 13)
         Me.Label18.TabIndex = 13
         Me.Label18.Text = "Total"
+        '
+        'Kolom_emp
+        '
+        Me.Kolom_emp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Kolom_emp.DefaultCellStyle = DataGridViewCellStyle5
+        Me.Kolom_emp.HeaderText = "Emp No."
+        Me.Kolom_emp.Name = "Kolom_emp"
+        Me.Kolom_emp.ReadOnly = True
+        Me.Kolom_emp.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Kolom_emp.Width = 54
+        '
+        'Kolom_Nama
+        '
+        Me.Kolom_Nama.HeaderText = "Name"
+        Me.Kolom_Nama.Name = "Kolom_Nama"
+        Me.Kolom_Nama.ReadOnly = True
+        Me.Kolom_Nama.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'DailyAttendance
         '
@@ -741,11 +725,12 @@ Partial Class DailyAttendance
     Friend WithEvents dt_start As DateTimePicker
     Friend WithEvents Label12 As Label
     Friend WithEvents Label16 As Label
-    Friend WithEvents Kolom_emp As DataGridViewTextBoxColumn
-    Friend WithEvents Kolom_Nama As DataGridViewTextBoxColumn
     Friend WithEvents cb_depSearch As ComboBox
     Friend WithEvents cb_statusCreate As ComboBox
     Friend WithEvents cb_depCreate As ComboBox
+    Friend WithEvents total_data As Label
+    Friend WithEvents b_clear As Button
+    Friend WithEvents Button1 As Button
     Friend WithEvents KolomView_NIK As DataGridViewTextBoxColumn
     Friend WithEvents KolomView_Nama As DataGridViewTextBoxColumn
     Friend WithEvents KolomView_Type As DataGridViewTextBoxColumn
@@ -758,12 +743,8 @@ Partial Class DailyAttendance
     Friend WithEvents KolomView_Latness As DataGridViewTextBoxColumn
     Friend WithEvents KolomView_EarlyCheckOut As DataGridViewTextBoxColumn
     Friend WithEvents KolomView_BasicTime As DataGridViewTextBoxColumn
-    Friend WithEvents kolom_dep As DataGridViewTextBoxColumn
-    Friend WithEvents KolomView_x1 As DataGridViewTextBoxColumn
     Friend WithEvents KolomView_x2 As DataGridViewTextBoxColumn
-    Friend WithEvents KolomView_x3 As DataGridViewTextBoxColumn
-    Friend WithEvents KolomView As DataGridViewTextBoxColumn
-    Friend WithEvents KolomView_Transport As DataGridViewTextBoxColumn
-    Friend WithEvents total_data As Label
-    Friend WithEvents b_clear As Button
+    Friend WithEvents kolom_dep As DataGridViewTextBoxColumn
+    Friend WithEvents Kolom_emp As DataGridViewTextBoxColumn
+    Friend WithEvents Kolom_Nama As DataGridViewTextBoxColumn
 End Class

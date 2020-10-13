@@ -75,7 +75,6 @@ Partial Class FingerModify
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.dt_day = New System.Windows.Forms.DateTimePicker()
-        Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.DGV_DataModify, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel5.SuspendLayout()
@@ -437,7 +436,6 @@ Partial Class FingerModify
         '
         'Panel4
         '
-        Me.Panel4.Controls.Add(Me.Button1)
         Me.Panel4.Controls.Add(Me.rec_time)
         Me.Panel4.Controls.Add(Me.DateTimePicker1)
         Me.Panel4.Controls.Add(Me.Panel6)
@@ -505,15 +503,6 @@ Partial Class FingerModify
         Me.dt_day.Size = New System.Drawing.Size(156, 20)
         Me.dt_day.TabIndex = 20
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(1022, 3)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(82, 50)
-        Me.Button1.TabIndex = 50
-        Me.Button1.Text = "SAVE"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'FingerModify
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -579,5 +568,4 @@ Partial Class FingerModify
     Friend WithEvents kolom_departement As DataGridViewTextBoxColumn
     Friend WithEvents kolom_upload_date As DataGridViewTextBoxColumn
     Friend WithEvents kolom_upload_emp As DataGridViewTextBoxColumn
-    Friend WithEvents Button1 As Button
 End Class
