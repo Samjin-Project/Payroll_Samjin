@@ -2,10 +2,24 @@
 Imports System.Data.OleDb
 Public Class RegisterMaster
     Dim flag As Boolean = False
+    Dim f_edit As Boolean = False
+    Dim f_create As Boolean = False
+    Dim r_index As Integer
     Private Sub RegisterMaster_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master employer`"
+        Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master_employer`"
         dataOnReview(QueryCMD)
         DGV_Setting_Display()
+        'data fill
+        cb_bpjs.Visible = False
+        cb_aktif.Visible = False
+        dt_createMasuk.Visible = False
+        dt_lahir.Visible = False
+        cb_createJK.Visible = False
+        'button
+        b_save.Visible = False
+        b_edit.Enabled = False
+        b_cancel.Visible = False
+        b_create.Enabled = True
 
     End Sub
 
@@ -40,7 +54,7 @@ Public Class RegisterMaster
         Console.WriteLine("Tanggal Masuk : " + DS.Tables(0).Rows(2).Item(9))
         For i As Integer = 2 To indexRows - 1
             Dim admisionDate As Date = Date.ParseExact(DS.Tables(0).Rows(i).Item(9), "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
-            Dim masterQuery As String = $"INSERT INTO `master employer`(`NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Department`, `Tempat_Lahir`, `Tanggal_Lahir`, `Jenis_Kelamin`, `Pendidikan_Karyawan`, `Tanggal_Masuk`, `Status_Karyawan`, `Salary`) 
+            Dim masterQuery As String = $"INSERT INTO `master_employer`(`NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Department`, `Tempat_Lahir`, `Tanggal_Lahir`, `Jenis_Kelamin`, `Pendidikan_Karyawan`, `Tanggal_Masuk`, `Status_Karyawan`, `Salary`) 
                  VALUES ('{DS.Tables(0).Rows(i).Item(1)}',
                          '{DS.Tables(0).Rows(i).Item(2)}',
                          '{DS.Tables(0).Rows(i).Item(3)}',
@@ -59,6 +73,7 @@ Public Class RegisterMaster
     End Sub
 
     Private Sub dataOnReview(QueryOnReview As String)
+        DGV_ReviewMaster.Rows.Clear()
         Dim DBClass As DataBaseClass = New DataBaseClass
         Dim ds As DataSet = DBClass.downloadDB(QueryOnReview)
         Dim indexDs As Integer = ds.Tables(0).Rows.Count
@@ -74,27 +89,33 @@ Public Class RegisterMaster
     End Sub
 
     Private Sub detailDataMaster(Nik As String)
-        Dim QueryCMD As String = $"SELECT `Nama_Karyawan`, `Posisi_Karyawan`, `Department`, `Tempat_Lahir`, `Tanggal_Lahir`, 
-        `Jenis_Kelamin`, `Pendidikan_Karyawan`, 
-        `Status_Karyawan`, `Salary`FROM `master employer` WHERE `NIK` = '{Nik}'"
+        Dim QueryCMD As String = $"SELECT *FROM `master_employer` WHERE `NIK` = '{Nik}'"
         Dim DBClass As DataBaseClass = New DataBaseClass
         Dim ds As DataSet = DBClass.downloadDB(QueryCMD)
         Dim indexDs As Integer = ds.Tables(0).Rows.Count
         'Console.WriteLine(ds.GetXml)
         If indexDs > 0 Then
-            tb_nama.Text = ds.Tables(0).Rows(0).Item(0).ToString
-            tb_posisi.Text = ds.Tables(0).Rows(0).Item(1).ToString
-            tb_dep.Text = ds.Tables(0).Rows(0).Item(2).ToString
-            tb_pob.Text = ds.Tables(0).Rows(0).Item(3).ToString
-            tb_dob.Text = ds.Tables(0).Rows(0).Item(4)
-            If ds.Tables(0).Rows(0).Item(5).ToString = "L" Then
+            Dim tglLahir As Date = ds.Tables(0).Rows(0).Item(5)
+            Dim tglMasuk As Date = ds.Tables(0).Rows(0).Item(8)
+            Dim gaji As Double = ds.Tables(0).Rows(0).Item(10).ToString
+            tb_empDet.Text = ds.Tables(0).Rows(0).ItemArray(0)
+            tb_nama.Text = ds.Tables(0).Rows(0).Item(1).ToString
+            tb_posisi.Text = ds.Tables(0).Rows(0).Item(2).ToString
+            tb_dep.Text = ds.Tables(0).Rows(0).Item(3).ToString
+            tb_pob.Text = ds.Tables(0).Rows(0).Item(4).ToString
+            tb_dob.Text = tglLahir.ToString("dd/MM/yyyy")
+            If ds.Tables(0).Rows(0).Item(6).ToString = "L" Then
                 tb_jk.Text = "Laki-laki"
-            ElseIf ds.Tables(0).Rows(0).Item(5).ToString = "P" Then
+            ElseIf ds.Tables(0).Rows(0).Item(6).ToString = "P" Then
                 tb_jk.Text = "Perempuan"
             End If
-            tb_pend.Text = ds.Tables(0).Rows(0).Item(6).ToString
-            tb_stat.Text = ds.Tables(0).Rows(0).Item(7).ToString
-            tb_salary.Text = ds.Tables(0).Rows(0).Item(8).ToString
+            tb_pend.Text = ds.Tables(0).Rows(0).Item(7).ToString
+            tb_masuk.Text = tglMasuk.ToString("dd/MM/yyyy")
+            tb_stat.Text = ds.Tables(0).Rows(0).Item(9).ToString
+            tb_salary.Text = gaji.ToString("##,##,###")
+            tb_shift.Text = ds.Tables(0).Rows(0).Item(11)
+            tb_bpjs.Text = ds.Tables(0).Rows(0).Item(12)
+            tb_aktif.Text = ds.Tables(0).Rows(0).Item(13)
         End If
     End Sub
 
@@ -102,7 +123,7 @@ Public Class RegisterMaster
         UploadExcel()
     End Sub
     Private Sub filterData(posisi As String, jk As String, masuk As String)
-        Dim queryAll As String = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master employer`"
+        Dim queryAll As String = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master_employer`"
         Dim querySortPosisi As String = $"{queryAll} WHERE `Posisi_Karyawan` = '{posisi}'"
         Dim querySortJK As String = $"{queryAll} WHERE `Jenis_Kelamin` = '{jk}'"
         Dim querySortAll As String = $"{queryAll} WHERE `Jenis_Kelamin` = '{jk}'AND `Posisi_Karyawan` = '{posisi}'"
@@ -135,20 +156,7 @@ Public Class RegisterMaster
             End If
         End If
 
-        DGV_ReviewMaster.Rows.Clear()
         dataOnReview(querycmd)
-    End Sub
-    Private Sub b_clear_Click(sender As Object, e As EventArgs) Handles b_clear.Click
-        dt_masuk.Value = Now
-        cb_jk.Text = ""
-        cb_posisi.Text = ""
-        tb_emp.Text = ""
-        DGV_ReviewMaster.Rows.Clear()
-        Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master employer`"
-        dataOnReview(QueryCMD)
-        DGV_Setting_Display()
-        flag = False
-        clearData()
     End Sub
 
     Private Sub dt_masuk_ValueChanged(sender As Object, e As EventArgs) Handles dt_masuk.ValueChanged
@@ -203,11 +211,10 @@ Public Class RegisterMaster
 
     Private Sub tb_emp_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles tb_emp.PreviewKeyDown
         If e.KeyCode = Keys.Enter Then
-            DGV_ReviewMaster.Rows.Clear()
             cb_jk.Text = ""
             cb_posisi.Text = ""
             Dim nik As String = tb_emp.Text
-            Dim querycmd As String = $"SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master employer` WHERE `NIK` = '{nik}'"
+            Dim querycmd As String = $"SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master_employer` WHERE `NIK` = '{nik}'"
             dataOnReview(querycmd)
             clearData()
         End If
@@ -216,8 +223,167 @@ Public Class RegisterMaster
     Private Sub DGV_ReviewMaster_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_ReviewMaster.CellContentClick
         Dim Nik As String = DGV_ReviewMaster.Rows(e.RowIndex).Cells(0).Value
         detailDataMaster(Nik)
+        b_edit.Enabled = True
+        r_index = e.RowIndex
+    End Sub
+    Private Sub b_clear_Click(sender As Object, e As EventArgs) Handles b_clear.Click
+        dt_masuk.Value = Now
+        cb_jk.Text = ""
+        cb_posisi.Text = ""
+        tb_emp.Text = ""
+        Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master_employer`"
+        dataOnReview(QueryCMD)
+        DGV_Setting_Display()
+        flag = False
+        b_edit.Enabled = False
+        clearData()
+    End Sub
+
+    Private Sub b_create_Click(sender As Object, e As EventArgs) Handles b_create.Click
+        clearData()
+        b_save.Visible = True
+        b_cancel.Visible = True
+        b_create.Enabled = False
+        b_edit.Enabled = False
+        f_create = True
+        dataFill()
+    End Sub
+
+    Private Sub b_cancel_Click(sender As Object, e As EventArgs) Handles b_cancel.Click
+        Dim result As MsgBoxResult = MsgBox("Are you sure want to cancel ?", MsgBoxStyle.YesNo)
+        Dim r_sellect As DataGridViewRow = DGV_ReviewMaster.Rows(r_index)
+        Dim nik As String = r_sellect.Cells(0).Value
+        If result = MsgBoxResult.Yes Then
+            clearData()
+            b_create.Enabled = True
+            b_edit.Enabled = True
+            b_cancel.Visible = False
+            b_save.Visible = False
+            f_edit = False
+            f_create = False
+            detailDataMaster(nik)
+            dataViewOnly()
+        ElseIf result = MsgBoxResult.No Then
+            b_save.Visible = True
+            b_cancel.Visible = True
+        End If
+    End Sub
+
+    Private Sub b_save_Click(sender As Object, e As EventArgs) Handles b_save.Click
+        Dim queryAll As String = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master_employer`"
+        If tb_empDet.Text = "" Or tb_nama.Text = "" Or cb_createJK.Text = "" Or tb_pob.Text = "" Or tb_pend.Text = "" Or cb_bpjs.Text = "" Or tb_posisi.Text = "" Or tb_dep.Text = "" Or tb_stat.Text = "" Or tb_shift.Text = "" Or tb_salary.Text = "" Or cb_aktif.Text = "" Then
+            MsgBox("Data tidak boleh kosong !", MsgBoxStyle.Exclamation)
+        Else
+            Dim result As MsgBoxResult = MsgBox("Are you sure want to save ?", MsgBoxStyle.YesNoCancel)
+            If result = MsgBoxResult.Yes Then
+                If f_create = True Then
+                    create()
+                    dataOnReview(queryAll)
+                ElseIf f_edit = True Then
+                    updateData()
+                    dataOnReview(queryAll)
+                End If
+                b_save.Visible = False
+                b_cancel.Visible = False
+                b_create.Enabled = True
+                b_edit.Enabled = False
+                clearData()
+                dataViewOnly()
+            ElseIf result = MsgBoxResult.No Then
+                If f_edit = True Then
+                    Dim r_sellect As DataGridViewRow = DGV_ReviewMaster.Rows(r_index)
+                    Dim nik As String = r_sellect.Cells(0).Value
+                    detailDataMaster(nik)
+                    b_edit.Enabled = True
+                Else
+                    clearData()
+                    dataViewOnly()
+                    b_edit.Enabled = False
+                End If
+                b_save.Visible = False
+                b_cancel.Visible = False
+                b_create.Enabled = True
+            End If
+            f_create = False
+            f_edit = False
+        End If
+    End Sub
+
+    Private Sub b_edit_Click(sender As Object, e As EventArgs) Handles b_edit.Click
+        b_save.Visible = True
+        b_create.Enabled = False
+        b_cancel.Visible = True
+        b_edit.Enabled = False
+        f_edit = True
+        dataFill()
+    End Sub
+
+    Private Sub dataFill()
+        tb_empDet.ReadOnly = False
+        tb_nama.ReadOnly = False
+
+        tb_masuk.Visible = False
+        dt_createMasuk.Visible = True
+
+        tb_jk.Visible = False
+        cb_createJK.Visible = True
+        tb_pob.ReadOnly = False
+
+        tb_dob.Visible = False
+        dt_lahir.Visible = True
+
+        tb_pend.ReadOnly = False
+
+        tb_bpjs.Visible = False
+        cb_bpjs.Visible = True
+
+        tb_posisi.ReadOnly = False
+        tb_dep.ReadOnly = False
+        tb_stat.ReadOnly = False
+        tb_shift.ReadOnly = False
+        tb_salary.ReadOnly = False
+
+        tb_aktif.Visible = False
+        cb_aktif.Visible = True
+
+        If f_edit Then
+            dt_createMasuk.Value = DateTime.ParseExact(tb_masuk.Text, "dd/MM/yyyy", Nothing)
+            cb_aktif.SelectedItem = tb_aktif.Text
+            cb_bpjs.SelectedItem = tb_bpjs.Text
+            cb_createJK.SelectedItem = tb_jk.Text
+            dt_lahir.Value = DateTime.ParseExact(tb_dob.Text, "dd/MM/yyyy", Nothing)
+        End If
+    End Sub
+    Private Sub dataViewOnly()
+        tb_empDet.ReadOnly = True
+        tb_nama.ReadOnly = True
+
+        tb_masuk.Visible = True
+        dt_createMasuk.Visible = False
+
+        tb_jk.Visible = True
+        cb_createJK.Visible = False
+        tb_pob.ReadOnly = True
+
+        tb_dob.Visible = True
+        dt_lahir.Visible = False
+
+        tb_pend.ReadOnly = True
+
+        tb_bpjs.Visible = True
+        cb_bpjs.Visible = False
+
+        tb_posisi.ReadOnly = True
+        tb_dep.ReadOnly = True
+        tb_stat.ReadOnly = True
+        tb_shift.ReadOnly = True
+        tb_salary.ReadOnly = True
+
+        tb_aktif.Visible = True
+        cb_aktif.Visible = False
     End Sub
     Private Sub clearData()
+        tb_empDet.Text = ""
         tb_nama.Text = ""
         tb_posisi.Text = ""
         tb_jk.Text = ""
@@ -227,6 +393,68 @@ Public Class RegisterMaster
         tb_stat.Text = ""
         tb_dep.Text = ""
         tb_pend.Text = ""
+        tb_bpjs.Text = ""
+        tb_aktif.Text = ""
+        tb_shift.Text = ""
+        tb_masuk.Text = ""
 
+
+    End Sub
+    Private Sub create()
+        Dim jk As String
+        If cb_createJK.Text = "Laki-laki" Then
+            jk = "L"
+        Else
+            jk = "P"
+        End If
+        Dim funcDB As DataBaseClass = New DataBaseClass
+        Dim masterQuery As String = $"INSERT INTO `master_employer`(`NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Department`, `Tempat_Lahir`, `Tanggal_Lahir`, `Jenis_Kelamin`, `Pendidikan_Karyawan`, `Tanggal_Masuk`, `Status_Karyawan`, `Salary`, `StatusShift_Karyawan`, `BPJS`, `Aktif`) 
+                 VALUES ('{tb_empDet.Text}',
+                         '{tb_nama.Text}',
+                         '{tb_posisi.Text}',
+                         '{tb_dep.Text}',
+                         '{tb_pob.Text}',
+                         '{dt_lahir.Value.ToString("yyyy-MM-dd")}',
+                         '{jk}',
+                         '{tb_pend.Text}',
+                         '{dt_createMasuk.Value.ToString("yyyy-MM-dd")}',
+                         '{tb_stat.Text}'
+                         '{tb_salary.Text}'
+                         '{tb_shift.Text}'
+                         '{cb_bpjs.Text}'
+                         '{cb_aktif.Text}')"
+        Console.WriteLine("DB Query : " + masterQuery)
+        funcDB.uploadDB(masterQuery)
+        MsgBox("Data already uploaded")
+    End Sub
+
+    Private Sub updateData()
+        Dim jk As String
+        If cb_createJK.Text = "Laki-laki" Then
+            jk = "L"
+        Else
+            jk = "P"
+        End If
+        Dim r_sellect As DataGridViewRow = DGV_ReviewMaster.Rows(r_index)
+        Dim nik As String = r_sellect.Cells(0).Value
+        Dim funcDB As DataBaseClass = New DataBaseClass
+        Dim masterQuery As String = $"UPDATE `master_employer`(`NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Department`, `Tempat_Lahir`, `Tanggal_Lahir`, `Jenis_Kelamin`, `Pendidikan_Karyawan`, `Tanggal_Masuk`, `Status_Karyawan`, `Salary`, `StatusShift_Karyawan`, `BPJS`, `Aktif`) 
+                 VALUES ('{tb_empDet.Text}',
+                         '{tb_nama.Text}',
+                         '{tb_posisi.Text}',
+                         '{tb_dep.Text}',
+                         '{tb_pob.Text}',
+                         '{dt_lahir.Value.ToString("yyyy-MM-dd")}',
+                         '{jk}',
+                         '{tb_pend.Text}',
+                         '{dt_createMasuk.Value.ToString("yyyy-MM-dd")}',
+                         '{tb_stat.Text}'
+                         '{tb_salary.Text}'
+                         '{tb_shift.Text}'
+                         '{cb_bpjs.Text}'
+                         '{cb_aktif.Text}') WHERE `NIK` = '{nik}'"
+        Console.WriteLine("DB Query : " + masterQuery)
+        funcDB.uploadDB(masterQuery)
+        MsgBox("Data already updated")
     End Sub
 End Class

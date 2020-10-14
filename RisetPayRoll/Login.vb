@@ -23,4 +23,8 @@ Public Class Login
             MDIParent1.Show()
         End If
     End Sub
+
+    Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class
