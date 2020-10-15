@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ComputePayroll
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class ComputePayroll
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -130,8 +130,10 @@ Partial Class ComputePayroll
         Me.Label27 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBoxNama = New System.Windows.Forms.TextBox()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.ComboBoxDep = New System.Windows.Forms.ComboBox()
+        Me.KolomPayroll_NIK = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.KolomPayroll_Nama = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.KolomPayroll_Posisition = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.KolomPayroll_Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.Panel4.SuspendLayout()
         CType(Me.DGV_ReviewDaily, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -352,6 +354,7 @@ Partial Class ComputePayroll
         Me.TextBox28.BackColor = System.Drawing.Color.White
         Me.TextBox28.Location = New System.Drawing.Point(101, 107)
         Me.TextBox28.Name = "TextBox28"
+        Me.TextBox28.ReadOnly = True
         Me.TextBox28.Size = New System.Drawing.Size(197, 20)
         Me.TextBox28.TabIndex = 66
         '
@@ -1205,23 +1208,33 @@ Partial Class ComputePayroll
         Me.TextBoxNama.Size = New System.Drawing.Size(110, 20)
         Me.TextBoxNama.TabIndex = 17
         '
-        'Button2
+        'KolomPayroll_NIK
         '
-        Me.Button2.Location = New System.Drawing.Point(570, 55)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(112, 23)
-        Me.Button2.TabIndex = 74
-        Me.Button2.Text = "Export"
-        Me.Button2.UseVisualStyleBackColor = True
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.KolomPayroll_NIK.DefaultCellStyle = DataGridViewCellStyle5
+        Me.KolomPayroll_NIK.HeaderText = "Emp No."
+        Me.KolomPayroll_NIK.Name = "KolomPayroll_NIK"
+        Me.KolomPayroll_NIK.ReadOnly = True
+        Me.KolomPayroll_NIK.Width = 80
         '
-        'ComboBoxDep
+        'KolomPayroll_Nama
         '
-        Me.ComboBoxDep.FormattingEnabled = True
-        Me.ComboBoxDep.Items.AddRange(New Object() {"PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING"})
-        Me.ComboBoxDep.Location = New System.Drawing.Point(570, 29)
-        Me.ComboBoxDep.Name = "ComboBoxDep"
-        Me.ComboBoxDep.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBoxDep.TabIndex = 75
+        Me.KolomPayroll_Nama.HeaderText = "Name"
+        Me.KolomPayroll_Nama.Name = "KolomPayroll_Nama"
+        Me.KolomPayroll_Nama.ReadOnly = True
+        Me.KolomPayroll_Nama.Width = 150
+        '
+        'KolomPayroll_Posisition
+        '
+        Me.KolomPayroll_Posisition.HeaderText = "Posisition"
+        Me.KolomPayroll_Posisition.Name = "KolomPayroll_Posisition"
+        Me.KolomPayroll_Posisition.ReadOnly = True
+        '
+        'KolomPayroll_Status
+        '
+        Me.KolomPayroll_Status.HeaderText = "Status"
+        Me.KolomPayroll_Status.Name = "KolomPayroll_Status"
+        Me.KolomPayroll_Status.ReadOnly = True
         '
         'ComputePayroll
         '

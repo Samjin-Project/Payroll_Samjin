@@ -4,7 +4,7 @@ Imports System.Linq ' need to add
 Public Class MDIParent1
     Dim widthForm As Integer
     Dim heightForm As Integer
-    Private Sub ShowNewForm(ByVal sender As Object, ByVal e As EventArgs) Handles NewToolStripMenuItem.Click, NewToolStripButton.Click, NewWindowToolStripMenuItem.Click
+    Private Sub ShowNewForm(ByVal sender As Object, ByVal e As EventArgs) Handles NewToolStripMenuItem.Click, NewWindowToolStripMenuItem.Click
         'DailyAttendance()
     End Sub
 
@@ -209,7 +209,7 @@ Public Class MDIParent1
         End If
 
     End Sub
-    Private Sub OpenFile(ByVal sender As Object, ByVal e As EventArgs) Handles OpenToolStripMenuItem.Click, OpenToolStripButton.Click
+    Private Sub OpenFile(ByVal sender As Object, ByVal e As EventArgs) Handles OpenToolStripMenuItem.Click
         Dim OpenFileDialog As New OpenFileDialog
         OpenFileDialog.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
         OpenFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
@@ -317,5 +317,6 @@ Public Class MDIParent1
             TreeViewMenu(e.Node.Text)
         End If
     End Sub
+
     'reza supriyatna
 End Class

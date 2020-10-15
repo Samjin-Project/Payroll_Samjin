@@ -455,6 +455,7 @@ Partial Class RegisterVacation
         Me.tb_nama.BackColor = System.Drawing.Color.Aqua
         Me.tb_nama.Location = New System.Drawing.Point(320, 40)
         Me.tb_nama.Name = "tb_nama"
+        Me.tb_nama.ReadOnly = True
         Me.tb_nama.Size = New System.Drawing.Size(110, 20)
         Me.tb_nama.TabIndex = 4
         '
@@ -480,6 +481,7 @@ Partial Class RegisterVacation
         Me.tb_emp.BackColor = System.Drawing.Color.Aqua
         Me.tb_emp.Location = New System.Drawing.Point(204, 40)
         Me.tb_emp.Name = "tb_emp"
+        Me.tb_emp.ReadOnly = True
         Me.tb_emp.Size = New System.Drawing.Size(110, 20)
         Me.tb_emp.TabIndex = 0
         '
