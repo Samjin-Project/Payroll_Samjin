@@ -22,12 +22,16 @@ Partial Class ComputePayroll
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.DGV_ReviewDaily = New System.Windows.Forms.DataGridView()
+        Me.KolomPayroll_NIK = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.KolomPayroll_Nama = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.KolomPayroll_Posisition = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.KolomPayroll_Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.b_showall = New System.Windows.Forms.Button()
         Me.Label51 = New System.Windows.Forms.Label()
@@ -37,6 +41,7 @@ Partial Class ComputePayroll
         Me.tb_empSearch = New System.Windows.Forms.TextBox()
         Me.Label44 = New System.Windows.Forms.Label()
         Me.Panel7 = New System.Windows.Forms.Panel()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.dt_month = New System.Windows.Forms.DateTimePicker()
         Me.TextBox29 = New System.Windows.Forms.TextBox()
         Me.TextBox28 = New System.Windows.Forms.TextBox()
@@ -125,10 +130,8 @@ Partial Class ComputePayroll
         Me.Label27 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBoxNama = New System.Windows.Forms.TextBox()
-        Me.KolomPayroll_NIK = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.KolomPayroll_Nama = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.KolomPayroll_Posisition = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.KolomPayroll_Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.ComboBoxDep = New System.Windows.Forms.ComboBox()
         Me.Panel1.SuspendLayout()
         Me.Panel4.SuspendLayout()
         CType(Me.DGV_ReviewDaily, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -167,14 +170,14 @@ Partial Class ComputePayroll
         Me.DGV_ReviewDaily.AllowUserToAddRows = False
         Me.DGV_ReviewDaily.AllowUserToDeleteRows = False
         Me.DGV_ReviewDaily.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGV_ReviewDaily.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGV_ReviewDaily.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DGV_ReviewDaily.ColumnHeadersHeight = 30
         Me.DGV_ReviewDaily.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DGV_ReviewDaily.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.KolomPayroll_NIK, Me.KolomPayroll_Nama, Me.KolomPayroll_Posisition, Me.KolomPayroll_Status})
@@ -185,11 +188,39 @@ Partial Class ComputePayroll
         Me.DGV_ReviewDaily.Name = "DGV_ReviewDaily"
         Me.DGV_ReviewDaily.ReadOnly = True
         Me.DGV_ReviewDaily.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DGV_ReviewDaily.RowsDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DGV_ReviewDaily.RowsDefaultCellStyle = DataGridViewCellStyle3
         Me.DGV_ReviewDaily.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DGV_ReviewDaily.Size = New System.Drawing.Size(320, 297)
         Me.DGV_ReviewDaily.TabIndex = 23
+        '
+        'KolomPayroll_NIK
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.KolomPayroll_NIK.DefaultCellStyle = DataGridViewCellStyle2
+        Me.KolomPayroll_NIK.HeaderText = "Emp No."
+        Me.KolomPayroll_NIK.Name = "KolomPayroll_NIK"
+        Me.KolomPayroll_NIK.ReadOnly = True
+        Me.KolomPayroll_NIK.Width = 80
+        '
+        'KolomPayroll_Nama
+        '
+        Me.KolomPayroll_Nama.HeaderText = "Name"
+        Me.KolomPayroll_Nama.Name = "KolomPayroll_Nama"
+        Me.KolomPayroll_Nama.ReadOnly = True
+        Me.KolomPayroll_Nama.Width = 150
+        '
+        'KolomPayroll_Posisition
+        '
+        Me.KolomPayroll_Posisition.HeaderText = "Posisition"
+        Me.KolomPayroll_Posisition.Name = "KolomPayroll_Posisition"
+        Me.KolomPayroll_Posisition.ReadOnly = True
+        '
+        'KolomPayroll_Status
+        '
+        Me.KolomPayroll_Status.HeaderText = "Status"
+        Me.KolomPayroll_Status.Name = "KolomPayroll_Status"
+        Me.KolomPayroll_Status.ReadOnly = True
         '
         'Panel3
         '
@@ -272,6 +303,7 @@ Partial Class ComputePayroll
         'Panel7
         '
         Me.Panel7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel7.Controls.Add(Me.Button1)
         Me.Panel7.Controls.Add(Me.dt_month)
         Me.Panel7.Controls.Add(Me.TextBox29)
         Me.Panel7.Controls.Add(Me.TextBox28)
@@ -288,6 +320,15 @@ Partial Class ComputePayroll
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(324, 170)
         Me.Panel7.TabIndex = 2
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(186, 3)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(112, 23)
+        Me.Button1.TabIndex = 73
+        Me.Button1.Text = "Create Payroll"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'dt_month
         '
@@ -981,6 +1022,8 @@ Partial Class ComputePayroll
         'Panel8
         '
         Me.Panel8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel8.Controls.Add(Me.ComboBoxDep)
+        Me.Panel8.Controls.Add(Me.Button2)
         Me.Panel8.Controls.Add(Me.Label48)
         Me.Panel8.Controls.Add(Me.tb_posisiDet)
         Me.Panel8.Controls.Add(Me.tb_nameDet)
@@ -1162,33 +1205,23 @@ Partial Class ComputePayroll
         Me.TextBoxNama.Size = New System.Drawing.Size(110, 20)
         Me.TextBoxNama.TabIndex = 17
         '
-        'KolomPayroll_NIK
+        'Button2
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.KolomPayroll_NIK.DefaultCellStyle = DataGridViewCellStyle5
-        Me.KolomPayroll_NIK.HeaderText = "Emp No."
-        Me.KolomPayroll_NIK.Name = "KolomPayroll_NIK"
-        Me.KolomPayroll_NIK.ReadOnly = True
-        Me.KolomPayroll_NIK.Width = 80
+        Me.Button2.Location = New System.Drawing.Point(570, 55)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(112, 23)
+        Me.Button2.TabIndex = 74
+        Me.Button2.Text = "Export"
+        Me.Button2.UseVisualStyleBackColor = True
         '
-        'KolomPayroll_Nama
+        'ComboBoxDep
         '
-        Me.KolomPayroll_Nama.HeaderText = "Name"
-        Me.KolomPayroll_Nama.Name = "KolomPayroll_Nama"
-        Me.KolomPayroll_Nama.ReadOnly = True
-        Me.KolomPayroll_Nama.Width = 150
-        '
-        'KolomPayroll_Posisition
-        '
-        Me.KolomPayroll_Posisition.HeaderText = "Posisition"
-        Me.KolomPayroll_Posisition.Name = "KolomPayroll_Posisition"
-        Me.KolomPayroll_Posisition.ReadOnly = True
-        '
-        'KolomPayroll_Status
-        '
-        Me.KolomPayroll_Status.HeaderText = "Status"
-        Me.KolomPayroll_Status.Name = "KolomPayroll_Status"
-        Me.KolomPayroll_Status.ReadOnly = True
+        Me.ComboBoxDep.FormattingEnabled = True
+        Me.ComboBoxDep.Items.AddRange(New Object() {"PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING"})
+        Me.ComboBoxDep.Location = New System.Drawing.Point(570, 29)
+        Me.ComboBoxDep.Name = "ComboBoxDep"
+        Me.ComboBoxDep.Size = New System.Drawing.Size(121, 21)
+        Me.ComboBoxDep.TabIndex = 75
         '
         'ComputePayroll
         '
@@ -1321,4 +1354,7 @@ Partial Class ComputePayroll
     Friend WithEvents KolomPayroll_Nama As DataGridViewTextBoxColumn
     Friend WithEvents KolomPayroll_Posisition As DataGridViewTextBoxColumn
     Friend WithEvents KolomPayroll_Status As DataGridViewTextBoxColumn
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Button2 As Button
+    Friend WithEvents ComboBoxDep As ComboBox
 End Class

@@ -35,8 +35,8 @@
         Dim funcDB As DataBaseClass = New DataBaseClass
         Dim masterQuery As String = $"INSERT INTO `approval_vacation`(`NIK`, `Status_Approval`, `Approver`, `Nama_Karyawan`, `Vacation_Code`, `StartVacation_Date`, `EndVacation_Date`, `ReqVacation_Date`) 
                  VALUES ('{tb_emp.Text}',
-                         '',
-                         '',
+                         'No',
+                         'Admin',
                          '{tb_nama.Text}',
                          '{tb_holtype.Text}',
                          '{dt_startdate.Value.ToString("yyyy-MM-dd")}',

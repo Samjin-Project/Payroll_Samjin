@@ -40,7 +40,7 @@ Public Class RegisterMaster
         Console.WriteLine("Tanggal Masuk : " + DS.Tables(0).Rows(2).Item(9))
         For i As Integer = 2 To indexRows - 1
             Dim admisionDate As Date = Date.ParseExact(DS.Tables(0).Rows(i).Item(9), "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
-            Dim masterQuery As String = $"INSERT INTO `master employer`(`NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Department`, `Tempat_Lahir`, `Tanggal_Lahir`, `Jenis_Kelamin`, `Pendidikan_Karyawan`, `Tanggal_Masuk`, `Status_Karyawan`, `Salary`) 
+            Dim masterQuery As String = $"INSERT INTO `master employer`(`NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Department`, `Tempat_Lahir`, `Tanggal_Lahir`, `Jenis_Kelamin`, `Pendidikan_Karyawan`, `Tanggal_Masuk`, `Status_Karyawan`, `Salary`,`StatusBpjs`,`StatusAktive`) 
                  VALUES ('{DS.Tables(0).Rows(i).Item(1)}',
                          '{DS.Tables(0).Rows(i).Item(2)}',
                          '{DS.Tables(0).Rows(i).Item(3)}',
@@ -51,7 +51,10 @@ Public Class RegisterMaster
                          '{DS.Tables(0).Rows(i).Item(8)}',
                          '{admisionDate.ToString("yyyy-MM-dd")}',
                          '{DS.Tables(0).Rows(i).Item(10)}',
-            '{DS.Tables(0).Rows(i).Item(11)}')"
+                         '{DS.Tables(0).Rows(i).Item(11)}',
+                         '{DS.Tables(0).Rows(i).Item(12)}',
+                         '{DS.Tables(0).Rows(i).Item(13)}'
+                         )"
             Console.WriteLine("DB Query : " + masterQuery)
             funcDB.uploadDB(masterQuery)
         Next

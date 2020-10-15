@@ -11,7 +11,7 @@ Public Class FingerModify
         DateTimePicker1.Format = DateTimePickerFormat.Custom
         DateTimePicker1.CustomFormat = "HH:mm"
 
-        Dim querycmd As String = $"{QueryUtama} WHERE `Data_Finger` = '{dt_day.Value.ToString("yyyy-MM-dd")}' "
+        Dim querycmd As String = $"{QueryUtama} WHERE `Date_Finger` = '{dt_day.Value.ToString("yyyy-MM-dd")}' "
         DGV_DataModify.Rows.Clear()
         Dim DBClass As DataBaseClass = New DataBaseClass
         Dim ds As DataSet = DBClass.downloadDB(querycmd)

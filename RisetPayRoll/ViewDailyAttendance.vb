@@ -127,17 +127,28 @@
         End If
         ExcelColName = S
     End Function
+    Function jumlah(ds As DataSet, x As Integer) As String
+        Dim tempNilai As Integer = 0
+        For i As Integer = 0 To 30
+            Dim valueTemp As String = ds.Tables(0).Rows(x).Item(i + 10)
+            If valueTemp = "" Then
+                valueTemp = "0"
+            End If
+            tempNilai += Convert.ToInt32(valueTemp)
+        Next
+        Return tempNilai.ToString
+    End Function
     Private Sub showData(QueryOnReview As String)
         DGV_ReviewDaily.Rows.Clear()
         Dim DBClass As DataBaseClass = New DataBaseClass
         Dim ds As DataSet = DBClass.downloadDB(QueryOnReview)
         Dim indexDs As Integer = ds.Tables(0).Rows.Count
         For i As Integer = 0 To indexDs - 1
-            Dim row As String() = New String() {ds.Tables(0).Rows(i).Item(0),
-            ds.Tables(0).Rows(i).Item(1),
+            Dim dateCekData As Date = Date.ParseExact(ds.Tables(0).Rows(i).Item(3), "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
+            Dim row As String() = New String() {ds.Tables(0).Rows(i).Item(1),
             ds.Tables(0).Rows(i).Item(2),
-            ds.Tables(0).Rows(i).Item(3),
             ds.Tables(0).Rows(i).Item(4),
+            dateCekData.ToString("MMM, yyyy"),
             ds.Tables(0).Rows(i).Item(5),
             ds.Tables(0).Rows(i).Item(6),
             ds.Tables(0).Rows(i).Item(7),
@@ -175,7 +186,9 @@
             ds.Tables(0).Rows(i).Item(39),
             ds.Tables(0).Rows(i).Item(40),
             ds.Tables(0).Rows(i).Item(41),
-            ds.Tables(0).Rows(i).Item(42)}
+            ds.Tables(0).Rows(i).Item(42),
+            jumlah(ds, i)
+            }
             DGV_ReviewDaily.Rows.Add(row)
             DGV_ReviewDaily.Rows(i).HeaderCell.Value = (i + 1).ToString
             If i Mod 2 = 1 Then

@@ -59,4 +59,21 @@ FROM `approval_vacation` "
     Private Sub RbApproved_CheckedChanged(sender As Object, e As EventArgs) Handles RbApproved.CheckedChanged, RbUnapproved.CheckedChanged, RbAll.CheckedChanged
         SortingTabel()
     End Sub
+
+    Private Sub DGV_ApprovalVacation_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_ApprovalVacation.CellContentClick
+
+    End Sub
+    Private Sub DGV_ApprovalVacation_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_ApprovalVacation.CellEndEdit
+        Dim indexRows As Integer = e.RowIndex
+        Dim nama As String = DGV_ApprovalVacation.Rows(indexRows).Cells(2).Value
+        Dim startDate As String = DGV_ApprovalVacation.Rows(indexRows).Cells(4).Value
+        Dim endDate As String = DGV_ApprovalVacation.Rows(indexRows).Cells(5).Value
+        Dim editAproval As String = DGV_ApprovalVacation.Rows(indexRows).Cells(0).Value
+
+        Dim startDateParse As Date = Date.ParseExact(startDate, "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
+        Dim endDateParse As Date = Date.ParseExact(endDate, "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
+        Dim DBClass As DataBaseClass = New DataBaseClass
+        Dim queryEdit As String = $"UPDATE `approval_vacation` SET `Status_Approval`='{editAproval}' WHERE `Nama_Karyawan` = '{nama}' AND `StartVacation_Date` = '{startDateParse.ToString("yyMMdd")}' AND `EndVacation_Date` = '{endDateParse.ToString("yyMMdd")}'"
+        DBClass.uploadDB(queryEdit)
+    End Sub
 End Class

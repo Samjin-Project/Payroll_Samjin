@@ -1,18 +1,19 @@
-﻿Public Class DailyAttendance
+﻿Imports System.Math
+Public Class DailyAttendance
     Dim queryAll As String = "SELECT `NIK`, `Name`, `Type`, `Date`, `Day`, `Shift`, `Check In`, `Check Out`, DATE_FORMAT(`Check Out Date`,""%d/%m/%Y""), `Lateness`, `Early Check Out`, `Basic Time`, `Over Time`,`Department` FROM `tabel_harian_karyawan1`"
     Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `Department` FROM `master employer`"
     Dim QueryCMDKosong As String = "SELECT `NIK`, `Nama_Karyawan`, `Status_Shift`, `Department` FROM `master employer` WHERE `NIK` = "
     Dim flag As Boolean = False
     Dim nik As String
     Private Sub DailyAttendance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Try
-        showEmploye(QueryCMD)
-        Dim nikSyarat As String = DGV_SideDaily.Rows(0).Cells(0).Value
-        Dim queryGetData As String = $"{queryAll} WHERE `NIK` = '{nikSyarat}'"
-        showDaily(queryGetData)
-        'Catch ex As Exception
+        Try
+            showEmploye(QueryCMD)
+            Dim nikSyarat As String = DGV_SideDaily.Rows(0).Cells(0).Value
+            Dim queryGetData As String = $"{queryAll} WHERE `NIK` = '{nikSyarat}'"
+            showDaily(queryGetData)
+        Catch ex As Exception
 
-        'End Try
+        End Try
     End Sub
 
     Private Sub showEmploye(QueryOnReview As String)
@@ -151,7 +152,7 @@
         dt_start.Value = Now
         dt_end.Value = Now
         Dim querydep As String = $"{QueryCMD} WHERE `Departement_Karyawan` = '{dep}'"
-                showEmploye(querydep)
+        showEmploye(querydep)
         total_data.Text = DGV_SideDaily.Rows.Count
         Console.WriteLine("Done")
         flag = False
@@ -246,8 +247,8 @@
                 Dim NikCreate As String = DGV_SideDaily.Rows(i).Cells(0).Value
                 Console.WriteLine("NIK CREATE : " + NikCreate)
                 For x As Integer = 0 To DGV_ReviewDaily.Rows.Count - 1
-                    If DGV_ReviewDaily.Rows(x).Cells(2).Value = "No Check" Then
-                        For y As Integer = x To DGV_ReviewDaily.Rows.Count - 1
+                    'If DGV_ReviewDaily.Rows(x).Cells(2).Value = "No Check" Then
+                    For y As Integer = x To DGV_ReviewDaily.Rows.Count - 1
                             InitDate = DGV_ReviewDaily.Rows(y).Cells(3).Value
                             Dim expenddt As Date = Date.ParseExact(InitDate, "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
                             Dim DBClass As DataBaseClass = New DataBaseClass
@@ -321,14 +322,134 @@
                                         Console.WriteLine("Jmlah Tabel : " + indexDs.ToString)
                                     End If
                                 End If
+                                CreateViewDaily(dsAbsen, x)
                             End If
                         Next
                         Exit For
-                    End If
+                    'End If
                 Next
-
             Next
         End If
+    End Sub
+    Function cekDataBulanan(nik As String, cekDate As String) As String
+        Dim dateCekData As Date = Date.ParseExact(cekDate, "yy-MM-dd", System.Globalization.DateTimeFormatInfo.InvariantInfo)
+        Dim DBClass As DataBaseClass = New DataBaseClass
+        Dim query As String = $"SELECT `attendance` FROM `tabel_bulanan_karyawan` WHERE MONTH(`DateMonth`) = '{dateCekData.ToString("MM")}' AND `NIK` = '{nik}'"
+        Dim dsAbsen As DataSet = DBClass.downloadDB(query)
+        If dsAbsen.Tables(0).Rows.Count <> 0 Then
+            Return dsAbsen.Tables(0).Rows(0).Item(0)
+        Else
+            Return ""
+        End If
+    End Function
+    Function cekOverTime(nik As String, cekDate As Date) As String()
+        Dim DBClass As DataBaseClass = New DataBaseClass
+        Dim query As String = $"SELECT `Over Time`, `absen_paid` FROM `tabel_harian_karyawan1` WHERE `Date` = '{cekDate.ToString("yyyy-MM-dd")}' AND `NIK` = '{nik}'"
+        Dim dsAbsen As DataSet = DBClass.downloadDB(query)
+        Dim outPut As String()
+        If dsAbsen.Tables(0).Rows.Count > 0 Then
+            outPut = New String() {dsAbsen.Tables(0).Rows(0).Item(0), dsAbsen.Tables(0).Rows(0).Item(1)}
+        Else
+            outPut = New String() {"", ""}
+        End If
+        Console.WriteLine("Out " + outPut(0) + outPut(1))
+        Return outPut
+    End Function
+    Sub CreateViewDaily(ds As DataSet, rowsData As Integer)
+        Dim DBClass As DataBaseClass = New DataBaseClass
+        Dim nik As String = ds.Tables(0).Rows(rowsData).Item(0)
+        Dim nama As String = ds.Tables(0).Rows(rowsData).Item(1)
+        Dim dep As String = ds.Tables(0).Rows(rowsData).Item(6)
+        Dim dateMonth As String = ds.Tables(0).Rows(rowsData).Item(2)
+        Dim nilai As String = ""
+        Console.WriteLine("date month : " + dateMonth.ToString)
+        Dim tempDate As Date = Date.ParseExact(dateMonth, "yy-MM-dd", System.Globalization.DateTimeFormatInfo.InvariantInfo)
+        Dim hari As String = tempDate.ToString("dd")
+
+        If hari.Substring(0, 1) = "0" Then
+            hari = hari.Substring(1, 1)
+        End If
+
+        Dim overTime As String() = cekOverTime(nik, tempDate)
+        If overTime(0) <> "" Then
+            Dim updateAtte As String = cekDataBulanan(nik, dateMonth)
+            Dim QueryCreateViewDaily As String
+            If updateAtte <> "" Then
+                Console.WriteLine("update daily view : " + overTime(1))
+                Dim attendance As Integer
+                Dim inQuery As String
+                If overTime(1) = "False" Then
+                    attendance = Convert.ToInt32(updateAtte) + 1
+                    inQuery = $"`attendance`='{attendance}',"
+                Else
+                    inQuery = ""
+                End If
+
+                Dim nilaiOt As String = overTime(0)
+                If nilaiOt = "0" Then
+                    nilaiOt = ""
+                End If
+                Dim kehadiran As String = $"SELECT * FROM `tabel_harian_karyawan1` WHERE `NIK`='{nik}' AND `Date` BETWEEN '{tempDate.ToString("yyyy-MM")}-01' AND '{tempDate.ToString("yyyy-MM")}-31' AND `Basic Time` <> '0' AND `Absen_Paid` = '1' "
+                Dim dsKehadiran As DataSet = DBClass.downloadDB(kehadiran)
+                Dim kehadiranValue As String = "0"
+                If dsKehadiran IsNot Nothing Then
+                    kehadiranValue = dsKehadiran.Tables(0).Rows.Count
+                End If
+
+                QueryCreateViewDaily = $"UPDATE `tabel_bulanan_karyawan` SET 
+                                            `Transport`='',
+                                            `Transport_Amount`='',
+                                            `Shift`='',
+                                            `Shift_Amount`='',
+                                            `Meal`='',
+                                            `Meal Amount`='',
+                                            {inQuery}
+                                            `{hari}`='{overTime(0)}',
+                                            `Kehadiran` = '{kehadiranValue}' 
+                                            WHERE MONTH(`DateMonth`)='{tempDate.ToString("MM")}' AND `NIK` = '{nik}'"
+            Else
+                Console.WriteLine("insert daily view")
+                Console.WriteLine("overtime 1")
+
+
+                Dim attendance(2) As String
+                If overTime(1) = "False" Then
+                    attendance = {"`attendance`,", "'1',"}
+                Else
+                    attendance = {"`attendance`,", "'0',"}
+                End If
+                dateMonth = tempDate.ToString("yyyy-MM-dd")
+                Dim nilaiOt As String = overTime(0)
+                If nilaiOt = "0" Then
+                    nilaiOt = ""
+                End If
+                Dim kehadiran As String = $"SELECT * FROM `tabel_harian_karyawan1` WHERE `NIK`='{nik}' AND `Date` BETWEEN '{tempDate.ToString("yyyy-MM")}-01' AND '{tempDate.ToString("yyyy-MM")}-31' AND `Basic Time` <> '0' AND `Absen_Paid` = '1' "
+                Dim dsKehadiran As DataSet = DBClass.downloadDB(kehadiran)
+                Dim kehadiranValue As String = "0"
+                If dsKehadiran Is Nothing Then
+                    kehadiranValue = dsKehadiran.Tables(0).Rows.Count
+                End If
+
+                QueryCreateViewDaily = $"INSERT INTO `tabel_bulanan_karyawan`(`NIK`, `Name`,`DateMonth`, `Department`, `Transport`, `Transport_Amount`, `Shift`, `Shift_Amount`, `Meal`, `Meal Amount`, {attendance(0)}`{hari}`,`Kehadiran`, `BasicSalary`) VALUES 
+                                        (
+                                            '{nik}',
+                                            '{nama}',
+                                            '{dateMonth}',
+                                            '{dep}',
+                                            '',
+                                            '',
+                                            '',
+                                            '',
+                                            '',
+                                            '',
+                                            {attendance(1)}
+                                            '{nilaiOt}',
+                                            '{kehadiranValue}',
+                                            '') "
+            End If
+            DBClass.uploadDB(QueryCreateViewDaily)
+        End If
+
     End Sub
     Function getVcationDate(ds As DataSet, dateNow As String) As Date
         Dim outputDate As String = ""
@@ -355,7 +476,6 @@
                         Return dateNow
                     End If
                 Next
-
             End If
         Next
         Return Nothing
@@ -436,9 +556,9 @@
         End If
         Return OutputCounter
     End Function
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        'Dim wD As Long = DateDiff(DateInterval.Minute, #23:30#, #23:59#)
-        'Console.WriteLine(wD + 1)
+
         CreateFunction()
         DGV_SideDaily.Rows.Clear()
         DGV_ReviewDaily.Rows.Clear()
@@ -452,4 +572,5 @@
 
         End Try
     End Sub
+
 End Class

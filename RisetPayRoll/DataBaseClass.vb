@@ -42,6 +42,7 @@ Public Class DataBaseClass
 
             ds = New DataSet
             da = New MySqlDataAdapter(QueryCMD, connDB)
+            da.SelectCommand.CommandTimeout = 2
             da.Fill(ds)
             connDB.Close()
             Console.WriteLine("OKE")

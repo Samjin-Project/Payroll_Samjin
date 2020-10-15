@@ -1,4 +1,5 @@
-﻿Module GlobalVar
+﻿Imports MySql.Data.MySqlClient
+Module GlobalVar
 
     Public dbServer As String
     Public dbUser As String

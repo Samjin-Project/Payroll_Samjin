@@ -24,22 +24,21 @@ Public Class UploadFingerData
         Dim indexCell As Integer = DS.Tables(0).Columns.Count
         Console.WriteLine($"Row Count {indexRows}")
         Console.WriteLine($"Cell Count {indexCell}")
-        Console.WriteLine(DS.GetXml.ToString)
+        'Console.WriteLine(DS.GetXml.ToString)
 
         For i As Integer = 0 To indexRows - 1
-            Dim nik As String = DS.Tables(0).Rows(i).Item(0)
-            Dim Nama_Karyawan As String = DS.Tables(0).Rows(i).Item(1)
+            Console.WriteLine("0")
             Dim Date_Finger As String = DS.Tables(0).Rows(i).Item(2)
-            Dim Shift_Finger As String = DS.Tables(0).Rows(i).Item(3)
-            Dim On_Duty As String = DS.Tables(0).Rows(i).Item(4)
-            Dim Off_Duty As String = DS.Tables(0).Rows(i).Item(5)
-            Dim Check_In As String = DS.Tables(0).Rows(i).Item(6)
-            Dim Check_Out As String = DS.Tables(0).Rows(i).Item(7)
-            Dim Departement As String = DS.Tables(0).Rows(i).Item(8)
+            Console.WriteLine("opopopo " + Date_Finger)
+            Dim Check_In As String = DS.Tables(0).Rows(i).Item(6).ToString
+            Console.WriteLine("2")
+            Dim Check_Out As String = DS.Tables(0).Rows(i).Item(7).ToString
+            Console.WriteLine("3")
             'Console.WriteLine(Check_In.Length)
             'Console.WriteLine(Check_Out.Length)
             Dim edate = Date_Finger
             Dim expenddt As Date = Date.ParseExact(edate, "M/d/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
+            Console.WriteLine("masuk Data")
             If Check_In Is Nothing Then
                 Dim masterQuery As String = $"INSERT INTO `finger_employer`(`NIK`, `Nama_Karyawan`, `Date_Finger`, `Shift_Finger`, `On_Duty`, `Off_Duty`, `Check_In`, `Check_Out`, `Departement`,`Finger Status`) 
                  VALUES ('{DS.Tables(0).Rows(i).Item(0)}',
@@ -52,7 +51,6 @@ Public Class UploadFingerData
                          '{DS.Tables(0).Rows(i).Item(7)}',
                          '{DS.Tables(0).Rows(i).Item(8)}',
                          '0')"
-                Console.WriteLine("DB Query : " + masterQuery)
                 funcDB.uploadDB(masterQuery)
             Else
                 If Check_In.Length > 4 And Check_Out.Length > 4 Then
@@ -67,7 +65,6 @@ Public Class UploadFingerData
                          '{DS.Tables(0).Rows(i).Item(7)}',
                          '{DS.Tables(0).Rows(i).Item(8)}',
                          '1')"
-                    Console.WriteLine("DB Query : " + masterQuery)
                     funcDB.uploadDB(masterQuery)
                 End If
 
