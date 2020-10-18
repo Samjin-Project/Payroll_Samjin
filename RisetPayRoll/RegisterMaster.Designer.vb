@@ -22,7 +22,7 @@ Partial Class RegisterMaster
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -40,6 +40,7 @@ Partial Class RegisterMaster
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Label21 = New System.Windows.Forms.Label()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.tb_empDet = New System.Windows.Forms.TextBox()
         Me.b_cancel = New System.Windows.Forms.Button()
@@ -70,6 +71,9 @@ Partial Class RegisterMaster
         Me.tb_posisi = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tb_nama = New System.Windows.Forms.TextBox()
+        Me.cb_createJK = New System.Windows.Forms.ComboBox()
+        Me.dt_createMasuk = New System.Windows.Forms.DateTimePicker()
+        Me.dt_lahir = New System.Windows.Forms.DateTimePicker()
         Me.DGV_ReviewMaster = New System.Windows.Forms.DataGridView()
         Me.Kolom_Nik = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Kolom_Nama = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -80,13 +84,10 @@ Partial Class RegisterMaster
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.OpenFileDialogImport = New System.Windows.Forms.OpenFileDialog()
-        Me.tb_shift = New System.Windows.Forms.TextBox()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.tb_keluar = New System.Windows.Forms.TextBox()
         Me.tb_masuk = New System.Windows.Forms.TextBox()
-        Me.Label21 = New System.Windows.Forms.Label()
-        Me.Label22 = New System.Windows.Forms.Label()
-        Me.cb_createJK = New System.Windows.Forms.ComboBox()
-        Me.dt_createMasuk = New System.Windows.Forms.DateTimePicker()
-        Me.dt_lahir = New System.Windows.Forms.DateTimePicker()
+        Me.dt_createKeluar = New System.Windows.Forms.DateTimePicker()
         Me.Panel1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -263,10 +264,10 @@ Partial Class RegisterMaster
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Panel2.Controls.Add(Me.Label22)
+        Me.Panel2.Controls.Add(Me.Label23)
+        Me.Panel2.Controls.Add(Me.tb_keluar)
         Me.Panel2.Controls.Add(Me.Label21)
         Me.Panel2.Controls.Add(Me.tb_masuk)
-        Me.Panel2.Controls.Add(Me.tb_shift)
         Me.Panel2.Controls.Add(Me.Label20)
         Me.Panel2.Controls.Add(Me.tb_empDet)
         Me.Panel2.Controls.Add(Me.b_cancel)
@@ -300,11 +301,21 @@ Partial Class RegisterMaster
         Me.Panel2.Controls.Add(Me.cb_createJK)
         Me.Panel2.Controls.Add(Me.dt_createMasuk)
         Me.Panel2.Controls.Add(Me.dt_lahir)
+        Me.Panel2.Controls.Add(Me.dt_createKeluar)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(354, 134)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(638, 433)
         Me.Panel2.TabIndex = 2
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Location = New System.Drawing.Point(25, 75)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(81, 13)
+        Me.Label21.TabIndex = 36
+        Me.Label21.Text = "Tanggal Masuk"
         '
         'Label20
         '
@@ -372,7 +383,7 @@ Partial Class RegisterMaster
         'tb_aktif
         '
         Me.tb_aktif.BackColor = System.Drawing.Color.Aqua
-        Me.tb_aktif.Location = New System.Drawing.Point(396, 267)
+        Me.tb_aktif.Location = New System.Drawing.Point(396, 272)
         Me.tb_aktif.Name = "tb_aktif"
         Me.tb_aktif.ReadOnly = True
         Me.tb_aktif.Size = New System.Drawing.Size(110, 20)
@@ -381,7 +392,7 @@ Partial Class RegisterMaster
         'Label19
         '
         Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(359, 269)
+        Me.Label19.Location = New System.Drawing.Point(359, 274)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(28, 13)
         Me.Label19.TabIndex = 20
@@ -401,7 +412,7 @@ Partial Class RegisterMaster
         Me.cb_aktif.BackColor = System.Drawing.Color.Cyan
         Me.cb_aktif.FormattingEnabled = True
         Me.cb_aktif.Items.AddRange(New Object() {"Ya", "Tidak"})
-        Me.cb_aktif.Location = New System.Drawing.Point(396, 266)
+        Me.cb_aktif.Location = New System.Drawing.Point(396, 271)
         Me.cb_aktif.Name = "cb_aktif"
         Me.cb_aktif.Size = New System.Drawing.Size(110, 21)
         Me.cb_aktif.TabIndex = 18
@@ -419,7 +430,7 @@ Partial Class RegisterMaster
         'tb_salary
         '
         Me.tb_salary.BackColor = System.Drawing.Color.Aqua
-        Me.tb_salary.Location = New System.Drawing.Point(396, 225)
+        Me.tb_salary.Location = New System.Drawing.Point(396, 233)
         Me.tb_salary.Name = "tb_salary"
         Me.tb_salary.ReadOnly = True
         Me.tb_salary.Size = New System.Drawing.Size(110, 20)
@@ -428,7 +439,7 @@ Partial Class RegisterMaster
         'tb_stat
         '
         Me.tb_stat.BackColor = System.Drawing.Color.Aqua
-        Me.tb_stat.Location = New System.Drawing.Point(396, 149)
+        Me.tb_stat.Location = New System.Drawing.Point(396, 190)
         Me.tb_stat.Name = "tb_stat"
         Me.tb_stat.ReadOnly = True
         Me.tb_stat.Size = New System.Drawing.Size(110, 20)
@@ -446,7 +457,7 @@ Partial Class RegisterMaster
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(351, 230)
+        Me.Label9.Location = New System.Drawing.Point(351, 238)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(36, 13)
         Me.Label9.TabIndex = 9
@@ -455,7 +466,7 @@ Partial Class RegisterMaster
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(319, 114)
+        Me.Label8.Location = New System.Drawing.Point(319, 155)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(68, 13)
         Me.Label8.TabIndex = 13
@@ -500,7 +511,7 @@ Partial Class RegisterMaster
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(300, 153)
+        Me.Label3.Location = New System.Drawing.Point(300, 194)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(87, 13)
         Me.Label3.TabIndex = 8
@@ -509,7 +520,7 @@ Partial Class RegisterMaster
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(353, 75)
+        Me.Label2.Location = New System.Drawing.Point(353, 116)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(34, 13)
         Me.Label2.TabIndex = 7
@@ -545,7 +556,7 @@ Partial Class RegisterMaster
         'tb_dep
         '
         Me.tb_dep.BackColor = System.Drawing.Color.Aqua
-        Me.tb_dep.Location = New System.Drawing.Point(396, 111)
+        Me.tb_dep.Location = New System.Drawing.Point(396, 152)
         Me.tb_dep.Name = "tb_dep"
         Me.tb_dep.ReadOnly = True
         Me.tb_dep.Size = New System.Drawing.Size(110, 20)
@@ -554,7 +565,7 @@ Partial Class RegisterMaster
         'tb_posisi
         '
         Me.tb_posisi.BackColor = System.Drawing.Color.Aqua
-        Me.tb_posisi.Location = New System.Drawing.Point(396, 73)
+        Me.tb_posisi.Location = New System.Drawing.Point(396, 114)
         Me.tb_posisi.Name = "tb_posisi"
         Me.tb_posisi.ReadOnly = True
         Me.tb_posisi.Size = New System.Drawing.Size(110, 20)
@@ -577,6 +588,34 @@ Partial Class RegisterMaster
         Me.tb_nama.ReadOnly = True
         Me.tb_nama.Size = New System.Drawing.Size(150, 20)
         Me.tb_nama.TabIndex = 0
+        '
+        'cb_createJK
+        '
+        Me.cb_createJK.BackColor = System.Drawing.Color.Cyan
+        Me.cb_createJK.FormattingEnabled = True
+        Me.cb_createJK.Items.AddRange(New Object() {"Laki-laki", "Perempuan"})
+        Me.cb_createJK.Location = New System.Drawing.Point(112, 113)
+        Me.cb_createJK.Name = "cb_createJK"
+        Me.cb_createJK.Size = New System.Drawing.Size(110, 21)
+        Me.cb_createJK.TabIndex = 38
+        '
+        'dt_createMasuk
+        '
+        Me.dt_createMasuk.CustomFormat = "dd/MM/yyyy"
+        Me.dt_createMasuk.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dt_createMasuk.Location = New System.Drawing.Point(112, 73)
+        Me.dt_createMasuk.Name = "dt_createMasuk"
+        Me.dt_createMasuk.Size = New System.Drawing.Size(110, 20)
+        Me.dt_createMasuk.TabIndex = 32
+        '
+        'dt_lahir
+        '
+        Me.dt_lahir.CustomFormat = "dd/MM/yyyy"
+        Me.dt_lahir.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dt_lahir.Location = New System.Drawing.Point(113, 194)
+        Me.dt_lahir.Name = "dt_lahir"
+        Me.dt_lahir.Size = New System.Drawing.Size(110, 20)
+        Me.dt_lahir.TabIndex = 39
         '
         'DGV_ReviewMaster
         '
@@ -604,8 +643,8 @@ Partial Class RegisterMaster
         'Kolom_Nik
         '
         Me.Kolom_Nik.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Kolom_Nik.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Kolom_Nik.DefaultCellStyle = DataGridViewCellStyle4
         Me.Kolom_Nik.HeaderText = "NIK"
         Me.Kolom_Nik.Name = "Kolom_Nik"
         Me.Kolom_Nik.ReadOnly = True
@@ -679,69 +718,41 @@ Partial Class RegisterMaster
         '
         Me.OpenFileDialogImport.FileName = "OpenFileDialog1"
         '
-        'tb_shift
+        'Label23
         '
-        Me.tb_shift.BackColor = System.Drawing.Color.Aqua
-        Me.tb_shift.Location = New System.Drawing.Point(396, 187)
-        Me.tb_shift.Name = "tb_shift"
-        Me.tb_shift.ReadOnly = True
-        Me.tb_shift.Size = New System.Drawing.Size(110, 20)
-        Me.tb_shift.TabIndex = 34
+        Me.Label23.AutoSize = True
+        Me.Label23.Location = New System.Drawing.Point(311, 75)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(79, 13)
+        Me.Label23.TabIndex = 41
+        Me.Label23.Text = "Tanggal Keluar"
+        '
+        'tb_keluar
+        '
+        Me.tb_keluar.BackColor = System.Drawing.Color.Aqua
+        Me.tb_keluar.Location = New System.Drawing.Point(396, 73)
+        Me.tb_keluar.Name = "tb_keluar"
+        Me.tb_keluar.ReadOnly = True
+        Me.tb_keluar.Size = New System.Drawing.Size(110, 20)
+        Me.tb_keluar.TabIndex = 40
         '
         'tb_masuk
         '
         Me.tb_masuk.BackColor = System.Drawing.Color.Aqua
-        Me.tb_masuk.Location = New System.Drawing.Point(113, 72)
+        Me.tb_masuk.Location = New System.Drawing.Point(112, 73)
         Me.tb_masuk.Name = "tb_masuk"
         Me.tb_masuk.ReadOnly = True
         Me.tb_masuk.Size = New System.Drawing.Size(110, 20)
         Me.tb_masuk.TabIndex = 35
         '
-        'Label21
+        'dt_createKeluar
         '
-        Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(25, 75)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(81, 13)
-        Me.Label21.TabIndex = 36
-        Me.Label21.Text = "Tanggal Masuk"
-        '
-        'Label22
-        '
-        Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(328, 192)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(59, 13)
-        Me.Label22.TabIndex = 37
-        Me.Label22.Text = "Status shift"
-        '
-        'cb_createJK
-        '
-        Me.cb_createJK.BackColor = System.Drawing.Color.Cyan
-        Me.cb_createJK.FormattingEnabled = True
-        Me.cb_createJK.Items.AddRange(New Object() {"Laki-laki", "Perempuan"})
-        Me.cb_createJK.Location = New System.Drawing.Point(112, 113)
-        Me.cb_createJK.Name = "cb_createJK"
-        Me.cb_createJK.Size = New System.Drawing.Size(110, 21)
-        Me.cb_createJK.TabIndex = 38
-        '
-        'dt_createMasuk
-        '
-        Me.dt_createMasuk.CustomFormat = "dd/MM/yyyy"
-        Me.dt_createMasuk.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dt_createMasuk.Location = New System.Drawing.Point(112, 73)
-        Me.dt_createMasuk.Name = "dt_createMasuk"
-        Me.dt_createMasuk.Size = New System.Drawing.Size(110, 20)
-        Me.dt_createMasuk.TabIndex = 32
-        '
-        'dt_lahir
-        '
-        Me.dt_lahir.CustomFormat = "dd/MM/yyyy"
-        Me.dt_lahir.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dt_lahir.Location = New System.Drawing.Point(113, 194)
-        Me.dt_lahir.Name = "dt_lahir"
-        Me.dt_lahir.Size = New System.Drawing.Size(110, 20)
-        Me.dt_lahir.TabIndex = 39
+        Me.dt_createKeluar.CustomFormat = "dd/MM/yyyy"
+        Me.dt_createKeluar.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dt_createKeluar.Location = New System.Drawing.Point(396, 73)
+        Me.dt_createKeluar.Name = "dt_createKeluar"
+        Me.dt_createKeluar.Size = New System.Drawing.Size(110, 20)
+        Me.dt_createKeluar.TabIndex = 42
         '
         'RegisterMaster
         '
@@ -828,11 +839,12 @@ Partial Class RegisterMaster
     Friend WithEvents tb_empDet As TextBox
     Friend WithEvents cb_aktif As ComboBox
     Friend WithEvents cb_bpjs As ComboBox
-    Friend WithEvents Label22 As Label
     Friend WithEvents Label21 As Label
-    Friend WithEvents tb_masuk As TextBox
-    Friend WithEvents tb_shift As TextBox
     Friend WithEvents cb_createJK As ComboBox
     Friend WithEvents dt_createMasuk As DateTimePicker
     Friend WithEvents dt_lahir As DateTimePicker
+    Friend WithEvents Label23 As Label
+    Friend WithEvents tb_keluar As TextBox
+    Friend WithEvents tb_masuk As TextBox
+    Friend WithEvents dt_createKeluar As DateTimePicker
 End Class

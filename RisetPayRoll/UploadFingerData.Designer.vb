@@ -215,7 +215,7 @@ Partial Class UploadFingerData
         Me.DGV_DataModify.MultiSelect = False
         Me.DGV_DataModify.Name = "DGV_DataModify"
         Me.DGV_DataModify.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
-        Me.DGV_DataModify.RowHeadersWidth = 30
+        Me.DGV_DataModify.RowHeadersWidth = 60
         Me.DGV_DataModify.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DGV_DataModify.Size = New System.Drawing.Size(904, 391)
         Me.DGV_DataModify.TabIndex = 17

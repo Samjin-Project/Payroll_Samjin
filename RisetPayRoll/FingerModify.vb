@@ -11,7 +11,7 @@ Public Class FingerModify
         DateTimePicker1.Format = DateTimePickerFormat.Custom
         DateTimePicker1.CustomFormat = "HH:mm"
 
-        Dim querycmd As String = $"{QueryUtama} WHERE `Date_Finger` = '{dt_day.Value.ToString("yyyy-MM-dd")}' "
+        Dim querycmd As String = $"{QueryUtama} WHERE `Date_Finger` = '{dt_day.Value.ToString("yyyy-dd-MM")}' "
         DGV_DataModify.Rows.Clear()
         Dim DBClass As DataBaseClass = New DataBaseClass
         Dim ds As DataSet = DBClass.downloadDB(querycmd)
@@ -25,7 +25,7 @@ Public Class FingerModify
                 DGV_DataModify.Rows(i).Cells(8).Value = DateTimePicker1.Value.ToString("HH:mm")
                 Dim recFinger As String = DGV_DataModify.Rows(i).Cells(8).Value
                 Dim Nik As String = DGV_DataModify.Rows(i).Cells(2).Value
-                Dim DateFinger As String = dt_day.Value.ToString("yyyy-MM-dd")
+                Dim DateFinger As String = dt_day.Value.ToString("yyyy-dd-MM")
                 Dim syaratPanjang As Boolean = recFinger.Length = 5
                 Dim syaratInput As Boolean
                 If syaratPanjang Then
@@ -125,7 +125,7 @@ Public Class FingerModify
     End Sub
     Private Sub SortingTabel(sortType As Boolean)
         Dim shift As String = cb_shift.Text
-        Dim datePilihan As String = dt_day.Value.ToString("yyyy-MM-dd")
+        Dim datePilihan As String = dt_day.Value.ToString("yyyy-dd-MM")
         Dim querycmd As String
         If sortType = False Then
             If shift = "ALL" Then
@@ -218,7 +218,7 @@ Public Class FingerModify
         Dim indexRows As Integer = e.RowIndex
         Dim recFinger As String = DGV_DataModify.Rows(indexRows).Cells(8).Value
         Dim Nik As String = DGV_DataModify.Rows(indexRows).Cells(2).Value
-        Dim DateFinger As String = dt_day.Value.ToString("yyyy-MM-dd")
+        Dim DateFinger As String = dt_day.Value.ToString("yyyy-dd-MM")
         Dim syaratPanjang As Boolean = recFinger.Length = 5
         Dim syaratInput As Boolean
         If syaratPanjang Then

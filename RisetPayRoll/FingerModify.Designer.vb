@@ -294,7 +294,7 @@ Partial Class FingerModify
         'cb_shift
         '
         Me.cb_shift.FormattingEnabled = True
-        Me.cb_shift.Items.AddRange(New Object() {"SHIFT1", "SHIFT2", "SHIFT3", "SIANG", "MALAM", "NONSHIFT", "ALL"})
+        Me.cb_shift.Items.AddRange(New Object() {"SHIFT1", "SHIFT2", "SHIFT3", "PENDEK1", "PENDEK2", "PENDEK3", "SIANG", "MALAM", "NONSHIFT", "ALL"})
         Me.cb_shift.Location = New System.Drawing.Point(91, 30)
         Me.cb_shift.Name = "cb_shift"
         Me.cb_shift.Size = New System.Drawing.Size(156, 21)

@@ -54,13 +54,11 @@ Public Class ComputePayroll
                 deductin = CInt(dsPayroll.Tables(0).Rows(0).Item(6))
                 takeHomePay = CInt(dsPayroll.Tables(0).Rows(0).Item(7))
 
-                'table.Rows.Add(i, nik, nama, posisi, dep, hairDate, status, pureSalary, grossSalary, managfeeSalary, paymentFromSamjin, grossSalary, jamsostSalary, bpjs, deductin, takeHomePay)
                 table.Rows.Add(i + 1, nik, nama, posisi, dep, hairDate, status, pureSalary, grossSalary, managfeeSalary, paymentFromSamjin, grossSalary, jamsostSalary, bpjs, deductin, takeHomePay)
-                'table.Rows.Add(i + 2, nik, nama, posisi, dep, hairDate, status, pureSalary, grossSalary, managfeeSalary, paymentFromSamjin, grossSalary, jamsostSalary, bpjs, deductin, takeHomePay)
+                'table.Rows.Add(i + 1, nik, nama, posisi, dep, hairDate, status, pureSalary, grossSalary, managfeeSalary, paymentFromSamjin, grossSalary, jamsostSalary, bpjs, deductin, takeHomePay)
+                'table.Rows.Add(i + 1, nik, nama, posisi, dep, hairDate, status, pureSalary, grossSalary, managfeeSalary, paymentFromSamjin, grossSalary, jamsostSalary, bpjs, deductin, takeHomePay)
                 Console.WriteLine("RowCount " + table.Rows.Count.ToString)
                 Console.WriteLine($"table.Rows.Add({i + 1}, {nik}, {nama}, {posisi}, {dep}, {hairDate}, {status}, {pureSalary}, {grossSalary}, {managfeeSalary}, {paymentFromSamjin}, {grossSalary}, {jamsostSalary}, {bpjs}, {deductin}, {takeHomePay})")
-
-
             Else
                 table.Rows.Add(i + 1, nik, nama, posisi, dep, hairDate, status, 0, 0, 0, 0, 0, 0, 0, 0, 0)
             End If
@@ -73,7 +71,14 @@ Public Class ComputePayroll
         Dim QueryMaster As String = $"SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Department`, `Tanggal_Masuk`, `Status_karyawan` FROM `master employer` WHERE `Department` = '{dep}'"
         Dim DBClass As DataBaseClass = New DataBaseClass
         Dim dsMaster As DataSet = DBClass.downloadDB(QueryMaster)
+
         Dim table As DataTable = GetTable(dsMaster)
+
+        Console.WriteLine("jumlah rows : " + table.Rows.Count.ToString)
+        For y As Integer = 0 To table.Rows.Count - 1
+            Console.WriteLine(table.Rows(y).Item(1))
+        Next
+
         Dim sheetIndex As Integer
         Dim Ex As Object
         Dim Wb As Object
@@ -384,7 +389,7 @@ Public Class ComputePayroll
         MsgBox("Create Payroll Done")
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         ExportExcel()
     End Sub
 End Class

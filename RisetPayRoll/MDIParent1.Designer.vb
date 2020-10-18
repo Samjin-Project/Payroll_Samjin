@@ -25,17 +25,17 @@ Partial Class MDIParent1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MDIParent1))
-        Dim TreeNode12 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Register Master")
-        Dim TreeNode13 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Approval Vacation")
-        Dim TreeNode14 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Daily Attendance")
-        Dim TreeNode15 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Compute Payroll")
-        Dim TreeNode16 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Approver", New System.Windows.Forms.TreeNode() {TreeNode12, TreeNode13, TreeNode14, TreeNode15})
-        Dim TreeNode17 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Upload Finger Data")
-        Dim TreeNode18 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Finger Modify")
-        Dim TreeNode19 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Register Vacation")
-        Dim TreeNode20 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("View Daily Attendance")
-        Dim TreeNode21 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Admin", New System.Windows.Forms.TreeNode() {TreeNode17, TreeNode18, TreeNode19, TreeNode20})
-        Dim TreeNode22 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Attendance App", New System.Windows.Forms.TreeNode() {TreeNode16, TreeNode21})
+        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Register Master")
+        Dim TreeNode2 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Approval Vacation")
+        Dim TreeNode3 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Daily Attendance")
+        Dim TreeNode4 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Compute Payroll")
+        Dim TreeNode5 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Approver", New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode2, TreeNode3, TreeNode4})
+        Dim TreeNode6 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Upload Finger Data")
+        Dim TreeNode7 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Finger Modify")
+        Dim TreeNode8 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Register Vacation")
+        Dim TreeNode9 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("View Daily Attendance")
+        Dim TreeNode10 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Admin", New System.Windows.Forms.TreeNode() {TreeNode6, TreeNode7, TreeNode8, TreeNode9})
+        Dim TreeNode11 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Attendance App", New System.Windows.Forms.TreeNode() {TreeNode5, TreeNode10})
         Me.MenuStrip = New System.Windows.Forms.MenuStrip()
         Me.FileMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.NewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -80,7 +80,6 @@ Partial Class MDIParent1
         Me.ToolStripStatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolTip = New System.Windows.Forms.ToolTip(Me.components)
         Me.TreeView1 = New System.Windows.Forms.TreeView()
-        Me.ToolStrip = New System.Windows.Forms.ToolStrip()
         Me.MenuStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -390,43 +389,36 @@ Partial Class MDIParent1
         '
         'TreeView1
         '
-        Me.TreeView1.Location = New System.Drawing.Point(0, 46)
+        Me.TreeView1.Dock = System.Windows.Forms.DockStyle.Left
+        Me.TreeView1.Location = New System.Drawing.Point(0, 24)
         Me.TreeView1.Name = "TreeView1"
-        TreeNode12.ImageKey = "(default)"
-        TreeNode12.Name = "RegisterMasterNode"
-        TreeNode12.Text = "Register Master"
-        TreeNode13.Name = "ApprovalVacationNode"
-        TreeNode13.Text = "Approval Vacation"
-        TreeNode14.Name = "DailyAttendanceNode"
-        TreeNode14.Text = "Daily Attendance"
-        TreeNode15.Name = "ComputePayrollNode"
-        TreeNode15.Text = "Compute Payroll"
-        TreeNode16.Name = "AprovalChild"
-        TreeNode16.Text = "Approver"
-        TreeNode16.ToolTipText = "Admin"
-        TreeNode17.Name = "UploadFingerDataNode"
-        TreeNode17.Text = "Upload Finger Data"
-        TreeNode18.Name = "FingerModifyNode"
-        TreeNode18.Text = "Finger Modify"
-        TreeNode19.Name = "RegisterVacationNode"
-        TreeNode19.Text = "Register Vacation"
-        TreeNode20.Name = "ViewDailyAttendanceNode"
-        TreeNode20.Text = "View Daily Attendance"
-        TreeNode21.Name = "AdminChild"
-        TreeNode21.Text = "Admin"
-        TreeNode22.Name = "ParentTree"
-        TreeNode22.Text = "Attendance App"
-        Me.TreeView1.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode22})
+        TreeNode1.ImageKey = "(default)"
+        TreeNode1.Name = "RegisterMasterNode"
+        TreeNode1.Text = "Register Master"
+        TreeNode2.Name = "ApprovalVacationNode"
+        TreeNode2.Text = "Approval Vacation"
+        TreeNode3.Name = "DailyAttendanceNode"
+        TreeNode3.Text = "Daily Attendance"
+        TreeNode4.Name = "ComputePayrollNode"
+        TreeNode4.Text = "Compute Payroll"
+        TreeNode5.Name = "AprovalChild"
+        TreeNode5.Text = "Approver"
+        TreeNode5.ToolTipText = "Admin"
+        TreeNode6.Name = "UploadFingerDataNode"
+        TreeNode6.Text = "Upload Finger Data"
+        TreeNode7.Name = "FingerModifyNode"
+        TreeNode7.Text = "Finger Modify"
+        TreeNode8.Name = "RegisterVacationNode"
+        TreeNode8.Text = "Register Vacation"
+        TreeNode9.Name = "ViewDailyAttendanceNode"
+        TreeNode9.Text = "View Daily Attendance"
+        TreeNode10.Name = "AdminChild"
+        TreeNode10.Text = "Admin"
+        TreeNode11.Name = "ParentTree"
+        TreeNode11.Text = "Attendance App"
+        Me.TreeView1.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode11})
         Me.TreeView1.Size = New System.Drawing.Size(175, 615)
         Me.TreeView1.TabIndex = 9
-        '
-        'ToolStrip
-        '
-        Me.ToolStrip.Location = New System.Drawing.Point(0, 24)
-        Me.ToolStrip.Name = "ToolStrip"
-        Me.ToolStrip.Size = New System.Drawing.Size(1284, 25)
-        Me.ToolStrip.TabIndex = 11
-        Me.ToolStrip.Text = "ToolStrip1"
         '
         'MDIParent1
         '
@@ -434,7 +426,6 @@ Partial Class MDIParent1
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(1284, 661)
-        Me.Controls.Add(Me.ToolStrip)
         Me.Controls.Add(Me.TreeView1)
         Me.Controls.Add(Me.MenuStrip)
         Me.Controls.Add(Me.StatusStrip)
@@ -496,5 +487,4 @@ Partial Class MDIParent1
     Friend WithEvents StatusBarToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolsMenu As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TreeView1 As TreeView
-    Friend WithEvents ToolStrip As ToolStrip
 End Class

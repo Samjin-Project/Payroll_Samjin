@@ -1,6 +1,12 @@
 ﻿Imports System.Data.OleDb
 Public Class UploadFingerData
-
+    Protected Overrides ReadOnly Property CreateParams() As CreateParams
+        Get
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ExStyle = cp.ExStyle Or &H2000000
+            Return cp
+        End Get
+    End Property
     Private Sub UploadExcel()
         Dim CONN As OleDbConnection
         Dim DA As OleDbDataAdapter
@@ -13,7 +19,7 @@ Public Class UploadFingerData
 
         CONN = New OleDbConnection("provider=Microsoft.Jet.OLEDB.4.0;" & "data source='" & OpenFileDialogImport.FileName & "';Extended Properties=Excel 8.0;")
 
-        DA = New OleDbDataAdapter("select * from [1$]", CONN)
+        DA = New OleDbDataAdapter("select * from [Sheet1$]", CONN)
         CONN.Open()
         DS.Clear()
         DA.Fill(DS)
@@ -37,13 +43,29 @@ Public Class UploadFingerData
             'Console.WriteLine(Check_In.Length)
             'Console.WriteLine(Check_Out.Length)
             Dim edate = Date_Finger
-            Dim expenddt As Date = Date.ParseExact(edate, "M/d/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
-            Console.WriteLine("masuk Data")
+            'edate = "1/12/2010"
+            Dim tangal_fin As String() = edate.Split("/")
+            Dim daySub As String = ""
+            If tangal_fin(1).Length = 2 Then
+                daySub = "dd"
+            Else
+                daySub = "d"
+            End If
+            Dim monthSub As String = ""
+            If tangal_fin(0).Length = 2 Then
+                monthSub = "MM"
+            Else
+                monthSub = "M"
+            End If
+            Dim xaxa As String = $"{monthSub}/{daySub}/yyyy"
+            Console.WriteLine("xaxa " + xaxa)
+            Dim expenddt As Date = Date.ParseExact(edate, xaxa, System.Globalization.DateTimeFormatInfo.InvariantInfo)
+            Console.WriteLine("masuk Data " + Date_Finger.ToString + "=" + expenddt.ToString("dd-MMM-yyyy"))
             If Check_In Is Nothing Then
                 Dim masterQuery As String = $"INSERT INTO `finger_employer`(`NIK`, `Nama_Karyawan`, `Date_Finger`, `Shift_Finger`, `On_Duty`, `Off_Duty`, `Check_In`, `Check_Out`, `Departement`,`Finger Status`) 
                  VALUES ('{DS.Tables(0).Rows(i).Item(0)}',
                          '{DS.Tables(0).Rows(i).Item(1)}',
-                         '{expenddt.ToString("yyyy/dd/MM")}',
+                         '{expenddt.ToString("yyyy-MM-dd")}',
                          '{DS.Tables(0).Rows(i).Item(3)}',
                          '{DS.Tables(0).Rows(i).Item(4)}',
                          '{DS.Tables(0).Rows(i).Item(5)}',
@@ -57,7 +79,7 @@ Public Class UploadFingerData
                     Dim masterQuery As String = $"INSERT INTO `finger_employer`(`NIK`, `Nama_Karyawan`, `Date_Finger`, `Shift_Finger`, `On_Duty`, `Off_Duty`, `Check_In`, `Check_Out`, `Departement`,`Finger Status`) 
                  VALUES ('{DS.Tables(0).Rows(i).Item(0)}',
                          '{DS.Tables(0).Rows(i).Item(1)}',
-                         '{expenddt.ToString("yyyy/dd/MM")}',
+                         '{expenddt.ToString("yyyy-MM-dd")}',
                          '{DS.Tables(0).Rows(i).Item(3)}',
                          '{DS.Tables(0).Rows(i).Item(4)}',
                          '{DS.Tables(0).Rows(i).Item(5)}',
@@ -70,6 +92,8 @@ Public Class UploadFingerData
 
             End If
         Next
+        MsgBox("UploadExcel Succesfully")
+
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
