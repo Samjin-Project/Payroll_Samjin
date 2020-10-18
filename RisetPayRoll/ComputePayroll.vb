@@ -115,7 +115,7 @@ Public Class ComputePayroll
         sheetIndex += 1
         Ws = Wb.Worksheets(sheetIndex)
         'Ws.name = "Test10"
-        Dim excelRange As String = String.Format("A5:{0}{1}", finalColLetter, table.Rows.Count + 1)
+        Dim excelRange As String = String.Format("A5:{0}{1}", finalColLetter, table.Rows.Count + 4)
         Ws.Cells(1, 2).Value = "Dept :"
         Ws.Cells(1, 3).Value = "Assembly"
         Ws.Cells(2, 2).Value = "Bulan :"
