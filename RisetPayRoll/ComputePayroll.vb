@@ -14,12 +14,25 @@ Public Class ComputePayroll
         table.Columns.Add("HIRE OF DATE", GetType(String))
         table.Columns.Add("STATUS", GetType(String))
         table.Columns.Add("BASIC SALARY", GetType(Integer))
+        table.Columns.Add("LEMBUR / JAM HARI KERJA", GetType(Integer))
+        table.Columns.Add("JAMSOST (1.19% x BS)", GetType(Integer))
+        table.Columns.Add("BPJS KESEHATAN", GetType(Integer))
+        table.Columns.Add("MANAGM FEE 8 % x BASIC SALARY", GetType(Integer))
+        table.Columns.Add("DAYS / WEEK", GetType(Integer))
+        table.Columns.Add("FORMULA PEMBAGI", GetType(Integer))
+        table.Columns.Add("DAYS ACTIVE", GetType(Integer))
+        table.Columns.Add("JAM LEMBUR HARI KERJA", GetType(Integer))
+        table.Columns.Add("BASIC SALARY ", GetType(Integer))
+        table.Columns.Add("OVERTIME WAGES", GetType(Integer))
+        table.Columns.Add("UANG MAKAN PUASA", GetType(Integer))
+        table.Columns.Add("JAMSOST (1.19% x BS) ", GetType(Integer))
+        table.Columns.Add("BPJS KESEHATAN ", GetType(Integer))
         table.Columns.Add("SUB TOTAL (GROSS SALARY)", GetType(Integer))
-        table.Columns.Add("MANAGM FEE 8% X BASIC SALARY", GetType(Integer))
+        table.Columns.Add("MANAGM FEE 8% X BASIC SALARY ", GetType(Integer))
         table.Columns.Add("TOTAL", GetType(Integer))
         table.Columns.Add("GROSS SALARY", GetType(Integer))
-        table.Columns.Add("JAMSOST(1.19% x BS)", GetType(Integer))
-        table.Columns.Add("BPJS KESEHATAN", GetType(Integer))
+        table.Columns.Add("JAMSOST(1.19% x BS)  ", GetType(Integer))
+        table.Columns.Add("BPJS KESEHATAN  ", GetType(Integer))
         table.Columns.Add("SUB TOTAL", GetType(Integer))
         table.Columns.Add("TAKE HOME PAY", GetType(Integer))
 
@@ -123,11 +136,11 @@ Public Class ComputePayroll
         Ws.Cells(3, 2).Value = "Date Export"
         Ws.Cells(3, 3).Value = DateTime.Now
         Ws.Range(excelRange, Type.Missing).Value2 = rawData
-        Ws.Range("A5:O5").WrapText = True
-        Ws.Range("A5:O5").VerticalAlignment = 2
+        Ws.Range("A5:AC5").WrapText = True
+        Ws.Range("A5:AC5").VerticalAlignment = 2
         Ws.Range(excelRange, Type.Missing).Borders.Color = RGB(0, 0, 0)
-        Ws.Range("A5:J5").interior.colorindex = 6
-        Ws.Range("K5:O5").interior.colorindex = 45
+        Ws.Range("A5:X5").interior.colorindex = 6
+        Ws.Range("Y5:AC5").interior.colorindex = 45
         Ws.Rows(5).RowHeight = 45
         Ws.Columns(1).ColumnWidth = 5
         Ws.Columns(2).ColumnWidth = 15
@@ -144,7 +157,20 @@ Public Class ComputePayroll
         Ws.Columns(13).ColumnWidth = 15
         Ws.Columns(14).ColumnWidth = 15
         Ws.Columns(15).ColumnWidth = 15
-        Ws.Columns(16).ColumnWidth = 16
+        Ws.Columns(16).ColumnWidth = 15
+        Ws.Columns(17).ColumnWidth = 15
+        Ws.Columns(18).ColumnWidth = 15
+        Ws.Columns(19).ColumnWidth = 15
+        Ws.Columns(20).ColumnWidth = 15
+        Ws.Columns(21).ColumnWidth = 15
+        Ws.Columns(22).ColumnWidth = 15
+        Ws.Columns(23).ColumnWidth = 15
+        Ws.Columns(24).ColumnWidth = 15
+        Ws.Columns(25).ColumnWidth = 15
+        Ws.Columns(26).ColumnWidth = 15
+        Ws.Columns(27).ColumnWidth = 15
+        Ws.Columns(28).ColumnWidth = 15
+        Ws.Columns(29).ColumnWidth = 15
         Ws = Nothing
 
 
