@@ -6,7 +6,16 @@
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Dim saveFileDialog1 As New SaveFileDialog
+        saveFileDialog1.Filter = "Excel File|*.xls"
+        saveFileDialog1.Title = "Save an Excel File"
+        saveFileDialog1.ShowDialog()
+        If saveFileDialog1.FileName <> "" Then
+            saveExcelFile(saveFileDialog1.FileName)
+        End If
+    End Sub
 
+    Public Sub saveExcelFile(ByVal FileName As String)
         Dim sheetIndex As Integer
         Dim Ex As Object
         Dim Wb As Object
@@ -92,10 +101,7 @@
         Ws = Nothing
 
 
-        Wb.SaveAs("D:\Test12.xlsx", Type.Missing, Type.Missing,
-         Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-         Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing)
-        Wb.Close(True, Type.Missing, Type.Missing)
+        Wb.SaveAs(FileName)
         Wb = Nothing
         ' Release the Application object
         Ex.Quit()
