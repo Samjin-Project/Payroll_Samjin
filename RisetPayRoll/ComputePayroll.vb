@@ -78,7 +78,7 @@ Public Class ComputePayroll
         Next
         Return table
     End Function
-    Private Sub ExportExcel()
+    Public Sub saveExcelFile(ByVal FileName As String)
         Dim nik As String = ""
         Dim dep As String = ComboBoxDep.Text
         Dim QueryMaster As String = $"SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Department`, `Tanggal_Masuk`, `Status_karyawan` FROM `master employer` WHERE `Department` = '{dep}'"
@@ -174,9 +174,7 @@ Public Class ComputePayroll
         Ws = Nothing
 
 
-        Wb.SaveAs($"D:\ujike5_{DateTime.Now.ToString("mm_ss")}.xlsx", Type.Missing, Type.Missing,
-         Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-         Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing)
+        Wb.SaveAs(FileName)
         Wb.Close(True, Type.Missing, Type.Missing)
         Wb = Nothing
         ' Release the Application object
@@ -404,8 +402,14 @@ Public Class ComputePayroll
         MsgBox("Create Payroll Done")
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles b_export.Click
-        ExportExcel()
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Dim saveFileDialog1 As New SaveFileDialog
+        saveFileDialog1.Filter = "Excel File|*.xls"
+        saveFileDialog1.Title = "Save an Excel File"
+        saveFileDialog1.ShowDialog()
+        If saveFileDialog1.FileName <> "" Then
+            saveExcelFile(saveFileDialog1.FileName)
+        End If
     End Sub
 
     Private Sub TextBox4_TextChanged(sender As Object, e As EventArgs) Handles tb_attendance.TextChanged
