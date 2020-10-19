@@ -9,11 +9,22 @@
         End Get
     End Property
     Private Sub ViewDailyAttendance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        showData(QueryCMD)
+        cb_dep.Text = "PCBA"
+        Dim query As String = $"{QueryCMD} WHERE `Department` = '{cb_dep.Text}'"
+        showData(query)
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Dim saveFileDialog1 As New SaveFileDialog
+        saveFileDialog1.Filter = "Excel File|*.xls"
+        saveFileDialog1.Title = "Save an Excel File"
+        saveFileDialog1.ShowDialog()
+        If saveFileDialog1.FileName <> "" Then
+            saveExcelFile(saveFileDialog1.FileName)
+        End If
+    End Sub
 
+    Public Sub saveExcelFile(ByVal FileName As String)
         Dim sheetIndex As Integer
         Dim Ex As Object
         Dim Wb As Object
@@ -99,10 +110,7 @@
         Ws = Nothing
 
 
-        Wb.SaveAs("D:\Test12.xlsx", Type.Missing, Type.Missing,
-         Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-         Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing)
-        Wb.Close(True, Type.Missing, Type.Missing)
+        Wb.SaveAs(FileName)
         Wb = Nothing
         ' Release the Application object
         Ex.Quit()
@@ -151,7 +159,7 @@
         Dim ds As DataSet = DBClass.downloadDB(QueryOnReview)
         Dim indexDs As Integer = ds.Tables(0).Rows.Count
         For i As Integer = 0 To indexDs - 1
-            Dim dateCekData As Date = Date.ParseExact(ds.Tables(0).Rows(i).Item(3), "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
+            Dim dateCekData As Date = DateTime.ParseExact(ds.Tables(0).Rows(i).Item(3), "yyyy-MM-dd", System.Globalization.DateTimeFormatInfo.InvariantInfo)
             Dim row As String() = New String() {ds.Tables(0).Rows(i).Item(1),
             ds.Tables(0).Rows(i).Item(2),
             ds.Tables(0).Rows(i).Item(4),

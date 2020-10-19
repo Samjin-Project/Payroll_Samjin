@@ -7,8 +7,12 @@
 `Vacation_Code`,
 DATE_FORMAT(`StartVacation_Date`,""%d/%m/%Y""),
 DATE_FORMAT(`EndVacation_Date`,""%d/%m/%Y""),
-DATE_FORMAT(`ReqVacation_Date`,""%d/%m/%Y"") 
+DATE_FORMAT(`ReqVacation_Date`,""%d/%m/%Y""),
+`Department`,
+`Telp`
 FROM `approval_vacation` "
+
+    Dim f_tgl As Boolean = False
 
     Protected Overrides ReadOnly Property CreateParams() As CreateParams
         Get
@@ -19,7 +23,10 @@ FROM `approval_vacation` "
     End Property
 
     Private Sub ApprovalVacation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        SortingTabel()
+        RbAll.Checked = True
+        RbApproved.Checked = False
+        RbUnapproved.Checked = False
+        cb_dep.SelectedItem = "PCBA"
     End Sub
 
     Private Sub dataOnRevieweDaily(QueryOnReview As String)
@@ -32,10 +39,12 @@ FROM `approval_vacation` "
                 Dim row As String() = New String() {ds.Tables(0).Rows(i).Item(2).ToString,
                                                     ds.Tables(0).Rows(i).Item(3).ToString,
                                                     ds.Tables(0).Rows(i).Item(4).ToString,
+                                                    ds.Tables(0).Rows(i).Item(9).ToString,
                                                     ds.Tables(0).Rows(i).Item(5).ToString,
                                                     ds.Tables(0).Rows(i).Item(6).ToString,
                                                     ds.Tables(0).Rows(i).Item(7).ToString,
-                                                    ds.Tables(0).Rows(i).Item(8).ToString}
+                                                    ds.Tables(0).Rows(i).Item(8).ToString,
+                                                    ds.Tables(0).Rows(i).Item(10).ToString}
                 'Dim row1 As String() = New String() {"Yes", "Putri Permatasari", "Riki", "Anual Leave", "2010/11/20", "2010/11/20", "2010/ 11/20", "085860147440"}
                 DGV_ApprovalVacation.Rows.Add(row)
                 DGV_ApprovalVacation.Rows(i).HeaderCell.Value = (i + 1).ToString
@@ -45,23 +54,64 @@ FROM `approval_vacation` "
             Next
         End If
 
+        total_data.Text = DGV_ApprovalVacation.Rows.Count()
         'EDITED BY RIKI
     End Sub
     Private Sub SortingTabel()
-        Dim datePilihan As String = DateTimePicker1.Value.ToString("yyyy-MM-dd")
+        Dim datePilihan As String = dt_since.Value.ToString("yyyy-MM-dd")
         Dim querycmd As String
-        If RbAll.Checked Then
-            querycmd = basicQuery + $"WHERE `StartVacation_Date` = '{datePilihan}'"
-        ElseIf RbApproved.Checked Then
-            querycmd = basicQuery + $"WHERE `StartVacation_Date` = '{datePilihan}' AND `Status_Approval` = 'Yes'"
-        ElseIf RbUnapproved.Checked Then
-            querycmd = basicQuery + $"WHERE `StartVacation_Date` = '{datePilihan}' AND `Status_Approval` = 'No'"
+        If f_tgl = True Then
+            If cb_dep.Text <> "" Then
+                If RbAll.Checked Then
+                    querycmd = basicQuery + $"WHERE `StartVacation_Date` = '{datePilihan}' AND `Department` = '{cb_dep.Text}'"
+                ElseIf RbApproved.Checked Then
+                    querycmd = basicQuery + $"WHERE `StartVacation_Date` = '{datePilihan}' AND `Status_Approval` = 'Yes' AND `Department` = '{cb_dep.Text}'"
+                ElseIf RbUnapproved.Checked Then
+                    querycmd = basicQuery + $"WHERE `StartVacation_Date` = '{datePilihan}' AND `Status_Approval` = 'No' AND `Department` = '{cb_dep.Text}'"
+                ElseIf RbAll.Checked = False And RbApproved.Checked = False And RbUnapproved.Checked = False Then
+                    querycmd = basicQuery
+                End If
+            Else
+                If RbAll.Checked Then
+                    querycmd = basicQuery + $"WHERE `StartVacation_Date` = '{datePilihan}'"
+                ElseIf RbApproved.Checked Then
+                    querycmd = basicQuery + $"WHERE `StartVacation_Date` = '{datePilihan}' AND `Status_Approval` = 'Yes'"
+                ElseIf RbUnapproved.Checked Then
+                    querycmd = basicQuery + $"WHERE `StartVacation_Date` = '{datePilihan}' AND `Status_Approval` = 'No'"
+                ElseIf RbAll.Checked = False And RbApproved.Checked = False And RbUnapproved.Checked = False Then
+                    querycmd = basicQuery
+                End If
+            End If
+
+        Else
+            If cb_dep.Text <> "" Then
+                If RbAll.Checked Then
+                    querycmd = basicQuery + $"WHERE `Department` = '{cb_dep.Text}'"
+                ElseIf RbApproved.Checked Then
+                    querycmd = basicQuery + $"WHERE `Status_Approval` = 'Yes' AND `Department` = '{cb_dep.Text}'"
+                ElseIf RbUnapproved.Checked Then
+                    querycmd = basicQuery + $"WHERE`Status_Approval` = 'No' AND `Department` = '{cb_dep.Text}'"
+                ElseIf RbAll.Checked = False And RbApproved.Checked = False And RbUnapproved.Checked = False Then
+                    querycmd = basicQuery
+                End If
+            Else
+                If RbAll.Checked Then
+                    querycmd = basicQuery
+                ElseIf RbApproved.Checked Then
+                    querycmd = basicQuery + $"WHERE `Status_Approval` = 'Yes'"
+                ElseIf RbUnapproved.Checked Then
+                    querycmd = basicQuery + $"WHERE `Status_Approval` = 'No'"
+                ElseIf RbAll.Checked = False And RbApproved.Checked = False And RbUnapproved.Checked = False Then
+                    querycmd = basicQuery
+                End If
+            End If
         End If
         Console.WriteLine("QUERY : " + querycmd)
         DGV_ApprovalVacation.Rows.Clear()
         dataOnRevieweDaily(querycmd)
     End Sub
-    Private Sub DateTimePicker1_ValueChanged(sender As Object, e As EventArgs) Handles DateTimePicker1.ValueChanged
+    Private Sub DateTimePicker1_ValueChanged(sender As Object, e As EventArgs) Handles dt_since.ValueChanged
+        f_tgl = True
         SortingTabel()
     End Sub
 
@@ -75,14 +125,29 @@ FROM `approval_vacation` "
     Private Sub DGV_ApprovalVacation_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_ApprovalVacation.CellEndEdit
         Dim indexRows As Integer = e.RowIndex
         Dim nama As String = DGV_ApprovalVacation.Rows(indexRows).Cells(2).Value
-        Dim startDate As String = DGV_ApprovalVacation.Rows(indexRows).Cells(4).Value
-        Dim endDate As String = DGV_ApprovalVacation.Rows(indexRows).Cells(5).Value
+        Dim startDate As String = DGV_ApprovalVacation.Rows(indexRows).Cells(5).Value
+        Dim endDate As String = DGV_ApprovalVacation.Rows(indexRows).Cells(6).Value
         Dim editAproval As String = DGV_ApprovalVacation.Rows(indexRows).Cells(0).Value
 
-        Dim startDateParse As Date = Date.ParseExact(startDate, "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
-        Dim endDateParse As Date = Date.ParseExact(endDate, "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
+        Dim startDateParse As Date = Date.ParseExact(startDate, "dd/MM/yyyy", Nothing)
+        Dim endDateParse As Date = Date.ParseExact(endDate, "dd/MM/yyyy", Nothing)
         Dim DBClass As DataBaseClass = New DataBaseClass
-        Dim queryEdit As String = $"UPDATE `approval_vacation` SET `Status_Approval`='{editAproval}' WHERE `Nama_Karyawan` = '{nama}' AND `StartVacation_Date` = '{startDateParse.ToString("yyMMdd")}' AND `EndVacation_Date` = '{endDateParse.ToString("yyMMdd")}'"
+        Dim queryEdit As String = $"UPDATE `approval_vacation` SET `Status_Approval`='{editAproval}' WHERE `Nama_Karyawan` = '{nama}' AND `StartVacation_Date` = '{startDateParse.ToString("yyyy-MM-dd")}' AND `EndVacation_Date` = '{endDateParse.ToString("yyyy-MM-dd")}'"
         DBClass.uploadDB(queryEdit)
+    End Sub
+
+    Private Sub b_show_Click(sender As Object, e As EventArgs) Handles b_clear.Click
+        RbAll.Checked = True
+        RbApproved.Checked = False
+        RbUnapproved.Checked = False
+        cb_dep.Text = ""
+        dt_since.Value = Now
+        DGV_ApprovalVacation.Rows.Clear()
+        dataOnRevieweDaily(basicQuery)
+        f_tgl = False
+    End Sub
+
+    Private Sub cb_dep_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_dep.SelectedIndexChanged
+        SortingTabel()
     End Sub
 End Class

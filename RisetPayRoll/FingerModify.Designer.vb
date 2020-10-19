@@ -67,9 +67,12 @@ Partial Class FingerModify
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
+        Me.cb_dep = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.b_filter = New System.Windows.Forms.Button()
+        Me.dt_filter = New System.Windows.Forms.DateTimePicker()
         Me.rec_time = New System.Windows.Forms.Button()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.Panel6 = New System.Windows.Forms.Panel()
@@ -416,14 +419,14 @@ Partial Class FingerModify
         Me.Label3.TabIndex = 42
         Me.Label3.Text = "Departement"
         '
-        'ComboBox3
+        'cb_dep
         '
-        Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Items.AddRange(New Object() {"Rubber Forming", "Rubber Printing", "Assembly", "Pcba"})
-        Me.ComboBox3.Location = New System.Drawing.Point(660, 2)
-        Me.ComboBox3.Name = "ComboBox3"
-        Me.ComboBox3.Size = New System.Drawing.Size(155, 21)
-        Me.ComboBox3.TabIndex = 41
+        Me.cb_dep.FormattingEnabled = True
+        Me.cb_dep.Items.AddRange(New Object() {"PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING", "SMD"})
+        Me.cb_dep.Location = New System.Drawing.Point(660, 2)
+        Me.cb_dep.Name = "cb_dep"
+        Me.cb_dep.Size = New System.Drawing.Size(155, 21)
+        Me.cb_dep.TabIndex = 41
         '
         'Label4
         '
@@ -436,6 +439,9 @@ Partial Class FingerModify
         '
         'Panel4
         '
+        Me.Panel4.Controls.Add(Me.Label5)
+        Me.Panel4.Controls.Add(Me.b_filter)
+        Me.Panel4.Controls.Add(Me.dt_filter)
         Me.Panel4.Controls.Add(Me.rec_time)
         Me.Panel4.Controls.Add(Me.DateTimePicker1)
         Me.Panel4.Controls.Add(Me.Panel6)
@@ -448,7 +454,7 @@ Partial Class FingerModify
         Me.Panel4.Controls.Add(Me.ComboBox2)
         Me.Panel4.Controls.Add(Me.Label14)
         Me.Panel4.Controls.Add(Me.Label3)
-        Me.Panel4.Controls.Add(Me.ComboBox3)
+        Me.Panel4.Controls.Add(Me.cb_dep)
         Me.Panel4.Controls.Add(Me.Panel3)
         Me.Panel4.Controls.Add(Me.Label1)
         Me.Panel4.Controls.Add(Me.Panel2)
@@ -457,6 +463,34 @@ Partial Class FingerModify
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(1370, 95)
         Me.Panel4.TabIndex = 47
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(1046, 6)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(90, 13)
+        Me.Label5.TabIndex = 52
+        Me.Label5.Text = "Recognized Time"
+        '
+        'b_filter
+        '
+        Me.b_filter.Location = New System.Drawing.Point(1146, 27)
+        Me.b_filter.Name = "b_filter"
+        Me.b_filter.Size = New System.Drawing.Size(75, 23)
+        Me.b_filter.TabIndex = 51
+        Me.b_filter.Text = "Filter"
+        Me.b_filter.UseVisualStyleBackColor = True
+        '
+        'dt_filter
+        '
+        Me.dt_filter.CustomFormat = "HH:mm"
+        Me.dt_filter.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dt_filter.Location = New System.Drawing.Point(1146, 4)
+        Me.dt_filter.Name = "dt_filter"
+        Me.dt_filter.ShowUpDown = True
+        Me.dt_filter.Size = New System.Drawing.Size(75, 20)
+        Me.dt_filter.TabIndex = 50
         '
         'rec_time
         '
@@ -547,7 +581,7 @@ Partial Class FingerModify
     Friend WithEvents Label2 As Label
     Friend WithEvents ComboBox2 As ComboBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents ComboBox3 As ComboBox
+    Friend WithEvents cb_dep As ComboBox
     Friend WithEvents Label4 As Label
     Friend WithEvents Panel4 As Panel
     Friend WithEvents dt_day As DateTimePicker
@@ -568,4 +602,7 @@ Partial Class FingerModify
     Friend WithEvents kolom_departement As DataGridViewTextBoxColumn
     Friend WithEvents kolom_upload_date As DataGridViewTextBoxColumn
     Friend WithEvents kolom_upload_emp As DataGridViewTextBoxColumn
+    Friend WithEvents Label5 As Label
+    Friend WithEvents b_filter As Button
+    Friend WithEvents dt_filter As DateTimePicker
 End Class

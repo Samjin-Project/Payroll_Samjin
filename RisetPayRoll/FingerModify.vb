@@ -4,6 +4,8 @@ Public Class FingerModify
     Dim con As New SqlConnection
     Dim cmd As New SqlCommand
     Public QueryUtama As String = "SELECT `NO`,`Time_Upload`,`NIK`,`Nama_Karyawan`,`Date_Finger`,`Shift_Finger`,`On_Duty`,`Off_Duty`,`Check_In`,`Check_Out`,`Departement`,`Finger Status`,`RecFinIN`,`RecFinOut` FROM `finger_employer`"
+    Public f_filterIn As Boolean = False
+    Public f_filterOut As Boolean = False
 
     Protected Overrides ReadOnly Property CreateParams() As CreateParams
         Get
@@ -17,8 +19,9 @@ Public Class FingerModify
         dt_day.Value = DateTime.Now
         DateTimePicker1.Format = DateTimePickerFormat.Custom
         DateTimePicker1.CustomFormat = "HH:mm"
-
-        Dim querycmd As String = $"{QueryUtama} WHERE `Date_Finger` = '{dt_day.Value.ToString("yyyy-MM-dd")}' "
+        cb_dep.Text = "PCBA"
+        Dim dep As String = cb_dep.Text
+        Dim querycmd As String = $"{QueryUtama} WHERE `Date_Finger` = '{dt_day.Value.ToString("yyyy-MM-dd")}' AND `Departement` = '{dep}' "
         DGV_DataModify.Rows.Clear()
         Dim DBClass As DataBaseClass = New DataBaseClass
         Dim ds As DataSet = DBClass.downloadDB(querycmd)
@@ -131,18 +134,37 @@ Public Class FingerModify
         End If
     End Sub
     Private Sub SortingTabel(sortType As Boolean)
+        'Console.WriteLine("Query : TEESTTTTTTIng")
         Dim shift As String = cb_shift.Text
         Dim datePilihan As String = dt_day.Value.ToString("yyyy-MM-dd")
         Dim querycmd As String
+        Dim dep As String = cb_dep.Text
+        Dim fingTime As String = dt_filter.Value.ToString("HH:mm")
+
         If sortType = False Then
-            If shift = "ALL" Then
-                querycmd = $"{QueryUtama} WHERE `Date_Finger` = '{datePilihan}'"
+            If f_filterIn = True Then
+                If shift = "ALL" Then
+                    querycmd = $"{QueryUtama} WHERE `Date_Finger` = '{datePilihan}' AND `Departement` = '{dep}' AND `Check_In` >= '{fingTime}' "
+                Else
+                    querycmd = $"{QueryUtama} WHERE `Shift_Finger` = '{shift}' AND `Date_Finger` = '{datePilihan}' AND `Departement` = '{dep}' AND `Check_In` >= '{fingTime}'"
+                End If
+            ElseIf f_filterOut = True Then
+                If shift = "ALL" Then
+                    querycmd = $"{QueryUtama} WHERE `Date_Finger` = '{datePilihan}' AND `Departement` = '{dep}' AND `Check_Out` >= '{fingTime}' "
+                Else
+                    querycmd = $"{QueryUtama} WHERE `Shift_Finger` = '{shift}' AND `Date_Finger` = '{datePilihan}' AND `Departement` = '{dep}' AND `Check_Out` >= '{fingTime}'"
+                End If
             Else
-                querycmd = $"{QueryUtama} WHERE `Shift_Finger` = '{shift}' AND `Date_Finger` = '{datePilihan}'"
+                If shift = "ALL" Then
+                    querycmd = $"{QueryUtama} WHERE `Date_Finger` = '{datePilihan}' AND `Departement` = '{dep}'"
+                Else
+                    querycmd = $"{QueryUtama} WHERE `Shift_Finger` = '{shift}' AND `Date_Finger` = '{datePilihan}' AND `Departement` = '{dep}'"
+                End If
             End If
         ElseIf sortType = True Then
-            querycmd = $"{QueryUtama} WHERE `Date_Finger` = '{datePilihan}' AND `NIK` = '{TextBox10.Text}'"
+            querycmd = $"{QueryUtama} WHERE `Date_Finger` = '{datePilihan}' AND `NIK` = '{TextBox10.Text}' AND `Departement` = '{dep}'"
         End If
+
         DGV_DataModify.Rows.Clear()
         Dim DBClass As DataBaseClass = New DataBaseClass
         Dim ds As DataSet = DBClass.downloadDB(querycmd)
@@ -225,8 +247,7 @@ Public Class FingerModify
         Dim indexRows As Integer = e.RowIndex
         Dim recFinger As String = DGV_DataModify.Rows(indexRows).Cells(8).Value
         Dim Nik As String = DGV_DataModify.Rows(indexRows).Cells(2).Value
-        Dim queryNik As String = $"SELECT `Nik` FROM `master employer`"
-        Dim DateFinger As String = dt_day.Value.ToString("yyyy-MM-dd")
+        Dim DateFinger As String = dt_day.Value.ToString("yyyy-dd-MM")
         Dim syaratPanjang As Boolean = recFinger.Length = 5
         Dim syaratInput As Boolean
         If syaratPanjang Then
@@ -259,4 +280,18 @@ Public Class FingerModify
 
     End Sub
 
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles b_filter.Click
+        If RadioButton1.Checked Then
+            f_filterIn = True
+        ElseIf RadioButton2.Checked Then
+            f_filterOut = True
+        End If
+        SortingTabel(False)
+        f_filterIn = False
+        f_filterOut = False
+    End Sub
+
+    Private Sub cb_dep_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_dep.SelectedIndexChanged
+        SortingTabel(False)
+    End Sub
 End Class
