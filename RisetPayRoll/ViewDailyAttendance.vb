@@ -2,7 +2,9 @@
     Dim flag As Boolean = False
     Dim QueryCMD As String = "SELECT * FROM `tabel_bulanan_karyawan`"
     Private Sub ViewDailyAttendance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        showData(QueryCMD)
+        cb_dep.Text = "PCBA"
+        Dim query As String = $"{QueryCMD} WHERE `Department` = '{cb_dep.Text}'"
+        showData(query)
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -144,7 +146,7 @@
         Dim ds As DataSet = DBClass.downloadDB(QueryOnReview)
         Dim indexDs As Integer = ds.Tables(0).Rows.Count
         For i As Integer = 0 To indexDs - 1
-            Dim dateCekData As Date = Date.ParseExact(ds.Tables(0).Rows(i).Item(3), "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
+            Dim dateCekData As Date = DateTime.ParseExact(ds.Tables(0).Rows(i).Item(3), "yyyy-MM-dd", System.Globalization.DateTimeFormatInfo.InvariantInfo)
             Dim row As String() = New String() {ds.Tables(0).Rows(i).Item(1),
             ds.Tables(0).Rows(i).Item(2),
             ds.Tables(0).Rows(i).Item(4),

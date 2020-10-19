@@ -234,60 +234,54 @@ Public Class ComputePayroll
 
     Private Sub DGV_ReviewDaily_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_ReviewDaily.CellContentClick
         Dim nik As String = DGV_ReviewDaily.Rows(e.RowIndex).Cells(0).Value
-        detailEmpInfo(nik)
         detailEmpSal(nik)
     End Sub
-    Private Sub detailEmpInfo(nik As String)
-        Dim querycmd As String = $"SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `TanggalMasuk_Karyawan` FROM `master_employer`WHERE `NIK` = '{nik}'"
-        Dim DBClass As DataBaseClass = New DataBaseClass
-        Dim ds As DataSet = DBClass.downloadDB(querycmd)
-        Dim indexDs As Integer = ds.Tables(0).Rows.Count
-        Dim tgl As DateTime
-        If indexDs > 0 Then
-            tb_empDet.Text = ds.Tables(0).Rows(0).Item(0)
-            tb_nameDet.Text = ds.Tables(0).Rows(0).Item(1)
-            tb_posisiDet.Text = ds.Tables(0).Rows(0).Item(2)
-            tgl = ds.Tables(0).Rows(0).Item(3)
-            tb_admiss.Text = tgl.ToString("dd MMM yyyy")
-        End If
-    End Sub
     Private Sub detailEmpSal(nik As String)
-        Dim tgl As String = dt_month.Value.ToString("MMM yyyy")
-        Dim querycmd As String = $"SELECT `Salary` FROM `tabel_bulanan_karyawan` WHERE `NIK` = '{nik}' AND `Period` = '{tgl}'"
+        Dim tgl As String = dt_month.Value.ToString("yyyy-MM")
+        Dim querycmd As String = $"SELECT `BasicSalary`, `attendance`, `Total_OT`, `Ot_wages`, `jamsostek`, `bpjs`  FROM `tabel_bulanan_karyawan` WHERE `NIK` = '{nik}' AND `DateMonth` LIKE '{tgl}%'"
         Dim DBClass As DataBaseClass = New DataBaseClass
         Dim ds As DataSet = DBClass.downloadDB(querycmd)
         Dim indexDs As Integer = ds.Tables(0).Rows.Count
         If indexDs > 0 Then
             Dim basic As Double = ds.Tables(0).Rows(0).Item(0)
+            Dim jamsos As Double = ds.Tables(0).Rows(0).Item(4)
+            Dim bpjs As Double = ds.Tables(0).Rows(0).Item(5)
+            Dim wages As Double = ds.Tables(0).Rows(0).Item(3)
             tb_basicSal.Text = basic.ToString("##,##,###")
-            tb_jamsostek.Text = (basic * 1.19 / 100).ToString("##,##,###")
-            tb_jamsostekPot.Text = tb_jamsostek.Text
+            tb_ot.Text = ds.Tables(0).Rows(0).Item(2)
+            tb_attendance.Text = ds.Tables(0).Rows(0).Item(1)
+            tb_otwages.Text = wages.ToString("##,##,###")
+            tb_jamsostek.Text = jamsos.ToString("##,##,###")
+            tb_bpjs.Text = bpjs.ToString("##,##,###")
+            tb_potsal.Text = (tb_attendance.Text * (tb_basicSal.Text / 20)).ToString("##,##,###")
         Else
             tb_basicSal.Text = ""
+            tb_ot.Text = ""
+            tb_attendance.Text = ""
+            tb_otwages.Text = ""
             tb_jamsostek.Text = ""
+            tb_bpjs.Text = ""
+            tb_potsal.Text = ""
+            MsgBox("Data belum tersedia", MsgBoxStyle.Information, "Compute Payroll Samjin")
         End If
 
     End Sub
     Private Sub filterData(emp As String)
-        Dim querycmd As String = $"SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `TanggalMasuk_Karyawan` FROM `master_employer`WHERE `NIK` = '{emp}'"
+        Dim querycmd As String = $"SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Tanggal_Masuk` FROM `master employer`WHERE `NIK` = '{emp}'"
         showEmployelist(querycmd)
     End Sub
     Private Sub filterName(name As String)
-        Dim querycmd As String = $"SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `TanggalMasuk_Karyawan` FROM `master_employer`WHERE `Nama_Karyawan` LIKE '{name}%' OR `Nama_Karyawan` LIKE '%{name}'"
+        Dim querycmd As String = $"SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Tanggal_Masuk` FROM `master employer`WHERE `Nama_Karyawan` LIKE '%{name}%' "
         showEmployelist(querycmd)
     End Sub
     Private Sub b_showall_Click(sender As Object, e As EventArgs) Handles b_showall.Click
         tb_empSearch.Text = ""
         tb_nameSearch.Text = ""
-        tb_empDet.Text = ""
-        tb_nameDet.Text = ""
-        tb_posisiDet.Text = ""
-        tb_admiss.Text = ""
         tb_basicSal.Text = ""
         tb_posisi.Text = ""
 
         dt_month.Value = Now
-        Dim querycmd As String = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Status_Karyawan` FROM `master_employer`"
+        Dim querycmd As String = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Status_Karyawan` FROM `master employer`"
         showEmployelist(querycmd)
     End Sub
 
@@ -305,11 +299,6 @@ Public Class ComputePayroll
             Dim name As String = tb_nameSearch.Text
             filterName(name)
         End If
-    End Sub
-
-    Private Sub dt_month_ValueChanged(sender As Object, e As EventArgs) Handles dt_month.ValueChanged
-        Dim nik As String = tb_empDet.Text
-        detailEmpSal(nik)
     End Sub
     Sub createPayroll(dep As String, bulan As Date)
         Dim DBClass As DataBaseClass = New DataBaseClass
@@ -415,7 +404,11 @@ Public Class ComputePayroll
         MsgBox("Create Payroll Done")
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles b_export.Click
         ExportExcel()
+    End Sub
+
+    Private Sub TextBox4_TextChanged(sender As Object, e As EventArgs) Handles tb_attendance.TextChanged
+
     End Sub
 End Class

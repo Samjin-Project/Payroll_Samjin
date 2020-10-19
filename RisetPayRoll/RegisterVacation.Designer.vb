@@ -26,6 +26,7 @@ Partial Class RegisterVacation
         Me.DGV_DataModify = New System.Windows.Forms.DataGridView()
         Me.kolom_emp = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Kolom_Nama = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.kolom_department = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Kolom_Admision = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.total_data = New System.Windows.Forms.Label()
@@ -45,23 +46,21 @@ Partial Class RegisterVacation
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.tb_dep = New System.Windows.Forms.TextBox()
+        Me.cb_holtype = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.b_save = New System.Windows.Forms.Button()
-        Me.Label10 = New System.Windows.Forms.Label()
         Me.dt_reqdate = New System.Windows.Forms.DateTimePicker()
         Me.dt_anddate = New System.Windows.Forms.DateTimePicker()
         Me.dt_startdate = New System.Windows.Forms.DateTimePicker()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.tb_telp = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.tb_reason = New System.Windows.Forms.RichTextBox()
-        Me.tb_time = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.tb_nama = New System.Windows.Forms.TextBox()
-        Me.tb_holtype = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tb_emp = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
@@ -90,7 +89,7 @@ Partial Class RegisterVacation
         Me.DGV_DataModify.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DGV_DataModify.BackgroundColor = System.Drawing.SystemColors.Control
         Me.DGV_DataModify.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.DGV_DataModify.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.kolom_emp, Me.Kolom_Nama, Me.Kolom_Admision})
+        Me.DGV_DataModify.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.kolom_emp, Me.Kolom_Nama, Me.kolom_department, Me.Kolom_Admision})
         Me.DGV_DataModify.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DGV_DataModify.GridColor = System.Drawing.Color.LightGoldenrodYellow
         Me.DGV_DataModify.Location = New System.Drawing.Point(0, 0)
@@ -105,21 +104,28 @@ Partial Class RegisterVacation
         '
         'kolom_emp
         '
-        Me.kolom_emp.FillWeight = 63.57936!
+        Me.kolom_emp.FillWeight = 120.0703!
         Me.kolom_emp.HeaderText = "Emp No."
         Me.kolom_emp.Name = "kolom_emp"
         Me.kolom_emp.ReadOnly = True
         '
         'Kolom_Nama
         '
-        Me.Kolom_Nama.FillWeight = 182.7165!
+        Me.Kolom_Nama.FillWeight = 141.4268!
         Me.Kolom_Nama.HeaderText = "Name"
         Me.Kolom_Nama.Name = "Kolom_Nama"
         Me.Kolom_Nama.ReadOnly = True
         '
+        'kolom_department
+        '
+        Me.kolom_department.FillWeight = 77.40235!
+        Me.kolom_department.HeaderText = "Department"
+        Me.kolom_department.Name = "kolom_department"
+        Me.kolom_department.ReadOnly = True
+        '
         'Kolom_Admision
         '
-        Me.Kolom_Admision.FillWeight = 83.77409!
+        Me.Kolom_Admision.FillWeight = 91.17045!
         Me.Kolom_Admision.HeaderText = "Admision Date"
         Me.Kolom_Admision.Name = "Kolom_Admision"
         Me.Kolom_Admision.ReadOnly = True
@@ -198,7 +204,7 @@ Partial Class RegisterVacation
         'cb_dep
         '
         Me.cb_dep.FormattingEnabled = True
-        Me.cb_dep.Items.AddRange(New Object() {"PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING", "Rubber Forming", "Rubber Printing"})
+        Me.cb_dep.Items.AddRange(New Object() {"PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING", "SMD"})
         Me.cb_dep.Location = New System.Drawing.Point(414, 4)
         Me.cb_dep.Name = "cb_dep"
         Me.cb_dep.Size = New System.Drawing.Size(125, 21)
@@ -297,23 +303,21 @@ Partial Class RegisterVacation
         '
         Me.Panel4.BackColor = System.Drawing.SystemColors.Control
         Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel4.Controls.Add(Me.Label16)
+        Me.Panel4.Controls.Add(Me.tb_dep)
+        Me.Panel4.Controls.Add(Me.cb_holtype)
         Me.Panel4.Controls.Add(Me.Label5)
         Me.Panel4.Controls.Add(Me.b_save)
-        Me.Panel4.Controls.Add(Me.Label10)
         Me.Panel4.Controls.Add(Me.dt_reqdate)
         Me.Panel4.Controls.Add(Me.dt_anddate)
         Me.Panel4.Controls.Add(Me.dt_startdate)
         Me.Panel4.Controls.Add(Me.Label4)
         Me.Panel4.Controls.Add(Me.tb_telp)
-        Me.Panel4.Controls.Add(Me.Label3)
-        Me.Panel4.Controls.Add(Me.tb_reason)
-        Me.Panel4.Controls.Add(Me.tb_time)
         Me.Panel4.Controls.Add(Me.Label8)
         Me.Panel4.Controls.Add(Me.Label7)
         Me.Panel4.Controls.Add(Me.Label6)
         Me.Panel4.Controls.Add(Me.Label2)
         Me.Panel4.Controls.Add(Me.tb_nama)
-        Me.Panel4.Controls.Add(Me.tb_holtype)
         Me.Panel4.Controls.Add(Me.Label1)
         Me.Panel4.Controls.Add(Me.tb_emp)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
@@ -321,6 +325,34 @@ Partial Class RegisterVacation
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(490, 510)
         Me.Panel4.TabIndex = 21
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(129, 72)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(62, 13)
+        Me.Label16.TabIndex = 51
+        Me.Label16.Text = "Department"
+        '
+        'tb_dep
+        '
+        Me.tb_dep.BackColor = System.Drawing.Color.Aqua
+        Me.tb_dep.Location = New System.Drawing.Point(204, 69)
+        Me.tb_dep.Name = "tb_dep"
+        Me.tb_dep.ReadOnly = True
+        Me.tb_dep.Size = New System.Drawing.Size(110, 20)
+        Me.tb_dep.TabIndex = 50
+        '
+        'cb_holtype
+        '
+        Me.cb_holtype.BackColor = System.Drawing.Color.Cyan
+        Me.cb_holtype.FormattingEnabled = True
+        Me.cb_holtype.Items.AddRange(New Object() {"Permission", "Sick", "No permission"})
+        Me.cb_holtype.Location = New System.Drawing.Point(205, 101)
+        Me.cb_holtype.Name = "cb_holtype"
+        Me.cb_holtype.Size = New System.Drawing.Size(109, 21)
+        Me.cb_holtype.TabIndex = 49
         '
         'Label5
         '
@@ -332,26 +364,17 @@ Partial Class RegisterVacation
         '
         'b_save
         '
-        Me.b_save.Location = New System.Drawing.Point(204, 421)
+        Me.b_save.Location = New System.Drawing.Point(204, 324)
         Me.b_save.Name = "b_save"
         Me.b_save.Size = New System.Drawing.Size(75, 23)
         Me.b_save.TabIndex = 47
         Me.b_save.Text = "Save"
         Me.b_save.UseVisualStyleBackColor = True
         '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(383, 84)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(26, 13)
-        Me.Label10.TabIndex = 46
-        Me.Label10.Text = "time"
-        '
         'dt_reqdate
         '
         Me.dt_reqdate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dt_reqdate.Location = New System.Drawing.Point(204, 184)
+        Me.dt_reqdate.Location = New System.Drawing.Point(204, 208)
         Me.dt_reqdate.Name = "dt_reqdate"
         Me.dt_reqdate.Size = New System.Drawing.Size(110, 20)
         Me.dt_reqdate.TabIndex = 45
@@ -359,7 +382,7 @@ Partial Class RegisterVacation
         'dt_anddate
         '
         Me.dt_anddate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dt_anddate.Location = New System.Drawing.Point(204, 148)
+        Me.dt_anddate.Location = New System.Drawing.Point(204, 172)
         Me.dt_anddate.Name = "dt_anddate"
         Me.dt_anddate.Size = New System.Drawing.Size(110, 20)
         Me.dt_anddate.TabIndex = 44
@@ -367,7 +390,7 @@ Partial Class RegisterVacation
         'dt_startdate
         '
         Me.dt_startdate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dt_startdate.Location = New System.Drawing.Point(204, 113)
+        Me.dt_startdate.Location = New System.Drawing.Point(204, 137)
         Me.dt_startdate.Name = "dt_startdate"
         Me.dt_startdate.Size = New System.Drawing.Size(110, 20)
         Me.dt_startdate.TabIndex = 43
@@ -375,7 +398,7 @@ Partial Class RegisterVacation
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(147, 350)
+        Me.Label4.Location = New System.Drawing.Point(147, 253)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(42, 13)
         Me.Label4.TabIndex = 34
@@ -384,40 +407,15 @@ Partial Class RegisterVacation
         'tb_telp
         '
         Me.tb_telp.BackColor = System.Drawing.Color.Aqua
-        Me.tb_telp.Location = New System.Drawing.Point(204, 343)
+        Me.tb_telp.Location = New System.Drawing.Point(204, 246)
         Me.tb_telp.Name = "tb_telp"
         Me.tb_telp.Size = New System.Drawing.Size(110, 20)
         Me.tb_telp.TabIndex = 33
         '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(141, 228)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(49, 13)
-        Me.Label3.TabIndex = 32
-        Me.Label3.Text = "Reasons"
-        '
-        'tb_reason
-        '
-        Me.tb_reason.Location = New System.Drawing.Point(204, 225)
-        Me.tb_reason.Name = "tb_reason"
-        Me.tb_reason.Size = New System.Drawing.Size(226, 104)
-        Me.tb_reason.TabIndex = 31
-        Me.tb_reason.Text = ""
-        '
-        'tb_time
-        '
-        Me.tb_time.BackColor = System.Drawing.Color.Aqua
-        Me.tb_time.Location = New System.Drawing.Point(320, 77)
-        Me.tb_time.Name = "tb_time"
-        Me.tb_time.Size = New System.Drawing.Size(57, 20)
-        Me.tb_time.TabIndex = 14
-        '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(135, 120)
+        Me.Label8.Location = New System.Drawing.Point(135, 144)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(55, 13)
         Me.Label8.TabIndex = 13
@@ -426,7 +424,7 @@ Partial Class RegisterVacation
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(138, 154)
+        Me.Label7.Location = New System.Drawing.Point(138, 178)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(52, 13)
         Me.Label7.TabIndex = 12
@@ -435,7 +433,7 @@ Partial Class RegisterVacation
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(117, 190)
+        Me.Label6.Location = New System.Drawing.Point(117, 214)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(73, 13)
         Me.Label6.TabIndex = 11
@@ -444,7 +442,7 @@ Partial Class RegisterVacation
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(121, 80)
+        Me.Label2.Location = New System.Drawing.Point(121, 104)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(69, 13)
         Me.Label2.TabIndex = 7
@@ -458,14 +456,6 @@ Partial Class RegisterVacation
         Me.tb_nama.ReadOnly = True
         Me.tb_nama.Size = New System.Drawing.Size(110, 20)
         Me.tb_nama.TabIndex = 4
-        '
-        'tb_holtype
-        '
-        Me.tb_holtype.BackColor = System.Drawing.Color.Aqua
-        Me.tb_holtype.Location = New System.Drawing.Point(204, 77)
-        Me.tb_holtype.Name = "tb_holtype"
-        Me.tb_holtype.Size = New System.Drawing.Size(110, 20)
-        Me.tb_holtype.TabIndex = 2
         '
         'Label1
         '
@@ -516,21 +506,16 @@ Partial Class RegisterVacation
     Friend WithEvents Panel4 As Panel
     Friend WithEvents Label4 As Label
     Friend WithEvents tb_telp As TextBox
-    Friend WithEvents Label3 As Label
-    Friend WithEvents tb_reason As RichTextBox
-    Friend WithEvents tb_time As TextBox
     Friend WithEvents Label8 As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents tb_nama As TextBox
-    Friend WithEvents tb_holtype As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents tb_emp As TextBox
     Friend WithEvents dt_reqdate As DateTimePicker
     Friend WithEvents dt_anddate As DateTimePicker
     Friend WithEvents dt_startdate As DateTimePicker
-    Friend WithEvents Label10 As Label
     Friend WithEvents b_save As Button
     Friend WithEvents Label14 As Label
     Friend WithEvents fil_emp As TextBox
@@ -543,10 +528,14 @@ Partial Class RegisterVacation
     Friend WithEvents Label9 As Label
     Friend WithEvents Label15 As Label
     Friend WithEvents cb_dep As ComboBox
-    Friend WithEvents kolom_emp As DataGridViewTextBoxColumn
-    Friend WithEvents Kolom_Nama As DataGridViewTextBoxColumn
-    Friend WithEvents Kolom_Admision As DataGridViewTextBoxColumn
     Friend WithEvents total_data As Label
     Friend WithEvents b_showall As Button
     Friend WithEvents Label5 As Label
+    Friend WithEvents cb_holtype As ComboBox
+    Friend WithEvents Label16 As Label
+    Friend WithEvents tb_dep As TextBox
+    Friend WithEvents kolom_emp As DataGridViewTextBoxColumn
+    Friend WithEvents Kolom_Nama As DataGridViewTextBoxColumn
+    Friend WithEvents kolom_department As DataGridViewTextBoxColumn
+    Friend WithEvents Kolom_Admision As DataGridViewTextBoxColumn
 End Class
