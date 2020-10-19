@@ -1,5 +1,11 @@
 ﻿Public Class RegisterVacation
-
+    Protected Overrides ReadOnly Property CreateParams() As CreateParams
+        Get
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ExStyle = cp.ExStyle Or &H2000000
+            Return cp
+        End Get
+    End Property
     Private Sub RegisterVacation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `Tanggal_Masuk` FROM `master employer`"
         dataOnSide(QueryCMD)

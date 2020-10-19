@@ -1,6 +1,13 @@
 ﻿Public Class ViewDailyAttendance
     Dim flag As Boolean = False
     Dim QueryCMD As String = "SELECT * FROM `tabel_bulanan_karyawan`"
+    Protected Overrides ReadOnly Property CreateParams() As CreateParams
+        Get
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ExStyle = cp.ExStyle Or &H2000000
+            Return cp
+        End Get
+    End Property
     Private Sub ViewDailyAttendance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         showData(QueryCMD)
     End Sub

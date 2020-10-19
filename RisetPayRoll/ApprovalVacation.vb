@@ -9,6 +9,15 @@ DATE_FORMAT(`StartVacation_Date`,""%d/%m/%Y""),
 DATE_FORMAT(`EndVacation_Date`,""%d/%m/%Y""),
 DATE_FORMAT(`ReqVacation_Date`,""%d/%m/%Y"") 
 FROM `approval_vacation` "
+
+    Protected Overrides ReadOnly Property CreateParams() As CreateParams
+        Get
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ExStyle = cp.ExStyle Or &H2000000
+            Return cp
+        End Get
+    End Property
+
     Private Sub ApprovalVacation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SortingTabel()
     End Sub

@@ -6,6 +6,13 @@ Public Class DailyAttendance
     Dim QueryCMDKosong As String = "SELECT `NIK`, `Nama_Karyawan`, `Department` FROM `master employer` WHERE `NIK` = "
     Dim flag As Boolean = False
     Dim nik As String
+    Protected Overrides ReadOnly Property CreateParams() As CreateParams
+        Get
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ExStyle = cp.ExStyle Or &H2000000
+            Return cp
+        End Get
+    End Property
     Private Sub DailyAttendance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             showEmploye(QueryCMD)
@@ -267,25 +274,52 @@ Public Class DailyAttendance
                         Dim expenddt As Date = Date.ParseExact(InitDate, "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
 
                         Dim DBClass As DataBaseClass = New DataBaseClass
-                        Dim QueryCreateAbsen As String = $"SELECT `NIK`,`Nama_Karyawan`,DATE_FORMAT(`Date_Finger`,""%y-%m-%d""),`Shift_Finger`,`RecFinIN`,`RecFinOut`,`Departement`, `Finger Status` FROM `finger_employer` WHERE `NIK` = '{Num(NikCreate).ToString}' AND `Date_Finger` = '{expenddt.ToString("yyyy-MM-dd")}'"
+                        Dim QueryCreateAbsen As String = $"SELECT `NIK`,`Nama_Karyawan`,DATE_FORMAT(`Date_Finger`,""%y-%m-%d""),`Shift_Finger`,`RecFinIN`,`RecFinOut`,`Departement`, `Finger Status` FROM `finger_employer` WHERE `NIK` = '{NikCreate}' AND `Date_Finger` = '{expenddt.ToString("yyyy-MM-dd")}'"
                         Dim dsAbsen As DataSet = DBClass.downloadDB(QueryCreateAbsen)
 
                         If dsAbsen IsNot Nothing AndAlso dsAbsen.Tables.Count > 0 AndAlso dsAbsen.Tables(0).Rows.Count > 0 Then
                             Dim QueryInsertCreate As String = ""
                             If dsAbsen.Tables(0).Rows(0).Item(7) = "0" Then
-                                Dim QueryCekVacation As String = $"SELECT `status_approval`,DATE_FORMAT(`StartVacation_Date`,""%y-%m-%d""),DATE_FORMAT(`EndVacation_Date`,""%y-%m-%d""),`Vacation`_Code FROM `approval_vacation` WHERE `NIK` = '{NikCreate}'"
+                                Dim QueryCekVacation As String = $"SELECT `status_approval`,DATE_FORMAT(`StartVacation_Date`,""%y-%m-%d""),DATE_FORMAT(`EndVacation_Date`,""%y-%m-%d""),`Vacation_Code` FROM `approval_vacation` WHERE `NIK` = '{NikCreate}'"
                                 Dim dsCekVacation As DataSet = DBClass.downloadDB(QueryCekVacation)
                                 Dim dateCode As String = ""
                                 If dsCekVacation.Tables(0).Rows.Count > 0 Then
                                     dateCode = dsCekVacation.Tables(0).Rows(0).Item(3).ToString
                                 End If
                                 Dim dateVacation As Nullable(Of Date) = getVcationDate(dsCekVacation, expenddt.ToString("yyyy-MM-dd"))
-                                Console.WriteLine(dateVacation.ToString)
-
+                                Console.WriteLine(dsAbsen.Tables(0).Rows(0).Item(2).ToString)
+                                Dim hariAbsen As String = (Date.ParseExact(dsAbsen.Tables(0).Rows(0).Item(2), "yy-MM-dd", System.Globalization.DateTimeFormatInfo.InvariantInfo)).ToString("ddd")
+                                Console.WriteLine("hari " + hariAbsen)
+                                'harus cek hari liburr pasti itu mah dibawah ini
+                                '
+                                '
+                                '''''''''''''''''''''
                                 If dateVacation.ToString = #1/1/0001 12:00:00 AM# Or dateCode = "NO PERMISSION" Then
                                     Console.WriteLine("bolos")
                                     deleteQuery(dsAbsen.Tables(0).Rows(0).Item(0), dsAbsen.Tables(0).Rows(0).Item(2))
-                                    QueryInsertCreate = $"INSERT INTO `tabel_harian_karyawan1`( `NIK`, `Name`, `Type`, `Date`, `Day`, `Shift`, `Check In`, `Check Out`, `Check Out Date`, `Lateness`, `Early Check Out`, `Basic Time`, `Over Time`, `Department`,`Absen_Paid`) VALUES ('{dsAbsen.Tables(0).Rows(0).Item(0)}','{dsAbsen.Tables(0).Rows(0).Item(1)}','Absent','{dsAbsen.Tables(0).Rows(0).Item(2)}','{DGV_ReviewDaily.Rows(y).Cells(4).Value}','{dsAbsen.Tables(0).Rows(0).Item(3)}','','','{dsAbsen.Tables(0).Rows(0).Item(2)}','','','0','0','{dsAbsen.Tables(0).Rows(0).Item(6)}','0')"
+                                    Dim statusAbsen As String = "No Permission"
+                                    Dim kodeAbsen As String = "0"
+
+                                    If hariAbsen = "Sat" Or hariAbsen = "Sun" Then
+                                        statusAbsen = "Unpaid Holiday"
+                                        kodeAbsen = "2"
+                                    End If
+                                    QueryInsertCreate = $"INSERT INTO `tabel_harian_karyawan1`( `NIK`, `Name`, `Type`, `Date`, `Day`, `Shift`, `Check In`, `Check Out`, `Check Out Date`, `Lateness`, `Early Check Out`, `Basic Time`, `Over Time`, `Department`,`Absen_Paid`) VALUES (
+                                                         '{dsAbsen.Tables(0).Rows(0).Item(0)}',
+                                                         '{dsAbsen.Tables(0).Rows(0).Item(1)}',
+                                                         '{statusAbsen}',
+                                                         '{dsAbsen.Tables(0).Rows(0).Item(2)}',
+                                                         '{DGV_ReviewDaily.Rows(y).Cells(4).Value}',
+                                                         '{dsAbsen.Tables(0).Rows(0).Item(3)}',
+                                                         '',
+                                                         '',
+                                                         '{dsAbsen.Tables(0).Rows(0).Item(2)}',
+                                                         '',
+                                                         '',
+                                                         '0',
+                                                         '0',
+                                                         '{dsAbsen.Tables(0).Rows(0).Item(6)}',
+                                                         '{kodeAbsen}')"
                                     Dim DBClassUp As DataBaseClass = New DataBaseClass
                                     'Dim queryInsert As String = ""
                                     DBClassUp.uploadDB(QueryInsertCreate)
@@ -310,7 +344,7 @@ Public Class DailyAttendance
 
                                 End If
                             Else
-                                Dim QueryCreate As String = $"SELECT `NIK`,`Nama_Karyawan`,DATE_FORMAT(`Date_Finger`,""%y-%m-%d""),`Shift_Finger`,`RecFinIN`,`RecFinOut`,`Departement`, `Finger Status` FROM `finger_employer` WHERE `NIK` = '{Num(NikCreate).ToString}' AND `Date_Finger` = '{expenddt.ToString("yyyy-MM-dd")}' AND `RecFinIN` <> '' AND `RecFinOut` <> ''"
+                                Dim QueryCreate As String = $"SELECT `NIK`,`Nama_Karyawan`,DATE_FORMAT(`Date_Finger`,""%y-%m-%d""),`Shift_Finger`,`RecFinIN`,`RecFinOut`,`Departement`, `Finger Status` FROM `finger_employer` WHERE `NIK` = '{NikCreate}' AND `Date_Finger` = '{expenddt.ToString("yyyy-MM-dd")}' AND `RecFinIN` <> '' AND `RecFinOut` <> ''"
                                 Dim ds As DataSet = DBClass.downloadDB(QueryCreate)
                                 Console.WriteLine("DS : " + ds.Tables.Count.ToString)
                                 Console.WriteLine(ds.GetXml)
@@ -318,7 +352,7 @@ Public Class DailyAttendance
                                     Dim DateOut As DateTime = CheckTime(ds.Tables(0).Rows(0).Item(4), ds.Tables(0).Rows(0).Item(5), expenddt)
 
                                     Dim indexDs As Integer = ds.Tables(0).Rows.Count
-                                    Dim JamKerja As Long() = basicTime(ds.Tables(0).Rows(0).Item(4), ds.Tables(0).Rows(0).Item(5), ds.Tables(0).Rows(0).Item(3), DGV_ReviewDaily.Rows(y).Cells(4).Value, ds.Tables(0).Rows(0).Item(2))
+                                    Dim JamKerja As Long() = basicTime(ds.Tables(0).Rows(0).Item(0), ds.Tables(0).Rows(0).Item(4), ds.Tables(0).Rows(0).Item(5), ds.Tables(0).Rows(0).Item(3), DGV_ReviewDaily.Rows(y).Cells(4).Value, ds.Tables(0).Rows(0).Item(2))
                                     Dim basic As Long = JamKerja(0)
                                     Dim overTime As Long = JamKerja(1)
                                     deleteQuery(ds.Tables(0).Rows(0).Item(0), ds.Tables(0).Rows(0).Item(2))
@@ -398,7 +432,7 @@ Public Class DailyAttendance
                 Console.WriteLine("update daily view : " + overTime(1))
                 Dim attendance As Integer
                 Dim inQuery As String
-                If overTime(1) = "False" Then
+                If overTime(1) = "0" Then
                     attendance = Convert.ToInt32(updateAtte) + 1
                     inQuery = $"`attendance`='{attendance}',"
                 Else
@@ -410,12 +444,18 @@ Public Class DailyAttendance
                     nilaiOt = ""
                 End If
                 Dim kehadiran As String = $"SELECT * FROM `tabel_harian_karyawan1` WHERE `NIK`='{nik}' AND `Date` BETWEEN '{tempDate.ToString("yyyy-MM")}-01' AND '{tempDate.ToString("yyyy-MM")}-31' AND `Basic Time` <> '0' AND `Absen_Paid` = '1' "
+                Dim kehadiran1 As String = $"SELECT * FROM `tabel_harian_karyawan1` WHERE `NIK`='{nik}' AND `Date` BETWEEN '{tempDate.ToString("yyyy-MM")}-01' AND '{tempDate.ToString("yyyy-MM")}-31' AND `Basic Time` <> '0' AND `Absen_Paid` = '1' "
                 Dim dsKehadiran As DataSet = DBClass.downloadDB(kehadiran)
+                Dim dsKehadiran1 As DataSet = DBClass.downloadDB(kehadiran1)
                 Dim kehadiranValue As String = "0"
+                Dim kehadiranValue1 As String = "0"
+                If dsKehadiran1 IsNot Nothing Then
+                    kehadiranValue1 = dsKehadiran1.Tables(0).Rows.Count
+                End If
                 If dsKehadiran IsNot Nothing Then
                     kehadiranValue = dsKehadiran.Tables(0).Rows.Count
                 End If
-
+                Dim total As String = (CInt(kehadiranValue) + CInt(kehadiranValue1)).ToString
                 QueryCreateViewDaily = $"UPDATE `tabel_bulanan_karyawan` SET 
                                             `Transport`='',
                                             `Transport_Amount`='',
@@ -425,7 +465,7 @@ Public Class DailyAttendance
                                             `Meal Amount`='',
                                             {inQuery}
                                             `{hari}`='{overTime(0)}',
-                                            `Kehadiran` = '{kehadiranValue}' 
+                                            `Kehadiran` = '{total}' 
                                             WHERE MONTH(`DateMonth`)='{tempDate.ToString("MM")}' AND `NIK` = '{nik}'"
             Else
                 Console.WriteLine("insert daily view")
@@ -525,53 +565,93 @@ Public Class DailyAttendance
 
         Return fa
     End Function
+    Function SortJamKerja(ByRef selisih As Integer) As Integer
+        Dim ResultSelisih As Integer = 0
+        Console.WriteLine("Selisih = " + selisih.ToString)
 
-    Function basicTime(timeIn As String, timeOut As String, ShiftData As String, WorkDay As String, tanggal As String) As Long()
+        If selisih >= 300 And selisih <= 360 Then
+            ResultSelisih = 5 '5 jam
+        ElseIf selisih > 360 And selisih <= 420 Then
+            ResultSelisih = 6 '6 jam
+        ElseIf selisih > 420 And selisih <= 480 Then
+            ResultSelisih = 7 '7 jam
+        ElseIf selisih > 480 And selisih <= 540 Then
+            ResultSelisih = 8 '8 jam
+        ElseIf selisih > 540 And selisih <= 600 Then
+            ResultSelisih = 9 '9 jam
+        ElseIf selisih > 600 And selisih <= 660 Then
+            ResultSelisih = 10 '10 jam
+        ElseIf selisih > 660 And selisih <= 720 Then
+            ResultSelisih = 11 '11 jam
+        End If
+
+        Return ResultSelisih
+    End Function
+    Function basicTime(nik As String, timeIn As String, timeOut As String, ShiftData As String, WorkDay As String, tanggal As String) As Long()
         Dim OutputCounter(2) As Long
         Dim tempTimeIn As DateTime = Convert.ToDateTime(timeIn)
         Dim tempTimeOut As DateTime = Convert.ToDateTime(timeOut)
         Dim OutDate As DateTime
         Dim libur As Boolean = cekLibur(tanggal)
-        If ShiftData = "SHIFT1" Or ShiftData = "SHIFT2" Or ShiftData = "SHIFT3" Then
+        Dim sDayNow As String = CDate(tanggal).ToString("ddd")
+        Console.WriteLine("sDayNow : " + sDayNow)
+        Console.WriteLine("tempIN : " + tempTimeIn.ToString)
+        Console.WriteLine("tempOUT : " + tempTimeOut.ToString)
+        If ShiftData = "SHIFT1" Or ShiftData = "SHIFT2" Or ShiftData = "SHIFT3" Or ShiftData = "PENDEK1" Or ShiftData = "PENDEK2" Or ShiftData = "PENDEK3" Then
             Dim resultDiff As Long
             If tempTimeIn > tempTimeOut Then
                 Dim diffTimeA As Long = DateDiff(DateInterval.Minute, tempTimeIn, #23:59#) + 1
                 Dim diffTimeB As Long = DateDiff(DateInterval.Minute, #00:00#, tempTimeOut) + 1
                 Console.WriteLine("Result Diff A : " + diffTimeA.ToString)
                 Console.WriteLine("Result Diff B : " + diffTimeB.ToString)
-                resultDiff = (diffTimeA + diffTimeB) / 60
+                resultDiff = (diffTimeA + diffTimeB) - 1
             Else
                 Dim diffTimeA As Long = DateDiff(DateInterval.Minute, tempTimeIn, tempTimeOut)
-                resultDiff = (diffTimeA / 60) - 1
+                resultDiff = diffTimeA
+                Console.WriteLine("Result Diff Solo : " + resultDiff.ToString)
             End If
 
-            If libur = False Then
+            Dim hasilSort As Integer = SortJamKerja(resultDiff)
+            Console.WriteLine("hasil Sort : " + hasilSort.ToString)
+            If libur = False Or sDayNow = "Sun" Then
                 If WorkDay = "Sat" Then
                     OutputCounter(0) = 5
-                    OutputCounter(1) = resultDiff - 5
+                    OutputCounter(1) = hasilSort - 5
                 Else
                     OutputCounter(0) = 7
-                    OutputCounter(1) = resultDiff - 7
+                    OutputCounter(1) = hasilSort - 7
                 End If
             Else
                 OutputCounter(0) = 0
-                OutputCounter(1) = resultDiff
+                OutputCounter(1) = hasilSort
             End If
-            Console.WriteLine("Result Diff : " + resultDiff.ToString)
+            Console.WriteLine("Result Diff : " + hasilSort.ToString)
+
         Else
-            Dim diffTimeA As Long = DateDiff(DateInterval.Minute, tempTimeOut, tempTimeIn)
-            Dim resultDiff As Long = (diffTimeA / 60) - 1
-            If libur = False Then
+            Dim resultDiff As Long
+            If tempTimeIn > tempTimeOut Then
+                Dim diffTimeA As Long = DateDiff(DateInterval.Minute, tempTimeIn, #23:59#) + 1
+                Dim diffTimeB As Long = DateDiff(DateInterval.Minute, #00:00#, tempTimeOut) + 1
+                Console.WriteLine("Result Diff A : " + diffTimeA.ToString)
+                Console.WriteLine("Result Diff B : " + diffTimeB.ToString)
+                resultDiff = (diffTimeA + diffTimeB) - 1
+            Else
+                Dim diffTimeA As Long = DateDiff(DateInterval.Minute, tempTimeIn, tempTimeOut)
+                resultDiff = diffTimeA
+                Console.WriteLine("Result Diff Solo : " + resultDiff.ToString)
+            End If
+            Dim hasilSort As Integer = SortJamKerja(resultDiff)
+            If libur = False Or sDayNow = "Sun" Or sDayNow = "Sat" Then
                 If resultDiff > 8 Then
                     OutputCounter(0) = 8
-                    OutputCounter(1) = resultDiff - 8
+                    OutputCounter(1) = hasilSort - 8
                 Else
                     OutputCounter(0) = 8
                     OutputCounter(1) = 0
                 End If
             Else
-                OutputCounter(0) = 0 And
-                OutputCounter(1) = resultDiff
+                OutputCounter(0) = 0
+                OutputCounter(1) = hasilSort
             End If
         End If
         Return OutputCounter

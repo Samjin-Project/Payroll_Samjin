@@ -5,6 +5,13 @@ Public Class RegisterMaster
     Dim f_edit As Boolean = False
     Dim f_create As Boolean = False
     Dim r_index As Integer
+    Protected Overrides ReadOnly Property CreateParams() As CreateParams
+        Get
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ExStyle = cp.ExStyle Or &H2000000
+            Return cp
+        End Get
+    End Property
     Private Sub RegisterMaster_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master employer`"
         dataOnReview(QueryCMD)

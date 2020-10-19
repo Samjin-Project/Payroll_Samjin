@@ -5,13 +5,20 @@ Public Class FingerModify
     Dim cmd As New SqlCommand
     Public QueryUtama As String = "SELECT `NO`,`Time_Upload`,`NIK`,`Nama_Karyawan`,`Date_Finger`,`Shift_Finger`,`On_Duty`,`Off_Duty`,`Check_In`,`Check_Out`,`Departement`,`Finger Status`,`RecFinIN`,`RecFinOut` FROM `finger_employer`"
 
+    Protected Overrides ReadOnly Property CreateParams() As CreateParams
+        Get
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ExStyle = cp.ExStyle Or &H2000000
+            Return cp
+        End Get
+    End Property
     Private Sub FingerModify_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         RadioButton1.Checked = True
         dt_day.Value = DateTime.Now
         DateTimePicker1.Format = DateTimePickerFormat.Custom
         DateTimePicker1.CustomFormat = "HH:mm"
 
-        Dim querycmd As String = $"{QueryUtama} WHERE `Date_Finger` = '{dt_day.Value.ToString("yyyy-dd-MM")}' "
+        Dim querycmd As String = $"{QueryUtama} WHERE `Date_Finger` = '{dt_day.Value.ToString("yyyy-MM-dd")}' "
         DGV_DataModify.Rows.Clear()
         Dim DBClass As DataBaseClass = New DataBaseClass
         Dim ds As DataSet = DBClass.downloadDB(querycmd)
@@ -25,7 +32,7 @@ Public Class FingerModify
                 DGV_DataModify.Rows(i).Cells(8).Value = DateTimePicker1.Value.ToString("HH:mm")
                 Dim recFinger As String = DGV_DataModify.Rows(i).Cells(8).Value
                 Dim Nik As String = DGV_DataModify.Rows(i).Cells(2).Value
-                Dim DateFinger As String = dt_day.Value.ToString("yyyy-dd-MM")
+                Dim DateFinger As String = dt_day.Value.ToString("yyyy-MM-dd")
                 Dim syaratPanjang As Boolean = recFinger.Length = 5
                 Dim syaratInput As Boolean
                 If syaratPanjang Then
@@ -125,7 +132,7 @@ Public Class FingerModify
     End Sub
     Private Sub SortingTabel(sortType As Boolean)
         Dim shift As String = cb_shift.Text
-        Dim datePilihan As String = dt_day.Value.ToString("yyyy-dd-MM")
+        Dim datePilihan As String = dt_day.Value.ToString("yyyy-MM-dd")
         Dim querycmd As String
         If sortType = False Then
             If shift = "ALL" Then
@@ -218,7 +225,8 @@ Public Class FingerModify
         Dim indexRows As Integer = e.RowIndex
         Dim recFinger As String = DGV_DataModify.Rows(indexRows).Cells(8).Value
         Dim Nik As String = DGV_DataModify.Rows(indexRows).Cells(2).Value
-        Dim DateFinger As String = dt_day.Value.ToString("yyyy-dd-MM")
+        Dim queryNik As String = $"SELECT `Nik` FROM `master employer`"
+        Dim DateFinger As String = dt_day.Value.ToString("yyyy-MM-dd")
         Dim syaratPanjang As Boolean = recFinger.Length = 5
         Dim syaratInput As Boolean
         If syaratPanjang Then
@@ -230,6 +238,7 @@ Public Class FingerModify
         If syaratInput Then
             If Convert.ToInt32(recFinger.Substring(0, 2)) < 24 And Convert.ToInt32(recFinger.Substring(3, 2)) < 60 Then
                 Dim DBClass As DataBaseClass = New DataBaseClass
+                Dim dsNik As DataSet = DBClass.downloadDB(QueryNik)
                 Dim querycmd As String
                 If RadioButton1.Checked = True Then
                     querycmd = $"UPDATE `finger_employer` SET `recFinIn` = '{recFinger}', `Modified` = 1 WHERE `NIK` = '{Nik}' And `Date_Finger` = '{DateFinger}'"

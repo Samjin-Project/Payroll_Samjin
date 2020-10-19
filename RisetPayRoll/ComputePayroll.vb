@@ -1,6 +1,13 @@
 ﻿Imports System.Math
 Imports Excel = Microsoft.Office.Interop.Excel
 Public Class ComputePayroll
+    Protected Overrides ReadOnly Property CreateParams() As CreateParams
+        Get
+            Dim cp As CreateParams = MyBase.CreateParams
+            cp.ExStyle = cp.ExStyle Or &H2000000
+            Return cp
+        End Get
+    End Property
     Function GetTable(ds As DataSet) As DataTable
         ' Create new DataTable instance.
         Dim table As New DataTable

@@ -61,9 +61,14 @@ Public Class UploadFingerData
             Console.WriteLine("xaxa " + xaxa)
             Dim expenddt As Date = Date.ParseExact(edate, xaxa, System.Globalization.DateTimeFormatInfo.InvariantInfo)
             Console.WriteLine("masuk Data " + Date_Finger.ToString + "=" + expenddt.ToString("dd-MMM-yyyy"))
-            If Check_In Is Nothing Then
-                Dim masterQuery As String = $"INSERT INTO `finger_employer`(`NIK`, `Nama_Karyawan`, `Date_Finger`, `Shift_Finger`, `On_Duty`, `Off_Duty`, `Check_In`, `Check_Out`, `Departement`,`Finger Status`) 
-                 VALUES ('{DS.Tables(0).Rows(i).Item(0)}',
+            Dim queryNIK As String = $"SELECT `NIK`, `DEPARTMENT` FROM `master employer` WHERE `AC_Nomor` = '{DS.Tables(0).Rows(i).Item(0)}'"
+            Dim dsNik As DataSet = funcDB.downloadDB(queryNIK)
+            Console.WriteLine($"Check In " + Check_In.ToString)
+            If Check_In = "" Then
+                Console.WriteLine("START BOLOS")
+                Dim masterQuery As String = $"INSERT INTO `finger_employer`(`NIK`,`AC_Nomor`, `Nama_Karyawan`, `Date_Finger`, `Shift_Finger`, `On_Duty`, `Off_Duty`, `Check_In`, `Check_Out`, `Departement`,`Finger Status`) 
+                 VALUES ('{dsNik.Tables(0).Rows(0).Item(0).ToString}',
+                         '{DS.Tables(0).Rows(i).Item(0)}',
                          '{DS.Tables(0).Rows(i).Item(1)}',
                          '{expenddt.ToString("yyyy-MM-dd")}',
                          '{DS.Tables(0).Rows(i).Item(3)}',
@@ -71,13 +76,16 @@ Public Class UploadFingerData
                          '{DS.Tables(0).Rows(i).Item(5)}',
                          '{DS.Tables(0).Rows(i).Item(6)}',
                          '{DS.Tables(0).Rows(i).Item(7)}',
-                         '{DS.Tables(0).Rows(i).Item(8)}',
+                         '{dsNik.Tables(0).Rows(0).Item(1).ToString}',
                          '0')"
                 funcDB.uploadDB(masterQuery)
+                Console.WriteLine("END BOLOS")
+
             Else
                 If Check_In.Length > 4 And Check_Out.Length > 4 Then
-                    Dim masterQuery As String = $"INSERT INTO `finger_employer`(`NIK`, `Nama_Karyawan`, `Date_Finger`, `Shift_Finger`, `On_Duty`, `Off_Duty`, `Check_In`, `Check_Out`, `Departement`,`Finger Status`) 
-                 VALUES ('{DS.Tables(0).Rows(i).Item(0)}',
+                    Dim masterQuery As String = $"INSERT INTO `finger_employer`(`NIK`,`AC_Nomor`, `Nama_Karyawan`, `Date_Finger`, `Shift_Finger`, `On_Duty`, `Off_Duty`, `Check_In`, `Check_Out`, `Departement`,`Finger Status`) 
+                 VALUES ('{dsNik.Tables(0).Rows(0).Item(0).ToString}',
+                         '{DS.Tables(0).Rows(i).Item(0)}',
                          '{DS.Tables(0).Rows(i).Item(1)}',
                          '{expenddt.ToString("yyyy-MM-dd")}',
                          '{DS.Tables(0).Rows(i).Item(3)}',
@@ -85,7 +93,7 @@ Public Class UploadFingerData
                          '{DS.Tables(0).Rows(i).Item(5)}',
                          '{DS.Tables(0).Rows(i).Item(6)}',
                          '{DS.Tables(0).Rows(i).Item(7)}',
-                         '{DS.Tables(0).Rows(i).Item(8)}',
+                         '{dsNik.Tables(0).Rows(0).Item(1).ToString}',
                          '1')"
                     funcDB.uploadDB(masterQuery)
                 End If
