@@ -388,12 +388,11 @@ Public Class DailyAttendance
     Function cekDataBulanan(nik As String, cekDate As String) As String
         Dim dateCekData As Date = Date.ParseExact(cekDate, "yy-MM-dd", System.Globalization.DateTimeFormatInfo.InvariantInfo)
         Dim DBClass As DataBaseClass = New DataBaseClass
-        Dim query As String = $"SELECT `attendance` FROM `tabel_bulanan_karyawan` WHERE MONTH(`DateMonth`) = '{dateCekData.ToString("MM")}' AND `NIK` = '{nik}'"
+        '
+        Dim query As String = $"SELECT COUNT(*) FROM `tabel_harian_karyawan1` WHERE `NIK`='{nik}' AND MONTH(`Date`) = '{dateCekData.ToString("MM")}' AND `Absen_Paid` = '0' "
         Dim dsAbsen As DataSet = DBClass.downloadDB(query)
         If dsAbsen.Tables(0).Rows.Count <> 0 Then
             Return dsAbsen.Tables(0).Rows(0).Item(0)
-        Else
-            Return ""
         End If
     End Function
     Function cekOverTime(nik As String, cekDate As Date) As String()
@@ -402,7 +401,11 @@ Public Class DailyAttendance
         Dim dsAbsen As DataSet = DBClass.downloadDB(query)
         Dim outPut As String()
         If dsAbsen.Tables(0).Rows.Count > 0 Then
-            outPut = New String() {dsAbsen.Tables(0).Rows(0).Item(0), dsAbsen.Tables(0).Rows(0).Item(1)}
+            Dim ot As String = dsAbsen.Tables(0).Rows(0).Item(0)
+            If dsAbsen.Tables(0).Rows(0).Item(0) = "0" Then
+                ot = ""
+            End If
+            outPut = New String() {ot, dsAbsen.Tables(0).Rows(0).Item(1)}
         Else
             outPut = New String() {"", ""}
         End If
@@ -425,38 +428,43 @@ Public Class DailyAttendance
         End If
 
         Dim overTime As String() = cekOverTime(nik, tempDate)
-        If overTime(0) <> "" Then
-            Dim updateAtte As String = cekDataBulanan(nik, dateMonth)
-            Dim QueryCreateViewDaily As String
-            If updateAtte <> "" Then
-                Console.WriteLine("update daily view : " + overTime(1))
-                Dim attendance As Integer
-                Dim inQuery As String
-                If overTime(1) = "0" Then
-                    attendance = Convert.ToInt32(updateAtte) + 1
-                    inQuery = $"`attendance`='{attendance}',"
-                Else
-                    inQuery = ""
-                End If
+        'If overTime(0) <> "" Then
+        Dim updateAtte As String = cekDataBulanan(nik, dateMonth)
+        Dim QueryCreateViewDaily As String
+        Dim query As String = $"SELECT COUNT(*) FROM `tabel_bulanan_karyawan` WHERE `NIK`='{nik}' AND MONTH(`DateMonth`) = '{tempDate.ToString("MM")}'"
+        Dim dsAbsen As DataSet = DBClass.downloadDB(query)
 
-                Dim nilaiOt As String = overTime(0)
-                If nilaiOt = "0" Then
-                    nilaiOt = ""
-                End If
-                Dim kehadiran As String = $"SELECT * FROM `tabel_harian_karyawan1` WHERE `NIK`='{nik}' AND `Date` BETWEEN '{tempDate.ToString("yyyy-MM")}-01' AND '{tempDate.ToString("yyyy-MM")}-31' AND `Basic Time` <> '0' AND `Absen_Paid` = '1' "
-                Dim kehadiran1 As String = $"SELECT * FROM `tabel_harian_karyawan1` WHERE `NIK`='{nik}' AND `Date` BETWEEN '{tempDate.ToString("yyyy-MM")}-01' AND '{tempDate.ToString("yyyy-MM")}-31' AND `Basic Time` <> '0' AND `Absen_Paid` = '1' "
-                Dim dsKehadiran As DataSet = DBClass.downloadDB(kehadiran)
-                Dim dsKehadiran1 As DataSet = DBClass.downloadDB(kehadiran1)
-                Dim kehadiranValue As String = "0"
-                Dim kehadiranValue1 As String = "0"
-                If dsKehadiran1 IsNot Nothing Then
-                    kehadiranValue1 = dsKehadiran1.Tables(0).Rows.Count
-                End If
-                If dsKehadiran IsNot Nothing Then
-                    kehadiranValue = dsKehadiran.Tables(0).Rows.Count
-                End If
-                Dim total As String = (CInt(kehadiranValue) + CInt(kehadiranValue1)).ToString
-                QueryCreateViewDaily = $"UPDATE `tabel_bulanan_karyawan` SET 
+        Dim cekRowBulan As Integer = dsAbsen.Tables(0).Rows(0).Item(0)
+
+        If cekRowBulan <> 0 Then
+            Console.WriteLine("update daily view : " + overTime(1))
+            Dim attendance As Integer
+            Dim inQuery As String
+            If overTime(1) = "0" Then
+                attendance = CInt(updateAtte)
+                inQuery = $"`attendance`='{attendance}',"
+            Else
+                inQuery = ""
+            End If
+
+            Dim nilaiOt As String = overTime(0)
+            If nilaiOt = "0" Then
+                nilaiOt = ""
+            End If
+            Dim kehadiran As String = $"SELECT * FROM `tabel_harian_karyawan1` WHERE `NIK`='{nik}' AND `Date` BETWEEN '{tempDate.ToString("yyyy-MM")}-01' AND '{tempDate.ToString("yyyy-MM")}-31'  AND `Absen_Paid` = '1' "
+            Dim kehadiran1 As String = $"SELECT * FROM `tabel_harian_karyawan1` WHERE `NIK`='{nik}' AND `Date` BETWEEN '{tempDate.ToString("yyyy-MM")}-01' AND '{tempDate.ToString("yyyy-MM")}-31'  AND `Absen_Paid` = '2' "
+            Dim dsKehadiran As DataSet = DBClass.downloadDB(kehadiran)
+            Dim dsKehadiran1 As DataSet = DBClass.downloadDB(kehadiran1)
+            Dim kehadiranValue As String = "0"
+            Dim kehadiranValue1 As String = "0"
+            If dsKehadiran1 IsNot Nothing Then
+                kehadiranValue1 = dsKehadiran1.Tables(0).Rows.Count
+            End If
+            If dsKehadiran IsNot Nothing Then
+                kehadiranValue = dsKehadiran.Tables(0).Rows.Count
+            End If
+            Dim total As String = (CInt(kehadiranValue) + CInt(kehadiranValue1)).ToString
+            QueryCreateViewDaily = $"UPDATE `tabel_bulanan_karyawan` SET 
                                             `Transport`='',
                                             `Transport_Amount`='',
                                             `Shift`='',
@@ -467,30 +475,30 @@ Public Class DailyAttendance
                                             `{hari}`='{overTime(0)}',
                                             `Kehadiran` = '{total}' 
                                             WHERE MONTH(`DateMonth`)='{tempDate.ToString("MM")}' AND `NIK` = '{nik}'"
+        Else
+            Console.WriteLine("insert daily view")
+            Console.WriteLine("overtime 1")
+
+
+            Dim attendance(2) As String
+            If overTime(1) = "False" Then
+                attendance = {"`attendance`,", "'1',"}
             Else
-                Console.WriteLine("insert daily view")
-                Console.WriteLine("overtime 1")
+                attendance = {"`attendance`,", "'0',"}
+            End If
+            dateMonth = tempDate.ToString("yyyy-MM-dd")
+            Dim nilaiOt As String = overTime(0)
+            If nilaiOt = "0" Then
+                nilaiOt = ""
+            End If
+            Dim kehadiran As String = $"SELECT * FROM `tabel_harian_karyawan1` WHERE `NIK`='{nik}' AND `Date` BETWEEN '{tempDate.ToString("yyyy-MM")}-01' AND '{tempDate.ToString("yyyy-MM")}-31' AND `Basic Time` <> '0' AND `Absen_Paid` = '1' "
+            Dim dsKehadiran As DataSet = DBClass.downloadDB(kehadiran)
+            Dim kehadiranValue As String = "0"
+            If dsKehadiran Is Nothing Then
+                kehadiranValue = dsKehadiran.Tables(0).Rows.Count
+            End If
 
-
-                Dim attendance(2) As String
-                If overTime(1) = "False" Then
-                    attendance = {"`attendance`,", "'1',"}
-                Else
-                    attendance = {"`attendance`,", "'0',"}
-                End If
-                dateMonth = tempDate.ToString("yyyy-MM-dd")
-                Dim nilaiOt As String = overTime(0)
-                If nilaiOt = "0" Then
-                    nilaiOt = ""
-                End If
-                Dim kehadiran As String = $"SELECT * FROM `tabel_harian_karyawan1` WHERE `NIK`='{nik}' AND `Date` BETWEEN '{tempDate.ToString("yyyy-MM")}-01' AND '{tempDate.ToString("yyyy-MM")}-31' AND `Basic Time` <> '0' AND `Absen_Paid` = '1' "
-                Dim dsKehadiran As DataSet = DBClass.downloadDB(kehadiran)
-                Dim kehadiranValue As String = "0"
-                If dsKehadiran Is Nothing Then
-                    kehadiranValue = dsKehadiran.Tables(0).Rows.Count
-                End If
-
-                QueryCreateViewDaily = $"INSERT INTO `tabel_bulanan_karyawan`(`NIK`, `Name`,`DateMonth`, `Department`, `Transport`, `Transport_Amount`, `Shift`, `Shift_Amount`, `Meal`, `Meal Amount`, {attendance(0)}`{hari}`,`Kehadiran`, `BasicSalary`) VALUES 
+            QueryCreateViewDaily = $"INSERT INTO `tabel_bulanan_karyawan`(`NIK`, `Name`,`DateMonth`, `Department`, `Transport`, `Transport_Amount`, `Shift`, `Shift_Amount`, `Meal`, `Meal Amount`, {attendance(0)}`{hari}`,`Kehadiran`, `BasicSalary`) VALUES 
                                         (
                                             '{nik}',
                                             '{nama}',
@@ -506,9 +514,9 @@ Public Class DailyAttendance
                                             '{nilaiOt}',
                                             '{kehadiranValue}',
                                             '') "
-            End If
-            DBClass.uploadDB(QueryCreateViewDaily)
         End If
+        DBClass.uploadDB(QueryCreateViewDaily)
+        'End If
 
     End Sub
     Function getVcationDate(ds As DataSet, dateNow As String) As Date

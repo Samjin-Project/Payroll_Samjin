@@ -22,11 +22,12 @@ Partial Class ViewDailyAttendance
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.b_clear = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.tb_emp = New System.Windows.Forms.TextBox()
@@ -82,7 +83,6 @@ Partial Class ViewDailyAttendance
         Me.KolomHasil_D30 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.KolomHasil_D31 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.KolomHasil_Total = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.b_clear = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -115,6 +115,15 @@ Partial Class ViewDailyAttendance
         Me.GroupBox1.TabIndex = 24
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Sorting"
+        '
+        'b_clear
+        '
+        Me.b_clear.Location = New System.Drawing.Point(293, 56)
+        Me.b_clear.Name = "b_clear"
+        Me.b_clear.Size = New System.Drawing.Size(98, 21)
+        Me.b_clear.TabIndex = 43
+        Me.b_clear.Text = "CLEAR"
+        Me.b_clear.UseVisualStyleBackColor = True
         '
         'Button2
         '
@@ -213,7 +222,7 @@ Partial Class ViewDailyAttendance
         'cb_dep
         '
         Me.cb_dep.FormattingEnabled = True
-        Me.cb_dep.Items.AddRange(New Object() {"PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING"})
+        Me.cb_dep.Items.AddRange(New Object() {"PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING", "SMD"})
         Me.cb_dep.Location = New System.Drawing.Point(232, 19)
         Me.cb_dep.Name = "cb_dep"
         Me.cb_dep.Size = New System.Drawing.Size(171, 21)
@@ -225,14 +234,14 @@ Partial Class ViewDailyAttendance
         Me.DGV_ReviewDaily.AllowUserToDeleteRows = False
         Me.DGV_ReviewDaily.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
         Me.DGV_ReviewDaily.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGV_ReviewDaily.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGV_ReviewDaily.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DGV_ReviewDaily.ColumnHeadersHeight = 30
         Me.DGV_ReviewDaily.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DGV_ReviewDaily.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.KolomHasil_NIK, Me.KolomHasil_Nama, Me.KolomHasil_Departement, Me.kolom_bulan, Me.KolomHasil_Transport, Me.KolomHasil_TransportAmount, Me.KolomHasil_Shift, Me.KolomHasil_ShiftAmount, Me.KolomHasil_Meal, Me.KolomHasil_MealAmount, Me.KolomHasil_Attendance, Me.KolomHasil_D1, Me.KolomHasil_D2, Me.KolomHasil_D3, Me.KolomHasil_D4, Me.KolomHasil_D5, Me.KolomHasil_D6, Me.KolomHasil_D7, Me.KolomHasil_D8, Me.KolomHasil_D9, Me.KolomHasil_D10, Me.KolomHasil_D11, Me.KolomHasil_D12, Me.KolomHasil_D13, Me.KolomHasil_D14, Me.KolomHasil_D15, Me.KolomHasil_D16, Me.KolomHasil_D17, Me.KolomHasil_D18, Me.KolomHasil_D19, Me.KolomHasil_D20, Me.KolomHasil_D21, Me.KolomHasil_D22, Me.KolomHasil_D23, Me.KolomHasil_D24, Me.KolomHasil_D25, Me.KolomHasil_D26, Me.KolomHasil_D27, Me.KolomHasil_D28, Me.KolomHasil_D29, Me.KolomHasil_D30, Me.KolomHasil_D31, Me.KolomHasil_Total})
@@ -242,16 +251,16 @@ Partial Class ViewDailyAttendance
         Me.DGV_ReviewDaily.MultiSelect = False
         Me.DGV_ReviewDaily.Name = "DGV_ReviewDaily"
         Me.DGV_ReviewDaily.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DGV_ReviewDaily.RowsDefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DGV_ReviewDaily.RowsDefaultCellStyle = DataGridViewCellStyle3
         Me.DGV_ReviewDaily.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DGV_ReviewDaily.Size = New System.Drawing.Size(1184, 523)
         Me.DGV_ReviewDaily.TabIndex = 22
         '
         'KolomHasil_NIK
         '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.KolomHasil_NIK.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.KolomHasil_NIK.DefaultCellStyle = DataGridViewCellStyle2
         Me.KolomHasil_NIK.HeaderText = "Emp No."
         Me.KolomHasil_NIK.Name = "KolomHasil_NIK"
         Me.KolomHasil_NIK.Width = 73
@@ -507,15 +516,6 @@ Partial Class ViewDailyAttendance
         Me.KolomHasil_Total.HeaderText = "Total"
         Me.KolomHasil_Total.Name = "KolomHasil_Total"
         Me.KolomHasil_Total.Width = 56
-        '
-        'b_clear
-        '
-        Me.b_clear.Location = New System.Drawing.Point(293, 56)
-        Me.b_clear.Name = "b_clear"
-        Me.b_clear.Size = New System.Drawing.Size(98, 21)
-        Me.b_clear.TabIndex = 43
-        Me.b_clear.Text = "CLEAR"
-        Me.b_clear.UseVisualStyleBackColor = True
         '
         'ViewDailyAttendance
         '

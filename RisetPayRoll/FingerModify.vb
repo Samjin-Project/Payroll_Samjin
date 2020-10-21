@@ -259,7 +259,6 @@ Public Class FingerModify
         If syaratInput Then
             If Convert.ToInt32(recFinger.Substring(0, 2)) < 24 And Convert.ToInt32(recFinger.Substring(3, 2)) < 60 Then
                 Dim DBClass As DataBaseClass = New DataBaseClass
-                Dim dsNik As DataSet = DBClass.downloadDB(QueryNik)
                 Dim querycmd As String
                 If RadioButton1.Checked = True Then
                     querycmd = $"UPDATE `finger_employer` SET `recFinIn` = '{recFinger}', `Modified` = 1 WHERE `NIK` = '{Nik}' And `Date_Finger` = '{DateFinger}'"

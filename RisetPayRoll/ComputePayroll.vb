@@ -20,28 +20,28 @@ Public Class ComputePayroll
         table.Columns.Add("DEPT", GetType(String))
         table.Columns.Add("HIRE OF DATE", GetType(String))
         table.Columns.Add("STATUS", GetType(String))
-        table.Columns.Add("BASIC SALARY", GetType(Integer))
-        table.Columns.Add("LEMBUR / JAM HARI KERJA", GetType(Integer))
-        table.Columns.Add("JAMSOST (1.19% x BS)", GetType(Integer))
-        table.Columns.Add("BPJS KESEHATAN", GetType(Integer))
-        table.Columns.Add("MANAGM FEE 8 % x BASIC SALARY", GetType(Integer))
-        table.Columns.Add("DAYS / WEEK", GetType(Integer))
-        table.Columns.Add("FORMULA PEMBAGI", GetType(Integer))
-        table.Columns.Add("DAYS ACTIVE", GetType(Integer))
-        table.Columns.Add("JAM LEMBUR HARI KERJA", GetType(Integer))
-        table.Columns.Add("BASIC SALARY ", GetType(Integer))
-        table.Columns.Add("OVERTIME WAGES", GetType(Integer))
-        table.Columns.Add("UANG MAKAN PUASA", GetType(Integer))
-        table.Columns.Add("JAMSOST (1.19% x BS) ", GetType(Integer))
-        table.Columns.Add("BPJS KESEHATAN ", GetType(Integer))
-        table.Columns.Add("SUB TOTAL (GROSS SALARY)", GetType(Integer))
-        table.Columns.Add("MANAGM FEE 8% X BASIC SALARY ", GetType(Integer))
-        table.Columns.Add("TOTAL", GetType(Integer))
-        table.Columns.Add("GROSS SALARY", GetType(Integer))
-        table.Columns.Add("JAMSOST(1.19% x BS)  ", GetType(Integer))
-        table.Columns.Add("BPJS KESEHATAN  ", GetType(Integer))
-        table.Columns.Add("SUB TOTAL", GetType(Integer))
-        table.Columns.Add("TAKE HOME PAY", GetType(Integer))
+        table.Columns.Add("BASIC SALARY", GetType(String))
+        table.Columns.Add("LEMBUR / JAM HARI KERJA", GetType(String))
+        table.Columns.Add("JAMSOST (1.19% x BS)", GetType(String))
+        table.Columns.Add("BPJS KESEHATAN", GetType(String))
+        table.Columns.Add("MANAGM FEE 8 % x BASIC SALARY", GetType(String))
+        table.Columns.Add("DAYS / WEEK", GetType(String))
+        table.Columns.Add("FORMULA PEMBAGI", GetType(String))
+        table.Columns.Add("DAYS ACTIVE", GetType(String))
+        table.Columns.Add("JAM LEMBUR HARI KERJA", GetType(String))
+        table.Columns.Add("BASIC SALARY ", GetType(String))
+        table.Columns.Add("OVERTIME WAGES", GetType(String))
+        table.Columns.Add("UANG MAKAN PUASA", GetType(String))
+        table.Columns.Add("JAMSOST (1.19% x BS) ", GetType(String))
+        table.Columns.Add("BPJS KESEHATAN ", GetType(String))
+        table.Columns.Add("SUB TOTAL (GROSS SALARY)", GetType(String))
+        table.Columns.Add("MANAGM FEE 8% X BASIC SALARY ", GetType(String))
+        table.Columns.Add("TOTAL", GetType(String))
+        table.Columns.Add("GROSS SALARY", GetType(String))
+        table.Columns.Add("JAMSOST(1.19% x BS)  ", GetType(String))
+        table.Columns.Add("BPJS KESEHATAN  ", GetType(String))
+        table.Columns.Add("SUB TOTAL", GetType(String))
+        table.Columns.Add("TAKE HOME PAY", GetType(String))
 
         Dim DBClass As DataBaseClass = New DataBaseClass
 
@@ -59,31 +59,82 @@ Public Class ComputePayroll
             hairDate = ds.Tables(0).Rows(i).Item(4)
             status = ds.Tables(0).Rows(i).Item(5)
 
-            Dim QueryPayroll As String = $"SELECT `BasicSalary`,`Gross_Salary`,`managFee_salary`,`payFromSamjin`,`jamsostek`,`bpjs`,`deduction`,`takeHomePay` FROM `tabel_bulanan_karyawan` WHERE `Department` = '{dep}' AND `NIK` = '{nik}'"
+            Dim QueryPayroll As String = $"SELECT `BasicSalary`,`Gross_Salary`,`managFee_salary`,`payFromSamjin`,`jamsostek`,`bpjs`,`deduction`,`takeHomePay`,`kehadiran`,`total_OT`, DATE_FORMAT(`DateMonth`,""%d/%m/%Y""),`Ot_wages`,`Attendance` FROM `tabel_bulanan_karyawan` WHERE `Department` = '{dep}' AND `NIK` = '{nik}'"
+            Dim queryBase As String = "SELECT * FROM `tabel_basic_payroll` "
+            Dim querySalary As String = $"SELECT `Salary` FROM `master employer` WHERE `NIK` = '{nik}'"
             Dim dsPayroll As DataSet = DBClass.downloadDB(QueryPayroll)
+            Dim dsBasePayRoll As DataSet = DBClass.downloadDB(queryBase)
+            Dim salary As DataSet = DBClass.downloadDB(querySalary)
 
-            Dim pureSalary, otSalary, jamsostSalary, managfeeSalary, grossSalary, deductin, paymentFromSamjin, takeHomePay, bpjs As Integer
-
+            Dim kehadiran, totalOT, attendance, totalHadir As Integer
+            Dim makanPuasa, pureSalary, basicSalary, otSalary, jamsostSalary, managfeeSalary, grossSalary, deductin, paymentFromSamjin, takeHomePay, bpjs, upahLembur, jumlahHAriKerja, bulan As String
+            Dim tanggal As String = ""
             If dsPayroll.Tables(0).Rows.Count <> 0 Then
-                pureSalary = CInt(dsPayroll.Tables(0).Rows(0).Item(0))
-                grossSalary = CInt(dsPayroll.Tables(0).Rows(0).Item(1))
-                managfeeSalary = CInt(dsPayroll.Tables(0).Rows(0).Item(2))
-                paymentFromSamjin = CInt(dsPayroll.Tables(0).Rows(0).Item(3))
-                jamsostSalary = CInt(dsPayroll.Tables(0).Rows(0).Item(4))
-                bpjs = CInt(dsPayroll.Tables(0).Rows(0).Item(5))
-                deductin = CInt(dsPayroll.Tables(0).Rows(0).Item(6))
-                takeHomePay = CInt(dsPayroll.Tables(0).Rows(0).Item(7))
+                basicSalary = makeDot((dsPayroll.Tables(0).Rows(0).Item(0)).ToString)
+                grossSalary = makeDot((dsPayroll.Tables(0).Rows(0).Item(1)).ToString)
+                managfeeSalary = makeDot((dsPayroll.Tables(0).Rows(0).Item(2)).ToString)
+                jamsostSalary = makeDot((dsPayroll.Tables(0).Rows(0).Item(4)).ToString)
+                bpjs = makeDot((dsPayroll.Tables(0).Rows(0).Item(5)).ToString)
+                deductin = makeDot((dsPayroll.Tables(0).Rows(0).Item(6)).ToString)
+                takeHomePay = makeDot((dsPayroll.Tables(0).Rows(0).Item(7)).ToString)
 
-                table.Rows.Add(i + 1, nik, nama, posisi, dep, hairDate, status, pureSalary, grossSalary, managfeeSalary, paymentFromSamjin, grossSalary, jamsostSalary, bpjs, deductin, takeHomePay)
-                'table.Rows.Add(i + 1, nik, nama, posisi, dep, hairDate, status, pureSalary, grossSalary, managfeeSalary, paymentFromSamjin, grossSalary, jamsostSalary, bpjs, deductin, takeHomePay)
-                'table.Rows.Add(i + 1, nik, nama, posisi, dep, hairDate, status, pureSalary, grossSalary, managfeeSalary, paymentFromSamjin, grossSalary, jamsostSalary, bpjs, deductin, takeHomePay)
+                kehadiran = CInt(dsPayroll.Tables(0).Rows(0).Item(8))
+                totalOT = CInt(dsPayroll.Tables(0).Rows(0).Item(9))
+
+                tanggal = makeDot(dsPayroll.Tables(0).Rows(0).Item(10).ToString)
+                otSalary = makeDot((dsPayroll.Tables(0).Rows(0).Item(11)).ToString)
+                attendance = CInt((dsPayroll.Tables(0).Rows(0).Item(12)))
+
+
+                upahLembur = makeDot((dsBasePayRoll.Tables(0).Rows(0).Item(2)).ToString)
+                makanPuasa = makeDot((dsBasePayRoll.Tables(0).Rows(0).Item(6)).ToString)
+
+                pureSalary = makeDot((salary.Tables(0).Rows(0).Item(0)).ToString)
+                totalHadir = kehadiran - attendance
+
+                'PCBA -(Ayu Elia Letari ) 2020018
+                'RUBBER -(Fitria Nurmegawati E ) 20190198
+                'MOULDING -(Sumarni) 20110126
+                'ASSEMBLING -(Tati Suryati ) 20110220
+                'PURCHASING
+
+
+                Dim expenddt As DateTime = DateTime.ParseExact(tanggal, "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
+
+                bulan = DateTime.DaysInMonth(expenddt.Year, expenddt.Month)
+
+                If dep = "PCBA" And dep = "RUBBER" And dep = "MOULDING" Then
+                    jumlahHAriKerja = 5
+                Else
+                    jumlahHAriKerja = 6
+                End If
+
+                table.Rows.Add(i + 1, nik, nama, posisi, dep, hairDate, status, pureSalary, upahLembur, jamsostSalary, bpjs, managfeeSalary, jumlahHAriKerja, bulan, totalHadir, totalOT, basicSalary, otSalary, makanPuasa, jamsostSalary, bpjs, grossSalary, managfeeSalary, paymentFromSamjin, grossSalary, jamsostSalary, bpjs, deductin, takeHomePay)
                 Console.WriteLine("RowCount " + table.Rows.Count.ToString)
-                Console.WriteLine($"table.Rows.Add({i + 1}, {nik}, {nama}, {posisi}, {dep}, {hairDate}, {status}, {pureSalary}, {grossSalary}, {managfeeSalary}, {paymentFromSamjin}, {grossSalary}, {jamsostSalary}, {bpjs}, {deductin}, {takeHomePay})")
+                Console.WriteLine($"table.Rows.Add({i + 1}, {nik}, {nama}, {posisi}, {dep}, {hairDate}, {status}, {basicSalary}, {grossSalary}, {managfeeSalary}, {paymentFromSamjin}, {grossSalary}, {jamsostSalary}, {bpjs}, {deductin}, {takeHomePay})")
             Else
-                table.Rows.Add(i + 1, nik, nama, posisi, dep, hairDate, status, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                table.Rows.Add(i + 1, nik, nama, posisi, dep, hairDate, status, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
             End If
         Next
         Return table
+    End Function
+    Function makeDot(tempValueInput As String) As String
+        If tempValueInput.Length > 3 And tempValueInput.Length < 7 Then
+            Dim tempSubValue0 As String = tempValueInput.Substring(0, tempValueInput.Length - 3)
+            Dim tempSubValue1 As String = tempValueInput.Substring(tempValueInput.Length - 3, 3)
+            tempValueInput = tempSubValue0 + "," + tempSubValue1
+            Return tempValueInput
+        ElseIf tempValueInput.Length > 6 And tempValueInput.Length < 10 Then
+
+            Dim tempSubValue0 As String = tempValueInput.Substring(0, tempValueInput.Length - 6)
+            Dim tempSubValue1 As String = tempValueInput.Substring(tempValueInput.Length - 6, 3)
+            Dim tempSubValue2 As String = tempValueInput.Substring(tempValueInput.Length - 3, 3)
+            tempValueInput = tempSubValue0 + "," + tempSubValue1 + "," + tempSubValue2
+            Return tempValueInput
+        Else
+            Return tempValueInput
+        End If
+        Console.WriteLine("make dot done")
     End Function
     Public Sub saveExcelFile(ByVal FileName As String)
         Dim nik As String = ""
@@ -310,8 +361,9 @@ Public Class ComputePayroll
         Dim queryDep As String = $"SELECT `NIK`, `Nama_Karyawan`, `Salary`, `statusBpjs` FROM `master employer` WHERE `Department` = '{dep}' AND `StatusAktive` = '1'"
         Dim dsMaster As DataSet = DBClass.downloadDB(queryDep)
         Dim indexMaster As Integer = dsMaster.Tables(0).Rows.Count
+        Console.WriteLine("indMAs : " + indexMaster.ToString)
         For i As Integer = 0 To indexMaster - 1
-            Dim nik, nama, salary, hariKerja As String
+            Dim nik, nama, salary, hariKerja, attendance As String
             Dim statusBpjs As Boolean
             nik = dsMaster.Tables(0).Rows(i).Item(0)
             nama = dsMaster.Tables(0).Rows(i).Item(1)
@@ -323,16 +375,19 @@ Public Class ComputePayroll
             Dim dsPayroll As DataSet = DBClass.downloadDB(queryall)
             If dsPayroll.Tables(0).Rows.Count <> 0 Then
                 hariKerja = dsPayroll.Tables(0).Rows(0).Item(44)
+                attendance = dsPayroll.Tables(0).Rows(0).Item(11)
                 Dim jumlahLembur As Integer = 0
+
                 For j As Integer = 0 To 30
                     Dim tempOT As String = dsPayroll.Tables(0).Rows(0).Item(j + 12)
+                    Console.WriteLine("tempOT : " + tempOT)
                     If tempOT = "" Then
                         tempOT = "0"
                     End If
-                    Dim loopOt As Integer = CInt(tempOT)
-                    jumlahLembur += loopOt
+                    jumlahLembur += CInt(tempOT)
                 Next
-                dataPayrol = FormulaPayroll(CDbl(salary), hariKerja, jumlahLembur, bulan, statusBpjs)
+
+                dataPayrol = FormulaPayroll(CDbl(salary), CInt(hariKerja), CInt(attendance), jumlahLembur, bulan, statusBpjs)
 
                 Dim pureSalary, otSalary, jamsostSalary, managfeeSalary, grossSalary, deductin, paymentFromSamjin, takeHomePay, bpjs
 
@@ -354,7 +409,7 @@ Public Class ComputePayroll
                                                 `Gross_Salary`='{grossSalary}',
                                                 `managFee_salary`='{managfeeSalary}',
                                                 `payFromSamjin`='{paymentFromSamjin}',
-                                                `bpjs`='{bpjs}'
+                                                `bpjs`='{bpjs}',
                                                 `deduction`='{deductin}',
                                                 `takeHomePay`='{takeHomePay}' 
                                                 WHERE `NIK` = '{nik}' AND MONTH(`DateMonth`) = '{bulan.ToString("MM")}'"
@@ -363,7 +418,7 @@ Public Class ComputePayroll
         Next
 
     End Sub
-    Function FormulaPayroll(basicSalary As Double, hariKerja As Integer, jumlahLembur As Integer, bulan As Date, StatusBpjs As Boolean) As String()
+    Function FormulaPayroll(basicSalary As Double, hariKerja As Integer, attendance As Integer, jumlahLembur As Integer, bulan As Date, StatusBpjs As Boolean) As String()
         Dim DBClass As DataBaseClass = New DataBaseClass
         Dim query As String = $"SELECT * FROM `tabel_basic_payroll`"
         Dim dsFormula As DataSet = DBClass.downloadDB(query)
@@ -381,10 +436,11 @@ Public Class ComputePayroll
             bpjs = 0
         End If
 
-        Dim pureSalary As Double = (basicSalary / indexHari) * hariKerja
+        Dim pureSalary As Double = basicSalary / indexHari * (hariKerja - attendance)
+        Console.WriteLine($"rumus pure : {basicSalary} / {indexHari} * ({hariKerja} - {attendance})")
         Dim otSalary As Double = upahLembur * jumlahLembur
-        Dim jamsostSalary As Double = Math.Round(pureSalary * Math.Round(jamsostek, 4), 0)
-        Dim managfeeSalary As Double = Math.Round(pureSalary * Math.Round(managFee, 4), 0)
+        Dim jamsostSalary As Double = Math.Round(basicSalary * Math.Round(jamsostek, 4), 0)
+        Dim managfeeSalary As Double = Math.Round(basicSalary * Math.Round(managFee, 4), 0)
         Dim grossSalary As Double = Math.Round((otSalary + pureSalary + jamsostSalary + bpjs), 0)
         Dim deductin As Double = Math.Round((jamsostSalary + bpjs), 0)
 
@@ -405,11 +461,17 @@ Public Class ComputePayroll
     End Function
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        createPayroll("ASSEMBLING", dt_month.Value)
+        For Each obj In ComboBoxDep.Items
+            Dim item = TryCast(obj, String)
+            If Not item Is Nothing Then
+                Console.WriteLine("item : " + item)
+                createPayroll(item, dt_month.Value)
+            End If
+        Next
         MsgBox("Create Payroll Done")
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles b_export.Click
         Dim saveFileDialog1 As New SaveFileDialog
         saveFileDialog1.Filter = "Excel File|*.xls"
         saveFileDialog1.Title = "Save an Excel File"

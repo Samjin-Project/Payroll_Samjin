@@ -1,6 +1,11 @@
 ﻿Public Class ViewDailyAttendance
     Dim flag As Boolean = False
     Dim QueryCMD As String = "SELECT * FROM `tabel_bulanan_karyawan`"
+    Public Shared Sub SetDoubleBuffered(ByVal c As System.Windows.Forms.Control)
+        If System.Windows.Forms.SystemInformation.TerminalServerSession Then Return
+        Dim aProp As System.Reflection.PropertyInfo = GetType(System.Windows.Forms.Control).GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic Or System.Reflection.BindingFlags.Instance)
+        aProp.SetValue(c, True, Nothing)
+    End Sub
     Protected Overrides ReadOnly Property CreateParams() As CreateParams
         Get
             Dim cp As CreateParams = MyBase.CreateParams
@@ -9,6 +14,7 @@
         End Get
     End Property
     Private Sub ViewDailyAttendance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SetDoubleBuffered(DGV_ReviewDaily)
         cb_dep.Text = "PCBA"
         Dim query As String = $"{QueryCMD} WHERE `Department` = '{cb_dep.Text}'"
         showData(query)
@@ -16,7 +22,7 @@
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Dim saveFileDialog1 As New SaveFileDialog
-        saveFileDialog1.Filter = "Excel File|*.xls"
+        saveFileDialog1.Filter = "Excel File|*.xls,*.xlsx"
         saveFileDialog1.Title = "Save an Excel File"
         saveFileDialog1.ShowDialog()
         If saveFileDialog1.FileName <> "" Then
@@ -145,7 +151,7 @@
     Function jumlah(ds As DataSet, x As Integer) As String
         Dim tempNilai As Integer = 0
         For i As Integer = 0 To 30
-            Dim valueTemp As String = ds.Tables(0).Rows(x).Item(i + 10)
+            Dim valueTemp As String = ds.Tables(0).Rows(x).Item(i + 12)
             If valueTemp = "" Then
                 valueTemp = "0"
             End If
@@ -159,7 +165,8 @@
         Dim ds As DataSet = DBClass.downloadDB(QueryOnReview)
         Dim indexDs As Integer = ds.Tables(0).Rows.Count
         For i As Integer = 0 To indexDs - 1
-            Dim dateCekData As Date = DateTime.ParseExact(ds.Tables(0).Rows(i).Item(3), "yyyy-MM-dd", System.Globalization.DateTimeFormatInfo.InvariantInfo)
+            Console.WriteLine("date test1: " + ds.Tables(0).Rows(i).Item(3).ToString)
+            Dim dateCekData As Date = DateTime.ParseExact(ds.Tables(0).Rows(i).Item(3).ToString.Substring(0, 10), "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
             Dim row As String() = New String() {ds.Tables(0).Rows(i).Item(1),
             ds.Tables(0).Rows(i).Item(2),
             ds.Tables(0).Rows(i).Item(4),
