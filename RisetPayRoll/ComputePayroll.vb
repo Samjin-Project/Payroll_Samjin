@@ -290,22 +290,42 @@ Public Class ComputePayroll
 
     Private Sub detailEmpSal(nik As String)
         Dim tgl As String = dt_month.Value.ToString("yyyy-MM")
-        Dim querycmd As String = $"SELECT `BasicSalary`, `attendance`, `Total_OT`, `Ot_wages`, `jamsostek`, `bpjs`  FROM `tabel_bulanan_karyawan` WHERE `NIK` = '{nik}' AND `DateMonth` LIKE '{tgl}%'"
+        Dim querycmd As String = $"SELECT `BasicSalary`, `Kehadiran`, `Total_OT`, `Ot_wages`, `jamsostek`, `bpjs`  FROM `tabel_bulanan_karyawan` WHERE `NIK` = '{nik}' AND `DateMonth` LIKE '{tgl}%'"
+        Dim querymaster As String = $"SELECT `Salary` FROM `master employer` WHERE `NIK` = '{nik}'"
+        Dim basicSal As Double
+
+        Dim DBmaster As DataBaseClass = New DataBaseClass
+        Dim dm As DataSet = DBmaster.downloadDB(querymaster)
+        If dm.Tables(0).Rows.Count > 0 Then
+            basicSal = Double.Parse(dm.Tables(0).Rows(0).Item(0))
+            tb_basicSal.Text = basicSal.ToString("##,##,###")
+        Else
+            tb_basicSal.Text = ""
+        End If
+
         Dim DBClass As DataBaseClass = New DataBaseClass
         Dim ds As DataSet = DBClass.downloadDB(querycmd)
         Dim indexDs As Integer = ds.Tables(0).Rows.Count
         If indexDs > 0 Then
-            Dim basic As Double = ds.Tables(0).Rows(0).Item(0)
+            Dim cut As Double = (ds.Tables(0).Rows(0).Item(0))
             Dim jamsos As Double = ds.Tables(0).Rows(0).Item(4)
             Dim bpjs As Double = ds.Tables(0).Rows(0).Item(5)
             Dim wages As Double = ds.Tables(0).Rows(0).Item(3)
-            tb_basicSal.Text = basic.ToString("##,##,###")
+            Dim deduct As Double = cut + jamsos + bpjs
+            Dim sup As Double = basicSal + jamsos + bpjs + wages
+
+            tb_potsal.Text = cut.ToString("##,##,###")
             tb_ot.Text = ds.Tables(0).Rows(0).Item(2)
             tb_attendance.Text = ds.Tables(0).Rows(0).Item(1)
             tb_otwages.Text = wages.ToString("##,##,###")
             tb_jamsostek.Text = jamsos.ToString("##,##,###")
             tb_bpjs.Text = bpjs.ToString("##,##,###")
-            tb_potsal.Text = (tb_attendance.Text * (tb_basicSal.Text / 20)).ToString("##,##,###")
+            tb_jamsostekPot.Text = jamsos.ToString("##,##,###")
+            tb_bpjsPot.Text = bpjs.ToString("##,##,###")
+
+            tb_sup.Text = sup.ToString("##,##,###")
+            tb_deduct.Text = deduct.ToString("##,##,###")
+            tb_total.Text = (sup - deduct).ToString("##,##,###")
         Else
             tb_basicSal.Text = ""
             tb_ot.Text = ""
@@ -314,6 +334,11 @@ Public Class ComputePayroll
             tb_jamsostek.Text = ""
             tb_bpjs.Text = ""
             tb_potsal.Text = ""
+            tb_bpjsPot.Text = ""
+            tb_jamsostekPot.Text = ""
+            tb_sup.Text = ""
+            tb_deduct.Text = ""
+            tb_total.Text = ""
             MsgBox("Data belum tersedia", MsgBoxStyle.Information, "Compute Payroll Samjin")
         End If
 

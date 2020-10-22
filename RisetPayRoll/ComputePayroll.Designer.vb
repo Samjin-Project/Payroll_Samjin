@@ -47,14 +47,14 @@ Partial Class ComputePayroll
         Me.Label39 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel6 = New System.Windows.Forms.Panel()
-        Me.TextBox13 = New System.Windows.Forms.TextBox()
-        Me.TextBox23 = New System.Windows.Forms.TextBox()
-        Me.TextBox24 = New System.Windows.Forms.TextBox()
+        Me.tb_total = New System.Windows.Forms.TextBox()
+        Me.tb_sup = New System.Windows.Forms.TextBox()
+        Me.tb_deduct = New System.Windows.Forms.TextBox()
         Me.TextBox12 = New System.Windows.Forms.TextBox()
         Me.TextBox14 = New System.Windows.Forms.TextBox()
         Me.TextBox15 = New System.Windows.Forms.TextBox()
         Me.TextBox16 = New System.Windows.Forms.TextBox()
-        Me.TextBox17 = New System.Windows.Forms.TextBox()
+        Me.tb_bpjsPot = New System.Windows.Forms.TextBox()
         Me.tb_potsal = New System.Windows.Forms.TextBox()
         Me.tb_jamsostekPot = New System.Windows.Forms.TextBox()
         Me.TextBox11 = New System.Windows.Forms.TextBox()
@@ -334,14 +334,14 @@ Partial Class ComputePayroll
         '
         Me.Panel6.AutoScroll = True
         Me.Panel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Panel6.Controls.Add(Me.TextBox13)
-        Me.Panel6.Controls.Add(Me.TextBox23)
-        Me.Panel6.Controls.Add(Me.TextBox24)
+        Me.Panel6.Controls.Add(Me.tb_total)
+        Me.Panel6.Controls.Add(Me.tb_sup)
+        Me.Panel6.Controls.Add(Me.tb_deduct)
         Me.Panel6.Controls.Add(Me.TextBox12)
         Me.Panel6.Controls.Add(Me.TextBox14)
         Me.Panel6.Controls.Add(Me.TextBox15)
         Me.Panel6.Controls.Add(Me.TextBox16)
-        Me.Panel6.Controls.Add(Me.TextBox17)
+        Me.Panel6.Controls.Add(Me.tb_bpjsPot)
         Me.Panel6.Controls.Add(Me.tb_potsal)
         Me.Panel6.Controls.Add(Me.tb_jamsostekPot)
         Me.Panel6.Controls.Add(Me.TextBox11)
@@ -389,32 +389,32 @@ Partial Class ComputePayroll
         Me.Panel6.Size = New System.Drawing.Size(733, 475)
         Me.Panel6.TabIndex = 2
         '
-        'TextBox13
+        'tb_total
         '
-        Me.TextBox13.BackColor = System.Drawing.Color.White
-        Me.TextBox13.Location = New System.Drawing.Point(643, 98)
-        Me.TextBox13.Name = "TextBox13"
-        Me.TextBox13.ReadOnly = True
-        Me.TextBox13.Size = New System.Drawing.Size(110, 20)
-        Me.TextBox13.TabIndex = 97
+        Me.tb_total.BackColor = System.Drawing.Color.White
+        Me.tb_total.Location = New System.Drawing.Point(643, 98)
+        Me.tb_total.Name = "tb_total"
+        Me.tb_total.ReadOnly = True
+        Me.tb_total.Size = New System.Drawing.Size(110, 20)
+        Me.tb_total.TabIndex = 97
         '
-        'TextBox23
+        'tb_sup
         '
-        Me.TextBox23.BackColor = System.Drawing.Color.White
-        Me.TextBox23.Location = New System.Drawing.Point(643, 47)
-        Me.TextBox23.Name = "TextBox23"
-        Me.TextBox23.ReadOnly = True
-        Me.TextBox23.Size = New System.Drawing.Size(110, 20)
-        Me.TextBox23.TabIndex = 96
+        Me.tb_sup.BackColor = System.Drawing.Color.White
+        Me.tb_sup.Location = New System.Drawing.Point(643, 47)
+        Me.tb_sup.Name = "tb_sup"
+        Me.tb_sup.ReadOnly = True
+        Me.tb_sup.Size = New System.Drawing.Size(110, 20)
+        Me.tb_sup.TabIndex = 96
         '
-        'TextBox24
+        'tb_deduct
         '
-        Me.TextBox24.BackColor = System.Drawing.Color.White
-        Me.TextBox24.Location = New System.Drawing.Point(643, 72)
-        Me.TextBox24.Name = "TextBox24"
-        Me.TextBox24.ReadOnly = True
-        Me.TextBox24.Size = New System.Drawing.Size(110, 20)
-        Me.TextBox24.TabIndex = 95
+        Me.tb_deduct.BackColor = System.Drawing.Color.White
+        Me.tb_deduct.Location = New System.Drawing.Point(643, 72)
+        Me.tb_deduct.Name = "tb_deduct"
+        Me.tb_deduct.ReadOnly = True
+        Me.tb_deduct.Size = New System.Drawing.Size(110, 20)
+        Me.tb_deduct.TabIndex = 95
         '
         'TextBox12
         '
@@ -452,14 +452,14 @@ Partial Class ComputePayroll
         Me.TextBox16.Size = New System.Drawing.Size(110, 20)
         Me.TextBox16.TabIndex = 90
         '
-        'TextBox17
+        'tb_bpjsPot
         '
-        Me.TextBox17.BackColor = System.Drawing.Color.White
-        Me.TextBox17.Location = New System.Drawing.Point(399, 101)
-        Me.TextBox17.Name = "TextBox17"
-        Me.TextBox17.ReadOnly = True
-        Me.TextBox17.Size = New System.Drawing.Size(110, 20)
-        Me.TextBox17.TabIndex = 89
+        Me.tb_bpjsPot.BackColor = System.Drawing.Color.White
+        Me.tb_bpjsPot.Location = New System.Drawing.Point(399, 101)
+        Me.tb_bpjsPot.Name = "tb_bpjsPot"
+        Me.tb_bpjsPot.ReadOnly = True
+        Me.tb_bpjsPot.Size = New System.Drawing.Size(110, 20)
+        Me.tb_bpjsPot.TabIndex = 89
         '
         'tb_potsal
         '
@@ -923,14 +923,14 @@ Partial Class ComputePayroll
     Friend WithEvents Label51 As Label
     Friend WithEvents dt_month As DateTimePicker
     Friend WithEvents Panel6 As Panel
-    Friend WithEvents TextBox13 As TextBox
-    Friend WithEvents TextBox23 As TextBox
-    Friend WithEvents TextBox24 As TextBox
+    Friend WithEvents tb_total As TextBox
+    Friend WithEvents tb_sup As TextBox
+    Friend WithEvents tb_deduct As TextBox
     Friend WithEvents TextBox12 As TextBox
     Friend WithEvents TextBox14 As TextBox
     Friend WithEvents TextBox15 As TextBox
     Friend WithEvents TextBox16 As TextBox
-    Friend WithEvents TextBox17 As TextBox
+    Friend WithEvents tb_bpjsPot As TextBox
     Friend WithEvents tb_potsal As TextBox
     Friend WithEvents tb_jamsostekPot As TextBox
     Friend WithEvents TextBox11 As TextBox
