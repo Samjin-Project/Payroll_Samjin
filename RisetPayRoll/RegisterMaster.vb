@@ -250,13 +250,6 @@ Public Class RegisterMaster
             clearData()
         End If
     End Sub
-
-    Private Sub DGV_ReviewMaster_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_ReviewMaster.CellContentClick
-        Dim Nik As String = DGV_ReviewMaster.Rows(e.RowIndex).Cells(0).Value
-        detailDataMaster(Nik)
-        b_edit.Enabled = True
-        r_index = e.RowIndex
-    End Sub
     Private Sub b_clear_Click(sender As Object, e As EventArgs) Handles b_clear.Click
         dt_masuk.Value = Now
         cb_jk.Text = ""
@@ -498,5 +491,12 @@ Public Class RegisterMaster
 
     Private Sub tb_masuk_TextChanged(sender As Object, e As EventArgs) Handles tb_masuk.TextChanged
 
+    End Sub
+
+    Private Sub DGV_ReviewMaster_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_ReviewMaster.CellClick
+        Dim Nik As String = DGV_ReviewMaster.Rows(e.RowIndex).Cells(0).Value
+        detailDataMaster(Nik)
+        b_edit.Enabled = True
+        r_index = e.RowIndex
     End Sub
 End Class

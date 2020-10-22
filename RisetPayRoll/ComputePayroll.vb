@@ -288,10 +288,6 @@ Public Class ComputePayroll
         Next
     End Sub
 
-    Private Sub DGV_ReviewDaily_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_ReviewDaily.CellContentClick
-        Dim nik As String = DGV_ReviewDaily.Rows(e.RowIndex).Cells(0).Value
-        detailEmpSal(nik)
-    End Sub
     Private Sub detailEmpSal(nik As String)
         Dim tgl As String = dt_month.Value.ToString("yyyy-MM")
         Dim querycmd As String = $"SELECT `BasicSalary`, `attendance`, `Total_OT`, `Ot_wages`, `jamsostek`, `bpjs`  FROM `tabel_bulanan_karyawan` WHERE `NIK` = '{nik}' AND `DateMonth` LIKE '{tgl}%'"
@@ -481,7 +477,9 @@ Public Class ComputePayroll
         End If
     End Sub
 
-    Private Sub TextBox4_TextChanged(sender As Object, e As EventArgs) Handles tb_attendance.TextChanged
 
+    Private Sub DGV_ReviewDaily_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_ReviewDaily.CellClick
+        Dim nik As String = DGV_ReviewDaily.Rows(e.RowIndex).Cells(0).Value
+        detailEmpSal(nik)
     End Sub
 End Class

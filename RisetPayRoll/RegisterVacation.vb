@@ -172,7 +172,7 @@
         total_data.Text = DGV_DataModify.Rows.Count
     End Sub
 
-    Private Sub DGV_DataModify_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_DataModify.CellContentClick
+    Private Sub DGV_DataModify_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_DataModify.CellClick
         Console.WriteLine($"Clicked Cell {e.RowIndex}")
         tb_emp.Text = DGV_DataModify.Rows(e.RowIndex).Cells(0).Value
         tb_nama.Text = DGV_DataModify.Rows(e.RowIndex).Cells(1).Value
