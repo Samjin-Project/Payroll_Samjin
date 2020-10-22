@@ -204,7 +204,6 @@ Partial Class RegisterVacation
         'cb_dep
         '
         Me.cb_dep.FormattingEnabled = True
-        Me.cb_dep.Items.AddRange(New Object() {"PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING", "SMD"})
         Me.cb_dep.Location = New System.Drawing.Point(414, 4)
         Me.cb_dep.Name = "cb_dep"
         Me.cb_dep.Size = New System.Drawing.Size(125, 21)

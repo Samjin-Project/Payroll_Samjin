@@ -14,6 +14,20 @@
         End Get
     End Property
     Private Sub ViewDailyAttendance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If My.Settings.StatusUser = "admin" Then
+            cb_dep.Text = My.Settings.Departement
+            cb_dep.Enabled = False
+            cb_name.Text = My.Settings.NamaUser
+            cb_name.Enabled = False
+
+        Else
+            For Each x As String In MDIParent1.JenisDepartement
+                cb_dep.Items.Add(x)
+            Next
+            cb_name.Text = ""
+            cb_name.Enabled = False
+        End If
+
         SetDoubleBuffered(DGV_ReviewDaily)
         cb_dep.Text = "PCBA"
         Dim query As String = $"{QueryCMD} WHERE `Department` = '{cb_dep.Text}'"

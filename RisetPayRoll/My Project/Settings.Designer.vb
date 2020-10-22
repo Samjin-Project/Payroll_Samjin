@@ -125,6 +125,66 @@ Namespace My
                 Me("Reso_Height") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property StatusLogin() As Boolean
+            Get
+                Return CType(Me("StatusLogin"),Boolean)
+            End Get
+            Set
+                Me("StatusLogin") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property User() As String
+            Get
+                Return CType(Me("User"),String)
+            End Get
+            Set
+                Me("User") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property Departement() As String
+            Get
+                Return CType(Me("Departement"),String)
+            End Get
+            Set
+                Me("Departement") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property NamaUser() As String
+            Get
+                Return CType(Me("NamaUser"),String)
+            End Get
+            Set
+                Me("NamaUser") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property StatusUser() As String
+            Get
+                Return CType(Me("StatusUser"),String)
+            End Get
+            Set
+                Me("StatusUser") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

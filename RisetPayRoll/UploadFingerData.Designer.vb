@@ -22,8 +22,8 @@ Partial Class UploadFingerData
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Button1 = New System.Windows.Forms.Button()
@@ -141,7 +141,6 @@ Partial Class UploadFingerData
         'cb_depfinger
         '
         Me.cb_depfinger.FormattingEnabled = True
-        Me.cb_depfinger.Items.AddRange(New Object() {"PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING", ""})
         Me.cb_depfinger.Location = New System.Drawing.Point(89, 48)
         Me.cb_depfinger.Name = "cb_depfinger"
         Me.cb_depfinger.Size = New System.Drawing.Size(155, 21)
@@ -223,8 +222,8 @@ Partial Class UploadFingerData
         'KolomFinger_Nik
         '
         Me.KolomFinger_Nik.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.KolomFinger_Nik.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.KolomFinger_Nik.DefaultCellStyle = DataGridViewCellStyle3
         Me.KolomFinger_Nik.HeaderText = "NIK"
         Me.KolomFinger_Nik.Name = "KolomFinger_Nik"
         Me.KolomFinger_Nik.ReadOnly = True
@@ -257,10 +256,10 @@ Partial Class UploadFingerData
         '
         'KolomFinger_ClockIn
         '
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Red
-        DataGridViewCellStyle2.Format = "t"
-        DataGridViewCellStyle2.NullValue = Nothing
-        Me.KolomFinger_ClockIn.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Red
+        DataGridViewCellStyle4.Format = "t"
+        DataGridViewCellStyle4.NullValue = Nothing
+        Me.KolomFinger_ClockIn.DefaultCellStyle = DataGridViewCellStyle4
         Me.KolomFinger_ClockIn.HeaderText = "Clock In"
         Me.KolomFinger_ClockIn.Name = "KolomFinger_ClockIn"
         '

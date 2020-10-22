@@ -43,15 +43,11 @@ Partial Class DailyAttendance
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.cb_depCreate = New System.Windows.Forms.ComboBox()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
-        Me.tb_namaCreate = New System.Windows.Forms.TextBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.tb_empCreate = New System.Windows.Forms.TextBox()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.ComboBox4 = New System.Windows.Forms.ComboBox()
         Me.Label11 = New System.Windows.Forms.Label()
@@ -79,6 +75,7 @@ Partial Class DailyAttendance
         Me.total_data = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
+        Me.dt_create = New System.Windows.Forms.DateTimePicker()
         Me.Panel1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -125,7 +122,7 @@ Partial Class DailyAttendance
         'b_clear
         '
         Me.b_clear.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.b_clear.Location = New System.Drawing.Point(399, 63)
+        Me.b_clear.Location = New System.Drawing.Point(489, 63)
         Me.b_clear.Name = "b_clear"
         Me.b_clear.Size = New System.Drawing.Size(68, 20)
         Me.b_clear.TabIndex = 44
@@ -239,17 +236,14 @@ Partial Class DailyAttendance
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.dt_create)
         Me.GroupBox1.Controls.Add(Me.Button1)
         Me.GroupBox1.Controls.Add(Me.cb_depCreate)
-        Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Controls.Add(Me.DateTimePicker2)
-        Me.GroupBox1.Controls.Add(Me.tb_namaCreate)
         Me.GroupBox1.Controls.Add(Me.TextBox2)
         Me.GroupBox1.Controls.Add(Me.tb_empCreate)
-        Me.GroupBox1.Controls.Add(Me.DateTimePicker1)
         Me.GroupBox1.Controls.Add(Me.Label14)
         Me.GroupBox1.Controls.Add(Me.ComboBox4)
         Me.GroupBox1.Controls.Add(Me.Label11)
@@ -263,7 +257,7 @@ Partial Class DailyAttendance
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(475, 60)
+        Me.Button1.Location = New System.Drawing.Point(370, 61)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(82, 24)
         Me.Button1.TabIndex = 45
@@ -278,17 +272,6 @@ Partial Class DailyAttendance
         Me.cb_depCreate.Name = "cb_depCreate"
         Me.cb_depCreate.Size = New System.Drawing.Size(124, 21)
         Me.cb_depCreate.TabIndex = 42
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label5.Location = New System.Drawing.Point(455, 43)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(14, 13)
-        Me.Label5.TabIndex = 41
-        Me.Label5.Text = "~"
-        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label4
         '
@@ -320,22 +303,6 @@ Partial Class DailyAttendance
         Me.Label1.TabIndex = 37
         Me.Label1.Text = "Workplace"
         '
-        'DateTimePicker2
-        '
-        Me.DateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.DateTimePicker2.Location = New System.Drawing.Point(475, 37)
-        Me.DateTimePicker2.Name = "DateTimePicker2"
-        Me.DateTimePicker2.Size = New System.Drawing.Size(82, 20)
-        Me.DateTimePicker2.TabIndex = 34
-        '
-        'tb_namaCreate
-        '
-        Me.tb_namaCreate.BackColor = System.Drawing.Color.White
-        Me.tb_namaCreate.Location = New System.Drawing.Point(155, 38)
-        Me.tb_namaCreate.Name = "tb_namaCreate"
-        Me.tb_namaCreate.Size = New System.Drawing.Size(123, 20)
-        Me.tb_namaCreate.TabIndex = 33
-        '
         'TextBox2
         '
         Me.TextBox2.BackColor = System.Drawing.Color.White
@@ -354,23 +321,15 @@ Partial Class DailyAttendance
         Me.tb_empCreate.Size = New System.Drawing.Size(77, 20)
         Me.tb_empCreate.TabIndex = 31
         '
-        'DateTimePicker1
-        '
-        Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.DateTimePicker1.Location = New System.Drawing.Point(370, 38)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(82, 20)
-        Me.DateTimePicker1.TabIndex = 30
-        '
         'Label14
         '
         Me.Label14.AutoSize = True
         Me.Label14.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label14.Location = New System.Drawing.Point(284, 41)
+        Me.Label14.Location = New System.Drawing.Point(282, 41)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(37, 13)
         Me.Label14.TabIndex = 29
-        Me.Label14.Text = "Period"
+        Me.Label14.Text = "Month"
         Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'ComboBox4
@@ -617,6 +576,15 @@ Partial Class DailyAttendance
         Me.Label18.TabIndex = 13
         Me.Label18.Text = "Total"
         '
+        'dt_create
+        '
+        Me.dt_create.CustomFormat = "MM/yyyy"
+        Me.dt_create.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dt_create.Location = New System.Drawing.Point(370, 38)
+        Me.dt_create.Name = "dt_create"
+        Me.dt_create.Size = New System.Drawing.Size(82, 20)
+        Me.dt_create.TabIndex = 45
+        '
         'DailyAttendance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -646,18 +614,14 @@ Partial Class DailyAttendance
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Panel3 As Panel
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents DateTimePicker1 As DateTimePicker
     Friend WithEvents Label14 As Label
     Friend WithEvents ComboBox4 As ComboBox
     Friend WithEvents Label11 As Label
     Friend WithEvents TextBox2 As TextBox
     Friend WithEvents tb_empCreate As TextBox
-    Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents DateTimePicker2 As DateTimePicker
-    Friend WithEvents tb_namaCreate As TextBox
     Friend WithEvents DGV_SideDaily As DataGridView
     Friend WithEvents Panel5 As Panel
     Friend WithEvents Label17 As Label
@@ -695,4 +659,5 @@ Partial Class DailyAttendance
     Friend WithEvents kolom_dep As DataGridViewTextBoxColumn
     Friend WithEvents Kolom_emp As DataGridViewTextBoxColumn
     Friend WithEvents Kolom_Nama As DataGridViewTextBoxColumn
+    Friend WithEvents dt_create As DateTimePicker
 End Class

@@ -37,7 +37,7 @@ Partial Class ViewDailyAttendance
         Me.dt_filter = New System.Windows.Forms.DateTimePicker()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
-        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
+        Me.cb_name = New System.Windows.Forms.ComboBox()
         Me.cb_dep = New System.Windows.Forms.ComboBox()
         Me.DGV_ReviewDaily = New System.Windows.Forms.DataGridView()
         Me.KolomHasil_NIK = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -107,7 +107,7 @@ Partial Class ViewDailyAttendance
         Me.GroupBox1.Controls.Add(Me.dt_filter)
         Me.GroupBox1.Controls.Add(Me.Label14)
         Me.GroupBox1.Controls.Add(Me.Label15)
-        Me.GroupBox1.Controls.Add(Me.ComboBox4)
+        Me.GroupBox1.Controls.Add(Me.cb_name)
         Me.GroupBox1.Controls.Add(Me.cb_dep)
         Me.GroupBox1.Location = New System.Drawing.Point(3, 3)
         Me.GroupBox1.Name = "GroupBox1"
@@ -210,19 +210,17 @@ Partial Class ViewDailyAttendance
         Me.Label15.TabIndex = 28
         Me.Label15.Text = "Departement"
         '
-        'ComboBox4
+        'cb_name
         '
-        Me.ComboBox4.FormattingEnabled = True
-        Me.ComboBox4.Items.AddRange(New Object() {"Laki-Laki", "Perempuan"})
-        Me.ComboBox4.Location = New System.Drawing.Point(483, 19)
-        Me.ComboBox4.Name = "ComboBox4"
-        Me.ComboBox4.Size = New System.Drawing.Size(171, 21)
-        Me.ComboBox4.TabIndex = 27
+        Me.cb_name.FormattingEnabled = True
+        Me.cb_name.Location = New System.Drawing.Point(483, 19)
+        Me.cb_name.Name = "cb_name"
+        Me.cb_name.Size = New System.Drawing.Size(171, 21)
+        Me.cb_name.TabIndex = 27
         '
         'cb_dep
         '
         Me.cb_dep.FormattingEnabled = True
-        Me.cb_dep.Items.AddRange(New Object() {"PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING", "SMD"})
         Me.cb_dep.Location = New System.Drawing.Point(232, 19)
         Me.cb_dep.Name = "cb_dep"
         Me.cb_dep.Size = New System.Drawing.Size(171, 21)
@@ -542,7 +540,7 @@ Partial Class ViewDailyAttendance
     Friend WithEvents dt_filter As DateTimePicker
     Friend WithEvents Label14 As Label
     Friend WithEvents Label15 As Label
-    Friend WithEvents ComboBox4 As ComboBox
+    Friend WithEvents cb_name As ComboBox
     Friend WithEvents cb_dep As ComboBox
     Friend WithEvents DGV_ReviewDaily As DataGridView
     Friend WithEvents Panel3 As Panel

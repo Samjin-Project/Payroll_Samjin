@@ -4,7 +4,8 @@ Imports System.Linq ' need to add
 Public Class MDIParent1
     Dim widthForm As Integer
     Dim heightForm As Integer
-    Private Sub ShowNewForm(ByVal sender As Object, ByVal e As EventArgs) Handles NewToolStripMenuItem.Click, NewWindowToolStripMenuItem.Click
+    Public Shared JenisDepartement As String() = {"PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING", "SMD"}
+    Private Sub ShowNewForm(ByVal sender As Object, ByVal e As EventArgs)
         'DailyAttendance()
     End Sub
 
@@ -209,7 +210,7 @@ Public Class MDIParent1
         End If
 
     End Sub
-    Private Sub OpenFile(ByVal sender As Object, ByVal e As EventArgs) Handles OpenToolStripMenuItem.Click
+    Private Sub OpenFile(ByVal sender As Object, ByVal e As EventArgs)
         Dim OpenFileDialog As New OpenFileDialog
         OpenFileDialog.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
         OpenFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
@@ -219,7 +220,7 @@ Public Class MDIParent1
         End If
     End Sub
 
-    Private Sub SaveAsToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles SaveAsToolStripMenuItem.Click
+    Private Sub SaveAsToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs)
         Dim SaveFileDialog As New SaveFileDialog
         SaveFileDialog.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
         SaveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
@@ -235,43 +236,39 @@ Public Class MDIParent1
         Me.Close()
     End Sub
 
-    Private Sub CutToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles CutToolStripMenuItem.Click
+    Private Sub CutToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs)
         ' Use My.Computer.Clipboard to insert the selected text or images into the clipboard
     End Sub
 
-    Private Sub CopyToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles CopyToolStripMenuItem.Click
+    Private Sub CopyToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs)
         ' Use My.Computer.Clipboard to insert the selected text or images into the clipboard
     End Sub
 
-    Private Sub PasteToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles PasteToolStripMenuItem.Click
+    Private Sub PasteToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs)
         'Use My.Computer.Clipboard.GetText() or My.Computer.Clipboard.GetData to retrieve information from the clipboard.
     End Sub
 
-    Private Sub ToolBarToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ToolBarToolStripMenuItem.Click
+    Private Sub ToolBarToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs)
         'Me.ToolStrip.Visible = Me.ToolBarToolStripMenuItem.Checked
     End Sub
 
-    Private Sub StatusBarToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles StatusBarToolStripMenuItem.Click
-        Me.StatusStrip.Visible = Me.StatusBarToolStripMenuItem.Checked
-    End Sub
-
-    Private Sub CascadeToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles CascadeToolStripMenuItem.Click
+    Private Sub CascadeToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs)
         Me.LayoutMdi(MdiLayout.Cascade)
     End Sub
 
-    Private Sub TileVerticalToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles TileVerticalToolStripMenuItem.Click
+    Private Sub TileVerticalToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs)
         Me.LayoutMdi(MdiLayout.TileVertical)
     End Sub
 
-    Private Sub TileHorizontalToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles TileHorizontalToolStripMenuItem.Click
+    Private Sub TileHorizontalToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs)
         Me.LayoutMdi(MdiLayout.TileHorizontal)
     End Sub
 
-    Private Sub ArrangeIconsToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles ArrangeIconsToolStripMenuItem.Click
+    Private Sub ArrangeIconsToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs)
         Me.LayoutMdi(MdiLayout.ArrangeIcons)
     End Sub
 
-    Private Sub CloseAllToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs) Handles CloseAllToolStripMenuItem.Click
+    Private Sub CloseAllToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs)
         ' Close all child forms of the parent.
         For Each ChildForm As Form In Me.MdiChildren
             ChildForm.Close()
@@ -281,8 +278,26 @@ Public Class MDIParent1
     Private m_ChildFormNumber As Integer
 
     Private Sub MDIParent1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Login.Close()
+        Console.WriteLine("Status Ceklist : " + My.Settings.StatusLogin.ToString)
+        Dim QueryAkun As String = $"SELECT * FROM `user_admin` WHERE `Username` = '{My.Settings.User}'"
+        Dim DBAkun As DataBaseClass = New DataBaseClass
+        Dim AkunData As DataSet = DBAkun.downloadDB(QueryAkun)
         Me.WindowState = FormWindowState.Maximized
+        My.Settings.NamaUser = AkunData.Tables(0).Rows(0).Item(2)
+        My.Settings.StatusUser = AkunData.Tables(0).Rows(0).Item(3)
+        My.Settings.Departement = AkunData.Tables(0).Rows(0).Item(4)
+        My.Settings.Save()
+        TextBoxUser.Text = My.Settings.User
+        TextBoxDep.Text = My.Settings.Departement
+
         SettingRasioScreen()
+        Console.WriteLine(My.Settings.StatusUser)
+        If My.Settings.StatusUser = "admin" Then
+            TreeView1.Nodes(0).Nodes(0).Remove()
+        End If
+
+
     End Sub
 
     Private Sub SettingRasioScreen()
@@ -316,6 +331,17 @@ Public Class MDIParent1
         If e.Node.Name.ToString.Contains("Node") Then
             TreeViewMenu(e.Node.Text)
         End If
+    End Sub
+
+    Private Sub LogOutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogOutToolStripMenuItem.Click
+
+        My.Settings.StatusLogin = False
+        My.Settings.NamaUser = String.Empty
+        My.Settings.Departement = String.Empty
+        My.Settings.Save()
+        LoginForm.Show()
+        Me.Close()
+
     End Sub
 
     'reza supriyatna

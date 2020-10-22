@@ -170,7 +170,14 @@ Public Class UploadFingerData
     End Sub
 
     Private Sub UploadFingerData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        If My.Settings.StatusUser = "admin" Then
+            cb_depfinger.Text = My.Settings.Departement
+            cb_depfinger.Enabled = False
+        Else
+            For Each x As String In MDIParent1.JenisDepartement
+                cb_depfinger.Items.Add(x)
+            Next
+        End If
     End Sub
 
     Private Sub cb_depfinger_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_depfinger.SelectedIndexChanged

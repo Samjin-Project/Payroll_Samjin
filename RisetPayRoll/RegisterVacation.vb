@@ -7,13 +7,23 @@
         End Get
     End Property
     Private Sub RegisterVacation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If My.Settings.StatusUser = "admin" Then
+            cb_dep.Text = My.Settings.Departement
+            cb_dep.Enabled = False
+
+        Else
+            For Each x As String In MDIParent1.JenisDepartement
+                cb_dep.Items.Add(x)
+            Next
+        End If
+
         Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `Tanggal_Masuk`, `Department` FROM `master employer`"
         dataOnSide(QueryCMD)
         total_data.Text = DGV_DataModify.Rows.Count
         If tb_emp.Text = "" Or tb_nama.Text = "" Then
             b_save.Enabled = False
         End If
- 
+
     End Sub
 
     Private Sub dataOnSide(QueryOnReview As String)
