@@ -197,4 +197,100 @@
         filterData(cb_dep.Text, tb_emp.Text, stDate, endDate)
     End Sub
 
+    Public Sub saveExcelFile(ByVal FileName As String)
+        Dim sheetIndex As Integer
+        Dim Ex As Object
+        Dim Wb As Object
+        Dim Ws As Object
+        Ex = CreateObject("Excel.Application")
+        Wb = Ex.workbooks.add
+
+        ' Copy each DataTable as a new Sheet
+
+        'On Error Resume Next
+        Dim col, row As Integer
+        ' Copy the DataTable to an object array
+        Dim rawData(DGV_DataModify.Rows.Count, DGV_DataModify.Columns.Count - 1) As Object
+
+        ' Copy the column names to the first row of the object array
+
+        For col = 0 To DGV_DataModify.Columns.Count - 1
+            rawData(0, col) = DGV_DataModify.Columns(col).HeaderText.ToUpper
+
+        Next
+
+        For col = 0 To DGV_DataModify.Columns.Count - 1
+            For row = 0 To DGV_DataModify.Rows.Count - 1
+                rawData(row + 1, col) = DGV_DataModify.Rows(row).Cells(col).Value
+
+            Next
+        Next
+        ' Calculate the final column letter
+        Dim finalColLetter As String = String.Empty
+        finalColLetter = ExcelColName(DGV_DataModify.Columns.Count) 'Generate Excel Column Name (Column ID)
+
+
+        sheetIndex += 1
+        Ws = Wb.Worksheets(sheetIndex)
+        'Ws.name = "Test10"
+        Dim excelRange As String = String.Format("A1:{0}{1}", finalColLetter, DGV_DataModify.Rows.Count + 1)
+        Ws.Columns(1).ColumnWidth = 10
+        Ws.Columns(2).ColumnWidth = 15
+        Ws.Columns(3).ColumnWidth = 15
+        Ws.Columns(4).ColumnWidth = 15
+        Ws.Columns(5).ColumnWidth = 15
+        Ws.Columns(6).ColumnWidth = 15
+        Ws.Columns(7).ColumnWidth = 15
+        Ws.Columns(8).ColumnWidth = 15
+        Ws.Columns(9).ColumnWidth = 15
+
+
+        Ws.Range(excelRange, Type.Missing).Value2 = rawData
+        Ws.Range(excelRange, Type.Missing).WrapText = True
+        Ws.Range(excelRange, Type.Missing).Borders.Color = RGB(0, 0, 0)
+        Ws = Nothing
+
+
+        Wb.SaveAs(FileName)
+        Wb = Nothing
+        ' Release the Application object
+        Ex.Quit()
+        Ex = Nothing
+        ' Collect the unreferenced objects
+        GC.Collect()
+        MsgBox("Exported Successfully.", MsgBoxStyle.Information)
+    End Sub
+
+    Public Function ExcelColName(ByVal Col As Integer) As String
+        If Col < 0 And Col > 256 Then
+            MsgBox("Invalid Argument", MsgBoxStyle.Critical)
+            Return Nothing
+            Exit Function
+        End If
+        Dim i As Int16
+        Dim r As Int16
+        Dim S As String
+        If Col <= 26 Then
+            S = Chr(Col + 64)
+        Else
+            r = Col Mod 26
+            i = System.Math.Floor(Col / 26)
+            If r = 0 Then
+                r = 26
+                i = i - 1
+            End If
+            S = Chr(i + 64) & Chr(r + 64)
+        End If
+        ExcelColName = S
+    End Function
+
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim saveFileDialog1 As New SaveFileDialog
+        saveFileDialog1.Filter = "Excel File|*.xls,*.xlsx"
+        saveFileDialog1.Title = "Save an Excel File"
+        saveFileDialog1.ShowDialog()
+        If saveFileDialog1.FileName <> "" Then
+            saveExcelFile(saveFileDialog1.FileName)
+        End If
+    End Sub
 End Class

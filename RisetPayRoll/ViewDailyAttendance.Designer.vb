@@ -22,9 +22,9 @@ Partial Class ViewDailyAttendance
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.b_clear = New System.Windows.Forms.Button()
@@ -95,7 +95,7 @@ Partial Class ViewDailyAttendance
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1184, 88)
+        Me.Panel1.Size = New System.Drawing.Size(1370, 88)
         Me.Panel1.TabIndex = 1
         '
         'GroupBox1
@@ -232,14 +232,14 @@ Partial Class ViewDailyAttendance
         Me.DGV_ReviewDaily.AllowUserToDeleteRows = False
         Me.DGV_ReviewDaily.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
         Me.DGV_ReviewDaily.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGV_ReviewDaily.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGV_ReviewDaily.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.DGV_ReviewDaily.ColumnHeadersHeight = 30
         Me.DGV_ReviewDaily.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DGV_ReviewDaily.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.KolomHasil_NIK, Me.KolomHasil_Nama, Me.KolomHasil_Departement, Me.kolom_bulan, Me.KolomHasil_Transport, Me.KolomHasil_TransportAmount, Me.KolomHasil_Shift, Me.KolomHasil_ShiftAmount, Me.KolomHasil_Meal, Me.KolomHasil_MealAmount, Me.KolomHasil_Attendance, Me.KolomHasil_D1, Me.KolomHasil_D2, Me.KolomHasil_D3, Me.KolomHasil_D4, Me.KolomHasil_D5, Me.KolomHasil_D6, Me.KolomHasil_D7, Me.KolomHasil_D8, Me.KolomHasil_D9, Me.KolomHasil_D10, Me.KolomHasil_D11, Me.KolomHasil_D12, Me.KolomHasil_D13, Me.KolomHasil_D14, Me.KolomHasil_D15, Me.KolomHasil_D16, Me.KolomHasil_D17, Me.KolomHasil_D18, Me.KolomHasil_D19, Me.KolomHasil_D20, Me.KolomHasil_D21, Me.KolomHasil_D22, Me.KolomHasil_D23, Me.KolomHasil_D24, Me.KolomHasil_D25, Me.KolomHasil_D26, Me.KolomHasil_D27, Me.KolomHasil_D28, Me.KolomHasil_D29, Me.KolomHasil_D30, Me.KolomHasil_D31, Me.KolomHasil_Total})
@@ -249,16 +249,16 @@ Partial Class ViewDailyAttendance
         Me.DGV_ReviewDaily.MultiSelect = False
         Me.DGV_ReviewDaily.Name = "DGV_ReviewDaily"
         Me.DGV_ReviewDaily.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DGV_ReviewDaily.RowsDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DGV_ReviewDaily.RowsDefaultCellStyle = DataGridViewCellStyle6
         Me.DGV_ReviewDaily.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DGV_ReviewDaily.Size = New System.Drawing.Size(1184, 523)
+        Me.DGV_ReviewDaily.Size = New System.Drawing.Size(1370, 523)
         Me.DGV_ReviewDaily.TabIndex = 22
         '
         'KolomHasil_NIK
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.KolomHasil_NIK.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.KolomHasil_NIK.DefaultCellStyle = DataGridViewCellStyle5
         Me.KolomHasil_NIK.HeaderText = "Emp No."
         Me.KolomHasil_NIK.Name = "KolomHasil_NIK"
         Me.KolomHasil_NIK.Width = 73
@@ -519,7 +519,7 @@ Partial Class ViewDailyAttendance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1184, 611)
+        Me.ClientSize = New System.Drawing.Size(1370, 611)
         Me.Controls.Add(Me.DGV_ReviewDaily)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "ViewDailyAttendance"
