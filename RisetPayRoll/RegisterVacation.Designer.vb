@@ -72,6 +72,7 @@ Partial Class RegisterVacation
         Me.tb_nama = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tb_emp = New System.Windows.Forms.TextBox()
+        Me.b_delete = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.DGV_DataModify, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
@@ -221,6 +222,7 @@ Partial Class RegisterVacation
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel2.Controls.Add(Me.b_delete)
         Me.Panel2.Controls.Add(Me.Button1)
         Me.Panel2.Controls.Add(Me.b_showall)
         Me.Panel2.Controls.Add(Me.cb_dep)
@@ -242,7 +244,7 @@ Partial Class RegisterVacation
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(640, 4)
+        Me.Button1.Location = New System.Drawing.Point(640, 3)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(63, 22)
         Me.Button1.TabIndex = 13
@@ -564,6 +566,15 @@ Partial Class RegisterVacation
         Me.tb_emp.Size = New System.Drawing.Size(110, 20)
         Me.tb_emp.TabIndex = 0
         '
+        'b_delete
+        '
+        Me.b_delete.Location = New System.Drawing.Point(555, 29)
+        Me.b_delete.Name = "b_delete"
+        Me.b_delete.Size = New System.Drawing.Size(63, 23)
+        Me.b_delete.TabIndex = 14
+        Me.b_delete.Text = "Delete"
+        Me.b_delete.UseVisualStyleBackColor = True
+        '
         'RegisterVacation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -636,4 +647,5 @@ Partial Class RegisterVacation
     Friend WithEvents StartDate As DataGridViewTextBoxColumn
     Friend WithEvents EndDate As DataGridViewTextBoxColumn
     Friend WithEvents Reasons As DataGridViewTextBoxColumn
+    Friend WithEvents b_delete As Button
 End Class

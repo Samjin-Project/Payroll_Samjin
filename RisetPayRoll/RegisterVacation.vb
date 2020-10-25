@@ -6,24 +6,28 @@
             Return cp
         End Get
     End Property
+    Dim selectedRow As Integer
+
     Private Sub RegisterVacation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If My.Settings.StatusUser = "admin" Then
             cb_dep.Text = My.Settings.Departement
             cb_dep.Enabled = False
 
         Else
+            cb_dep.Items.Clear()
             For Each x As String In MDIParent1.JenisDepartement
                 cb_dep.Items.Add(x)
             Next
         End If
 
-        Dim QueryCMD As String = "SELECT `NIK`, `Status_Approval`, `Nama_Karyawan`, `Vacation_Code`, `StartVacation_Date`, 
-        `EndVacation_Date`,  `Department`,`Reason` FROM `approval_vacation`"
+        Dim QueryCMD As String = $"SELECT `NIK`, `Status_Approval`, `Nama_Karyawan`, `Vacation_Code`, `StartVacation_Date`, 
+        `EndVacation_Date`,  `Department`,`Reason` FROM `approval_vacation` WHERE `Status_Approval` = 'Yes'"
         dataOnSide(QueryCMD)
-
+        b_delete.Enabled = False
     End Sub
 
     Private Sub dataOnSide(QueryOnReview As String)
+        DGV_DataModify.Rows.Clear()
         Dim DBClass As DataBaseClass = New DataBaseClass
         Dim ds As DataSet = DBClass.downloadDB(QueryOnReview)
         Dim indexDs As Integer = ds.Tables(0).Rows.Count
@@ -60,7 +64,7 @@
                 End If
             Next
         Else
-            MsgBox("Data Not Found", MsgBoxStyle.Information, "Register Vacation")
+            DGV_DataModify.Rows.Clear()
         End If
         total_data.Text = DGV_DataModify.Rows.Count
     End Sub
@@ -84,6 +88,16 @@
         funcDB.uploadDB(masterQuery)
     End Sub
 
+    Sub deleteData(nik As String)
+        Dim deleteDB As DataBaseClass = New DataBaseClass
+        Dim queryCmd As String = $"DELETE FROM `approval_vacation` WHERE `NIK` = '{nik}'"
+        deleteDB.uploadDB(queryCmd)
+        Dim queryAll As String = $"SELECT `NIK`, `Status_Approval`, `Nama_Karyawan`, `Vacation_Code`, `StartVacation_Date`, 
+        `EndVacation_Date`,  `Department`,`Reason` FROM `approval_vacation` WHERE `Status_Approval` = 'Yes'"
+        dataOnSide(queryAll)
+        MsgBox("Data deleted !", MsgBoxStyle.Information, "Register Vacation")
+    End Sub
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles b_save.Click
         If cb_holtype.Text = "" Or tb_nama.Text = "" Or tb_emp.Text = "" Or cb_department.Text = "" Or tb_telp.Text = "" Or tb_reason.Text = "" Then
             MsgBox("Data tidak boleh kosong !", MsgBoxStyle.Exclamation, "Register Vacation")
@@ -104,21 +118,20 @@
     End Sub
     'filter data master
     Private Sub filterData(dep As String, emp As String, stDate As String, endDate As String)
-
-        Dim QueryALL As String = "SELECT `NIK`, `Status_Approval`, `Nama_Karyawan`, `Vacation_Code`, `StartVacation_Date`, 
+        Dim mainQuery As String = "SELECT `NIK`, `Status_Approval`, `Nama_Karyawan`, `Vacation_Code`, `StartVacation_Date`,
         `EndVacation_Date`,  `Department`,`Reason` FROM `approval_vacation`"
-        Dim QuerySortEmp As String = $"{QueryALL} WHERE `NIK` = '{emp}' "
-        Dim QuerySortDep As String = $"{QueryALL} WHERE `Department` = '{dep}' "
-        Dim QuerySortAll As String = $"{QueryALL} WHERE `Department` = '{dep}' AND `NIK` = '{emp}'"
+        Dim QueryALL As String = $"{mainQuery} WHERE `Status_Approval` = 'Yes'"
+        Dim QuerySortEmp As String = $"{mainQuery} WHERE `NIK` = '{emp}' AND `Status_Approval` = 'Yes'"
+        Dim QuerySortDep As String = $"{mainQuery} WHERE `Department` = '{dep}' AND `Status_Approval` = 'Yes'"
+        Dim QuerySortAll As String = $"{mainQuery} WHERE `Department` = '{dep}' AND `NIK` = '{emp}' AND `Status_Approval` = 'Yes'"
 
-        Dim QueryALLwTime As String = $"{QueryALL} WHERE `StartVacation_Date` BETWEEN '{stDate}' AND '{endDate}' OR `EndVacation_Date` BETWEEN '{stDate}' AND '{endDate}'"
-        Dim QuerySortEmpwTime As String = $"{QueryALL} WHERE (`NIK` = '{emp}') 
-            AND (`StartVacation_Date` BETWEEN '{stDate}' AND '{endDate}' OR `EndVacation_Date` BETWEEN '{stDate}' AND '{endDate}')"
-        Dim QuerySortDepwTime As String = $"{QueryALL} WHERE (`Department` = '{dep}') 
-            AND (`StartVacation_Date` BETWEEN '{stDate}' AND '{endDate}' OR `EndVacation_Date` BETWEEN '{stDate}' AND '{endDate}')"
-        Dim QuerySortAllwTime As String = $"{QueryALL} WHERE (`Department` = '{dep}') 
-            AND (`NIK` = '{emp}')
-            AND (`StartVacation_Date` BETWEEN '{stDate}' AND '{endDate}' OR `EndVacation_Date` BETWEEN '{stDate}' AND '{endDate}')"
+        Dim QueryALLwTime As String = $"{mainQuery} WHERE (`StartVacation_Date` BETWEEN '{stDate}' AND '{endDate}' OR `EndVacation_Date` BETWEEN '{stDate}' AND '{endDate}') AND `Status_Approval` = 'Yes'"
+        Dim QuerySortEmpwTime As String = $"{mainQuery} WHERE `NIK` = '{emp}' 
+            AND (`StartVacation_Date` BETWEEN '{stDate}' AND '{endDate}' OR `EndVacation_Date` BETWEEN '{stDate}' AND '{endDate}') AND `Status_Approval` = 'Yes'"
+        Dim QuerySortDepwTime As String = $"{mainQuery} WHERE `Department` = '{dep}'
+            AND (`StartVacation_Date` BETWEEN '{stDate}' AND '{endDate}' OR `EndVacation_Date` BETWEEN '{stDate}' AND '{endDate}') AND `Status_Approval` = 'Yes'"
+        Dim QuerySortAllwTime As String = $"{mainQuery} WHERE `Department` = '{dep}' AND `NIK` = '{emp}'
+            AND (`StartVacation_Date` BETWEEN '{stDate}' AND '{endDate}' OR `EndVacation_Date` BETWEEN '{stDate}' AND '{endDate}') AND `Status_Approval` = 'Yes'"
 
         Dim querycmd As String = ""
         If stDate = endDate Then
@@ -156,9 +169,10 @@
         dt_start.Value = Now
         dt_end.Value = Now
         DGV_DataModify.Rows.Clear()
-        Dim QueryCMD As String = "SELECT `NIK`, `Status_Approval`, `Nama_Karyawan`, `Vacation_Code`, `StartVacation_Date`, 
-        `EndVacation_Date`,  `Department`,`Reason` FROM `approval_vacation`"
+        Dim QueryCMD As String = $"SELECT `NIK`, `Status_Approval`, `Nama_Karyawan`, `Vacation_Code`, `StartVacation_Date`, 
+        `EndVacation_Date`,  `Department`,`Reason` FROM `approval_vacation` WHERE `Status_Approval` = 'Yes'"
         dataOnSide(QueryCMD)
+        b_delete.Enabled = False
         Console.WriteLine("Done")
     End Sub
     Private Sub cb_dep_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_dep.SelectedIndexChanged
@@ -197,4 +211,19 @@
         filterData(cb_dep.Text, tb_emp.Text, stDate, endDate)
     End Sub
 
+    Private Sub b_delete_Click(sender As Object, e As EventArgs) Handles b_delete.Click
+        Dim result As MsgBoxResult = MsgBox("Are you sure want to delete selected data ?", MsgBoxStyle.YesNo, "Register Vacation")
+        If result = MsgBoxResult.Yes Then
+            Dim nik As String = DGV_DataModify.Rows(selectedRow).Cells(0).Value
+            deleteData(nik)
+            b_delete.Enabled = False
+        Else
+            b_delete.Enabled = False
+        End If
+    End Sub
+
+    Private Sub DGV_DataModify_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_DataModify.CellClick
+        selectedRow = e.RowIndex
+        b_delete.Enabled = True
+    End Sub
 End Class
