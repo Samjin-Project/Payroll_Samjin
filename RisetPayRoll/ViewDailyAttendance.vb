@@ -91,7 +91,7 @@
         Ws.Columns(8).ColumnWidth = 10
         Ws.Columns(9).ColumnWidth = 10
         Ws.Columns(10).ColumnWidth = 15
-        Ws.Columns(11).ColumnWidth = 5
+        Ws.Columns(11).ColumnWidth = 15
         Ws.Columns(12).ColumnWidth = 5
         Ws.Columns(13).ColumnWidth = 5
         Ws.Columns(14).ColumnWidth = 5
