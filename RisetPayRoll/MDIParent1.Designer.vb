@@ -28,16 +28,19 @@ Partial Class MDIParent1
         Dim TreeNode2 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Approval Vacation")
         Dim TreeNode3 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Daily Attendance")
         Dim TreeNode4 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Compute Payroll")
-        Dim TreeNode5 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Approver", New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode2, TreeNode3, TreeNode4})
-        Dim TreeNode6 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Upload Finger Data")
-        Dim TreeNode7 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Finger Modify")
-        Dim TreeNode8 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Register Vacation")
-        Dim TreeNode9 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("View Daily Attendance")
-        Dim TreeNode10 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Admin", New System.Windows.Forms.TreeNode() {TreeNode6, TreeNode7, TreeNode8, TreeNode9})
-        Dim TreeNode11 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Attendance App", New System.Windows.Forms.TreeNode() {TreeNode5, TreeNode10})
+        Dim TreeNode5 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Upload Finger Data")
+        Dim TreeNode6 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("List No Check")
+        Dim TreeNode7 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("User", New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode2, TreeNode3, TreeNode4, TreeNode5, TreeNode6})
+        Dim TreeNode8 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Finger Modify")
+        Dim TreeNode9 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Register Vacation")
+        Dim TreeNode10 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("View Daily Attendance")
+        Dim TreeNode11 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Admin", New System.Windows.Forms.TreeNode() {TreeNode8, TreeNode9, TreeNode10})
+        Dim TreeNode12 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Attendance App", New System.Windows.Forms.TreeNode() {TreeNode7, TreeNode11})
         Me.MenuStrip = New System.Windows.Forms.MenuStrip()
         Me.FileMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LogOutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -45,14 +48,12 @@ Partial Class MDIParent1
         Me.ToolStripStatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolTip = New System.Windows.Forms.ToolTip(Me.components)
         Me.TreeView1 = New System.Windows.Forms.TreeView()
-        Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LogOutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.TextBoxUser = New System.Windows.Forms.Label()
         Me.TextBoxDep = New System.Windows.Forms.Label()
+        Me.TextBoxUser = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.MenuStrip.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -80,12 +81,24 @@ Partial Class MDIParent1
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(114, 6)
+        '
+        'OptionsToolStripMenuItem
+        '
+        Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
+        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(117, 22)
+        Me.OptionsToolStripMenuItem.Text = "&Options"
+        '
+        'LogOutToolStripMenuItem
+        '
+        Me.LogOutToolStripMenuItem.Name = "LogOutToolStripMenuItem"
+        Me.LogOutToolStripMenuItem.Size = New System.Drawing.Size(117, 22)
+        Me.LogOutToolStripMenuItem.Text = "Log Out"
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(117, 22)
         Me.ExitToolStripMenuItem.Text = "E&xit"
         '
         'HelpMenu
@@ -98,7 +111,7 @@ Partial Class MDIParent1
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(119, 22)
         Me.AboutToolStripMenuItem.Text = "&About ..."
         '
         'StatusStrip
@@ -131,36 +144,26 @@ Partial Class MDIParent1
         TreeNode3.Text = "Daily Attendance"
         TreeNode4.Name = "ComputePayrollNode"
         TreeNode4.Text = "Compute Payroll"
-        TreeNode5.Name = "AprovalChild"
-        TreeNode5.Text = "Approver"
-        TreeNode5.ToolTipText = "Admin"
-        TreeNode6.Name = "UploadFingerDataNode"
-        TreeNode6.Text = "Upload Finger Data"
-        TreeNode7.Name = "FingerModifyNode"
-        TreeNode7.Text = "Finger Modify"
-        TreeNode8.Name = "RegisterVacationNode"
-        TreeNode8.Text = "Register Vacation"
-        TreeNode9.Name = "ViewDailyAttendanceNode"
-        TreeNode9.Text = "View Daily Attendance"
-        TreeNode10.Name = "AdminChild"
-        TreeNode10.Text = "Admin"
-        TreeNode11.Name = "ParentTree"
-        TreeNode11.Text = "Attendance App"
-        Me.TreeView1.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode11})
+        TreeNode5.Name = "UploadFingerDataNode"
+        TreeNode5.Text = "Upload Finger Data"
+        TreeNode6.Name = "ListNoCheckNode"
+        TreeNode6.Text = "List No Check"
+        TreeNode7.Name = "AprovalChild"
+        TreeNode7.Text = "User"
+        TreeNode7.ToolTipText = "Admin"
+        TreeNode8.Name = "FingerModifyNode"
+        TreeNode8.Text = "Finger Modify"
+        TreeNode9.Name = "RegisterVacationNode"
+        TreeNode9.Text = "Register Vacation"
+        TreeNode10.Name = "ViewDailyAttendanceNode"
+        TreeNode10.Text = "View Daily Attendance"
+        TreeNode11.Name = "AdminChild"
+        TreeNode11.Text = "Admin"
+        TreeNode12.Name = "ParentTree"
+        TreeNode12.Text = "Attendance App"
+        Me.TreeView1.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode12})
         Me.TreeView1.Size = New System.Drawing.Size(200, 1200)
         Me.TreeView1.TabIndex = 9
-        '
-        'OptionsToolStripMenuItem
-        '
-        Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
-        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.OptionsToolStripMenuItem.Text = "&Options"
-        '
-        'LogOutToolStripMenuItem
-        '
-        Me.LogOutToolStripMenuItem.Name = "LogOutToolStripMenuItem"
-        Me.LogOutToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.LogOutToolStripMenuItem.Text = "Log Out"
         '
         'Panel1
         '
@@ -177,24 +180,21 @@ Partial Class MDIParent1
         Me.Panel1.Size = New System.Drawing.Size(200, 68)
         Me.Panel1.TabIndex = 15
         '
-        'Panel2
+        'TextBoxDep
         '
-        Me.Panel2.Controls.Add(Me.Panel1)
-        Me.Panel2.Controls.Add(Me.TreeView1)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Panel2.Location = New System.Drawing.Point(0, 24)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(200, 615)
-        Me.Panel2.TabIndex = 16
+        Me.TextBoxDep.AutoSize = True
+        Me.TextBoxDep.Location = New System.Drawing.Point(53, 42)
+        Me.TextBoxDep.Name = "TextBoxDep"
+        Me.TextBoxDep.Size = New System.Drawing.Size(0, 13)
+        Me.TextBoxDep.TabIndex = 20
         '
-        'Label1
+        'TextBoxUser
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(12, 16)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(35, 13)
-        Me.Label1.TabIndex = 17
-        Me.Label1.Text = "User :"
+        Me.TextBoxUser.AutoSize = True
+        Me.TextBoxUser.Location = New System.Drawing.Point(53, 16)
+        Me.TextBoxUser.Name = "TextBoxUser"
+        Me.TextBoxUser.Size = New System.Drawing.Size(0, 13)
+        Me.TextBoxUser.TabIndex = 19
         '
         'Label2
         '
@@ -205,21 +205,24 @@ Partial Class MDIParent1
         Me.Label2.TabIndex = 18
         Me.Label2.Text = "Dep :"
         '
-        'TextBoxUser
+        'Label1
         '
-        Me.TextBoxUser.AutoSize = True
-        Me.TextBoxUser.Location = New System.Drawing.Point(53, 16)
-        Me.TextBoxUser.Name = "TextBoxUser"
-        Me.TextBoxUser.Size = New System.Drawing.Size(0, 13)
-        Me.TextBoxUser.TabIndex = 19
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(12, 16)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(35, 13)
+        Me.Label1.TabIndex = 17
+        Me.Label1.Text = "User :"
         '
-        'TextBoxDep
+        'Panel2
         '
-        Me.TextBoxDep.AutoSize = True
-        Me.TextBoxDep.Location = New System.Drawing.Point(53, 42)
-        Me.TextBoxDep.Name = "TextBoxDep"
-        Me.TextBoxDep.Size = New System.Drawing.Size(0, 13)
-        Me.TextBoxDep.TabIndex = 20
+        Me.Panel2.Controls.Add(Me.Panel1)
+        Me.Panel2.Controls.Add(Me.TreeView1)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Panel2.Location = New System.Drawing.Point(0, 24)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(200, 615)
+        Me.Panel2.TabIndex = 16
         '
         'MDIParent1
         '

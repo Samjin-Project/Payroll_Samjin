@@ -210,6 +210,31 @@ Public Class MDIParent1
         End If
 
     End Sub
+    Public Sub ListNoCheckForm()
+        If Application.OpenForms().OfType(Of ListNoCheck).Any Then
+        Else
+            Dim ChildForm As New ListNoCheck()
+            With ChildForm
+                .MdiParent = Me
+                .AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+                .BackColor = System.Drawing.SystemColors.ControlDark
+                .ClientSize = New System.Drawing.Size(heightForm, widthForm)
+                .FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+                .Location = New System.Drawing.Point(0, 0)
+                .MaximizeBox = False
+                .MinimizeBox = False
+                .Name = "ListNoCheck"
+                .StartPosition = System.Windows.Forms.FormStartPosition.Manual
+                .TopMost = True
+                .WindowState = System.Windows.Forms.FormWindowState.Normal
+                .Text = "List No Check"
+                .Anchor = AnchorStyles.Top And AnchorStyles.Left
+                .Show()
+            End With
+            Console.WriteLine("New Form Raised")
+        End If
+
+    End Sub
     Private Sub OpenFile(ByVal sender As Object, ByVal e As EventArgs)
         Dim OpenFileDialog As New OpenFileDialog
         OpenFileDialog.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments

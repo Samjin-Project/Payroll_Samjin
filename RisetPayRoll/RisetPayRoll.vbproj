@@ -135,6 +135,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GlobalVar.vb" />
+    <Compile Include="ListNoCheck.Designer.vb">
+      <DependentUpon>ListNoCheck.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ListNoCheck.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Login.Designer.vb">
       <DependentUpon>Login.vb</DependentUpon>
     </Compile>
@@ -206,6 +212,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FingerModify.resx">
       <DependentUpon>FingerModify.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListNoCheck.resx">
+      <DependentUpon>ListNoCheck.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>

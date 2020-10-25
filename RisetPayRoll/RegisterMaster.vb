@@ -45,35 +45,37 @@ Public Class RegisterMaster
 
         'On Error Resume Next
         OpenFileDialogImport.Filter = "(*.xlsx)|*.xlsx|(*.xls)|*.xls|All files (*.*)|*.*"
-        OpenFileDialogImport.ShowDialog()
+
+        Dim result As DialogResult = OpenFileDialogImport.ShowDialog()
+
+        If result = DialogResult.OK Then
+
+            CONN = New OleDbConnection("provider=Microsoft.ACE.OLEDB.12.0;" & "data source='" & OpenFileDialogImport.FileName & "';Extended Properties=Excel 12.0 Xml;")
+
+            DA = New OleDbDataAdapter("select * from [Sheet1$]", CONN)
+            CONN.Open()
+            DS.Clear()
+            DA.Fill(DS)
+            DGV_ReviewMaster.DataSource = DS.Tables("a")
+            CONN.Close()
 
 
-        CONN = New OleDbConnection("provider=Microsoft.ACE.OLEDB.12.0;" & "data source='" & OpenFileDialogImport.FileName & "';Extended Properties=Excel 12.0 Xml;")
 
-        DA = New OleDbDataAdapter("select * from [Sheet1$]", CONN)
-        CONN.Open()
-        DS.Clear()
-        DA.Fill(DS)
-        DGV_ReviewMaster.DataSource = DS.Tables("a")
-        CONN.Close()
-
-
-
-        Dim funcDB As DataBaseClass = New DataBaseClass
-        Dim indexRows As Integer = DS.Tables(0).Rows.Count
-        Console.WriteLine("Tanggal Masuk : " + DS.Tables(0).Rows(2).Item(9))
-        Console.WriteLine("indexRows" + indexRows.ToString)
-        For i As Integer = 1 To indexRows - 3
-            Console.WriteLine("nilai" + i.ToString)
-            Dim AC_no As String = DS.Tables(0).Rows(i).Item(1).ToString.Substring(1, 6)
-            Dim admisionDateIn As Date = Date.ParseExact(DS.Tables(0).Rows(i).Item(9), "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
-            Dim admisionDateOut As String
-            If DS.Tables(0).Rows(i).Item(10).ToString = "" Then
-                admisionDateOut = ""
-            Else
-                admisionDateOut = Date.ParseExact(DS.Tables(0).Rows(i).Item(10), "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo).ToString("yyyy-MM-dd")
-            End If
-            Dim masterQuery As String = $"INSERT INTO `master employer`(`AC_nomor`,`NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Department`, `Tempat_Lahir`, `Tanggal_Lahir`, `Jenis_Kelamin`, `Pendidikan_Karyawan`, `Tanggal_Masuk`,`Tanggal_Keluar`, `Salary`,`StatusBpjs`,`StatusAktive`) 
+            Dim funcDB As DataBaseClass = New DataBaseClass
+            Dim indexRows As Integer = DS.Tables(0).Rows.Count
+            Console.WriteLine("Tanggal Masuk : " + DS.Tables(0).Rows(2).Item(9))
+            Console.WriteLine("indexRows" + indexRows.ToString)
+            For i As Integer = 1 To indexRows - 3
+                Console.WriteLine("nilai" + i.ToString)
+                Dim AC_no As String = DS.Tables(0).Rows(i).Item(1).ToString.Substring(1, 6)
+                Dim admisionDateIn As Date = Date.ParseExact(DS.Tables(0).Rows(i).Item(9), "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
+                Dim admisionDateOut As String
+                If DS.Tables(0).Rows(i).Item(10).ToString = "" Then
+                    admisionDateOut = ""
+                Else
+                    admisionDateOut = Date.ParseExact(DS.Tables(0).Rows(i).Item(10), "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo).ToString("yyyy-MM-dd")
+                End If
+                Dim masterQuery As String = $"INSERT INTO `master employer`(`AC_nomor`,`NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Department`, `Tempat_Lahir`, `Tanggal_Lahir`, `Jenis_Kelamin`, `Pendidikan_Karyawan`, `Tanggal_Masuk`,`Tanggal_Keluar`, `Salary`,`StatusBpjs`,`StatusAktive`) 
                  VALUES ('{AC_no }',
                          '{DS.Tables(0).Rows(i).Item(1)}',
                          '{DS.Tables(0).Rows(i).Item(2)}',
@@ -89,10 +91,11 @@ Public Class RegisterMaster
                          '{DS.Tables(0).Rows(i).Item(12)}',
                          '{DS.Tables(0).Rows(i).Item(13)}'
                          )"
-            Console.WriteLine("DB Query : " + masterQuery)
-            funcDB.uploadDB(masterQuery)
-        Next
-        MsgBox("Upload Selesai")
+                Console.WriteLine("DB Query : " + masterQuery)
+                funcDB.uploadDB(masterQuery)
+            Next
+            MsgBox("Upload Selesai")
+        End If
     End Sub
 
     Private Sub dataOnReview(QueryOnReview As String)
