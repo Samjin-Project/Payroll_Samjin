@@ -12,6 +12,7 @@
             cb_dep.Enabled = False
 
         Else
+
             For Each x As String In MDIParent1.JenisDepartement
                 cb_dep.Items.Add(x)
             Next
@@ -197,4 +198,7 @@
         filterData(cb_dep.Text, tb_emp.Text, stDate, endDate)
     End Sub
 
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
+
+    End Sub
 End Class

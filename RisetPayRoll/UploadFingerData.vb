@@ -64,7 +64,7 @@ Public Class UploadFingerData
             Dim queryNIK As String = $"SELECT `NIK`, `DEPARTMENT` FROM `master employer` WHERE `AC_Nomor` = '{DS.Tables(0).Rows(i).Item(0)}'"
             Dim dsNik As DataSet = funcDB.downloadDB(queryNIK)
             Console.WriteLine($"Check In " + Check_In.ToString)
-            If Check_In = "" Then
+            If Check_In = "" Or Check_Out = "" Then
                 Console.WriteLine("START BOLOS")
                 Dim masterQuery As String = $"INSERT INTO `finger_employer`(`NIK`,`AC_Nomor`, `Nama_Karyawan`, `Date_Finger`, `Shift_Finger`, `On_Duty`, `Off_Duty`, `Check_In`, `Check_Out`, `Departement`,`Finger Status`) 
                  VALUES ('{dsNik.Tables(0).Rows(0).Item(0).ToString}',
