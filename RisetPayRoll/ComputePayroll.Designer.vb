@@ -22,9 +22,9 @@ Partial Class ComputePayroll
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.DGV_ReviewDaily = New System.Windows.Forms.DataGridView()
@@ -46,6 +46,8 @@ Partial Class ComputePayroll
         Me.Label43 = New System.Windows.Forms.Label()
         Me.Label39 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.tb_x1 = New System.Windows.Forms.TextBox()
+        Me.tb_basic = New System.Windows.Forms.TextBox()
         Me.Label27 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel6 = New System.Windows.Forms.Panel()
@@ -103,8 +105,6 @@ Partial Class ComputePayroll
         Me.ComboBoxDep = New System.Windows.Forms.ComboBox()
         Me.b_export = New System.Windows.Forms.Button()
         Me.Label48 = New System.Windows.Forms.Label()
-        Me.tb_basic = New System.Windows.Forms.TextBox()
-        Me.tb_x1 = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.Panel4.SuspendLayout()
         CType(Me.DGV_ReviewDaily, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -125,7 +125,7 @@ Partial Class ComputePayroll
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(324, 561)
+        Me.Panel1.Size = New System.Drawing.Size(324, 665)
         Me.Panel1.TabIndex = 0
         '
         'Panel4
@@ -135,7 +135,7 @@ Partial Class ComputePayroll
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.Location = New System.Drawing.Point(0, 190)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(324, 371)
+        Me.Panel4.Size = New System.Drawing.Size(324, 475)
         Me.Panel4.TabIndex = 1
         '
         'DGV_ReviewDaily
@@ -143,14 +143,14 @@ Partial Class ComputePayroll
         Me.DGV_ReviewDaily.AllowUserToAddRows = False
         Me.DGV_ReviewDaily.AllowUserToDeleteRows = False
         Me.DGV_ReviewDaily.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DGV_ReviewDaily.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DGV_ReviewDaily.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DGV_ReviewDaily.ColumnHeadersHeight = 30
         Me.DGV_ReviewDaily.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DGV_ReviewDaily.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.KolomPayroll_NIK, Me.KolomPayroll_Nama, Me.KolomPayroll_Posisition, Me.KolomPayroll_Status})
@@ -161,16 +161,16 @@ Partial Class ComputePayroll
         Me.DGV_ReviewDaily.Name = "DGV_ReviewDaily"
         Me.DGV_ReviewDaily.ReadOnly = True
         Me.DGV_ReviewDaily.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DGV_ReviewDaily.RowsDefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DGV_ReviewDaily.RowsDefaultCellStyle = DataGridViewCellStyle3
         Me.DGV_ReviewDaily.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DGV_ReviewDaily.Size = New System.Drawing.Size(320, 367)
+        Me.DGV_ReviewDaily.Size = New System.Drawing.Size(320, 471)
         Me.DGV_ReviewDaily.TabIndex = 23
         '
         'KolomPayroll_NIK
         '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.KolomPayroll_NIK.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.KolomPayroll_NIK.DefaultCellStyle = DataGridViewCellStyle2
         Me.KolomPayroll_NIK.HeaderText = "Emp No."
         Me.KolomPayroll_NIK.Name = "KolomPayroll_NIK"
         Me.KolomPayroll_NIK.ReadOnly = True
@@ -335,8 +335,26 @@ Partial Class ComputePayroll
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(324, 0)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(733, 561)
+        Me.Panel2.Size = New System.Drawing.Size(938, 665)
         Me.Panel2.TabIndex = 1
+        '
+        'tb_x1
+        '
+        Me.tb_x1.BackColor = System.Drawing.Color.White
+        Me.tb_x1.Location = New System.Drawing.Point(196, 90)
+        Me.tb_x1.Name = "tb_x1"
+        Me.tb_x1.ReadOnly = True
+        Me.tb_x1.Size = New System.Drawing.Size(66, 20)
+        Me.tb_x1.TabIndex = 99
+        '
+        'tb_basic
+        '
+        Me.tb_basic.BackColor = System.Drawing.Color.White
+        Me.tb_basic.Location = New System.Drawing.Point(60, 90)
+        Me.tb_basic.Name = "tb_basic"
+        Me.tb_basic.ReadOnly = True
+        Me.tb_basic.Size = New System.Drawing.Size(66, 20)
+        Me.tb_basic.TabIndex = 98
         '
         'Label27
         '
@@ -411,7 +429,7 @@ Partial Class ComputePayroll
         Me.Panel6.Controls.Add(Me.tb_posisi)
         Me.Panel6.Location = New System.Drawing.Point(0, 118)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(733, 443)
+        Me.Panel6.Size = New System.Drawing.Size(935, 545)
         Me.Panel6.TabIndex = 2
         '
         'tb_total
@@ -422,6 +440,7 @@ Partial Class ComputePayroll
         Me.tb_total.ReadOnly = True
         Me.tb_total.Size = New System.Drawing.Size(110, 20)
         Me.tb_total.TabIndex = 97
+        Me.tb_total.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'tb_sup
         '
@@ -431,6 +450,7 @@ Partial Class ComputePayroll
         Me.tb_sup.ReadOnly = True
         Me.tb_sup.Size = New System.Drawing.Size(110, 20)
         Me.tb_sup.TabIndex = 96
+        Me.tb_sup.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'tb_deduct
         '
@@ -440,6 +460,7 @@ Partial Class ComputePayroll
         Me.tb_deduct.ReadOnly = True
         Me.tb_deduct.Size = New System.Drawing.Size(110, 20)
         Me.tb_deduct.TabIndex = 95
+        Me.tb_deduct.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'TextBox12
         '
@@ -449,6 +470,7 @@ Partial Class ComputePayroll
         Me.TextBox12.ReadOnly = True
         Me.TextBox12.Size = New System.Drawing.Size(110, 20)
         Me.TextBox12.TabIndex = 94
+        Me.TextBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'TextBox14
         '
@@ -458,6 +480,7 @@ Partial Class ComputePayroll
         Me.TextBox14.ReadOnly = True
         Me.TextBox14.Size = New System.Drawing.Size(110, 20)
         Me.TextBox14.TabIndex = 92
+        Me.TextBox14.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'TextBox15
         '
@@ -467,6 +490,7 @@ Partial Class ComputePayroll
         Me.TextBox15.ReadOnly = True
         Me.TextBox15.Size = New System.Drawing.Size(110, 20)
         Me.TextBox15.TabIndex = 91
+        Me.TextBox15.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'TextBox16
         '
@@ -476,6 +500,7 @@ Partial Class ComputePayroll
         Me.TextBox16.ReadOnly = True
         Me.TextBox16.Size = New System.Drawing.Size(110, 20)
         Me.TextBox16.TabIndex = 90
+        Me.TextBox16.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'tb_bpjsPot
         '
@@ -485,6 +510,7 @@ Partial Class ComputePayroll
         Me.tb_bpjsPot.ReadOnly = True
         Me.tb_bpjsPot.Size = New System.Drawing.Size(110, 20)
         Me.tb_bpjsPot.TabIndex = 89
+        Me.tb_bpjsPot.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'tb_potsal
         '
@@ -494,6 +520,7 @@ Partial Class ComputePayroll
         Me.tb_potsal.ReadOnly = True
         Me.tb_potsal.Size = New System.Drawing.Size(110, 20)
         Me.tb_potsal.TabIndex = 88
+        Me.tb_potsal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'tb_jamsostekPot
         '
@@ -503,6 +530,7 @@ Partial Class ComputePayroll
         Me.tb_jamsostekPot.ReadOnly = True
         Me.tb_jamsostekPot.Size = New System.Drawing.Size(110, 20)
         Me.tb_jamsostekPot.TabIndex = 87
+        Me.tb_jamsostekPot.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'TextBox11
         '
@@ -512,6 +540,7 @@ Partial Class ComputePayroll
         Me.TextBox11.ReadOnly = True
         Me.TextBox11.Size = New System.Drawing.Size(110, 20)
         Me.TextBox11.TabIndex = 86
+        Me.TextBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'TextBox8
         '
@@ -521,6 +550,7 @@ Partial Class ComputePayroll
         Me.TextBox8.ReadOnly = True
         Me.TextBox8.Size = New System.Drawing.Size(110, 20)
         Me.TextBox8.TabIndex = 85
+        Me.TextBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'tb_jamsostek
         '
@@ -530,6 +560,7 @@ Partial Class ComputePayroll
         Me.tb_jamsostek.ReadOnly = True
         Me.tb_jamsostek.Size = New System.Drawing.Size(110, 20)
         Me.tb_jamsostek.TabIndex = 84
+        Me.tb_jamsostek.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'tb_bpjs
         '
@@ -539,6 +570,7 @@ Partial Class ComputePayroll
         Me.tb_bpjs.ReadOnly = True
         Me.tb_bpjs.Size = New System.Drawing.Size(110, 20)
         Me.tb_bpjs.TabIndex = 83
+        Me.tb_bpjs.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'tb_otwages
         '
@@ -548,6 +580,7 @@ Partial Class ComputePayroll
         Me.tb_otwages.ReadOnly = True
         Me.tb_otwages.Size = New System.Drawing.Size(110, 20)
         Me.tb_otwages.TabIndex = 82
+        Me.tb_otwages.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'TextBox6
         '
@@ -557,6 +590,7 @@ Partial Class ComputePayroll
         Me.TextBox6.ReadOnly = True
         Me.TextBox6.Size = New System.Drawing.Size(110, 20)
         Me.TextBox6.TabIndex = 81
+        Me.TextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'TextBox7
         '
@@ -566,6 +600,7 @@ Partial Class ComputePayroll
         Me.TextBox7.ReadOnly = True
         Me.TextBox7.Size = New System.Drawing.Size(110, 20)
         Me.TextBox7.TabIndex = 80
+        Me.TextBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'TextBox2
         '
@@ -575,6 +610,7 @@ Partial Class ComputePayroll
         Me.TextBox2.ReadOnly = True
         Me.TextBox2.Size = New System.Drawing.Size(110, 20)
         Me.TextBox2.TabIndex = 79
+        Me.TextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'tb_ot
         '
@@ -584,6 +620,7 @@ Partial Class ComputePayroll
         Me.tb_ot.ReadOnly = True
         Me.tb_ot.Size = New System.Drawing.Size(110, 20)
         Me.tb_ot.TabIndex = 78
+        Me.tb_ot.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'tb_attendance
         '
@@ -593,6 +630,7 @@ Partial Class ComputePayroll
         Me.tb_attendance.ReadOnly = True
         Me.tb_attendance.Size = New System.Drawing.Size(110, 20)
         Me.tb_attendance.TabIndex = 77
+        Me.tb_attendance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'TextBox1
         '
@@ -602,6 +640,7 @@ Partial Class ComputePayroll
         Me.TextBox1.ReadOnly = True
         Me.TextBox1.Size = New System.Drawing.Size(110, 20)
         Me.TextBox1.TabIndex = 76
+        Me.TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label47
         '
@@ -620,6 +659,7 @@ Partial Class ComputePayroll
         Me.tb_basicSal.ReadOnly = True
         Me.tb_basicSal.Size = New System.Drawing.Size(110, 20)
         Me.tb_basicSal.TabIndex = 74
+        Me.tb_basicSal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label24
         '
@@ -857,6 +897,7 @@ Partial Class ComputePayroll
         Me.tb_posisi.ReadOnly = True
         Me.tb_posisi.Size = New System.Drawing.Size(110, 20)
         Me.tb_posisi.TabIndex = 19
+        Me.tb_posisi.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Panel5
         '
@@ -865,7 +906,7 @@ Partial Class ComputePayroll
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel5.Location = New System.Drawing.Point(0, 0)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(733, 86)
+        Me.Panel5.Size = New System.Drawing.Size(938, 86)
         Me.Panel5.TabIndex = 1
         '
         'Panel8
@@ -906,29 +947,11 @@ Partial Class ComputePayroll
         Me.Label48.TabIndex = 72
         Me.Label48.Text = "Department"
         '
-        'tb_basic
-        '
-        Me.tb_basic.BackColor = System.Drawing.Color.White
-        Me.tb_basic.Location = New System.Drawing.Point(60, 90)
-        Me.tb_basic.Name = "tb_basic"
-        Me.tb_basic.ReadOnly = True
-        Me.tb_basic.Size = New System.Drawing.Size(66, 20)
-        Me.tb_basic.TabIndex = 98
-        '
-        'tb_x1
-        '
-        Me.tb_x1.BackColor = System.Drawing.Color.White
-        Me.tb_x1.Location = New System.Drawing.Point(196, 90)
-        Me.tb_x1.Name = "tb_x1"
-        Me.tb_x1.ReadOnly = True
-        Me.tb_x1.Size = New System.Drawing.Size(66, 20)
-        Me.tb_x1.TabIndex = 99
-        '
         'ComputePayroll
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1057, 561)
+        Me.ClientSize = New System.Drawing.Size(1262, 665)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "ComputePayroll"

@@ -38,6 +38,7 @@ Partial Class RegisterVacation
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.b_delete = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.b_showall = New System.Windows.Forms.Button()
         Me.cb_dep = New System.Windows.Forms.ComboBox()
@@ -72,7 +73,6 @@ Partial Class RegisterVacation
         Me.tb_nama = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tb_emp = New System.Windows.Forms.TextBox()
-        Me.b_delete = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.DGV_DataModify, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
@@ -107,7 +107,7 @@ Partial Class RegisterVacation
         Me.DGV_DataModify.ReadOnly = True
         Me.DGV_DataModify.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         Me.DGV_DataModify.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
-        Me.DGV_DataModify.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        Me.DGV_DataModify.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DGV_DataModify.Size = New System.Drawing.Size(1031, 485)
         Me.DGV_DataModify.TabIndex = 17
         '
@@ -241,6 +241,15 @@ Partial Class RegisterVacation
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(1370, 57)
         Me.Panel2.TabIndex = 20
+        '
+        'b_delete
+        '
+        Me.b_delete.Location = New System.Drawing.Point(555, 29)
+        Me.b_delete.Name = "b_delete"
+        Me.b_delete.Size = New System.Drawing.Size(63, 23)
+        Me.b_delete.TabIndex = 14
+        Me.b_delete.Text = "Delete"
+        Me.b_delete.UseVisualStyleBackColor = True
         '
         'Button1
         '
@@ -565,15 +574,6 @@ Partial Class RegisterVacation
         Me.tb_emp.Name = "tb_emp"
         Me.tb_emp.Size = New System.Drawing.Size(110, 20)
         Me.tb_emp.TabIndex = 0
-        '
-        'b_delete
-        '
-        Me.b_delete.Location = New System.Drawing.Point(555, 29)
-        Me.b_delete.Name = "b_delete"
-        Me.b_delete.Size = New System.Drawing.Size(63, 23)
-        Me.b_delete.TabIndex = 14
-        Me.b_delete.Text = "Delete"
-        Me.b_delete.UseVisualStyleBackColor = True
         '
         'RegisterVacation
         '

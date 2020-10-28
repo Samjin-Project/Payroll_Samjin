@@ -23,7 +23,7 @@
         Dim QueryCMD As String = $"SELECT `NIK`, `Status_Approval`, `Nama_Karyawan`, `Vacation_Code`, `StartVacation_Date`, 
         `EndVacation_Date`,  `Department`,`Reason` FROM `approval_vacation` WHERE `Status_Approval` = 'Yes'"
         dataOnSide(QueryCMD)
-        b_delete.Enabled = False
+        b_delete.Enabled = True
     End Sub
 
     Private Sub dataOnSide(QueryOnReview As String)
@@ -69,10 +69,14 @@
         total_data.Text = DGV_DataModify.Rows.Count
     End Sub
 
-    Sub uploadData()
-
+    Function uploadData() As Boolean
         Dim funcDB As DataBaseClass = New DataBaseClass
-        Dim masterQuery As String = $"INSERT INTO `approval_vacation`(`NIK`, `Status_Approval`, `Approver`, `Nama_Karyawan`, `Vacation_Code`, `StartVacation_Date`, `EndVacation_Date`, `ReqVacation_Date`, `Department`, `Telp`, `Reason`) 
+        Dim cekQuery As String = $"select count(*) from `approval_vacation` WHERE `NIK` = '{tb_emp.Text}' AND `StartVacation_Date` = '{dt_startdate.Value.ToString("yyyy-MM-dd")}'"
+        Dim CekDs As DataSet = funcDB.downloadDB(cekQuery)
+        Dim jumlahSyarat As Integer = CInt(CekDs.Tables(0).Rows(0).Item(0))
+
+        If jumlahSyarat < 1 Then
+            Dim masterQuery As String = $"INSERT INTO `approval_vacation`(`NIK`, `Status_Approval`, `Approver`, `Nama_Karyawan`, `Vacation_Code`, `StartVacation_Date`, `EndVacation_Date`, `ReqVacation_Date`, `Department`, `Telp`, `Reason`) 
                  VALUES ('{tb_emp.Text}',
                          'No',
                          'Admin',
@@ -84,13 +88,23 @@
                          '{cb_department.Text}',
                          '{tb_telp.Text}',
                          '{tb_reason.Text}')"
-        Console.WriteLine("DB Query : " + masterQuery)
-        funcDB.uploadDB(masterQuery)
-    End Sub
+            Console.WriteLine("DB Query : " + masterQuery)
+            funcDB.uploadDB(masterQuery)
+            MsgBox("Data Saved", MsgBoxStyle.Information, "Register Vacation")
+            Return True
+        Else
+            MsgBox("Perhatian !" + vbCrLf + "Vacation Sudah Dibuat, Silahkan Cek Kembali", MsgBoxStyle.Critical, "Register Vacation")
+            Return False
+        End If
 
-    Sub deleteData(nik As String)
+    End Function
+
+    Sub deleteData(rowIndex As Integer)
+        Console.WriteLine("row index :" + DGV_DataModify.Rows(rowIndex).Cells(6).Value.ToString)
+        Dim expenddt As Date = Date.ParseExact(DGV_DataModify.Rows(rowIndex).Cells(6).Value.ToString, "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
+
         Dim deleteDB As DataBaseClass = New DataBaseClass
-        Dim queryCmd As String = $"DELETE FROM `approval_vacation` WHERE `NIK` = '{nik}'"
+        Dim queryCmd As String = $"DELETE FROM `approval_vacation` WHERE `NIK` = '{DGV_DataModify.Rows(rowIndex).Cells(0).Value.ToString}' AND `StartVacation_Date` = '{expenddt.ToString("yyyy-MM-dd")}' AND `Status_Approval` = 'Yes'"
         deleteDB.uploadDB(queryCmd)
         Dim queryAll As String = $"SELECT `NIK`, `Status_Approval`, `Nama_Karyawan`, `Vacation_Code`, `StartVacation_Date`, 
         `EndVacation_Date`,  `Department`,`Reason` FROM `approval_vacation` WHERE `Status_Approval` = 'Yes'"
@@ -102,19 +116,18 @@
         If cb_holtype.Text = "" Or tb_nama.Text = "" Or tb_emp.Text = "" Or cb_department.Text = "" Or tb_telp.Text = "" Or tb_reason.Text = "" Then
             MsgBox("Data tidak boleh kosong !", MsgBoxStyle.Exclamation, "Register Vacation")
         Else
-            uploadData()
-            tb_emp.Text = ""
-            tb_nama.Text = ""
-            cb_holtype.Text = ""
-            tb_telp.Text = ""
-            cb_department.Text = ""
-            dt_startdate.Value = Now
-            dt_anddate.Value = Now
-            dt_reqdate.Value = Now
-            tb_reason.Text = ""
-            MsgBox("Data Saved", MsgBoxStyle.Information, "Register Vacation")
+            If uploadData() = True Then
+                tb_emp.Text = ""
+                tb_nama.Text = ""
+                cb_holtype.Text = ""
+                tb_telp.Text = ""
+                cb_department.Text = ""
+                dt_startdate.Value = Now
+                dt_anddate.Value = Now
+                dt_reqdate.Value = Now
+                tb_reason.Text = ""
+            End If
         End If
-
     End Sub
     'filter data master
     Private Sub filterData(dep As String, emp As String, stDate As String, endDate As String)
@@ -211,6 +224,28 @@
         filterData(cb_dep.Text, tb_emp.Text, stDate, endDate)
     End Sub
 
+    Public Function ExcelColName(ByVal Col As Integer) As String
+        If Col < 0 And Col > 256 Then
+            MsgBox("Invalid Argument", MsgBoxStyle.Critical)
+            Return Nothing
+            Exit Function
+        End If
+        Dim i As Int16
+        Dim r As Int16
+        Dim S As String
+        If Col <= 26 Then
+            S = Chr(Col + 64)
+        Else
+            r = Col Mod 26
+            i = System.Math.Floor(Col / 26)
+            If r = 0 Then
+                r = 26
+                i = i - 1
+            End If
+            S = Chr(i + 64) & Chr(r + 64)
+        End If
+        ExcelColName = S
+    End Function
     Public Sub saveExcelFile(ByVal FileName As String)
         Dim sheetIndex As Integer
         Dim Ex As Object
@@ -275,4 +310,18 @@
         MsgBox("Exported Successfully.", MsgBoxStyle.Information)
     End Sub
 
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim saveFileDialog1 As New SaveFileDialog
+        saveFileDialog1.Filter = "Excel File|*.xls,*.xlsx"
+        saveFileDialog1.Title = "Save an Excel File"
+        saveFileDialog1.ShowDialog()
+        If saveFileDialog1.FileName <> "" Then
+            saveExcelFile(saveFileDialog1.FileName)
+        End If
+    End Sub
+
+    Private Sub b_delete_Click(sender As Object, e As EventArgs) Handles b_delete.Click
+        Dim selectedRows As Integer = DGV_DataModify.CurrentRow.Index
+        deleteData(selectedRows)
+    End Sub
 End Class
