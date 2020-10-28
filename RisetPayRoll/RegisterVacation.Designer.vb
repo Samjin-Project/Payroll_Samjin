@@ -94,12 +94,13 @@ Partial Class RegisterVacation
         '
         Me.DGV_DataModify.AllowUserToAddRows = False
         Me.DGV_DataModify.AllowUserToDeleteRows = False
+        Me.DGV_DataModify.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGV_DataModify.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
         Me.DGV_DataModify.BackgroundColor = System.Drawing.SystemColors.Control
         Me.DGV_DataModify.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.DGV_DataModify.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DGV_DataModify.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.kolom_emp, Me.Kolom_Nama, Me.Kolom_Admision, Me.kolom_department, Me.HolidayType, Me.Approval, Me.StartDate, Me.EndDate, Me.Reasons})
-        Me.DGV_DataModify.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DGV_DataModify.GridColor = System.Drawing.Color.LightGoldenrodYellow
         Me.DGV_DataModify.Location = New System.Drawing.Point(0, 0)
         Me.DGV_DataModify.MultiSelect = False

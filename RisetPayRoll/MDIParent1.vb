@@ -218,7 +218,7 @@ Public Class MDIParent1
                 .MdiParent = Me
                 .AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
                 .BackColor = System.Drawing.SystemColors.ControlDark
-                .ClientSize = New System.Drawing.Size(heightForm, widthForm)
+                .ClientSize = New System.Drawing.Size(900, 575)
                 .FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
                 .Location = New System.Drawing.Point(0, 0)
                 .MaximizeBox = False
