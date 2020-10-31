@@ -66,8 +66,8 @@ Public Class ComputePayroll
             Dim dsBasePayRoll As DataSet = DBClass.downloadDB(queryBase)
             Dim salary As DataSet = DBClass.downloadDB(querySalary)
 
-            Dim kehadiran, totalOT, attendance, totalHadir As Integer
-            Dim makanPuasa, pureSalary, basicSalary, otSalary, jamsostSalary, managfeeSalary, grossSalary, deductin, paymentFromSamjin, takeHomePay, bpjs, upahLembur, jumlahHAriKerja, bulan As String
+            Dim totalOT As Integer
+            Dim managfeeSalary, grossSalary, attendance, kehadiran, makanPuasa, pureSalary, basicSalary, otSalary, jamsostSalary, deductin, paymentFromSamjin, takeHomePay, bpjs, upahLembur, jumlahHAriKerja, bulan As String
             Dim tanggal As String = ""
             If dsPayroll.Tables(0).Rows.Count <> 0 Then
                 basicSalary = makeDot((dsPayroll.Tables(0).Rows(0).Item(0)).ToString)
@@ -78,20 +78,19 @@ Public Class ComputePayroll
                 deductin = makeDot((dsPayroll.Tables(0).Rows(0).Item(6)).ToString)
                 takeHomePay = makeDot((dsPayroll.Tables(0).Rows(0).Item(7)).ToString)
 
-                kehadiran = CInt(dsPayroll.Tables(0).Rows(0).Item(8))
+                kehadiran = dsPayroll.Tables(0).Rows(0).Item(8).ToString
                 totalOT = CInt(dsPayroll.Tables(0).Rows(0).Item(9))
 
-                tanggal = makeDot(dsPayroll.Tables(0).Rows(0).Item(10).ToString)
+                tanggal = dsPayroll.Tables(0).Rows(0).Item(10).ToString
                 otSalary = makeDot((dsPayroll.Tables(0).Rows(0).Item(11)).ToString)
-                attendance = CInt((dsPayroll.Tables(0).Rows(0).Item(12)))
+                attendance = (dsPayroll.Tables(0).Rows(0).Item(12)).ToString
 
 
                 upahLembur = makeDot((dsBasePayRoll.Tables(0).Rows(0).Item(2)).ToString)
                 makanPuasa = makeDot((dsBasePayRoll.Tables(0).Rows(0).Item(6)).ToString)
 
                 pureSalary = makeDot((salary.Tables(0).Rows(0).Item(0)).ToString)
-                totalHadir = kehadiran - attendance
-
+                paymentFromSamjin = makeDot(dsPayroll.Tables(0).Rows(0).Item(2) + (dsPayroll.Tables(0).Rows(0).Item(1)).ToString)
                 'PCBA -(Ayu Elia Letari ) 2020018
                 'RUBBER -(Fitria Nurmegawati E ) 20190198
                 'MOULDING -(Sumarni) 20110126
@@ -109,7 +108,7 @@ Public Class ComputePayroll
                     jumlahHAriKerja = 6
                 End If
 
-                table.Rows.Add(i + 1, nik, nama, posisi, dep, hairDate, status, pureSalary, upahLembur, jamsostSalary, bpjs, managfeeSalary, jumlahHAriKerja, bulan, totalHadir, totalOT, basicSalary, otSalary, makanPuasa, jamsostSalary, bpjs, grossSalary, managfeeSalary, paymentFromSamjin, grossSalary, jamsostSalary, bpjs, deductin, takeHomePay)
+                table.Rows.Add(i + 1, nik, nama, posisi, dep, hairDate, status, pureSalary, upahLembur, jamsostSalary, bpjs, managfeeSalary, jumlahHAriKerja, bulan, kehadiran, totalOT, basicSalary, otSalary, makanPuasa, jamsostSalary, bpjs, grossSalary, managfeeSalary, paymentFromSamjin, grossSalary, jamsostSalary, bpjs, deductin, takeHomePay)
                 Console.WriteLine("RowCount " + table.Rows.Count.ToString)
                 Console.WriteLine($"table.Rows.Add({i + 1}, {nik}, {nama}, {posisi}, {dep}, {hairDate}, {status}, {basicSalary}, {grossSalary}, {managfeeSalary}, {paymentFromSamjin}, {grossSalary}, {jamsostSalary}, {bpjs}, {deductin}, {takeHomePay})")
             Else
@@ -458,8 +457,8 @@ Public Class ComputePayroll
             bpjs = 0
         End If
 
-        Dim pureSalary As Double = basicSalary / indexHari * (hariKerja - attendance)
-        Console.WriteLine($"rumus pure : {basicSalary} / {indexHari} * ({hariKerja} - {attendance})")
+        Dim pureSalary As Double = basicSalary / indexHari * (hariKerja)
+        Console.WriteLine($"rumus pure : {basicSalary} / {indexHari} * ({hariKerja})")
         Dim otSalary As Double = upahLembur * jumlahLembur
         Dim jamsostSalary As Double = Math.Round(basicSalary * Math.Round(jamsostek, 4), 0)
         Dim managfeeSalary As Double = Math.Round(basicSalary * Math.Round(managFee, 4), 0)

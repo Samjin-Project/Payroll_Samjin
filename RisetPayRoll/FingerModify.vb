@@ -261,7 +261,7 @@ Public Class FingerModify
         Dim indexRows As Integer = e.RowIndex
         Dim recFinger As String = DGV_DataModify.Rows(indexRows).Cells(8).Value
         Dim Nik As String = DGV_DataModify.Rows(indexRows).Cells(2).Value
-        Dim DateFinger As String = dt_day.Value.ToString("yyyy-dd-MM")
+        Dim DateFinger As String = dt_day.Value.ToString("yyyy-MM-dd")
         Dim syaratPanjang As Boolean = recFinger.Length = 5
         Dim syaratInput As Boolean
         If syaratPanjang Then
