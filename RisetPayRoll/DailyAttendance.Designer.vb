@@ -41,6 +41,7 @@ Partial Class DailyAttendance
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.dt_create = New System.Windows.Forms.DateTimePicker()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.cb_depCreate = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -75,7 +76,6 @@ Partial Class DailyAttendance
         Me.total_data = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
-        Me.dt_create = New System.Windows.Forms.DateTimePicker()
         Me.Panel1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -255,6 +255,15 @@ Partial Class DailyAttendance
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Create Conditions"
         '
+        'dt_create
+        '
+        Me.dt_create.CustomFormat = "MM/yyyy"
+        Me.dt_create.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dt_create.Location = New System.Drawing.Point(370, 38)
+        Me.dt_create.Name = "dt_create"
+        Me.dt_create.Size = New System.Drawing.Size(82, 20)
+        Me.dt_create.TabIndex = 45
+        '
         'Button1
         '
         Me.Button1.Location = New System.Drawing.Point(370, 61)
@@ -267,11 +276,12 @@ Partial Class DailyAttendance
         'cb_depCreate
         '
         Me.cb_depCreate.FormattingEnabled = True
-        Me.cb_depCreate.Items.AddRange(New Object() {"PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING"})
+        Me.cb_depCreate.Items.AddRange(New Object() {"ALL", "PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING", "SMD"})
         Me.cb_depCreate.Location = New System.Drawing.Point(370, 13)
         Me.cb_depCreate.Name = "cb_depCreate"
         Me.cb_depCreate.Size = New System.Drawing.Size(124, 21)
         Me.cb_depCreate.TabIndex = 42
+        Me.cb_depCreate.Text = "ALL"
         '
         'Label4
         '
@@ -575,15 +585,6 @@ Partial Class DailyAttendance
         Me.Label18.Size = New System.Drawing.Size(45, 13)
         Me.Label18.TabIndex = 13
         Me.Label18.Text = "Total"
-        '
-        'dt_create
-        '
-        Me.dt_create.CustomFormat = "MM/yyyy"
-        Me.dt_create.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dt_create.Location = New System.Drawing.Point(370, 38)
-        Me.dt_create.Name = "dt_create"
-        Me.dt_create.Size = New System.Drawing.Size(82, 20)
-        Me.dt_create.TabIndex = 45
         '
         'DailyAttendance
         '

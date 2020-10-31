@@ -461,7 +461,7 @@ Public Class ComputePayroll
         Console.WriteLine($"rumus pure : {basicSalary} / {indexHari} * ({hariKerja})")
         Dim otSalary As Double = upahLembur * jumlahLembur
         Dim jamsostSalary As Double = Math.Round(basicSalary * Math.Round(jamsostek, 4), 0)
-        Dim managfeeSalary As Double = Math.Round(basicSalary * Math.Round(managFee, 4), 0)
+        Dim managfeeSalary As Double = Math.Round(pureSalary * Math.Round(managFee, 4), 0)
         Dim grossSalary As Double = Math.Round((otSalary + pureSalary + jamsostSalary + bpjs), 0)
         Dim deductin As Double = Math.Round((jamsostSalary + bpjs), 0)
 
