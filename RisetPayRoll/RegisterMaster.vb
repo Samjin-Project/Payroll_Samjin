@@ -141,7 +141,7 @@ Public Class RegisterMaster
             tb_empDet.Text = ds.Tables(0).Rows(0).Item(2)
             tb_nama.Text = ds.Tables(0).Rows(0).Item(3).ToString
             cb_createPosisi.Text = ds.Tables(0).Rows(0).Item(4).ToString
-            tb_dep.Text = ds.Tables(0).Rows(0).Item(5).ToString
+            cb_dep.Text = ds.Tables(0).Rows(0).Item(5).ToString
             tb_pob.Text = ds.Tables(0).Rows(0).Item(6).ToString
             dt_lahir.CustomFormat = "dd/MM/yyyy"
             dt_lahir.Value = tglLahir
@@ -163,36 +163,36 @@ Public Class RegisterMaster
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         UploadExcel()
     End Sub
-    Private Sub filterData(posisi As String, jk As String, masuk As String)
-        Dim queryAll As String = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master employer`"
-        Dim querySortPosisi As String = $"{queryAll} WHERE `Posisi_Karyawan` = '{posisi}'"
+    Private Sub filterData(dep As String, jk As String, masuk As String)
+        Dim queryAll As String = "SELECT `NIK`, `Nama_Karyawan`, `Department` FROM `master employer`"
+        Dim querySortDep As String = $"{queryAll} WHERE `Department` = '{dep}'"
         Dim querySortJK As String = $"{queryAll} WHERE `Jenis_Kelamin` = '{jk}'"
-        Dim querySortAll As String = $"{queryAll} WHERE `Jenis_Kelamin` = '{jk}'AND `Posisi_Karyawan` = '{posisi}'"
+        Dim querySortAll As String = $"{queryAll} WHERE `Jenis_Kelamin` = '{jk}'AND `Department` = '{dep}'"
 
-        Dim queryAllwTime As String = $"{queryAll} WHERE `Tanggal_Masuk` = '{masuk}' AND `Tanggal_Masuk` = '{masuk}'"
-        Dim querySortPosisiwTime As String = $"{queryAll} WHERE `Posisi_Karyawan` = '{posisi}' AND `Tanggal_Masuk` = '{masuk}'"
+        Dim queryAllwTime As String = $"{queryAll} WHERE `Tanggal_Masuk` = '{masuk}'"
+        Dim querySortDepwTime As String = $"{queryAll} WHERE `Department` = '{dep}' AND `Tanggal_Masuk` = '{masuk}'"
         Dim querySortJKwTime As String = $"{queryAll} WHERE `Jenis_Kelamin` = '{jk}' AND `Tanggal_Masuk` = '{masuk}'"
-        Dim querySortAllwTime As String = $"{queryAll} WHERE `Jenis_Kelamin` = '{jk}'AND `Posisi_Karyawan` = '{posisi}' AND `Tanggal_Masuk` = '{masuk}'"
+        Dim querySortAllwTime As String = $"{queryAll} WHERE `Jenis_Kelamin` = '{jk}'AND `Department` = '{dep}' AND `Tanggal_Masuk` = '{masuk}'"
 
         Dim querycmd As String = ""
         If flag = False Then
-            If posisi = "" And jk <> "" Then
+            If dep = "" And jk <> "" Then
                 querycmd = querySortJK
-            ElseIf posisi <> "" And jk = "" Then
-                querycmd = querySortPosisi
-            ElseIf posisi <> "" And jk <> "" Then
+            ElseIf dep <> "" And jk = "" Then
+                querycmd = querySortDep
+            ElseIf dep <> "" And jk <> "" Then
                 querycmd = querySortAll
-            ElseIf posisi = "" And jk = "" Then
+            ElseIf dep = "" And jk = "" Then
                 querycmd = queryAll
             End If
         Else
-            If posisi = "" And jk <> "" Then
+            If dep = "" And jk <> "" Then
                 querycmd = querySortJKwTime
-            ElseIf posisi <> "" And jk = "" Then
-                querycmd = querySortPosisiwTime
-            ElseIf posisi <> "" And jk <> "" Then
+            ElseIf dep <> "" And jk = "" Then
+                querycmd = querySortDepwTime
+            ElseIf dep <> "" And jk <> "" Then
                 querycmd = querySortAllwTime
-            ElseIf posisi = "" And jk = "" Then
+            ElseIf dep = "" And jk = "" Then
                 querycmd = queryAllwTime
             End If
         End If
@@ -203,7 +203,7 @@ Public Class RegisterMaster
     Private Sub dt_masuk_ValueChanged(sender As Object, e As EventArgs) Handles dt_masuk.ValueChanged
         flag = True
         Dim masuk As String = dt_masuk.Value.ToString("yyyy-MM-dd")
-        Dim posisi As String = cb_posisi.Text
+        Dim dep As String = cb_department.Text
         Dim jk As String
         tb_emp.Text = ""
         If cb_jk.Text = "Laki-Laki" Then
@@ -213,13 +213,13 @@ Public Class RegisterMaster
         Else
             jk = ""
         End If
-        filterData(posisi, jk, masuk)
+        filterData(dep, jk, masuk)
         clearData()
     End Sub
 
-    Private Sub cb_posisi_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_posisi.SelectedIndexChanged
+    Private Sub cb_posisi_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_department.SelectedIndexChanged
         Dim masuk As String = dt_masuk.Value.ToString("yyyy-MM-dd")
-        Dim posisi As String = cb_posisi.Text
+        Dim dep As String = cb_department.Text
         Dim jk As String
         tb_emp.Text = ""
         If cb_jk.Text = "Laki-Laki" Then
@@ -229,13 +229,13 @@ Public Class RegisterMaster
         Else
             jk = ""
         End If
-        filterData(posisi, jk, masuk)
+        filterData(dep, jk, masuk)
         clearData()
     End Sub
 
     Private Sub cb_jk_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_jk.SelectedIndexChanged
         Dim masuk As String = dt_masuk.Value.ToString("yyyy-MM-dd")
-        Dim posisi As String = cb_posisi.Text
+        Dim dep As String = cb_department.Text
         Dim jk As String
         tb_emp.Text = ""
         If cb_jk.Text = "Laki-Laki" Then
@@ -245,7 +245,7 @@ Public Class RegisterMaster
         Else
             jk = ""
         End If
-        filterData(posisi, jk, masuk)
+        filterData(dep, jk, masuk)
         clearData()
     End Sub
 
@@ -253,7 +253,7 @@ Public Class RegisterMaster
     Private Sub tb_emp_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles tb_emp.PreviewKeyDown
         If e.KeyCode = Keys.Enter Then
             cb_jk.Text = ""
-            cb_posisi.Text = ""
+            cb_department.Text = ""
             Dim nik As String = tb_emp.Text
             Dim querycmd As String = $"SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master employer` WHERE `NIK` = '{nik}'"
             dataOnReview(querycmd)
@@ -263,7 +263,7 @@ Public Class RegisterMaster
     Private Sub b_clear_Click(sender As Object, e As EventArgs) Handles b_clear.Click
         dt_masuk.Value = Now
         cb_jk.Text = ""
-        cb_posisi.Text = ""
+        cb_department.Text = ""
         tb_emp.Text = ""
         Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master employer`"
         dataOnReview(QueryCMD)
@@ -305,7 +305,7 @@ Public Class RegisterMaster
 
     Private Sub b_save_Click(sender As Object, e As EventArgs) Handles b_save.Click
         Dim queryAll As String = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master employer`"
-        If tb_empDet.Text = "" Or tb_nama.Text = "" Or cb_createJK.Text = "" Or tb_pob.Text = "" Or tb_pend.Text = "" Or cb_bpjs.Text = "" Or cb_createPosisi.Text = "" Or tb_dep.Text = "" Or cb_stat.Text = "" Or tb_salary.Text = "" Or cb_aktif.Text = "" Then
+        If tb_empDet.Text = "" Or tb_nama.Text = "" Or cb_createJK.Text = "" Or tb_pob.Text = "" Or tb_pend.Text = "" Or cb_bpjs.Text = "" Or cb_createPosisi.Text = "" Or cb_dep.Text = "" Or cb_stat.Text = "" Or tb_salary.Text = "" Or cb_aktif.Text = "" Then
             MsgBox("Data tidak boleh kosong !", MsgBoxStyle.Exclamation)
         Else
             Dim result As MsgBoxResult = MsgBox("Are you sure want to save ?", MsgBoxStyle.YesNoCancel, "Register Master")
@@ -358,7 +358,7 @@ Public Class RegisterMaster
         tb_pob.ReadOnly = False
         tb_pend.ReadOnly = False
         cb_createPosisi.Enabled = True
-        tb_dep.ReadOnly = False
+        cb_dep.Enabled = True
         cb_stat.Enabled = True
         tb_salary.ReadOnly = False
         dt_createKeluar.Enabled = True
@@ -378,7 +378,7 @@ Public Class RegisterMaster
         tb_pob.ReadOnly = True
         tb_pend.ReadOnly = True
         cb_createPosisi.Enabled = False
-        tb_dep.ReadOnly = True
+        cb_dep.Enabled = False
         cb_stat.Enabled = False
         tb_salary.ReadOnly = True
 
@@ -399,7 +399,7 @@ Public Class RegisterMaster
         tb_pob.Text = ""
         tb_salary.Text = ""
         cb_stat.Text = ""
-        tb_dep.Text = ""
+        cb_dep.Text = ""
         tb_pend.Text = ""
         dt_createKeluar.Enabled = False
         dt_createKeluar.CustomFormat = " "
@@ -429,7 +429,7 @@ Public Class RegisterMaster
                          '{tb_empDet.Text}',
                          '{tb_nama.Text}',
                          '{cb_createPosisi.Text}',
-                         '{tb_dep.Text}',
+                         '{cb_dep.Text}',
                          '{tb_pob.Text}',
                          '{dt_lahir.Value.ToString("dd/MM/yyyy")}',
                          '{jk}',

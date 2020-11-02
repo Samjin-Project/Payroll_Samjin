@@ -34,7 +34,7 @@ Partial Class RegisterMaster
         Me.Label15 = New System.Windows.Forms.Label()
         Me.cb_jk = New System.Windows.Forms.ComboBox()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.cb_posisi = New System.Windows.Forms.ComboBox()
+        Me.cb_department = New System.Windows.Forms.ComboBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.tb_emp = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
@@ -65,7 +65,6 @@ Partial Class RegisterMaster
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.tb_pob = New System.Windows.Forms.TextBox()
-        Me.tb_dep = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tb_nama = New System.Windows.Forms.TextBox()
         Me.cb_createJK = New System.Windows.Forms.ComboBox()
@@ -82,6 +81,7 @@ Partial Class RegisterMaster
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.OpenFileDialogImport = New System.Windows.Forms.OpenFileDialog()
+        Me.cb_dep = New System.Windows.Forms.ComboBox()
         Me.Panel1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -144,7 +144,7 @@ Partial Class RegisterMaster
         Me.GroupBox1.Controls.Add(Me.Label15)
         Me.GroupBox1.Controls.Add(Me.cb_jk)
         Me.GroupBox1.Controls.Add(Me.Label11)
-        Me.GroupBox1.Controls.Add(Me.cb_posisi)
+        Me.GroupBox1.Controls.Add(Me.cb_department)
         Me.GroupBox1.Location = New System.Drawing.Point(4, 10)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(527, 79)
@@ -200,20 +200,20 @@ Partial Class RegisterMaster
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(59, 29)
+        Me.Label11.Location = New System.Drawing.Point(29, 23)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(34, 13)
+        Me.Label11.Size = New System.Drawing.Size(62, 13)
         Me.Label11.TabIndex = 24
-        Me.Label11.Text = "Posisi"
+        Me.Label11.Text = "Department"
         '
-        'cb_posisi
+        'cb_department
         '
-        Me.cb_posisi.FormattingEnabled = True
-        Me.cb_posisi.Items.AddRange(New Object() {"PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING", "SMD"})
-        Me.cb_posisi.Location = New System.Drawing.Point(97, 21)
-        Me.cb_posisi.Name = "cb_posisi"
-        Me.cb_posisi.Size = New System.Drawing.Size(155, 21)
-        Me.cb_posisi.TabIndex = 23
+        Me.cb_department.FormattingEnabled = True
+        Me.cb_department.Items.AddRange(New Object() {"PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING", "SMD"})
+        Me.cb_department.Location = New System.Drawing.Point(97, 21)
+        Me.cb_department.Name = "cb_department"
+        Me.cb_department.Size = New System.Drawing.Size(155, 21)
+        Me.cb_department.TabIndex = 23
         '
         'Panel3
         '
@@ -258,6 +258,7 @@ Partial Class RegisterMaster
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel2.Controls.Add(Me.cb_dep)
         Me.Panel2.Controls.Add(Me.cb_createPosisi)
         Me.Panel2.Controls.Add(Me.cb_stat)
         Me.Panel2.Controls.Add(Me.Label23)
@@ -283,7 +284,6 @@ Partial Class RegisterMaster
         Me.Panel2.Controls.Add(Me.Label3)
         Me.Panel2.Controls.Add(Me.Label2)
         Me.Panel2.Controls.Add(Me.tb_pob)
-        Me.Panel2.Controls.Add(Me.tb_dep)
         Me.Panel2.Controls.Add(Me.Label1)
         Me.Panel2.Controls.Add(Me.tb_nama)
         Me.Panel2.Controls.Add(Me.cb_createJK)
@@ -312,7 +312,7 @@ Partial Class RegisterMaster
         Me.cb_stat.BackColor = System.Drawing.Color.Cyan
         Me.cb_stat.Enabled = False
         Me.cb_stat.FormattingEnabled = True
-        Me.cb_stat.Items.AddRange(New Object() {"Magang", "Resign", "Finish Contract"})
+        Me.cb_stat.Items.AddRange(New Object() {"Laki-laki", "Perempuan"})
         Me.cb_stat.Location = New System.Drawing.Point(396, 191)
         Me.cb_stat.Name = "cb_stat"
         Me.cb_stat.Size = New System.Drawing.Size(110, 21)
@@ -529,15 +529,6 @@ Partial Class RegisterMaster
         Me.tb_pob.Size = New System.Drawing.Size(110, 20)
         Me.tb_pob.TabIndex = 5
         '
-        'tb_dep
-        '
-        Me.tb_dep.BackColor = System.Drawing.Color.Aqua
-        Me.tb_dep.Location = New System.Drawing.Point(396, 152)
-        Me.tb_dep.Name = "tb_dep"
-        Me.tb_dep.ReadOnly = True
-        Me.tb_dep.Size = New System.Drawing.Size(110, 20)
-        Me.tb_dep.TabIndex = 3
-        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -698,6 +689,18 @@ Partial Class RegisterMaster
         '
         Me.OpenFileDialogImport.FileName = "OpenFileDialog1"
         '
+        'cb_dep
+        '
+        Me.cb_dep.AutoCompleteCustomSource.AddRange(New String() {"PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING", "SMD"})
+        Me.cb_dep.BackColor = System.Drawing.Color.Cyan
+        Me.cb_dep.Enabled = False
+        Me.cb_dep.FormattingEnabled = True
+        Me.cb_dep.Items.AddRange(New Object() {"Laki-laki", "Perempuan"})
+        Me.cb_dep.Location = New System.Drawing.Point(396, 152)
+        Me.cb_dep.Name = "cb_dep"
+        Me.cb_dep.Size = New System.Drawing.Size(110, 21)
+        Me.cb_dep.TabIndex = 45
+        '
         'RegisterMaster
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -739,7 +742,6 @@ Partial Class RegisterMaster
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents tb_pob As TextBox
-    Friend WithEvents tb_dep As TextBox
     Friend WithEvents tb_salary As TextBox
     Friend WithEvents tb_pend As TextBox
     Friend WithEvents GroupBox2 As GroupBox
@@ -749,7 +751,7 @@ Partial Class RegisterMaster
     Friend WithEvents Label15 As Label
     Friend WithEvents cb_jk As ComboBox
     Friend WithEvents Label11 As Label
-    Friend WithEvents cb_posisi As ComboBox
+    Friend WithEvents cb_department As ComboBox
     Friend WithEvents Panel3 As Panel
     Friend WithEvents tb_emp As TextBox
     Friend WithEvents Label12 As Label
@@ -785,4 +787,5 @@ Partial Class RegisterMaster
     Friend WithEvents dt_createKeluar As DateTimePicker
     Friend WithEvents cb_stat As ComboBox
     Friend WithEvents cb_createPosisi As ComboBox
+    Friend WithEvents cb_dep As ComboBox
 End Class
