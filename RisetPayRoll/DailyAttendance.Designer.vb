@@ -53,7 +53,7 @@ Partial Class DailyAttendance
         Me.ComboBox4 = New System.Windows.Forms.ComboBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.DGV_SideDaily = New System.Windows.Forms.DataGridView()
+        Me.DGV_SideDaily1 = New System.Windows.Forms.DataGridView()
         Me.Kolom_emp = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Kolom_Nama = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel3 = New System.Windows.Forms.Panel()
@@ -80,7 +80,7 @@ Partial Class DailyAttendance
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.Panel2.SuspendLayout()
-        CType(Me.DGV_SideDaily, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DGV_SideDaily1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel3.SuspendLayout()
         CType(Me.DGV_ReviewDaily, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
@@ -257,7 +257,7 @@ Partial Class DailyAttendance
         '
         'dt_create
         '
-        Me.dt_create.CustomFormat = "MM/yyyy"
+        Me.dt_create.CustomFormat = "dd/MM/yyyy"
         Me.dt_create.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dt_create.Location = New System.Drawing.Point(370, 38)
         Me.dt_create.Name = "dt_create"
@@ -337,9 +337,9 @@ Partial Class DailyAttendance
         Me.Label14.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label14.Location = New System.Drawing.Point(282, 41)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(37, 13)
+        Me.Label14.Size = New System.Drawing.Size(30, 13)
         Me.Label14.TabIndex = 29
-        Me.Label14.Text = "Month"
+        Me.Label14.Text = "Date"
         Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'ComboBox4
@@ -364,35 +364,35 @@ Partial Class DailyAttendance
         '
         'Panel2
         '
-        Me.Panel2.Controls.Add(Me.DGV_SideDaily)
+        Me.Panel2.Controls.Add(Me.DGV_SideDaily1)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel2.Location = New System.Drawing.Point(0, 94)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(281, 517)
         Me.Panel2.TabIndex = 1
         '
-        'DGV_SideDaily
+        'DGV_SideDaily1
         '
-        Me.DGV_SideDaily.AllowUserToAddRows = False
-        Me.DGV_SideDaily.AllowUserToDeleteRows = False
-        Me.DGV_SideDaily.AllowUserToResizeColumns = False
-        Me.DGV_SideDaily.AllowUserToResizeRows = False
-        Me.DGV_SideDaily.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.DGV_SideDaily.BackgroundColor = System.Drawing.SystemColors.Control
-        Me.DGV_SideDaily.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.DGV_SideDaily.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        Me.DGV_SideDaily.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Kolom_emp, Me.Kolom_Nama})
-        Me.DGV_SideDaily.GridColor = System.Drawing.Color.LightGoldenrodYellow
-        Me.DGV_SideDaily.Location = New System.Drawing.Point(0, 0)
-        Me.DGV_SideDaily.MultiSelect = False
-        Me.DGV_SideDaily.Name = "DGV_SideDaily"
-        Me.DGV_SideDaily.ReadOnly = True
-        Me.DGV_SideDaily.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders
+        Me.DGV_SideDaily1.AllowUserToAddRows = True
+        Me.DGV_SideDaily1.AllowUserToDeleteRows = False
+        Me.DGV_SideDaily1.AllowUserToResizeColumns = False
+        Me.DGV_SideDaily1.AllowUserToResizeRows = False
+        Me.DGV_SideDaily1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DGV_SideDaily1.BackgroundColor = System.Drawing.SystemColors.Control
+        Me.DGV_SideDaily1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.DGV_SideDaily1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        Me.DGV_SideDaily1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Kolom_emp, Me.Kolom_Nama})
+        Me.DGV_SideDaily1.GridColor = System.Drawing.Color.LightGoldenrodYellow
+        Me.DGV_SideDaily1.Location = New System.Drawing.Point(0, 0)
+        Me.DGV_SideDaily1.MultiSelect = False
+        Me.DGV_SideDaily1.Name = "DGV_SideDaily1"
+        Me.DGV_SideDaily1.ReadOnly = True
+        Me.DGV_SideDaily1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DGV_SideDaily.RowsDefaultCellStyle = DataGridViewCellStyle2
-        Me.DGV_SideDaily.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DGV_SideDaily.Size = New System.Drawing.Size(246, 517)
-        Me.DGV_SideDaily.TabIndex = 2
+        Me.DGV_SideDaily1.RowsDefaultCellStyle = DataGridViewCellStyle2
+        Me.DGV_SideDaily1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DGV_SideDaily1.Size = New System.Drawing.Size(246, 517)
+        Me.DGV_SideDaily1.TabIndex = 2
         '
         'Kolom_emp
         '
@@ -602,7 +602,7 @@ Partial Class DailyAttendance
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
-        CType(Me.DGV_SideDaily, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DGV_SideDaily1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel3.ResumeLayout(False)
         CType(Me.DGV_ReviewDaily, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel5.ResumeLayout(False)
@@ -623,7 +623,7 @@ Partial Class DailyAttendance
     Friend WithEvents Label4 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents DGV_SideDaily As DataGridView
+    Friend WithEvents DGV_SideDaily1 As DataGridView
     Friend WithEvents Panel5 As Panel
     Friend WithEvents Label17 As Label
     Friend WithEvents Label18 As Label

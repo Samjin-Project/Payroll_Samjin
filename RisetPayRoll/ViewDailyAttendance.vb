@@ -30,7 +30,7 @@
 
         SetDoubleBuffered(DGV_ReviewDaily)
         cb_dep.Text = "PCBA"
-        Dim query As String = $"{QueryCMD} WHERE `Department` = '{cb_dep.Text}'"
+        Dim query As String = $"{QueryCMD} WHERE `Department` = '{cb_dep.Text}' AND MONTH(`DateMonth`) = {dt_filter.Value.ToString("MM")}"
         showData(query)
     End Sub
 
@@ -236,7 +236,7 @@
     Private Sub filterDataDep(dep As String, tgl As String)
         Dim queryAll As String = "SELECT * FROM `tabel_bulanan_karyawan`"
         Dim queryDep As String = $"{queryAll} WHERE `Department` ='{dep}' "
-        Dim querySortAll As String = $"{queryAll} WHERE `Department` ='{dep}' AND `Period` = '{tgl}'"
+        Dim querySortAll As String = $"{queryAll} WHERE `Department` ='{dep}' AND MONTH(`DateMonth`) = {dt_filter.Value.ToString("MM")}"
 
         Dim querycmd As String = ""
         If dep = "" And flag = False Then
@@ -252,7 +252,7 @@
     Private Sub filterDataEmp(emp As String, tgl As String)
         Dim queryAll As String = "SELECT * FROM `tabel_bulanan_karyawan`"
         Dim queryEmp As String = $"{queryAll} WHERE `NIK` ='{emp}' "
-        Dim querySortAll As String = $"{queryAll} WHERE `NIK` ='{emp}' AND `Period` = '{tgl}'"
+        Dim querySortAll As String = $"{queryAll} WHERE `NIK` ='{emp}' AND MONTH(`DateMonth`) = {dt_filter.Value.ToString("MM")}"
 
         Dim querycmd As String = ""
         If emp = "" And flag = False Then
@@ -279,11 +279,11 @@
         Dim emp As String = tb_emp.Text
         Dim queryDate As String = ""
         If emp = "" And dep = "" Then
-            queryDate = $"{QueryCMD} WHERE `Period` = '{tgl}'"
+            queryDate = $"{QueryCMD} WHERE MONTH(`DateMonth`) = {dt_filter.Value.ToString("MM")}"
         ElseIf emp <> "" Then
-            queryDate = $"{QueryCMD} WHERE `Period` = '{tgl}' AND `NIK` = '{emp}'"
+            queryDate = $"{QueryCMD} WHERE MONTH(`DateMonth`) = {dt_filter.Value.ToString("MM")} And `NIK` = '{emp}'"
         ElseIf dep <> "" Then
-            queryDate = $"{QueryCMD} WHERE `Period` = '{tgl}' AND `Department` = '{dep}'"
+            queryDate = $"{QueryCMD} WHERE MONTH(`DateMonth`) = {dt_filter.Value.ToString("MM")} And `Department` = '{dep}'"
         End If
         showData(queryDate)
         flag = True
