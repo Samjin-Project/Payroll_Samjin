@@ -16,14 +16,8 @@ Public Class RegisterMaster
         Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master employer`"
         dataOnReview(QueryCMD)
         DGV_Setting_Display()
-        'data fill
-        cb_bpjs.Visible = False
-        cb_aktif.Visible = False
-        dt_createMasuk.Visible = False
-        dt_createKeluar.Visible = False
+        clearData()
 
-        dt_lahir.Visible = False
-        cb_createJK.Visible = False
         'button
         b_save.Visible = False
         b_edit.Enabled = False
@@ -121,35 +115,37 @@ Public Class RegisterMaster
         Dim indexDs As Integer = ds.Tables(0).Rows.Count
         'Console.WriteLine(ds.GetXml)
         If indexDs > 0 Then
-            Dim tglLahir As Date = ds.Tables(0).Rows(0).Item(7)
-            Dim tglMasuk As Date = ds.Tables(0).Rows(0).Item(10)
-            Dim tglKeluar As String
+            Dim tglLahir As Date = DateTime.ParseExact(ds.Tables(0).Rows(0).Item(7), "dd/MM/yyyy", Nothing)
+            Dim tglMasuk As Date = DateTime.ParseExact(ds.Tables(0).Rows(0).Item(10), "yyyy-MM-dd", Nothing)
+            Dim tglKeluar As String = ds.Tables(0).Rows(0).Item(11)
             Console.WriteLine("tglOut" + ds.Tables(0).Rows(0).Item(11).ToString)
             If ds.Tables(0).Rows(0).Item(11).ToString = "0" Then
-                tglKeluar = ""
+                dt_createKeluar.Format = DateTimePickerFormat.Custom
+                dt_createKeluar.CustomFormat = " "
             Else
-                tglKeluar = ds.Tables(0).Rows(0).Item(11).ToString("dd/MM/yyyy")
+                dt_createKeluar.Value = DateTime.ParseExact(tglKeluar, "yyyy-MM-dd", Nothing)
             End If
             Dim gaji As Double = ds.Tables(0).Rows(0).Item(13)
 
             tb_empDet.Text = ds.Tables(0).Rows(0).Item(2)
             tb_nama.Text = ds.Tables(0).Rows(0).Item(3).ToString
-            tb_posisi.Text = ds.Tables(0).Rows(0).Item(4).ToString
+            cb_createPosisi.Text = ds.Tables(0).Rows(0).Item(4).ToString
             tb_dep.Text = ds.Tables(0).Rows(0).Item(5).ToString
             tb_pob.Text = ds.Tables(0).Rows(0).Item(6).ToString
-            tb_dob.Text = tglLahir.ToString("dd/MM/yyyy")
-            If ds.Tables(0).Rows(0).Item(8).ToString = "L" Then
-                tb_jk.Text = "Laki-laki"
-            ElseIf ds.Tables(0).Rows(0).Item(8).ToString = "P" Then
-                tb_jk.Text = "Perempuan"
+            dt_lahir.CustomFormat = "dd/MM/yyyy"
+            dt_lahir.Value = tglLahir
+            If ds.Tables(0).Rows(0).Item(8) = "L" Then
+                cb_createJK.Text = "Laki-laki"
+            ElseIf ds.Tables(0).Rows(0).Item(8) = "P" Then
+                cb_createJK.Text = "Perempuan"
             End If
             tb_pend.Text = ds.Tables(0).Rows(0).Item(9).ToString
-            tb_masuk.Text = tglMasuk.ToString("dd/MM/yyyy")
-            tb_keluar.Text = tglKeluar
-            tb_stat.Text = ds.Tables(0).Rows(0).Item(12).ToString
+            dt_createMasuk.CustomFormat = "dd/MM/yyyy"
+            dt_createMasuk.Value = tglMasuk
+            cb_stat.SelectedItem = ds.Tables(0).Rows(0).Item(12).ToString
             tb_salary.Text = gaji.ToString("##,##,###")
-            tb_bpjs.Text = ds.Tables(0).Rows(0).Item(14)
-            tb_aktif.Text = ds.Tables(0).Rows(0).Item(15)
+            cb_bpjs.Text = ds.Tables(0).Rows(0).Item(14)
+            cb_aktif.Text = ds.Tables(0).Rows(0).Item(15)
         End If
     End Sub
 
@@ -277,7 +273,7 @@ Public Class RegisterMaster
     End Sub
 
     Private Sub b_cancel_Click(sender As Object, e As EventArgs) Handles b_cancel.Click
-        Dim result As MsgBoxResult = MsgBox("Are you sure want to cancel ?", MsgBoxStyle.YesNo)
+        Dim result As MsgBoxResult = MsgBox("Are you sure want to cancel ?", MsgBoxStyle.YesNo, "Register Master")
         Dim r_sellect As DataGridViewRow = DGV_ReviewMaster.Rows(r_index)
         Dim nik As String = r_sellect.Cells(0).Value
         If result = MsgBoxResult.Yes Then
@@ -298,10 +294,10 @@ Public Class RegisterMaster
 
     Private Sub b_save_Click(sender As Object, e As EventArgs) Handles b_save.Click
         Dim queryAll As String = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master employer`"
-        If tb_empDet.Text = "" Or tb_nama.Text = "" Or cb_createJK.Text = "" Or tb_pob.Text = "" Or tb_pend.Text = "" Or cb_bpjs.Text = "" Or tb_posisi.Text = "" Or tb_dep.Text = "" Or tb_stat.Text = "" Or tb_keluar.Text = "" Or tb_salary.Text = "" Or cb_aktif.Text = "" Then
+        If tb_empDet.Text = "" Or tb_nama.Text = "" Or cb_createJK.Text = "" Or tb_pob.Text = "" Or tb_pend.Text = "" Or cb_bpjs.Text = "" Or cb_createPosisi.Text = "" Or tb_dep.Text = "" Or cb_stat.Text = "" Or tb_salary.Text = "" Or cb_aktif.Text = "" Then
             MsgBox("Data tidak boleh kosong !", MsgBoxStyle.Exclamation)
         Else
-            Dim result As MsgBoxResult = MsgBox("Are you sure want to save ?", MsgBoxStyle.YesNoCancel)
+            Dim result As MsgBoxResult = MsgBox("Are you sure want to save ?", MsgBoxStyle.YesNoCancel, "Register Master")
             If result = MsgBoxResult.Yes Then
                 If f_create = True Then
                     create()
@@ -348,87 +344,64 @@ Public Class RegisterMaster
     Private Sub dataFill()
         tb_empDet.ReadOnly = False
         tb_nama.ReadOnly = False
-
-        tb_masuk.Visible = False
-        dt_createMasuk.Visible = True
-        dt_createKeluar.Visible = True
-
-
-        tb_jk.Visible = False
-        cb_createJK.Visible = True
         tb_pob.ReadOnly = False
-
-        tb_dob.Visible = False
-        dt_lahir.Visible = True
-
         tb_pend.ReadOnly = False
-
-        tb_bpjs.Visible = False
-        cb_bpjs.Visible = True
-
-        tb_posisi.ReadOnly = False
+        cb_createPosisi.Enabled = True
         tb_dep.ReadOnly = False
-        tb_stat.ReadOnly = False
-        tb_keluar.ReadOnly = False
+        cb_stat.Enabled = True
         tb_salary.ReadOnly = False
+        dt_createKeluar.Enabled = True
+        dt_createKeluar.CustomFormat = "dd/MM/yyyy"
+        dt_createMasuk.Enabled = True
+        dt_createMasuk.CustomFormat = "dd/MM/yyyy"
+        dt_lahir.Enabled = True
+        dt_lahir.CustomFormat = "dd/MM/yyyy"
+        cb_bpjs.Enabled = True
+        cb_aktif.Enabled = True
+        cb_createJK.Enabled = True
 
-        tb_aktif.Visible = False
-        cb_aktif.Visible = True
-
-        If f_edit Then
-            dt_createMasuk.Value = DateTime.ParseExact(tb_masuk.Text, "dd/MM/yyyy", Nothing)
-            cb_aktif.SelectedItem = tb_aktif.Text
-            cb_bpjs.SelectedItem = tb_bpjs.Text
-            cb_createJK.SelectedItem = tb_jk.Text
-            dt_lahir.Value = DateTime.ParseExact(tb_dob.Text, "dd/MM/yyyy", Nothing)
-        End If
     End Sub
     Private Sub dataViewOnly()
         tb_empDet.ReadOnly = True
         tb_nama.ReadOnly = True
-
-        tb_masuk.Visible = True
-        dt_createMasuk.Visible = False
-        dt_createKeluar.Visible = False
-
-
-        tb_jk.Visible = True
-        cb_createJK.Visible = False
         tb_pob.ReadOnly = True
-
-        tb_dob.Visible = True
-        dt_lahir.Visible = False
-
         tb_pend.ReadOnly = True
-
-        tb_bpjs.Visible = True
-        cb_bpjs.Visible = False
-
-        tb_posisi.ReadOnly = True
+        cb_createPosisi.Enabled = False
         tb_dep.ReadOnly = True
-        tb_stat.ReadOnly = True
-        tb_keluar.ReadOnly = True
+        cb_stat.Enabled = False
         tb_salary.ReadOnly = True
 
-        tb_aktif.Visible = True
-        cb_aktif.Visible = False
+        dt_createKeluar.Enabled = False
+        dt_createKeluar.CustomFormat = "dd/MM/yyyy"
+        dt_createMasuk.Enabled = False
+        dt_createMasuk.CustomFormat = "dd/MM/yyyy"
+        dt_lahir.Enabled = False
+        dt_lahir.CustomFormat = "dd/MM/yyyy"
+        cb_bpjs.Enabled = False
+        cb_aktif.Enabled = False
+        cb_createJK.Enabled = False
     End Sub
     Private Sub clearData()
         tb_empDet.Text = ""
         tb_nama.Text = ""
-        tb_posisi.Text = ""
-        tb_jk.Text = ""
-        tb_dob.Text = ""
+        cb_createPosisi.Text = ""
         tb_pob.Text = ""
         tb_salary.Text = ""
-        tb_stat.Text = ""
+        cb_stat.Text = ""
         tb_dep.Text = ""
         tb_pend.Text = ""
-        tb_bpjs.Text = ""
-        tb_aktif.Text = ""
-        tb_keluar.Text = ""
-        tb_masuk.Text = ""
-
+        dt_createKeluar.Enabled = False
+        dt_createKeluar.CustomFormat = " "
+        dt_createMasuk.Enabled = False
+        dt_createMasuk.CustomFormat = " "
+        dt_lahir.Enabled = False
+        dt_lahir.CustomFormat = " "
+        cb_bpjs.Enabled = False
+        cb_bpjs.Text = ""
+        cb_aktif.Enabled = False
+        cb_aktif.Text = ""
+        cb_createJK.Enabled = False
+        cb_createJK.Text = ""
 
     End Sub
     Private Sub create()
@@ -444,7 +417,7 @@ Public Class RegisterMaster
                  VALUES ('{AC_No}',
                          '{tb_empDet.Text}',
                          '{tb_nama.Text}',
-                         '{tb_posisi.Text}',
+                         '{cb_createPosisi.Text}',
                          '{tb_dep.Text}',
                          '{tb_pob.Text}',
                          '{dt_lahir.Value.ToString("yyyy-MM-dd")}',
@@ -452,7 +425,7 @@ Public Class RegisterMaster
                          '{tb_pend.Text}',
                          '{dt_createMasuk.Value.ToString("yyyy-MM-dd")}',
                          '{dt_createKeluar.Value.ToString("yyyy-MM-dd")}',
-                         '{tb_stat.Text}'
+                         '{cb_stat.Text}'
                          '{tb_salary.Text}'
                          '{cb_bpjs.Text}'
                          '{cb_aktif.Text}')"
@@ -476,14 +449,14 @@ Public Class RegisterMaster
                  VALUES ('{AC_No}',
                          '{tb_empDet.Text}',
                          '{tb_nama.Text}',
-                         '{tb_posisi.Text}',
+                         '{cb_createPosisi.Text}',
                          '{tb_dep.Text}',
                          '{tb_pob.Text}',
                          '{dt_lahir.Value.ToString("yyyy-MM-dd")}',
                          '{jk}',
                          '{tb_pend.Text}',
                          '{dt_createMasuk.Value.ToString("yyyy-MM-dd")}',
-                         '{tb_stat.Text}'
+                         '{cb_stat.Text}'
                          '{tb_salary.Text}'
                          '{cb_bpjs.Text}'
                          '{cb_aktif.Text}') WHERE `NIK` = '{nik}'"
@@ -492,7 +465,7 @@ Public Class RegisterMaster
         MsgBox("Data already updated")
     End Sub
 
-    Private Sub tb_masuk_TextChanged(sender As Object, e As EventArgs) Handles tb_masuk.TextChanged
+    Private Sub tb_masuk_TextChanged(sender As Object, e As EventArgs)
 
     End Sub
 

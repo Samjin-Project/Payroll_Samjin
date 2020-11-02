@@ -41,6 +41,7 @@
         End If
     End Sub
     Private Sub ListNoCheck_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        Dim querycmd As String = $"SELECT `NIK`, `Name`, `Department`,`Date` FROM `tabel_harian_karyawan1` WHERE `Type` = 'No Check'"
+        dataOnSide(querycmd)
     End Sub
 End Class
