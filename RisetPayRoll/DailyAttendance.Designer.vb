@@ -76,6 +76,9 @@ Partial Class DailyAttendance
         Me.total_data = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripProgressBar1 = New System.Windows.Forms.ToolStripProgressBar()
         Me.Panel1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -84,6 +87,7 @@ Partial Class DailyAttendance
         Me.Panel3.SuspendLayout()
         CType(Me.DGV_ReviewDaily, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
+        Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -364,16 +368,16 @@ Partial Class DailyAttendance
         '
         'Panel2
         '
+        Me.Panel2.Controls.Add(Me.StatusStrip1)
         Me.Panel2.Controls.Add(Me.DGV_SideDaily1)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel2.Location = New System.Drawing.Point(0, 94)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(281, 517)
+        Me.Panel2.Size = New System.Drawing.Size(281, 561)
         Me.Panel2.TabIndex = 1
         '
         'DGV_SideDaily1
         '
-        Me.DGV_SideDaily1.AllowUserToAddRows = True
         Me.DGV_SideDaily1.AllowUserToDeleteRows = False
         Me.DGV_SideDaily1.AllowUserToResizeColumns = False
         Me.DGV_SideDaily1.AllowUserToResizeRows = False
@@ -419,7 +423,7 @@ Partial Class DailyAttendance
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(281, 94)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(903, 517)
+        Me.Panel3.Size = New System.Drawing.Size(903, 561)
         Me.Panel3.TabIndex = 2
         '
         'DGV_ReviewDaily
@@ -448,7 +452,7 @@ Partial Class DailyAttendance
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         Me.DGV_ReviewDaily.RowsDefaultCellStyle = DataGridViewCellStyle4
         Me.DGV_ReviewDaily.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DGV_ReviewDaily.Size = New System.Drawing.Size(903, 492)
+        Me.DGV_ReviewDaily.Size = New System.Drawing.Size(903, 536)
         Me.DGV_ReviewDaily.TabIndex = 21
         '
         'KolomView_NIK
@@ -553,7 +557,7 @@ Partial Class DailyAttendance
         Me.Panel5.Controls.Add(Me.Label17)
         Me.Panel5.Controls.Add(Me.Label18)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel5.Location = New System.Drawing.Point(0, 492)
+        Me.Panel5.Location = New System.Drawing.Point(0, 536)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(903, 25)
         Me.Panel5.TabIndex = 20
@@ -586,11 +590,33 @@ Partial Class DailyAttendance
         Me.Label18.TabIndex = 13
         Me.Label18.Text = "Total"
         '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.ToolStripProgressBar1})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 539)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(281, 22)
+        Me.StatusStrip1.TabIndex = 3
+        Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'ToolStripStatusLabel1
+        '
+        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(39, 17)
+        Me.ToolStripStatusLabel1.Text = "Ready"
+        '
+        'ToolStripProgressBar1
+        '
+        Me.ToolStripProgressBar1.Name = "ToolStripProgressBar1"
+        Me.ToolStripProgressBar1.Size = New System.Drawing.Size(100, 16)
+        Me.ToolStripProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee
+        Me.ToolStripProgressBar1.Visible = False
+        '
         'DailyAttendance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1184, 611)
+        Me.ClientSize = New System.Drawing.Size(1184, 655)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
@@ -602,11 +628,14 @@ Partial Class DailyAttendance
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         CType(Me.DGV_SideDaily1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel3.ResumeLayout(False)
         CType(Me.DGV_ReviewDaily, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -661,4 +690,7 @@ Partial Class DailyAttendance
     Friend WithEvents Kolom_emp As DataGridViewTextBoxColumn
     Friend WithEvents Kolom_Nama As DataGridViewTextBoxColumn
     Friend WithEvents dt_create As DateTimePicker
+    Friend WithEvents StatusStrip1 As StatusStrip
+    Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
+    Friend WithEvents ToolStripProgressBar1 As ToolStripProgressBar
 End Class

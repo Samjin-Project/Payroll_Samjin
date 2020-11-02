@@ -27,6 +27,9 @@ Partial Class ComputePayroll
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripProgressBar1 = New System.Windows.Forms.ToolStripProgressBar()
         Me.DGV_ReviewDaily = New System.Windows.Forms.DataGridView()
         Me.KolomPayroll_NIK = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.KolomPayroll_Nama = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -47,6 +50,7 @@ Partial Class ComputePayroll
         Me.Label39 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.tb_total = New System.Windows.Forms.TextBox()
         Me.tb_sup = New System.Windows.Forms.TextBox()
         Me.tb_deduct = New System.Windows.Forms.TextBox()
@@ -103,6 +107,7 @@ Partial Class ComputePayroll
         Me.Label48 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel4.SuspendLayout()
+        Me.StatusStrip1.SuspendLayout()
         CType(Me.DGV_ReviewDaily, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel3.SuspendLayout()
         Me.Panel7.SuspendLayout()
@@ -127,12 +132,35 @@ Partial Class ComputePayroll
         'Panel4
         '
         Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel4.Controls.Add(Me.StatusStrip1)
         Me.Panel4.Controls.Add(Me.DGV_ReviewDaily)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.Location = New System.Drawing.Point(0, 190)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(324, 475)
         Me.Panel4.TabIndex = 1
+        '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.ToolStripProgressBar1})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 449)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(320, 22)
+        Me.StatusStrip1.TabIndex = 24
+        Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'ToolStripStatusLabel1
+        '
+        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(39, 17)
+        Me.ToolStripStatusLabel1.Text = "Ready"
+        '
+        'ToolStripProgressBar1
+        '
+        Me.ToolStripProgressBar1.Name = "ToolStripProgressBar1"
+        Me.ToolStripProgressBar1.Size = New System.Drawing.Size(100, 16)
+        Me.ToolStripProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee
+        Me.ToolStripProgressBar1.Visible = False
         '
         'DGV_ReviewDaily
         '
@@ -332,8 +360,12 @@ Partial Class ComputePayroll
         '
         'Panel6
         '
+        Me.Panel6.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel6.AutoScroll = True
         Me.Panel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel6.Controls.Add(Me.ProgressBar1)
         Me.Panel6.Controls.Add(Me.tb_total)
         Me.Panel6.Controls.Add(Me.tb_sup)
         Me.Panel6.Controls.Add(Me.tb_deduct)
@@ -387,6 +419,13 @@ Partial Class ComputePayroll
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(935, 545)
         Me.Panel6.TabIndex = 2
+        '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.Location = New System.Drawing.Point(515, 175)
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(331, 54)
+        Me.ProgressBar1.TabIndex = 98
         '
         'tb_total
         '
@@ -871,9 +910,10 @@ Partial Class ComputePayroll
         Me.Panel8.Controls.Add(Me.ComboBoxDep)
         Me.Panel8.Controls.Add(Me.b_export)
         Me.Panel8.Controls.Add(Me.Label48)
-        Me.Panel8.Location = New System.Drawing.Point(-1, -1)
+        Me.Panel8.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel8.Location = New System.Drawing.Point(0, 0)
         Me.Panel8.Name = "Panel8"
-        Me.Panel8.Size = New System.Drawing.Size(860, 85)
+        Me.Panel8.Size = New System.Drawing.Size(934, 85)
         Me.Panel8.TabIndex = 64
         '
         'ComboBoxDep
@@ -914,6 +954,9 @@ Partial Class ComputePayroll
         Me.Text = "Compute Payroll"
         Me.Panel1.ResumeLayout(False)
         Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
         CType(Me.DGV_ReviewDaily, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
@@ -1006,4 +1049,8 @@ Partial Class ComputePayroll
     Friend WithEvents ComboBoxDep As ComboBox
     Friend WithEvents b_export As Button
     Friend WithEvents Label48 As Label
+    Friend WithEvents ProgressBar1 As ProgressBar
+    Friend WithEvents StatusStrip1 As StatusStrip
+    Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
+    Friend WithEvents ToolStripProgressBar1 As ToolStripProgressBar
 End Class

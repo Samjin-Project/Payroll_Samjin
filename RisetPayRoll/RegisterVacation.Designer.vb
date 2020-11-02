@@ -53,6 +53,7 @@ Partial Class RegisterVacation
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.tb_dep = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.tb_reason = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -72,7 +73,6 @@ Partial Class RegisterVacation
         Me.tb_nama = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tb_emp = New System.Windows.Forms.TextBox()
-        Me.tb_dep = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         CType(Me.DGV_DataModify, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
@@ -94,7 +94,8 @@ Partial Class RegisterVacation
         '
         Me.DGV_DataModify.AllowUserToAddRows = False
         Me.DGV_DataModify.AllowUserToDeleteRows = False
-        Me.DGV_DataModify.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.DGV_DataModify.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGV_DataModify.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
         Me.DGV_DataModify.BackgroundColor = System.Drawing.SystemColors.Control
@@ -398,6 +399,15 @@ Partial Class RegisterVacation
         Me.Panel4.Size = New System.Drawing.Size(339, 510)
         Me.Panel4.TabIndex = 21
         '
+        'tb_dep
+        '
+        Me.tb_dep.BackColor = System.Drawing.Color.Aqua
+        Me.tb_dep.Location = New System.Drawing.Point(145, 119)
+        Me.tb_dep.Name = "tb_dep"
+        Me.tb_dep.ReadOnly = True
+        Me.tb_dep.Size = New System.Drawing.Size(110, 20)
+        Me.tb_dep.TabIndex = 56
+        '
         'Label10
         '
         Me.Label10.AutoSize = True
@@ -566,15 +576,6 @@ Partial Class RegisterVacation
         Me.tb_emp.Name = "tb_emp"
         Me.tb_emp.Size = New System.Drawing.Size(110, 20)
         Me.tb_emp.TabIndex = 0
-        '
-        'tb_dep
-        '
-        Me.tb_dep.BackColor = System.Drawing.Color.Aqua
-        Me.tb_dep.Location = New System.Drawing.Point(145, 119)
-        Me.tb_dep.Name = "tb_dep"
-        Me.tb_dep.ReadOnly = True
-        Me.tb_dep.Size = New System.Drawing.Size(110, 20)
-        Me.tb_dep.TabIndex = 56
         '
         'RegisterVacation
         '

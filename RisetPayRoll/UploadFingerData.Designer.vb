@@ -49,12 +49,16 @@ Partial Class UploadFingerData
         Me.KolomFinger_ClockOut = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.KolomFinger_Dep = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OpenFileDialogImport = New System.Windows.Forms.OpenFileDialog()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripProgressBar1 = New System.Windows.Forms.ToolStripProgressBar()
         Me.Panel1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel5.SuspendLayout()
         CType(Me.DGV_DataModify, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -150,6 +154,7 @@ Partial Class UploadFingerData
         'Panel2
         '
         Me.Panel2.Controls.Add(Me.Panel5)
+        Me.Panel2.Controls.Add(Me.StatusStrip1)
         Me.Panel2.Controls.Add(Me.DGV_DataModify)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(0, 95)
@@ -164,7 +169,7 @@ Partial Class UploadFingerData
         Me.Panel5.Controls.Add(Me.Label17)
         Me.Panel5.Controls.Add(Me.Label18)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel5.Location = New System.Drawing.Point(0, 366)
+        Me.Panel5.Location = New System.Drawing.Point(0, 344)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(904, 25)
         Me.Panel5.TabIndex = 19
@@ -277,6 +282,28 @@ Partial Class UploadFingerData
         '
         Me.OpenFileDialogImport.FileName = "OpenFileDialog1"
         '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.ToolStripProgressBar1})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 369)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(904, 22)
+        Me.StatusStrip1.TabIndex = 25
+        Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'ToolStripStatusLabel1
+        '
+        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(39, 17)
+        Me.ToolStripStatusLabel1.Text = "Ready"
+        '
+        'ToolStripProgressBar1
+        '
+        Me.ToolStripProgressBar1.Name = "ToolStripProgressBar1"
+        Me.ToolStripProgressBar1.Size = New System.Drawing.Size(100, 16)
+        Me.ToolStripProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee
+        Me.ToolStripProgressBar1.Visible = False
+        '
         'UploadFingerData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -291,9 +318,12 @@ Partial Class UploadFingerData
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
         CType(Me.DGV_DataModify, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -323,4 +353,7 @@ Partial Class UploadFingerData
     Friend WithEvents OpenFileDialogImport As OpenFileDialog
     Friend WithEvents b_showall As Button
     Friend WithEvents total_data As Label
+    Friend WithEvents StatusStrip1 As StatusStrip
+    Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
+    Friend WithEvents ToolStripProgressBar1 As ToolStripProgressBar
 End Class

@@ -117,13 +117,24 @@ Public Class RegisterMaster
         If indexDs > 0 Then
             Dim tglLahir As Date = DateTime.ParseExact(ds.Tables(0).Rows(0).Item(7), "dd/MM/yyyy", Nothing)
             Dim tglMasuk As Date = DateTime.ParseExact(ds.Tables(0).Rows(0).Item(10), "yyyy-MM-dd", Nothing)
-            Dim tglKeluar As String = ds.Tables(0).Rows(0).Item(11)
-            Console.WriteLine("tglOut" + ds.Tables(0).Rows(0).Item(11).ToString)
-            If ds.Tables(0).Rows(0).Item(11).ToString = "01/01/0001 00:00:00" Then
+            Dim tglKeluar As String = ds.Tables(0).Rows(0).Item(11).ToString
+            Dim syaratOut As Integer = 0
+
+            If tglKeluar.Substring(0, 2).Contains("/") Then
+                syaratOut = CInt(tglKeluar.Substring(4, 4))
+            Else
+                syaratOut = CInt(tglKeluar.Substring(6, 4))
+
+            End If
+
+            Console.WriteLine("tglOut" + ds.Tables(0).Rows(0).Item(11))
+            If syaratOut = 1 Then
                 dt_createKeluar.Format = DateTimePickerFormat.Custom
                 dt_createKeluar.CustomFormat = " "
             Else
-                dt_createKeluar.Value = DateTime.ParseExact(tglKeluar, "yyyy-MM-dd", Nothing)
+                Debug.WriteLine("test")
+                dt_createKeluar.CustomFormat = "dd/MM/yyyy"
+                dt_createKeluar.Value = New Date(CInt(tglKeluar.Substring(6, 4)), CInt(tglKeluar.Substring(3, 2)), CInt(tglKeluar.Substring(0, 2)))
             End If
             Dim gaji As Double = ds.Tables(0).Rows(0).Item(13)
 
@@ -420,7 +431,7 @@ Public Class RegisterMaster
                          '{cb_createPosisi.Text}',
                          '{tb_dep.Text}',
                          '{tb_pob.Text}',
-                         '{dt_lahir.Value.ToString("yyyy-MM-dd")}',
+                         '{dt_lahir.Value.ToString("dd/MM/yyyy")}',
                          '{jk}',
                          '{tb_pend.Text}',
                          '{dt_createMasuk.Value.ToString("yyyy-MM-dd")}',
@@ -445,21 +456,21 @@ Public Class RegisterMaster
         Dim nik As String = r_sellect.Cells(0).Value
         Dim funcDB As DataBaseClass = New DataBaseClass
         Dim AC_No As String = tb_empDet.Text.Substring(1, 6)
-        Dim masterQuery As String = $"UPDATE `master employer`(`AC_Nomor`,`NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Department`, `Tempat_Lahir`, `Tanggal_Lahir`, `Jenis_Kelamin`, `Pendidikan_Karyawan`, `Tanggal_Masuk`,`Tanggal_Keluar`, `Salary`, `BPJS`, `Aktif`) 
-                 VALUES ('{AC_No}',
-                         '{tb_empDet.Text}',
-                         '{tb_nama.Text}',
-                         '{cb_createPosisi.Text}',
-                         '{tb_dep.Text}',
-                         '{tb_pob.Text}',
-                         '{dt_lahir.Value.ToString("yyyy-MM-dd")}',
-                         '{jk}',
-                         '{tb_pend.Text}',
-                         '{dt_createMasuk.Value.ToString("yyyy-MM-dd")}',
-                         '{cb_stat.Text}'
-                         '{tb_salary.Text}'
-                         '{cb_bpjs.Text}'
-                         '{cb_aktif.Text}') WHERE `NIK` = '{nik}'"
+        Dim masterQuery As String = $"UPDATE `master employer` SET `AC_Nomor` ='{AC_No}',
+                                             `NIK`='{tb_empDet.Text}', 
+                                             `Nama_Karyawan`='{tb_nama.Text}', 
+                                             `Posisi_Karyawan`='{cb_createPosisi.Text}', 
+                                             `Department`='{tb_dep.Text}', 
+                                             `Tempat_Lahir`='{tb_pob.Text}', 
+                                             `Tanggal_Lahir`='{dt_lahir.Value.ToString("dd/MM/yyyy")}', 
+                                             `Jenis_Kelamin`='{jk}', 
+                                             `Pendidikan_Karyawan`='{tb_pend.Text}', 
+                                             `Tanggal_Masuk`='{dt_createMasuk.Value.ToString("yyyy-MM-dd")}',
+                                             `Tanggal_Keluar`='{dt_createKeluar.Value.ToString("yyyy-MM-dd")}', 
+                                             `Salary`='{tb_salary.Text}', 
+                                             `StatusBPJS`='{cb_bpjs.Text}', 
+                                             `StatusAktive`= '{cb_aktif.Text}'
+                                    WHERE `NIK` = '{nik}'"
         Console.WriteLine("DB Query : " + masterQuery)
         funcDB.uploadDB(masterQuery)
         MsgBox("Data already updated")
@@ -479,4 +490,5 @@ Public Class RegisterMaster
     Private Sub dt_createKeluar_ValueChanged(sender As Object, e As EventArgs) Handles dt_createKeluar.ValueChanged
         cb_aktif.Text = "Yes"
     End Sub
+
 End Class
