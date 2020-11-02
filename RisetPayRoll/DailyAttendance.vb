@@ -1,6 +1,7 @@
 ﻿Imports System.Math
 Imports System.Text.RegularExpressions
 Public Class DailyAttendance
+    Public flagcb As Boolean = False
     Dim queryAll As String = "SELECT `NIK`, `Name`, `Type`, `Date`, `Day`, `Shift`, `Check In`, `Check Out`, DATE_FORMAT(`Check Out Date`,""%d/%m/%Y""), `Lateness`, `Early Check Out`, `Basic Time`, `Over Time`,`Department` FROM `tabel_harian_karyawan1`"
     Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `Department` FROM `master employer`"
     Dim QueryCMDKosong As String = "SELECT `NIK`, `Nama_Karyawan`, `Department` FROM `master employer` WHERE `NIK` = "
@@ -15,9 +16,10 @@ Public Class DailyAttendance
     End Property
     Private Sub DailyAttendance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
+            flagcb = True
             showEmploye(QueryCMD)
-            Dim nikSyarat As String = DGV_SideDaily.Rows(0).Cells(0).Value
-            Dim queryGetData As String = $"{queryAll} WHERE `NIK` = '{nikSyarat}'"
+            Dim nikSyarat As String = DGV_SideDaily1.Rows(0).Cells(0).Value
+            Dim queryGetData As String = $"{queryAll} WHERE `NIK` = '{nikSyarat}' AND DATE_FORMAT(`Date`,""%m"") = {dt_create.Value.ToString("MM")}"
             showDaily(queryGetData)
         Catch ex As Exception
 
@@ -32,27 +34,27 @@ Public Class DailyAttendance
             Dim indexDs As Integer = ds.Tables(0).Rows.Count
             For i As Integer = 0 To indexDs - 1
                 Dim row As String() = New String() {ds.Tables(0).Rows(i).Item(0).ToString, ds.Tables(0).Rows(i).Item(1).ToString}
-                DGV_SideDaily.Rows.Add(row)
-                DGV_SideDaily.Rows(i).HeaderCell.Value = (i + 1).ToString
+                DGV_SideDaily1.Rows.Add(row)
+                DGV_SideDaily1.Rows(i).HeaderCell.Value = (i + 1).ToString
                 If i Mod 2 = 1 Then
-                    DGV_SideDaily.Rows(i).DefaultCellStyle.BackColor = Color.LightGray
+                    DGV_SideDaily1.Rows(i).DefaultCellStyle.BackColor = Color.LightGray
                 End If
             Next
         End If
     End Sub
-    Private Sub DGV_SideDaily_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_SideDaily.CellClick
+    Private Sub DGV_SideDaily_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_SideDaily1.CellClick
         PickingLeftDgv(e.RowIndex)
     End Sub
-    Private Sub DGV_SideDaily_RowHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGV_SideDaily.RowHeaderMouseClick
+    Private Sub DGV_SideDaily_RowHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DGV_SideDaily1.RowHeaderMouseClick
         PickingLeftDgv(e.RowIndex)
     End Sub
     Sub PickingLeftDgv(indexRows As Integer)
         Console.WriteLine("PickingLeftDgv")
 
         Try
-            nik = DGV_SideDaily.Rows(indexRows).Cells(0).Value
+            nik = DGV_SideDaily1.Rows(indexRows).Cells(0).Value
             DGV_ReviewDaily.Rows.Clear()
-            Dim queryGetData As String = $"{queryAll} WHERE `NIK` = '{nik}'"
+            Dim queryGetData As String = $"{queryAll} WHERE `NIK` = '{nik}' AND DATE_FORMAT(`Date`,""%m"") = {dt_create.Value.ToString("MM")}"
             showDaily(queryGetData)
         Catch ex As Exception
 
@@ -76,92 +78,95 @@ Public Class DailyAttendance
         Dim ds As DataSet = DBClass.downloadDB(QueryDaily)
         Dim indexDs As Integer = ds.Tables(0).Rows.Count
         Dim selisih As Integer = 0
-        Dim tanggalNow As Integer = Convert.ToInt32(DateTime.Now.ToString("dd"))
+        Dim dtTanggal As Integer = CInt(dt_create.Value.ToString("dd"))
+        Dim tanggalNow As Integer = dtTanggal
 
-        Dim indexRows As Integer = DGV_SideDaily.CurrentRow.Index
-        Dim query As String = QueryCMDKosong + $"'{DGV_SideDaily.Rows(indexRows).Cells(0).Value}'"
-        Dim dsKosong As DataSet = DBClass.downloadDB(query)
-        Dim indexDsKosong As Integer = dsKosong.Tables(0).Rows.Count
-        selisih = tanggalNow - indexDs
-        Dim tempHeaderCell As Integer = 1
+        If DGV_SideDaily1.Rows.Count <> 0 Then
+            Dim indexRows As Integer = DGV_SideDaily1.CurrentRow.Index
+            Dim query As String = QueryCMDKosong + $"'{DGV_SideDaily1.Rows(indexRows).Cells(0).Value}'"
+            Dim dsKosong As DataSet = DBClass.downloadDB(query)
+            Dim indexDsKosong As Integer = dsKosong.Tables(0).Rows.Count
+            selisih = tanggalNow - indexDs
+            Dim tempHeaderCell As Integer = 1
 
-        For j As Integer = 0 To tanggalNow - 1
-            Dim jejak As Integer = 0
-            Dim row As String()
-            Dim syaratTgl As Boolean
-            Dim k As Integer = 0
-            Console.WriteLine("jejak " + jejak.ToString + " index rows " + indexDs.ToString)
-            If jejak < indexDs Then
-                Try
-                    For z As Integer = 0 To indexDs - 1
-                        syaratTgl = CekTanggal(ds.Tables(0).Rows(z).Item(3), j)
-                        If syaratTgl = True Then
-                            k = z
-                            Exit For
-                        End If
-                    Next
-                Catch ex As IndexOutOfRangeException
+            For j As Integer = 0 To tanggalNow - 1
+                Dim jejak As Integer = 0
+                Dim row As String()
+                Dim syaratTgl As Boolean
+                Dim k As Integer = 0
+                Console.WriteLine("jejak " + jejak.ToString + " index rows " + indexDs.ToString)
+                If jejak < indexDs Then
+                    Try
+                        For z As Integer = 0 To indexDs - 1
+                            syaratTgl = CekTanggal(ds.Tables(0).Rows(z).Item(3), j)
+                            If syaratTgl = True Then
+                                k = z
+                                Exit For
+                            End If
+                        Next
+                    Catch ex As IndexOutOfRangeException
+                        syaratTgl = False
+                        Console.WriteLine("Ini Syarat Tanggal")
+                    End Try
+                Else
                     syaratTgl = False
-                End Try
-            Else
-                syaratTgl = False
-            End If
-            Console.WriteLine("Urutan" + (j + 1).ToString)
-            If syaratTgl = True Then
-                row = New String() {ds.Tables(0).Rows(k).Item(0).ToString,
-                ds.Tables(0).Rows(k).Item(1).ToString,
-                ds.Tables(0).Rows(k).Item(2).ToString,
-                ds.Tables(0).Rows(k).Item(3),
-                ds.Tables(0).Rows(k).Item(4).ToString,
-                ds.Tables(0).Rows(k).Item(5).ToString,
-                ds.Tables(0).Rows(k).Item(6).ToString,
-                ds.Tables(0).Rows(k).Item(7).ToString,
-                ds.Tables(0).Rows(k).Item(8).ToString,
-                ds.Tables(0).Rows(k).Item(9).ToString,
-                ds.Tables(0).Rows(k).Item(10).ToString,
-                ds.Tables(0).Rows(k).Item(11).ToString,
-                ds.Tables(0).Rows(k).Item(12).ToString,
-                ds.Tables(0).Rows(k).Item(13).ToString}
-                jejak = jejak + 1
-            Else
-                Console.WriteLine("ds Kosong")
-                row = New String() {dsKosong.Tables(0).Rows(0).Item(0).ToString,
-                dsKosong.Tables(0).Rows(0).Item(1).ToString,
-                "No Check",
-                DateTime.Now.AddDays((j + 1) - tanggalNow).ToString("dd/MM/yyyy"),
-                DateTime.Now.AddDays((j + 1) - tanggalNow).ToString("ddd"),
-                "",
-                "-",
-                "-",
-                "00/00/0000",
-                "",
-                "",
-                "",
-                "",
-                dsKosong.Tables(0).Rows(0).Item(2).ToString}
-            End If
+                End If
+                Console.WriteLine("Urutan" + (j + 1).ToString)
+                If syaratTgl = True Then
+                    row = New String() {ds.Tables(0).Rows(k).Item(0).ToString,
+                    ds.Tables(0).Rows(k).Item(1).ToString,
+                    ds.Tables(0).Rows(k).Item(2).ToString,
+                    ds.Tables(0).Rows(k).Item(3),
+                    ds.Tables(0).Rows(k).Item(4).ToString,
+                    ds.Tables(0).Rows(k).Item(5).ToString,
+                    ds.Tables(0).Rows(k).Item(6).ToString,
+                    ds.Tables(0).Rows(k).Item(7).ToString,
+                    ds.Tables(0).Rows(k).Item(8).ToString,
+                    ds.Tables(0).Rows(k).Item(9).ToString,
+                    ds.Tables(0).Rows(k).Item(10).ToString,
+                    ds.Tables(0).Rows(k).Item(11).ToString,
+                    ds.Tables(0).Rows(k).Item(12).ToString,
+                    ds.Tables(0).Rows(k).Item(13).ToString}
+                    jejak = jejak + 1
+                Else
+                    Console.WriteLine("ds Kosong")
+                    row = New String() {dsKosong.Tables(0).Rows(0).Item(0).ToString,
+                    dsKosong.Tables(0).Rows(0).Item(1).ToString,
+                    "No Check",
+                    dt_create.Value.AddDays((j + 1) - tanggalNow).ToString("dd/MM/yyyy"),
+                    dt_create.Value.AddDays((j + 1) - tanggalNow).ToString("ddd"),
+                    "",
+                    "-",
+                    "-",
+                    "00/00/0000",
+                    "",
+                    "",
+                    "",
+                    "",
+                    dsKosong.Tables(0).Rows(0).Item(2).ToString}
+                End If
 
-            DGV_ReviewDaily.Rows.Add(row)
-            DGV_ReviewDaily.Rows(j).HeaderCell.Value = (j + 1).ToString
-            tempHeaderCell = (j + 1)
-            If j Mod 2 = 1 Then
-                DGV_ReviewDaily.Rows(j).DefaultCellStyle.BackColor = Color.LightGray
-            End If
-        Next
-
+                DGV_ReviewDaily.Rows.Add(row)
+                DGV_ReviewDaily.Rows(j).HeaderCell.Value = (j + 1).ToString
+                tempHeaderCell = (j + 1)
+                If j Mod 2 = 1 Then
+                    DGV_ReviewDaily.Rows(j).DefaultCellStyle.BackColor = Color.LightGray
+                End If
+            Next
+        End If
     End Sub
 
     Private Sub cb_depSearch_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_depSearch.SelectedIndexChanged
         tb_empSearch.Text = ""
         tb_namaSearch.Text = ""
-        DGV_SideDaily.Rows.Clear()
+        DGV_SideDaily1.Rows.Clear()
         DGV_ReviewDaily.Rows.Clear()
         Dim dep = cb_depSearch.Text
         dt_start.Value = Now
         dt_end.Value = Now
         Dim querydep As String = $"{QueryCMD} WHERE `Departement_Karyawan` = '{dep}'"
         showEmploye(querydep)
-        total_data.Text = DGV_SideDaily.Rows.Count
+        total_data.Text = DGV_SideDaily1.Rows.Count
         Console.WriteLine("Done")
         flag = False
     End Sub
@@ -170,14 +175,14 @@ Public Class DailyAttendance
         If e.KeyCode = Keys.Enter Then
             tb_namaSearch.Text = ""
             cb_depSearch.Text = ""
-            DGV_SideDaily.Rows.Clear()
+            DGV_SideDaily1.Rows.Clear()
             DGV_ReviewDaily.Rows.Clear()
             dt_start.Value = Now
             dt_end.Value = Now
             Dim emp As String = tb_empSearch.Text
             Dim queryemp As String = $"{QueryCMD} WHERE `NIK` = '{emp}' "
             showEmploye(queryemp)
-            total_data.Text = DGV_SideDaily.Rows.Count
+            total_data.Text = DGV_SideDaily1.Rows.Count
             Console.WriteLine("Done")
             flag = False
         End If
@@ -187,14 +192,14 @@ Public Class DailyAttendance
         If e.KeyCode = Keys.Enter Then
             tb_empSearch.Text = ""
             cb_depSearch.Text = ""
-            DGV_SideDaily.Rows.Clear()
+            DGV_SideDaily1.Rows.Clear()
             DGV_ReviewDaily.Rows.Clear()
             dt_start.Value = Now
             dt_end.Value = Now
             Dim name As String = tb_namaSearch.Text
             Dim queryname As String = $"{QueryCMD} WHERE `Nama_Karyawan` = '{name}' "
             showEmploye(queryname)
-            total_data.Text = DGV_SideDaily.Rows.Count
+            total_data.Text = DGV_SideDaily1.Rows.Count
             Console.WriteLine("Done")
             flag = False
         End If
@@ -234,7 +239,7 @@ Public Class DailyAttendance
         cb_depSearch.Text = ""
         dt_start.Value = Now
         dt_end.Value = Now
-        DGV_SideDaily.Rows.Clear()
+        DGV_SideDaily1.Rows.Clear()
         DGV_ReviewDaily.Rows.Clear()
         'showDaily(queryAll)
         showEmploye(QueryCMD)
@@ -256,18 +261,17 @@ Public Class DailyAttendance
         Next
         Return Convert.ToInt32(returnVal)
     End Function
-
-
-    Function nikFunc() As String
-
-    End Function
     Sub subCreateFunc(ByVal sideRowCount As Integer)
         Dim flagVacation As Boolean = False
         Dim tempDate As Date
         For i As Integer = 0 To sideRowCount - 1
             Dim InitDate, NikCreate As String
             InitDate = ""
-            NikCreate = DGV_SideDaily.Rows(i).Cells(0).Value
+            If sideRowCount <> 1 Then
+                NikCreate = DGV_SideDaily1.Rows(i).Cells(0).Value
+            Else
+                NikCreate = tb_empCreate.Text
+            End If
             Console.WriteLine("NIK CREATE : " + NikCreate)
 
             For x As Integer = 0 To DGV_ReviewDaily.Rows.Count - 1
@@ -277,7 +281,10 @@ Public Class DailyAttendance
                     Dim F_NIK, F_Nama_Karyawan, Date_Finger, Shift_Finger, RecFinIN, RecFinOut, F_Departement, Finger_Status As String
                     Dim DBClass As DataBaseClass = New DataBaseClass
                     Dim QueryCreateAbsen As String = $"SELECT `NIK`,`Nama_Karyawan`,DATE_FORMAT(`Date_Finger`,""%y-%m-%d""),`Shift_Finger`,`RecFinIN`,`RecFinOut`,`Departement`, `Finger Status` FROM `finger_employer` WHERE `NIK` = '{NikCreate}' AND `Date_Finger` = '{expenddt.ToString("yyyy-MM-dd")}'"
+                    Dim QueryCekAktive As String = $"SELECT `Tanggal_Keluar` FROM `master employer` WHERE `NIK` = '{NikCreate}' AND `Tanggal_Keluar` = '{expenddt.ToString("yyyy-MM-dd")}'"
                     Dim dsAbsen As DataSet = DBClass.downloadDB(QueryCreateAbsen)
+                    Dim dsCekAktive As DataSet = DBClass.downloadDB(QueryCekAktive)
+
 
                     If dsAbsen IsNot Nothing AndAlso dsAbsen.Tables.Count > 0 AndAlso dsAbsen.Tables(0).Rows.Count > 0 Then
                         F_NIK = dsAbsen.Tables(0).Rows(0).Item(0)
@@ -403,10 +410,10 @@ Public Class DailyAttendance
     End Sub
 
     Sub CreateFunction()
-        If DGV_SideDaily.Rows.Count <> 0 Then
+        If DGV_SideDaily1.Rows.Count <> 0 Then
             Dim sideRowCount As Integer
             Dim testDataOk As Boolean = True
-            sideRowCount = DGV_SideDaily.Rows.Count
+            sideRowCount = DGV_SideDaily1.Rows.Count
 
             If tb_empCreate.Text.Count <> 0 Then
                 Dim DBClass As DataBaseClass = New DataBaseClass
@@ -416,6 +423,7 @@ Public Class DailyAttendance
                     MsgBox("Emp No Not Found", MsgBoxStyle.OkOnly, "Create")
                     sideRowCount = 0
                     testDataOk = False
+
                 Else
                     sideRowCount = 1
                 End If
@@ -712,18 +720,42 @@ Public Class DailyAttendance
     End Function
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        If DGV_SideDaily1.Rows.Count <> 0 Then
+            CreateFunction()
+            DGV_SideDaily1.Rows.Clear()
+            DGV_ReviewDaily.Rows.Clear()
+            Try
+                showEmploye(QueryCMD)
+                Dim nikSyarat As String = DGV_SideDaily1.Rows(0).Cells(0).Value
+                Dim queryGetData As String = $"{queryAll} WHERE `NIK` = '{nikSyarat}' AND DATE_FORMAT(`Date`,""%m"") = {dt_create.Value.ToString("MM")}"
+                showDaily(queryGetData)
+            Catch ex As Exception
 
-        CreateFunction()
-        DGV_SideDaily.Rows.Clear()
-        DGV_ReviewDaily.Rows.Clear()
-        Try
-            showEmploye(QueryCMD)
-            Dim nikSyarat As String = DGV_SideDaily.Rows(0).Cells(0).Value
-            Dim queryGetData As String = $"{queryAll} WHERE `NIK` = '{nikSyarat}'"
-            showDaily(queryGetData)
-        Catch ex As Exception
-
-        End Try
+            End Try
+        Else
+            MsgBox("Data Karyawan Tidak Tersedia")
+        End If
     End Sub
 
+    Private Sub dt_create_ValueChanged(sender As Object, e As EventArgs) Handles dt_create.ValueChanged
+        Dim nikSyarat As String = DGV_SideDaily1.Rows(0).Cells(0).Value
+        DGV_ReviewDaily.Rows.Clear()
+        Dim queryGetData As String = $"{queryAll} WHERE `NIK` = '{nikSyarat}' AND DATE_FORMAT(`Date`,""%m"") = {dt_create.Value.ToString("MM")}"
+        showDaily(queryGetData)
+    End Sub
+
+    Private Sub cb_depCreate_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_depCreate.SelectedIndexChanged
+        If flagcb = True Then
+            Dim depCode As String = ""
+            If cb_depCreate.Text <> "ALL" Then
+                depCode = $" WHERE `Department` = '{cb_depCreate.Text}'"
+            End If
+            DGV_SideDaily1.Rows.Clear()
+            DGV_ReviewDaily.Rows.Clear()
+            showEmploye(QueryCMD + depCode)
+            Dim nikSyarat As String = DGV_SideDaily1.Rows(0).Cells(0).Value
+            Dim queryGetData As String = $"{queryAll} WHERE `NIK` = '{nikSyarat}' AND DATE_FORMAT(`Date`,""%m"") = {dt_create.Value.ToString("MM")}"
+            showDaily(queryGetData)
+        End If
+    End Sub
 End Class
