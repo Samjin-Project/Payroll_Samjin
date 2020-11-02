@@ -46,10 +46,6 @@ Partial Class ComputePayroll
         Me.Label43 = New System.Windows.Forms.Label()
         Me.Label39 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.tb_x1 = New System.Windows.Forms.TextBox()
-        Me.tb_basic = New System.Windows.Forms.TextBox()
-        Me.Label27 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.tb_total = New System.Windows.Forms.TextBox()
         Me.tb_sup = New System.Windows.Forms.TextBox()
@@ -326,10 +322,6 @@ Partial Class ComputePayroll
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.ControlLight
-        Me.Panel2.Controls.Add(Me.tb_x1)
-        Me.Panel2.Controls.Add(Me.tb_basic)
-        Me.Panel2.Controls.Add(Me.Label27)
-        Me.Panel2.Controls.Add(Me.Label1)
         Me.Panel2.Controls.Add(Me.Panel6)
         Me.Panel2.Controls.Add(Me.Panel5)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
@@ -337,42 +329,6 @@ Partial Class ComputePayroll
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(938, 665)
         Me.Panel2.TabIndex = 1
-        '
-        'tb_x1
-        '
-        Me.tb_x1.BackColor = System.Drawing.Color.White
-        Me.tb_x1.Location = New System.Drawing.Point(196, 90)
-        Me.tb_x1.Name = "tb_x1"
-        Me.tb_x1.ReadOnly = True
-        Me.tb_x1.Size = New System.Drawing.Size(66, 20)
-        Me.tb_x1.TabIndex = 99
-        '
-        'tb_basic
-        '
-        Me.tb_basic.BackColor = System.Drawing.Color.White
-        Me.tb_basic.Location = New System.Drawing.Point(60, 90)
-        Me.tb_basic.Name = "tb_basic"
-        Me.tb_basic.ReadOnly = True
-        Me.tb_basic.Size = New System.Drawing.Size(66, 20)
-        Me.tb_basic.TabIndex = 98
-        '
-        'Label27
-        '
-        Me.Label27.AutoSize = True
-        Me.Label27.Location = New System.Drawing.Point(172, 94)
-        Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(18, 13)
-        Me.Label27.TabIndex = 76
-        Me.Label27.Text = "x1"
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(21, 94)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(33, 13)
-        Me.Label1.TabIndex = 75
-        Me.Label1.Text = "Basic"
         '
         'Panel6
         '
@@ -964,7 +920,6 @@ Partial Class ComputePayroll
         Me.Panel7.ResumeLayout(False)
         Me.Panel7.PerformLayout()
         Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
         Me.Panel6.ResumeLayout(False)
         Me.Panel6.PerformLayout()
         Me.Panel5.ResumeLayout(False)
@@ -1051,8 +1006,4 @@ Partial Class ComputePayroll
     Friend WithEvents ComboBoxDep As ComboBox
     Friend WithEvents b_export As Button
     Friend WithEvents Label48 As Label
-    Friend WithEvents Label27 As Label
-    Friend WithEvents Label1 As Label
-    Friend WithEvents tb_x1 As TextBox
-    Friend WithEvents tb_basic As TextBox
 End Class

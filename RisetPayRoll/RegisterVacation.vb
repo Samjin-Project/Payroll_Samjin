@@ -85,7 +85,7 @@
                          '{dt_startdate.Value.ToString("yyyy-MM-dd")}',
                          '{dt_anddate.Value.ToString("yyyy-MM-dd")}',
                          '{dt_reqdate.Value.ToString("yyyy-MM-dd")}',
-                         '{cb_department.Text}',
+                         '{tb_dep.Text}',
                          '{tb_telp.Text}',
                          '{tb_reason.Text}')"
             Console.WriteLine("DB Query : " + masterQuery)
@@ -113,7 +113,7 @@
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles b_save.Click
-        If cb_holtype.Text = "" Or tb_nama.Text = "" Or tb_emp.Text = "" Or cb_department.Text = "" Or tb_telp.Text = "" Or tb_reason.Text = "" Then
+        If cb_holtype.Text = "" Or tb_nama.Text = "" Or tb_emp.Text = "" Or tb_dep.Text = "" Or tb_telp.Text = "" Or tb_reason.Text = "" Then
             MsgBox("Data tidak boleh kosong !", MsgBoxStyle.Exclamation, "Register Vacation")
         Else
             If uploadData() = True Then
@@ -121,7 +121,7 @@
                 tb_nama.Text = ""
                 cb_holtype.Text = ""
                 tb_telp.Text = ""
-                cb_department.Text = ""
+                tb_dep.Text = ""
                 dt_startdate.Value = Now
                 dt_anddate.Value = Now
                 dt_reqdate.Value = Now
@@ -177,7 +177,7 @@
         tb_nama.Text = ""
         cb_dep.Text = ""
         fil_emp.Text = ""
-        cb_department.Text = ""
+        tb_dep.Text = ""
         cb_holtype.Text = ""
         dt_start.Value = Now
         dt_end.Value = Now
@@ -323,5 +323,26 @@
     Private Sub b_delete_Click(sender As Object, e As EventArgs) Handles b_delete.Click
         Dim selectedRows As Integer = DGV_DataModify.CurrentRow.Index
         deleteData(selectedRows)
+    End Sub
+
+
+    Private Sub tb_emp_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles tb_emp.PreviewKeyDown
+        tb_emp.ForeColor = Color.Black
+        If e.KeyCode = Keys.Enter Then
+            Dim nik As String = tb_emp.Text
+            Dim querycmd As String = $"SELECT `Nama_Karyawan`, `Department` FROM `master employer` WHERE `NIK` = '{nik}'"
+            Dim DBClass As DataBaseClass = New DataBaseClass
+            Dim ds As DataSet = DBClass.downloadDB(querycmd)
+            Dim indexDs As Integer = ds.Tables(0).Rows.Count
+            If indexDs > 0 Then
+                tb_nama.Text = ds.Tables(0).Rows(0).Item(0)
+                tb_dep.Text = ds.Tables(0).Rows(0).Item(1)
+            Else
+                tb_emp.ForeColor = Color.Red
+                tb_emp.Text = "Data not found"
+                tb_nama.Text = ""
+                tb_dep.Text = ""
+            End If
+        End If
     End Sub
 End Class

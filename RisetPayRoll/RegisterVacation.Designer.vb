@@ -54,7 +54,6 @@ Partial Class RegisterVacation
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.cb_department = New System.Windows.Forms.ComboBox()
         Me.tb_reason = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
@@ -73,6 +72,7 @@ Partial Class RegisterVacation
         Me.tb_nama = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tb_emp = New System.Windows.Forms.TextBox()
+        Me.tb_dep = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         CType(Me.DGV_DataModify, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
@@ -372,8 +372,8 @@ Partial Class RegisterVacation
         '
         Me.Panel4.BackColor = System.Drawing.SystemColors.Control
         Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel4.Controls.Add(Me.tb_dep)
         Me.Panel4.Controls.Add(Me.Label10)
-        Me.Panel4.Controls.Add(Me.cb_department)
         Me.Panel4.Controls.Add(Me.tb_reason)
         Me.Panel4.Controls.Add(Me.Label3)
         Me.Panel4.Controls.Add(Me.Label16)
@@ -401,21 +401,11 @@ Partial Class RegisterVacation
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(79, 99)
+        Me.Label10.Location = New System.Drawing.Point(80, 74)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(51, 13)
         Me.Label10.TabIndex = 55
         Me.Label10.Text = "Emp. No."
-        '
-        'cb_department
-        '
-        Me.cb_department.BackColor = System.Drawing.Color.Cyan
-        Me.cb_department.FormattingEnabled = True
-        Me.cb_department.Items.AddRange(New Object() {"PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING", "SMD"})
-        Me.cb_department.Location = New System.Drawing.Point(144, 120)
-        Me.cb_department.Name = "cb_department"
-        Me.cb_department.Size = New System.Drawing.Size(109, 21)
-        Me.cb_department.TabIndex = 54
         '
         'tb_reason
         '
@@ -457,7 +447,7 @@ Partial Class RegisterVacation
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(64, 89)
+        Me.Label5.Location = New System.Drawing.Point(65, 64)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(0, 13)
         Me.Label5.TabIndex = 48
@@ -554,15 +544,16 @@ Partial Class RegisterVacation
         'tb_nama
         '
         Me.tb_nama.BackColor = System.Drawing.Color.Aqua
-        Me.tb_nama.Location = New System.Drawing.Point(143, 65)
+        Me.tb_nama.Location = New System.Drawing.Point(144, 93)
         Me.tb_nama.Name = "tb_nama"
+        Me.tb_nama.ReadOnly = True
         Me.tb_nama.Size = New System.Drawing.Size(110, 20)
         Me.tb_nama.TabIndex = 4
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(93, 68)
+        Me.Label1.Location = New System.Drawing.Point(94, 96)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(35, 13)
         Me.Label1.TabIndex = 1
@@ -571,10 +562,19 @@ Partial Class RegisterVacation
         'tb_emp
         '
         Me.tb_emp.BackColor = System.Drawing.Color.Aqua
-        Me.tb_emp.Location = New System.Drawing.Point(144, 92)
+        Me.tb_emp.Location = New System.Drawing.Point(145, 67)
         Me.tb_emp.Name = "tb_emp"
         Me.tb_emp.Size = New System.Drawing.Size(110, 20)
         Me.tb_emp.TabIndex = 0
+        '
+        'tb_dep
+        '
+        Me.tb_dep.BackColor = System.Drawing.Color.Aqua
+        Me.tb_dep.Location = New System.Drawing.Point(145, 119)
+        Me.tb_dep.Name = "tb_dep"
+        Me.tb_dep.ReadOnly = True
+        Me.tb_dep.Size = New System.Drawing.Size(110, 20)
+        Me.tb_dep.TabIndex = 56
         '
         'RegisterVacation
         '
@@ -637,7 +637,6 @@ Partial Class RegisterVacation
     Friend WithEvents Button1 As Button
     Friend WithEvents tb_reason As TextBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents cb_department As ComboBox
     Friend WithEvents Label10 As Label
     Friend WithEvents kolom_emp As DataGridViewTextBoxColumn
     Friend WithEvents Kolom_Nama As DataGridViewTextBoxColumn
@@ -649,4 +648,5 @@ Partial Class RegisterVacation
     Friend WithEvents EndDate As DataGridViewTextBoxColumn
     Friend WithEvents Reasons As DataGridViewTextBoxColumn
     Friend WithEvents b_delete As Button
+    Friend WithEvents tb_dep As TextBox
 End Class

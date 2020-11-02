@@ -315,7 +315,6 @@ Public Class ComputePayroll
 
             tb_potsal.Text = cut.ToString("##,##,###")
             tb_ot.Text = ds.Tables(0).Rows(0).Item(2)
-            tb_x1.Text = tb_ot.Text
             tb_attendance.Text = ds.Tables(0).Rows(0).Item(1)
             tb_otwages.Text = wages.ToString("##,##,###")
             tb_jamsostek.Text = jamsos.ToString("##,##,###")
