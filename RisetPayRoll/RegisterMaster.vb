@@ -109,7 +109,7 @@ Public Class RegisterMaster
     End Sub
 
     Private Sub detailDataMaster(Nik As String)
-        Dim QueryCMD As String = $"SELECT *FROM `master employer` WHERE `NIK` = '{Nik}'"
+        Dim QueryCMD As String = $"SELECT * FROM `master employer` WHERE `NIK` = '{Nik}'"
         Dim DBClass As DataBaseClass = New DataBaseClass
         Dim ds As DataSet = DBClass.downloadDB(QueryCMD)
         Dim indexDs As Integer = ds.Tables(0).Rows.Count
@@ -119,7 +119,7 @@ Public Class RegisterMaster
             Dim tglMasuk As Date = DateTime.ParseExact(ds.Tables(0).Rows(0).Item(10), "yyyy-MM-dd", Nothing)
             Dim tglKeluar As String = ds.Tables(0).Rows(0).Item(11)
             Console.WriteLine("tglOut" + ds.Tables(0).Rows(0).Item(11).ToString)
-            If ds.Tables(0).Rows(0).Item(11).ToString = "0" Then
+            If ds.Tables(0).Rows(0).Item(11).ToString = "01/01/0001 00:00:00" Then
                 dt_createKeluar.Format = DateTimePickerFormat.Custom
                 dt_createKeluar.CustomFormat = " "
             Else
@@ -474,5 +474,9 @@ Public Class RegisterMaster
         detailDataMaster(Nik)
         b_edit.Enabled = True
         r_index = e.RowIndex
+    End Sub
+
+    Private Sub dt_createKeluar_ValueChanged(sender As Object, e As EventArgs) Handles dt_createKeluar.ValueChanged
+        cb_aktif.Text = "Yes"
     End Sub
 End Class

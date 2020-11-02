@@ -36,7 +36,7 @@ Public Class DataBaseClass
         Try
             Console.WriteLine("Query Download : " + QueryCMD)
             If connDB.State <> ConnectionState.Open Then
-                connDB.ConnectionString = "server=" & strServer.Trim & ";database=" & strDbase.Trim & ";user=" & strUser.Trim & ";password=" & strPass
+                connDB.ConnectionString = "server=" & strServer.Trim & ";database=" & strDbase.Trim & ";user=" & strUser.Trim & ";password=" & strPass & ";Convert Zero Datetime=True"
                 connDB.Open()
             End If
 

@@ -40,6 +40,8 @@ Partial Class RegisterMaster
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.cb_createPosisi = New System.Windows.Forms.ComboBox()
+        Me.cb_stat = New System.Windows.Forms.ComboBox()
         Me.Label23 = New System.Windows.Forms.Label()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Label20 = New System.Windows.Forms.Label()
@@ -80,8 +82,6 @@ Partial Class RegisterMaster
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.OpenFileDialogImport = New System.Windows.Forms.OpenFileDialog()
-        Me.cb_stat = New System.Windows.Forms.ComboBox()
-        Me.cb_createPosisi = New System.Windows.Forms.ComboBox()
         Me.Panel1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -295,6 +295,28 @@ Partial Class RegisterMaster
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(638, 433)
         Me.Panel2.TabIndex = 2
+        '
+        'cb_createPosisi
+        '
+        Me.cb_createPosisi.BackColor = System.Drawing.Color.Cyan
+        Me.cb_createPosisi.Enabled = False
+        Me.cb_createPosisi.FormattingEnabled = True
+        Me.cb_createPosisi.Items.AddRange(New Object() {"Laki-laki", "Perempuan"})
+        Me.cb_createPosisi.Location = New System.Drawing.Point(396, 113)
+        Me.cb_createPosisi.Name = "cb_createPosisi"
+        Me.cb_createPosisi.Size = New System.Drawing.Size(110, 21)
+        Me.cb_createPosisi.TabIndex = 44
+        '
+        'cb_stat
+        '
+        Me.cb_stat.BackColor = System.Drawing.Color.Cyan
+        Me.cb_stat.Enabled = False
+        Me.cb_stat.FormattingEnabled = True
+        Me.cb_stat.Items.AddRange(New Object() {"Magang", "Resign", "Finish Contract"})
+        Me.cb_stat.Location = New System.Drawing.Point(396, 191)
+        Me.cb_stat.Name = "cb_stat"
+        Me.cb_stat.Size = New System.Drawing.Size(110, 21)
+        Me.cb_stat.TabIndex = 43
         '
         'Label23
         '
@@ -675,28 +697,6 @@ Partial Class RegisterMaster
         'OpenFileDialogImport
         '
         Me.OpenFileDialogImport.FileName = "OpenFileDialog1"
-        '
-        'cb_stat
-        '
-        Me.cb_stat.BackColor = System.Drawing.Color.Cyan
-        Me.cb_stat.Enabled = False
-        Me.cb_stat.FormattingEnabled = True
-        Me.cb_stat.Items.AddRange(New Object() {"Laki-laki", "Perempuan"})
-        Me.cb_stat.Location = New System.Drawing.Point(396, 191)
-        Me.cb_stat.Name = "cb_stat"
-        Me.cb_stat.Size = New System.Drawing.Size(110, 21)
-        Me.cb_stat.TabIndex = 43
-        '
-        'cb_createPosisi
-        '
-        Me.cb_createPosisi.BackColor = System.Drawing.Color.Cyan
-        Me.cb_createPosisi.Enabled = False
-        Me.cb_createPosisi.FormattingEnabled = True
-        Me.cb_createPosisi.Items.AddRange(New Object() {"Laki-laki", "Perempuan"})
-        Me.cb_createPosisi.Location = New System.Drawing.Point(396, 113)
-        Me.cb_createPosisi.Name = "cb_createPosisi"
-        Me.cb_createPosisi.Size = New System.Drawing.Size(110, 21)
-        Me.cb_createPosisi.TabIndex = 44
         '
         'RegisterMaster
         '
