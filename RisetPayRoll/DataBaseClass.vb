@@ -15,7 +15,7 @@ Public Class DataBaseClass
         '        VALUES ('K200191,'Marlina Agustin','Operator','Rubber Forming','Bekasi','2008-01-13','Perempuan','SMA','2002-20-17','Magang',3524207)"
 
         Try
-            Console.WriteLine("Query Upload : " + QueryUpload)
+            'Console.WriteLine("Query Upload : " + QueryUpload)
             If connDB.State <> ConnectionState.Open Then
                 connDB.ConnectionString = "server=" & strServer.Trim & ";database=" & strDbase.Trim & ";user=" & strUser.Trim & ";password=" & strPass.Trim & ";Convert Zero Datetime='True'"
                 connDB.Open()
@@ -25,7 +25,7 @@ Public Class DataBaseClass
             cmd.ExecuteNonQuery()
             cmd.Dispose()
             connDB.Close()
-            Console.WriteLine("Connection Oke")
+            'Console.WriteLine("Connection Oke")
         Catch ex As Exception
             Console.WriteLine(ex.ToString)
             Console.WriteLine("Connection Error")
@@ -34,7 +34,7 @@ Public Class DataBaseClass
     Function downloadDB(QueryCMD As String) As DataSet
 
         Try
-            Console.WriteLine("Query Download : " + QueryCMD)
+            'Console.WriteLine("Query Download : " + QueryCMD)
             If connDB.State <> ConnectionState.Open Then
                 connDB.ConnectionString = "server=" & strServer.Trim & ";database=" & strDbase.Trim & ";user=" & strUser.Trim & ";password=" & strPass & ";Convert Zero Datetime=True"
                 connDB.Open()
@@ -45,7 +45,7 @@ Public Class DataBaseClass
             da.SelectCommand.CommandTimeout = 2
             da.Fill(ds)
             connDB.Close()
-            Console.WriteLine("OKE")
+            'Console.WriteLine("OKE")
             Return ds
         Catch ex As Exception
             Console.WriteLine(ex.ToString())

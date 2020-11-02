@@ -29,7 +29,7 @@ Public Class DailyAttendance
     Private Sub showEmploye(QueryOnReview As String)
         Dim DBClass As DataBaseClass = New DataBaseClass
         Dim ds As DataSet = DBClass.downloadDB(QueryOnReview)
-        Console.WriteLine("Query : " + QueryOnReview)
+        'console.WriteLine("Query : " + QueryOnReview)
         If ds IsNot Nothing Then
             Dim indexDs As Integer = ds.Tables(0).Rows.Count
             For i As Integer = 0 To indexDs - 1
@@ -49,7 +49,7 @@ Public Class DailyAttendance
         PickingLeftDgv(e.RowIndex)
     End Sub
     Sub PickingLeftDgv(indexRows As Integer)
-        Console.WriteLine("PickingLeftDgv")
+        'console.WriteLine("PickingLeftDgv")
 
         Try
             nik = DGV_SideDaily1.Rows(indexRows).Cells(0).Value
@@ -64,7 +64,7 @@ Public Class DailyAttendance
     Function CekTanggal(tanggal As String, rowNow As Integer) As Boolean
         Dim tempTgl As Integer = Convert.ToInt32(tanggal.Substring(0, 2))
         Dim result As Boolean
-        Console.WriteLine("Tgl = " + tempTgl.ToString + ", result = " + rowNow.ToString)
+        'console.WriteLine("Tgl = " + tempTgl.ToString + ", result = " + rowNow.ToString)
         If tempTgl = rowNow + 1 Then
             result = True
         Else
@@ -73,7 +73,7 @@ Public Class DailyAttendance
         Return result
     End Function
     Private Sub showDaily(QueryDaily As String)
-        'Console.WriteLine(QueryDaily)
+        ''console.WriteLine(QueryDaily)
         Dim DBClass As DataBaseClass = New DataBaseClass
         Dim ds As DataSet = DBClass.downloadDB(QueryDaily)
         Dim indexDs As Integer = ds.Tables(0).Rows.Count
@@ -94,7 +94,7 @@ Public Class DailyAttendance
                 Dim row As String()
                 Dim syaratTgl As Boolean
                 Dim k As Integer = 0
-                Console.WriteLine("jejak " + jejak.ToString + " index rows " + indexDs.ToString)
+                'console.WriteLine("jejak " + jejak.ToString + " index rows " + indexDs.ToString)
                 If jejak < indexDs Then
                     Try
                         For z As Integer = 0 To indexDs - 1
@@ -106,12 +106,12 @@ Public Class DailyAttendance
                         Next
                     Catch ex As IndexOutOfRangeException
                         syaratTgl = False
-                        Console.WriteLine("Ini Syarat Tanggal")
+                        'console.WriteLine("Ini Syarat Tanggal")
                     End Try
                 Else
                     syaratTgl = False
                 End If
-                Console.WriteLine("Urutan" + (j + 1).ToString)
+                'console.WriteLine("Urutan" + (j + 1).ToString)
                 If syaratTgl = True Then
                     row = New String() {ds.Tables(0).Rows(k).Item(0).ToString,
                     ds.Tables(0).Rows(k).Item(1).ToString,
@@ -129,7 +129,7 @@ Public Class DailyAttendance
                     ds.Tables(0).Rows(k).Item(13).ToString}
                     jejak = jejak + 1
                 Else
-                    Console.WriteLine("ds Kosong")
+                    'console.WriteLine("ds Kosong")
                     row = New String() {dsKosong.Tables(0).Rows(0).Item(0).ToString,
                     dsKosong.Tables(0).Rows(0).Item(1).ToString,
                     "No Check",
@@ -167,7 +167,7 @@ Public Class DailyAttendance
         Dim querydep As String = $"{QueryCMD} WHERE `Departement_Karyawan` = '{dep}'"
         showEmploye(querydep)
         total_data.Text = DGV_SideDaily1.Rows.Count
-        Console.WriteLine("Done")
+        'console.WriteLine("Done")
         flag = False
     End Sub
 
@@ -183,7 +183,7 @@ Public Class DailyAttendance
             Dim queryemp As String = $"{QueryCMD} WHERE `NIK` = '{emp}' "
             showEmploye(queryemp)
             total_data.Text = DGV_SideDaily1.Rows.Count
-            Console.WriteLine("Done")
+            'console.WriteLine("Done")
             flag = False
         End If
     End Sub
@@ -200,7 +200,7 @@ Public Class DailyAttendance
             Dim queryname As String = $"{QueryCMD} WHERE `Nama_Karyawan` = '{name}' "
             showEmploye(queryname)
             total_data.Text = DGV_SideDaily1.Rows.Count
-            Console.WriteLine("Done")
+            'console.WriteLine("Done")
             flag = False
         End If
     End Sub
@@ -272,7 +272,7 @@ Public Class DailyAttendance
             Else
                 NikCreate = tb_empCreate.Text
             End If
-            Console.WriteLine("NIK CREATE : " + NikCreate)
+            'console.WriteLine("NIK CREATE : " + NikCreate)
 
             For x As Integer = 0 To DGV_ReviewDaily.Rows.Count - 1
                 For y As Integer = x To DGV_ReviewDaily.Rows.Count - 1
@@ -322,24 +322,24 @@ Public Class DailyAttendance
                                 End If
 
                                 statusAbsen = dsCekVacation.Tables(0).Rows(0).Item(3).ToString
-                                Console.WriteLine("code hadir : " + dsCekVacation.Tables(0).Rows(0).Item(3).ToString)
-                                Console.WriteLine("date today : " + Date.Today.ToString)
-                                Console.WriteLine("vacatio : " + vacation.ToString)
+                                'console.WriteLine("code hadir : " + dsCekVacation.Tables(0).Rows(0).Item(3).ToString)
+                                'console.WriteLine("date today : " + Date.Today.ToString)
+                                'console.WriteLine("vacatio : " + vacation.ToString)
                                 If (dsCekVacation.Tables(0).Rows(0).Item(3).ToString = "Permission" Or dsCekVacation.Tables(0).Rows(0).Item(3).ToString = "No permission") And expenddt = vacation Then
                                     kodeAbsen = "0"
-                                    Console.WriteLine("CODE permission")
+                                    'console.WriteLine("CODE permission")
                                 ElseIf dsCekVacation.Tables(0).Rows(0).Item(3).ToString = "Sick" And expenddt = vacation Then
                                     kodeAbsen = "1"
-                                    Console.WriteLine("CODE sick")
+                                    'console.WriteLine("CODE sick")
 
                                 End If
                             End If
                             'Dim dateVacation As Nullable(Of Date) = getVcationDate(dsCekVacation, expenddt.ToString("yyyy-MM-dd"))
-                            Console.WriteLine(Date_Finger)
+                            'console.WriteLine(Date_Finger)
                             Dim hariAbsen As String = (Date.ParseExact(Date_Finger, "yy-MM-dd", System.Globalization.DateTimeFormatInfo.InvariantInfo)).ToString("ddd")
-                            Console.WriteLine("hari " + hariAbsen)
+                            'console.WriteLine("hari " + hariAbsen)
 
-                            Console.WriteLine("bolos")
+                            'console.WriteLine("bolos")
                             deleteQuery(F_NIK, Date_Finger)
 
                             If hariAbsen = "Sat" Or hariAbsen = "Sun" Then
@@ -369,8 +369,8 @@ Public Class DailyAttendance
                         Else
                             Dim QueryCreate As String = $"SELECT `NIK`,`Nama_Karyawan`,DATE_FORMAT(`Date_Finger`,""%y-%m-%d""),`Shift_Finger`,`RecFinIN`,`RecFinOut`,`Departement`, `Finger Status` FROM `finger_employer` WHERE `NIK` = '{NikCreate}' AND `Date_Finger` = '{expenddt.ToString("yyyy-MM-dd")}' AND `RecFinIN` <> '' AND `RecFinOut` <> ''"
                             Dim ds As DataSet = DBClass.downloadDB(QueryCreate)
-                            Console.WriteLine("DS : " + ds.Tables.Count.ToString)
-                            Console.WriteLine(ds.GetXml)
+                            'console.WriteLine("DS : " + ds.Tables.Count.ToString)
+                            'console.WriteLine(ds.GetXml)
                             If dsAbsen IsNot Nothing AndAlso dsAbsen.Tables.Count > 0 AndAlso ds.Tables(0).Rows.Count > 0 Then
                                 Dim DateOut As DateTime = CheckTime(ds.Tables(0).Rows(0).Item(4), ds.Tables(0).Rows(0).Item(5), expenddt)
 
@@ -396,7 +396,7 @@ Public Class DailyAttendance
                                                          '{ds.Tables(0).Rows(0).Item(6)}',
                                                          '1')"
                                 DBClass.uploadDB(QueryInsertCreate)
-                                Console.WriteLine("Jmlah Tabel : " + indexDs.ToString)
+                                'console.WriteLine("Jmlah Tabel : " + indexDs.ToString)
                             End If
                         End If
 
@@ -459,7 +459,7 @@ Public Class DailyAttendance
         Else
             outPut = New String() {"", ""}
         End If
-        Console.WriteLine("Out " + outPut(0) + outPut(1))
+        'console.WriteLine("Out " + outPut(0) + outPut(1))
         Return outPut
     End Function
     Sub CreateViewDaily(ds As DataSet, rowsData As Integer)
@@ -469,7 +469,7 @@ Public Class DailyAttendance
         Dim dep As String = ds.Tables(0).Rows(rowsData).Item(6)
         Dim dateMonth As String = ds.Tables(0).Rows(rowsData).Item(2)
         Dim nilai As String = ""
-        Console.WriteLine("date month : " + dateMonth.ToString)
+        'console.WriteLine("date month : " + dateMonth.ToString)
         Dim tempDate As Date = Date.ParseExact(dateMonth, "yy-MM-dd", System.Globalization.DateTimeFormatInfo.InvariantInfo)
         Dim hari As String = tempDate.ToString("dd")
 
@@ -487,7 +487,7 @@ Public Class DailyAttendance
         Dim cekRowBulan As Integer = dsAbsen.Tables(0).Rows(0).Item(0)
 
         If cekRowBulan <> 0 Then
-            Console.WriteLine("update daily view : " + overTime(1))
+            'console.WriteLine("update daily view : " + overTime(1))
             Dim attendance As Integer
             Dim inQuery As String
             If overTime(1) = "0" Then
@@ -526,8 +526,8 @@ Public Class DailyAttendance
                                             `Kehadiran` = '{total}' 
                                             WHERE MONTH(`DateMonth`)='{tempDate.ToString("MM")}' AND `NIK` = '{nik}'"
         Else
-            Console.WriteLine("insert daily view")
-            Console.WriteLine("overtime 1")
+            'console.WriteLine("insert daily view")
+            'console.WriteLine("overtime 1")
 
 
             Dim attendance(2) As String
@@ -574,8 +574,8 @@ Public Class DailyAttendance
         Dim indexTabel As Integer = ds.Tables(0).Rows.Count
 
         If indexTabel > 0 Then
-            Console.WriteLine("data set vacation Start : " + ds.Tables(0).Rows(0).Item(1))
-            Console.WriteLine("data set vacation End : " + ds.Tables(0).Rows(0).Item(2))
+            'console.WriteLine("data set vacation Start : " + ds.Tables(0).Rows(0).Item(1))
+            'console.WriteLine("data set vacation End : " + ds.Tables(0).Rows(0).Item(2))
         End If
 
         For i As Integer = 0 To ds.Tables(0).Rows.Count - 1
@@ -583,23 +583,23 @@ Public Class DailyAttendance
             Dim endDate As Date = Date.ParseExact(ds.Tables(0).Rows(i).Item(2), "yy-MM-dd", System.Globalization.DateTimeFormatInfo.InvariantInfo)
 
             If startDate = dateNow Then
-                Console.WriteLine("cek 1")
+                'console.WriteLine("cek 1")
                 Return dateNow
             ElseIf endDate = dateNow Then
-                Console.WriteLine("cek 2")
+                'console.WriteLine("cek 2")
                 Return dateNow
             Else
                 Dim diffTimeday As Long = DateDiff(DateInterval.Day, startDate, startDate)
                 For j As Integer = 0 To Convert.ToInt32(diffTimeday) - 1
                     Dim tempDate As Date = startDate.AddDays(i + 1)
                     If tempDate = dateNow Then
-                        Console.WriteLine("cek 3")
+                        'console.WriteLine("cek 3")
                         Return dateNow
                     End If
                 Next
             End If
         Next
-        Console.WriteLine("cek 4")
+        'console.WriteLine("cek 4")
         Return Nothing
     End Function
     Function CheckTime(timeIn As String, timeOut As String, dateIn As Date) As Date
@@ -629,7 +629,7 @@ Public Class DailyAttendance
     End Function
     Function SortJamKerja(ByRef selisih As Integer) As Integer
         Dim ResultSelisih As Integer = 0
-        Console.WriteLine("Selisih = " + selisih.ToString)
+        'console.WriteLine("Selisih = " + selisih.ToString)
 
         If selisih >= 290 And selisih <= 360 Then
             ResultSelisih = 5 '5 jam
@@ -656,25 +656,25 @@ Public Class DailyAttendance
         Dim OutDate As DateTime
         Dim libur As Boolean = cekLibur(tanggal)
         Dim sDayNow As String = CDate(tanggal).ToString("ddd")
-        Console.WriteLine("sDayNow : " + sDayNow)
-        Console.WriteLine("tempIN : " + tempTimeIn.ToString)
-        Console.WriteLine("tempOUT : " + tempTimeOut.ToString)
+        'console.WriteLine("sDayNow : " + sDayNow)
+        'console.WriteLine("tempIN : " + tempTimeIn.ToString)
+        'console.WriteLine("tempOUT : " + tempTimeOut.ToString)
         If ShiftData = "SHIFT1" Or ShiftData = "SHIFT2" Or ShiftData = "SHIFT3" Or ShiftData = "PENDEK1" Or ShiftData = "PENDEK2" Or ShiftData = "PENDEK3" Then
             Dim resultDiff As Long
             If tempTimeIn > tempTimeOut Then
                 Dim diffTimeA As Long = DateDiff(DateInterval.Minute, tempTimeIn, #23:59#) + 1
                 Dim diffTimeB As Long = DateDiff(DateInterval.Minute, #00:00#, tempTimeOut) + 1
-                Console.WriteLine("Result Diff A : " + diffTimeA.ToString)
-                Console.WriteLine("Result Diff B : " + diffTimeB.ToString)
+                'console.WriteLine("Result Diff A : " + diffTimeA.ToString)
+                'console.WriteLine("Result Diff B : " + diffTimeB.ToString)
                 resultDiff = (diffTimeA + diffTimeB) - 1
             Else
                 Dim diffTimeA As Long = DateDiff(DateInterval.Minute, tempTimeIn, tempTimeOut)
                 resultDiff = diffTimeA
-                Console.WriteLine("Result Diff Solo : " + resultDiff.ToString)
+                'console.WriteLine("Result Diff Solo : " + resultDiff.ToString)
             End If
 
             Dim hasilSort As Integer = SortJamKerja(resultDiff)
-            Console.WriteLine("hasil Sort : " + hasilSort.ToString)
+            'console.WriteLine("hasil Sort : " + hasilSort.ToString)
             If libur = False Or sDayNow = "Sun" Then
                 If WorkDay = "Sat" Then
                     OutputCounter(0) = 5
@@ -687,20 +687,20 @@ Public Class DailyAttendance
                 OutputCounter(0) = 0
                 OutputCounter(1) = hasilSort
             End If
-            Console.WriteLine("Result Diff : " + hasilSort.ToString)
+            'console.WriteLine("Result Diff : " + hasilSort.ToString)
 
         Else
             Dim resultDiff As Long
             If tempTimeIn > tempTimeOut Then
                 Dim diffTimeA As Long = DateDiff(DateInterval.Minute, tempTimeIn, #23:59#) + 1
                 Dim diffTimeB As Long = DateDiff(DateInterval.Minute, #00:00#, tempTimeOut) + 1
-                Console.WriteLine("Result Diff A : " + diffTimeA.ToString)
-                Console.WriteLine("Result Diff B : " + diffTimeB.ToString)
+                'console.WriteLine("Result Diff A : " + diffTimeA.ToString)
+                'console.WriteLine("Result Diff B : " + diffTimeB.ToString)
                 resultDiff = (diffTimeA + diffTimeB) - 1
             Else
                 Dim diffTimeA As Long = DateDiff(DateInterval.Minute, tempTimeIn, tempTimeOut)
                 resultDiff = diffTimeA
-                Console.WriteLine("Result Diff Solo : " + resultDiff.ToString)
+                'console.WriteLine("Result Diff Solo : " + resultDiff.ToString)
             End If
             Dim hasilSort As Integer = SortJamKerja(resultDiff)
             If libur = False Or sDayNow = "Sun" Or sDayNow = "Sat" Then
@@ -720,6 +720,8 @@ Public Class DailyAttendance
     End Function
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim Stopwatch As Stopwatch = Stopwatch.StartNew()
+
         If DGV_SideDaily1.Rows.Count <> 0 Then
             CreateFunction()
             DGV_SideDaily1.Rows.Clear()
@@ -735,6 +737,9 @@ Public Class DailyAttendance
         Else
             MsgBox("Data Karyawan Tidak Tersedia")
         End If
+        System.Threading.Thread.Sleep(500)
+        Stopwatch.[Stop]()
+        Console.WriteLine(Stopwatch.ElapsedMilliseconds)
     End Sub
 
     Private Sub dt_create_ValueChanged(sender As Object, e As EventArgs) Handles dt_create.ValueChanged
