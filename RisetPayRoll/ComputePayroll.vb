@@ -59,7 +59,8 @@ Public Class ComputePayroll
             hairDate = ds.Tables(0).Rows(i).Item(4)
             status = ds.Tables(0).Rows(i).Item(5)
 
-            Dim QueryPayroll As String = $"SELECT `BasicSalary`,`Gross_Salary`,`managFee_salary`,`payFromSamjin`,`jamsostek`,`bpjs`,`deduction`,`takeHomePay`,`kehadiran`,`total_OT`, DATE_FORMAT(`DateMonth`,""%d/%m/%Y""),`Ot_wages`,`Attendance` FROM `tabel_bulanan_karyawan` WHERE `Department` = '{dep}' AND `NIK` = '{nik}'"
+            Debug.WriteLine(dt_month.Value.Month.ToString)
+            Dim QueryPayroll As String = $"SELECT `BasicSalary`,`Gross_Salary`,`managFee_salary`,`payFromSamjin`,`jamsostek`,`bpjs`,`deduction`,`takeHomePay`,`kehadiran`,`total_OT`, DATE_FORMAT(`DateMonth`,""%d/%m/%Y""),`Ot_wages`,`Attendance` FROM `tabel_bulanan_karyawan` WHERE `Department` = '{dep}' AND `NIK` = '{nik}' AND MONTH(`DateMonth`) = '{dt_month.Value.Month.ToString}'"
             Dim queryBase As String = "SELECT * FROM `tabel_basic_payroll` "
             Dim querySalary As String = $"SELECT `Salary` FROM `master employer` WHERE `NIK` = '{nik}'"
             Dim dsPayroll As DataSet = DBClass.downloadDB(QueryPayroll)
@@ -187,9 +188,9 @@ Public Class ComputePayroll
         'Ws.name = "Test10"
         Dim excelRange As String = String.Format("A5:{0}{1}", finalColLetter, table.Rows.Count + 4)
         Ws.Cells(1, 2).Value = "Dept :"
-        Ws.Cells(1, 3).Value = "Assembly"
+        Ws.Cells(1, 3).Value = ComboBoxDep.Text
         Ws.Cells(2, 2).Value = "Bulan :"
-        Ws.Cells(2, 3).Value = "Oktober"
+        Ws.Cells(2, 3).Value = dt_month.Value.Month.ToString
         Ws.Cells(3, 2).Value = "Date Export"
         Ws.Cells(3, 3).Value = DateTime.Now
         Ws.Range(excelRange, Type.Missing).Value2 = rawData

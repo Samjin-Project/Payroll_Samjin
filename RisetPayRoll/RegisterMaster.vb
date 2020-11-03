@@ -436,7 +436,7 @@ Public Class RegisterMaster
                                              `NIK`='{tb_empDet.Text}', 
                                              `Nama_Karyawan`='{tb_nama.Text}', 
                                              `Posisi_Karyawan`='{cb_createPosisi.Text}', 
-                                             `Department`='{tb_dep.Text}', 
+                                             `Department`='{cb_dep.Text}', 
                                              `Tempat_Lahir`='{tb_pob.Text}', 
                                              `Tanggal_Lahir`='{dt_lahir.Value.ToString("dd/MM/yyyy")}', 
                                              `Jenis_Kelamin`='{jk}', 

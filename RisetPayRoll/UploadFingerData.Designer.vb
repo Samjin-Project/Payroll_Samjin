@@ -368,4 +368,5 @@ Partial Class UploadFingerData
     Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
     Friend WithEvents ToolStripProgressBar1 As ToolStripProgressBar
+    Friend WithEvents b_filter As Button
 End Class
