@@ -264,6 +264,20 @@ Public Class DailyAttendance
     Sub subCreateFunc(ByVal sideRowCount As Integer)
         Dim flagVacation As Boolean = False
         Dim tempDate As Date
+        Dim flag As Boolean = False
+        MDIParent1.TreeView1.Enabled = flag
+        MDIParent1.MenuStrip.Enabled = flag
+        MDIParent1.ControlBox = flag
+        GroupBox1.Enabled = flag
+        GroupBox2.Enabled = flag
+        DGV_SideDaily1.Enabled = flag
+        Me.ControlBox = flag
+
+        ToolStripStatusLabel1.Text = "Creating..."
+        ToolStripProgressBar1.Visible = True
+        ToolStripProgressBar1.Value = 0
+        ToolStripProgressBar1.Maximum = sideRowCount
+
         For i As Integer = 0 To sideRowCount - 1
             Dim InitDate, NikCreate As String
             InitDate = ""
@@ -273,7 +287,6 @@ Public Class DailyAttendance
                 NikCreate = tb_empCreate.Text
             End If
             'console.WriteLine("NIK CREATE : " + NikCreate)
-
             For x As Integer = 0 To DGV_ReviewDaily.Rows.Count - 1
                 For y As Integer = x To DGV_ReviewDaily.Rows.Count - 1
                     InitDate = DGV_ReviewDaily.Rows(y).Cells(3).Value
@@ -406,7 +419,10 @@ Public Class DailyAttendance
                 Exit For
                 'End If
             Next
+            ToolStripProgressBar1.Value = i
+            Debug.WriteLine(i)
         Next
+        ToolStripStatusLabel1.Text = "Done"
     End Sub
 
     Sub CreateFunction()
@@ -431,7 +447,18 @@ Public Class DailyAttendance
 
             If testDataOk = True Then
                 subCreateFunc(sideRowCount)
+                Dim flag As Boolean = True
+                MDIParent1.TreeView1.Enabled = flag
+                MDIParent1.MenuStrip.Enabled = flag
+                MDIParent1.ControlBox = flag
+                GroupBox1.Enabled = flag
+                GroupBox2.Enabled = flag
+                DGV_SideDaily1.Enabled = flag
+                Me.ControlBox = flag
                 MsgBox("Create Succces", MsgBoxStyle.OkOnly, "Create")
+                ToolStripProgressBar1.Visible = False
+                ToolStripStatusLabel1.Text = "Ready"
+
             End If
         End If
     End Sub
@@ -721,6 +748,7 @@ Public Class DailyAttendance
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim Stopwatch As Stopwatch = Stopwatch.StartNew()
+        Dim i As Integer
 
         If DGV_SideDaily1.Rows.Count <> 0 Then
             CreateFunction()

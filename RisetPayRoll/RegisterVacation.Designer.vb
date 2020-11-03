@@ -95,7 +95,8 @@ Partial Class RegisterVacation
         '
         Me.DGV_DataModify.AllowUserToAddRows = False
         Me.DGV_DataModify.AllowUserToDeleteRows = False
-        Me.DGV_DataModify.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.DGV_DataModify.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGV_DataModify.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
         Me.DGV_DataModify.BackgroundColor = System.Drawing.SystemColors.Control

@@ -119,12 +119,23 @@ Public Class RegisterMaster
             Dim tglLahir As Date = DateTime.ParseExact(ds.Tables(0).Rows(0).Item(7), "dd/MM/yyyy", Nothing)
             Dim tglMasuk As Date = DateTime.ParseExact(ds.Tables(0).Rows(0).Item(10), "yyyy-MM-dd", Nothing)
             Dim tglKeluar As String = ds.Tables(0).Rows(0).Item(11).ToString
-            Console.WriteLine("tglOut " + tglKeluar.Substring(0, 8))
-            If tglKeluar.Substring(0, 8) = "1/1/0001" Then
+            Dim syaratOut As Integer = 0
+
+            If tglKeluar.Substring(0, 2).Contains("/") Then
+                syaratOut = CInt(tglKeluar.Substring(4, 4))
+            Else
+                syaratOut = CInt(tglKeluar.Substring(6, 4))
+
+            End If
+
+            Console.WriteLine("tglOut" + ds.Tables(0).Rows(0).Item(11))
+            If syaratOut = 1 Then
+                dt_createKeluar.Format = DateTimePickerFormat.Custom
                 dt_createKeluar.CustomFormat = " "
             Else
+                Debug.WriteLine("test")
                 dt_createKeluar.CustomFormat = "dd/MM/yyyy"
-                dt_createKeluar.Value = tglKeluar
+                dt_createKeluar.Value = New Date(CInt(tglKeluar.Substring(6, 4)), CInt(tglKeluar.Substring(3, 2)), CInt(tglKeluar.Substring(0, 2)))
             End If
             Dim gaji As Double = ds.Tables(0).Rows(0).Item(13)
 
@@ -381,7 +392,7 @@ Public Class RegisterMaster
                          '{cb_createPosisi.Text}',
                          '{cb_dep.Text}',
                          '{tb_pob.Text}',
-                         '{dt_lahir.Value.ToString("yyyy-MM-dd")}',
+                         '{dt_lahir.Value.ToString("dd/MM/yyyy")}',
                          '{jk}',
                          '{tb_pend.Text}',
                          '{dt_createMasuk.Value.ToString("yyyy-MM-dd")}',
@@ -425,16 +436,16 @@ Public Class RegisterMaster
                                              `NIK`='{tb_empDet.Text}', 
                                              `Nama_Karyawan`='{tb_nama.Text}', 
                                              `Posisi_Karyawan`='{cb_createPosisi.Text}', 
-                                             `Department`='{cb_dep.Text}', 
+                                             `Department`='{tb_dep.Text}', 
                                              `Tempat_Lahir`='{tb_pob.Text}', 
-                                             `Tanggal_Lahir`='{dt_lahir.Value.ToString("yyyy-MM-dd")}', 
+                                             `Tanggal_Lahir`='{dt_lahir.Value.ToString("dd/MM/yyyy")}', 
                                              `Jenis_Kelamin`='{jk}', 
                                              `Pendidikan_Karyawan`='{tb_pend.Text}', 
                                              `Tanggal_Masuk`='{dt_createMasuk.Value.ToString("yyyy-MM-dd")}',
-                                             `Tanggal_Keluar`='{cb_stat.Text}', 
+                                             `Tanggal_Keluar`='{dt_createKeluar.Value.ToString("yyyy-MM-dd")}', 
                                              `Salary`='{tb_salary.Text}', 
-                                             `BPJS`='{bpjs}', 
-                                             `Aktif`= '{aktif}'
+                                             `StatusBPJS`='{cb_bpjs.Text}', 
+                                             `StatusAktive`= '{cb_aktif.Text}'
                                     WHERE `NIK` = '{nik}'"
         Console.WriteLine("DB Query : " + masterQuery)
         funcDB.uploadDB(masterQuery)

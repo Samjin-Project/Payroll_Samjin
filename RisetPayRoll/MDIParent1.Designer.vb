@@ -233,9 +233,11 @@ Partial Class MDIParent1
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.MenuStrip)
         Me.Controls.Add(Me.StatusStrip)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.DoubleBuffered = True
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.MenuStrip
+        Me.MaximizeBox = False
         Me.MinimumSize = New System.Drawing.Size(1000, 600)
         Me.Name = "MDIParent1"
         Me.Text = "Payroll System Aplication 1.0.0"

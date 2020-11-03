@@ -382,6 +382,22 @@ Public Class ComputePayroll
         Dim dsMaster As DataSet = DBClass.downloadDB(queryDep)
         Dim indexMaster As Integer = dsMaster.Tables(0).Rows.Count
         Console.WriteLine("indMAs : " + indexMaster.ToString)
+        Dim flag As Boolean = False
+        MDIParent1.TreeView1.Enabled = flag
+        MDIParent1.MenuStrip.Enabled = flag
+        MDIParent1.ControlBox = flag
+
+        Panel7.Enabled = flag
+        Panel8.Enabled = flag
+        Panel6.Enabled = flag
+        Panel8.Enabled = flag
+        DGV_ReviewDaily.Enabled = flag
+        Me.ControlBox = flag
+
+        ToolStripStatusLabel1.Text = "Creating..."
+        ToolStripProgressBar1.Visible = True
+        ToolStripProgressBar1.Value = 0
+        ToolStripProgressBar1.Maximum = indexMaster
         For i As Integer = 0 To indexMaster - 1
             Dim nik, nama, salary, hariKerja, attendance As String
             Dim statusBpjs As Boolean
@@ -435,7 +451,9 @@ Public Class ComputePayroll
                                                 WHERE `NIK` = '{nik}' AND MONTH(`DateMonth`) = '{bulan.ToString("MM")}'"
                 DBClass.uploadDB(queryUpdatePayroll)
             End If
+            ToolStripProgressBar1.Value = i
         Next
+        ToolStripStatusLabel1.Text = "Done"
 
     End Sub
     Function FormulaPayroll(basicSalary As Double, hariKerja As Integer, attendance As Integer, jumlahLembur As Integer, bulan As Date, StatusBpjs As Boolean) As String()
@@ -481,6 +499,8 @@ Public Class ComputePayroll
     End Function
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+
         For Each obj In ComboBoxDep.Items
             Dim item = TryCast(obj, String)
             If Not item Is Nothing Then
@@ -488,7 +508,24 @@ Public Class ComputePayroll
                 createPayroll(item, dt_month.Value)
             End If
         Next
+        Dim flag As Boolean = True
+        MDIParent1.TreeView1.Enabled = flag
+        MDIParent1.MenuStrip.Enabled = flag
+        MDIParent1.ControlBox = flag
+
+        Me.ControlBox = flag
+        Panel7.Enabled = flag
+        Panel8.Enabled = flag
+        Panel6.Enabled = flag
+        Panel8.Enabled = flag
+        DGV_ReviewDaily.Enabled = flag
+        Me.ControlBox = flag
+
         MsgBox("Create Payroll Done")
+        ToolStripStatusLabel1.Text = "Ready"
+        ToolStripProgressBar1.Value = 0
+        ToolStripProgressBar1.Visible = True
+
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles b_export.Click
