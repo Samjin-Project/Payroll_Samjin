@@ -28,6 +28,7 @@ Partial Class UploadFingerData
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.b_filter = New System.Windows.Forms.Button()
         Me.b_showall = New System.Windows.Forms.Button()
         Me.dt_upfinger = New System.Windows.Forms.DateTimePicker()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -90,6 +91,7 @@ Partial Class UploadFingerData
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.b_filter)
         Me.GroupBox1.Controls.Add(Me.b_showall)
         Me.GroupBox1.Controls.Add(Me.dt_upfinger)
         Me.GroupBox1.Controls.Add(Me.Label14)
@@ -102,9 +104,18 @@ Partial Class UploadFingerData
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Sorting"
         '
+        'b_filter
+        '
+        Me.b_filter.Location = New System.Drawing.Point(516, 48)
+        Me.b_filter.Name = "b_filter"
+        Me.b_filter.Size = New System.Drawing.Size(77, 19)
+        Me.b_filter.TabIndex = 32
+        Me.b_filter.Text = "Search"
+        Me.b_filter.UseVisualStyleBackColor = True
+        '
         'b_showall
         '
-        Me.b_showall.Location = New System.Drawing.Point(518, 49)
+        Me.b_showall.Location = New System.Drawing.Point(516, 19)
         Me.b_showall.Name = "b_showall"
         Me.b_showall.Size = New System.Drawing.Size(77, 19)
         Me.b_showall.TabIndex = 31
@@ -113,7 +124,8 @@ Partial Class UploadFingerData
         '
         'dt_upfinger
         '
-        Me.dt_upfinger.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dt_upfinger.CustomFormat = "dd/MM/yyyy"
+        Me.dt_upfinger.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dt_upfinger.Location = New System.Drawing.Point(337, 49)
         Me.dt_upfinger.Name = "dt_upfinger"
         Me.dt_upfinger.Size = New System.Drawing.Size(155, 20)
@@ -323,4 +335,5 @@ Partial Class UploadFingerData
     Friend WithEvents OpenFileDialogImport As OpenFileDialog
     Friend WithEvents b_showall As Button
     Friend WithEvents total_data As Label
+    Friend WithEvents b_filter As Button
 End Class

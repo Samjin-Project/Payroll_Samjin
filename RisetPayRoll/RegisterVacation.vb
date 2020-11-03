@@ -19,6 +19,8 @@
                 cb_dep.Items.Add(x)
             Next
         End If
+        dt_start.CustomFormat = " "
+        dt_end.CustomFormat = " "
 
         Dim QueryCMD As String = $"SELECT `NIK`, `Status_Approval`, `Nama_Karyawan`, `Vacation_Code`, `StartVacation_Date`, 
         `EndVacation_Date`,  `Department`,`Reason` FROM `approval_vacation` WHERE `Status_Approval` = 'Yes'"
@@ -158,7 +160,7 @@
                 querycmd = QuerySortAll
             End If
 
-        ElseIf Not stDate = endDate Then
+        Else
             If dep = "" And emp = "" Then
                 querycmd = QueryALLwTime
             ElseIf dep = "" And emp <> "" Then
@@ -179,49 +181,23 @@
         fil_emp.Text = ""
         tb_dep.Text = ""
         cb_holtype.Text = ""
-        dt_start.Value = Now
-        dt_end.Value = Now
+        dt_start.CustomFormat = " "
+        dt_end.CustomFormat = " "
+
         DGV_DataModify.Rows.Clear()
+
         Dim QueryCMD As String = $"SELECT `NIK`, `Status_Approval`, `Nama_Karyawan`, `Vacation_Code`, `StartVacation_Date`, 
         `EndVacation_Date`,  `Department`,`Reason` FROM `approval_vacation` WHERE `Status_Approval` = 'Yes'"
         dataOnSide(QueryCMD)
-        b_delete.Enabled = False
         Console.WriteLine("Done")
-    End Sub
-    Private Sub cb_dep_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_dep.SelectedIndexChanged
-        Dim stDate As String = dt_start.Value.ToString("yyyy-MM-dd")
-        Dim endDate As String = dt_end.Value.ToString("yyyy-MM-dd")
-        Dim depPilihan As String = cb_dep.Text
-        Dim emp As String = fil_emp.Text
-        DGV_DataModify.Rows.Clear()
-        filterData(depPilihan, emp, stDate, endDate)
-        Console.WriteLine("Done")
-    End Sub
-
-    Private Sub fil_emp_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles fil_emp.PreviewKeyDown
-        If e.KeyCode = Keys.Enter Then
-            Dim stDate As String = dt_start.Value.ToString("yyyy-MM-dd")
-            Dim endDate As String = dt_end.Value.ToString("yyyy-MM-dd")
-            Dim depPilihan As String = cb_dep.Text
-            Dim emp As String = fil_emp.Text
-            DGV_DataModify.Rows.Clear()
-            filterData(depPilihan, emp, stDate, endDate)
-            Console.WriteLine("Done")
-        End If
     End Sub
 
     Private Sub dt_start_ValueChanged(sender As Object, e As EventArgs) Handles dt_start.ValueChanged
-        Dim stDate As String = dt_start.Value.ToString("yyyy-MM-dd")
-        Dim endDate As String = dt_end.Value.ToString("yyyy-MM-dd")
-        DGV_DataModify.Rows.Clear()
-        filterData(cb_dep.Text, tb_emp.Text, stDate, endDate)
+        dt_start.CustomFormat = "dd/MM/yyyy"
     End Sub
 
     Private Sub dt_end_ValueChanged(sender As Object, e As EventArgs) Handles dt_end.ValueChanged
-        Dim stDate As String = dt_start.Value.ToString("yyyy-MM-dd")
-        Dim endDate As String = dt_end.Value.ToString("yyyy-MM-dd")
-        DGV_DataModify.Rows.Clear()
-        filterData(cb_dep.Text, tb_emp.Text, stDate, endDate)
+        dt_end.CustomFormat = "dd/MM/yyyy"
     End Sub
 
     Public Function ExcelColName(ByVal Col As Integer) As String
@@ -344,5 +320,14 @@
                 tb_dep.Text = ""
             End If
         End If
+    End Sub
+
+    Private Sub b_search_Click(sender As Object, e As EventArgs) Handles b_search.Click
+        Dim stDate As String = dt_start.Value.ToString("yyyy-MM-dd")
+        Dim endDate As String = dt_end.Value.ToString("yyyy-MM-dd")
+        Dim depPilihan As String = cb_dep.Text
+        Dim emp As String = fil_emp.Text
+        DGV_DataModify.Rows.Clear()
+        filterData(depPilihan, emp, stDate, endDate)
     End Sub
 End Class

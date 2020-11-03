@@ -1,7 +1,6 @@
 ﻿
 Imports System.Data.OleDb
 Public Class RegisterMaster
-    Dim flag As Boolean = False
     Dim f_edit As Boolean = False
     Dim f_create As Boolean = False
     Dim r_index As Integer
@@ -13,10 +12,12 @@ Public Class RegisterMaster
         End Get
     End Property
     Private Sub RegisterMaster_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master employer`"
+        Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `Department` FROM `master employer`"
         dataOnReview(QueryCMD)
         DGV_Setting_Display()
         clearData()
+
+        dt_masuk.CustomFormat = " "
 
         'button
         b_save.Visible = False
@@ -117,13 +118,13 @@ Public Class RegisterMaster
         If indexDs > 0 Then
             Dim tglLahir As Date = DateTime.ParseExact(ds.Tables(0).Rows(0).Item(7), "dd/MM/yyyy", Nothing)
             Dim tglMasuk As Date = DateTime.ParseExact(ds.Tables(0).Rows(0).Item(10), "yyyy-MM-dd", Nothing)
-            Dim tglKeluar As String = ds.Tables(0).Rows(0).Item(11)
-            Console.WriteLine("tglOut" + ds.Tables(0).Rows(0).Item(11).ToString)
-            If ds.Tables(0).Rows(0).Item(11).ToString = "01/01/0001 00:00:00" Then
-                dt_createKeluar.Format = DateTimePickerFormat.Custom
+            Dim tglKeluar As String = ds.Tables(0).Rows(0).Item(11).ToString
+            Console.WriteLine("tglOut " + tglKeluar.Substring(0, 8))
+            If tglKeluar.Substring(0, 8) = "1/1/0001" Then
                 dt_createKeluar.CustomFormat = " "
             Else
-                dt_createKeluar.Value = DateTime.ParseExact(tglKeluar, "yyyy-MM-dd", Nothing)
+                dt_createKeluar.CustomFormat = "dd/MM/yyyy"
+                dt_createKeluar.Value = tglKeluar
             End If
             Dim gaji As Double = ds.Tables(0).Rows(0).Item(13)
 
@@ -144,8 +145,18 @@ Public Class RegisterMaster
             dt_createMasuk.Value = tglMasuk
             cb_stat.SelectedItem = ds.Tables(0).Rows(0).Item(12).ToString
             tb_salary.Text = gaji.ToString("##,##,###")
-            cb_bpjs.Text = ds.Tables(0).Rows(0).Item(14)
-            cb_aktif.Text = ds.Tables(0).Rows(0).Item(15)
+
+            If ds.Tables(0).Rows(0).Item(14) = "1" Then
+                cb_bpjs.Text = "Ya"
+            Else
+                cb_bpjs.Text = "Tidak"
+            End If
+
+            If ds.Tables(0).Rows(0).Item(15) = "1" Then
+                cb_aktif.Text = "Yes"
+            Else
+                cb_aktif.Text = "Tidak"
+            End If
         End If
     End Sub
 
@@ -164,7 +175,7 @@ Public Class RegisterMaster
         Dim querySortAllwTime As String = $"{queryAll} WHERE `Jenis_Kelamin` = '{jk}'AND `Department` = '{dep}' AND `Tanggal_Masuk` = '{masuk}'"
 
         Dim querycmd As String = ""
-        If flag = False Then
+        If dt_masuk.Text = " " Then
             If dep = "" And jk <> "" Then
                 querycmd = querySortJK
             ElseIf dep <> "" And jk = "" Then
@@ -188,57 +199,6 @@ Public Class RegisterMaster
 
         dataOnReview(querycmd)
     End Sub
-
-    Private Sub dt_masuk_ValueChanged(sender As Object, e As EventArgs) Handles dt_masuk.ValueChanged
-        flag = True
-        Dim masuk As String = dt_masuk.Value.ToString("yyyy-MM-dd")
-        Dim dep As String = cb_department.Text
-        Dim jk As String
-        tb_emp.Text = ""
-        If cb_jk.Text = "Laki-Laki" Then
-            jk = "L"
-        ElseIf cb_jk.Text = "Perempuan" Then
-            jk = "P"
-        Else
-            jk = ""
-        End If
-        filterData(dep, jk, masuk)
-        clearData()
-    End Sub
-
-    Private Sub cb_posisi_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_department.SelectedIndexChanged
-        Dim masuk As String = dt_masuk.Value.ToString("yyyy-MM-dd")
-        Dim dep As String = cb_department.Text
-        Dim jk As String
-        tb_emp.Text = ""
-        If cb_jk.Text = "Laki-Laki" Then
-            jk = "L"
-        ElseIf cb_jk.Text = "Perempuan" Then
-            jk = "P"
-        Else
-            jk = ""
-        End If
-        filterData(dep, jk, masuk)
-        clearData()
-    End Sub
-
-    Private Sub cb_jk_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_jk.SelectedIndexChanged
-        Dim masuk As String = dt_masuk.Value.ToString("yyyy-MM-dd")
-        Dim dep As String = cb_department.Text
-        Dim jk As String
-        tb_emp.Text = ""
-        If cb_jk.Text = "Laki-Laki" Then
-            jk = "L"
-        ElseIf cb_jk.Text = "Perempuan" Then
-            jk = "P"
-        Else
-            jk = ""
-        End If
-        filterData(dep, jk, masuk)
-        clearData()
-    End Sub
-
-
     Private Sub tb_emp_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles tb_emp.PreviewKeyDown
         If e.KeyCode = Keys.Enter Then
             cb_jk.Text = ""
@@ -257,7 +217,8 @@ Public Class RegisterMaster
         Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master employer`"
         dataOnReview(QueryCMD)
         DGV_Setting_Display()
-        flag = False
+        dt_masuk.Format = DateTimePickerFormat.Custom
+        dt_masuk.CustomFormat = " "
         b_edit.Enabled = False
         clearData()
     End Sub
@@ -444,30 +405,42 @@ Public Class RegisterMaster
         Dim r_sellect As DataGridViewRow = DGV_ReviewMaster.Rows(r_index)
         Dim nik As String = r_sellect.Cells(0).Value
         Dim funcDB As DataBaseClass = New DataBaseClass
+        Dim bpjs As String
+        Dim aktif As String
+
+        If cb_bpjs.Text = "Ya" Then
+            bpjs = "1"
+        Else
+            bpjs = "0"
+        End If
+
+        If cb_aktif.Text = "Ya" Then
+            aktif = "1"
+        Else
+            aktif = "0"
+        End If
+
         Dim AC_No As String = tb_empDet.Text.Substring(1, 6)
-        Dim masterQuery As String = $"UPDATE `master employer`(`AC_Nomor`,`NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Department`, `Tempat_Lahir`, `Tanggal_Lahir`, `Jenis_Kelamin`, `Pendidikan_Karyawan`, `Tanggal_Masuk`,`Tanggal_Keluar`, `Salary`, `BPJS`, `Aktif`) 
-                 VALUES ('{AC_No}',
-                         '{tb_empDet.Text}',
-                         '{tb_nama.Text}',
-                         '{cb_createPosisi.Text}',
-                         '{cb_dep.Text}',
-                         '{tb_pob.Text}',
-                         '{dt_lahir.Value.ToString("yyyy-MM-dd")}',
-                         '{jk}',
-                         '{tb_pend.Text}',
-                         '{dt_createMasuk.Value.ToString("yyyy-MM-dd")}',
-                         '{cb_stat.Text}'
-                         '{tb_salary.Text}'
-                         '{cb_bpjs.Text}'
-                         '{cb_aktif.Text}') WHERE `NIK` = '{nik}'"
+        Dim masterQuery As String = $"UPDATE `master employer` SET `AC_Nomor` ='{AC_No}',
+                                             `NIK`='{tb_empDet.Text}', 
+                                             `Nama_Karyawan`='{tb_nama.Text}', 
+                                             `Posisi_Karyawan`='{cb_createPosisi.Text}', 
+                                             `Department`='{cb_dep.Text}', 
+                                             `Tempat_Lahir`='{tb_pob.Text}', 
+                                             `Tanggal_Lahir`='{dt_lahir.Value.ToString("yyyy-MM-dd")}', 
+                                             `Jenis_Kelamin`='{jk}', 
+                                             `Pendidikan_Karyawan`='{tb_pend.Text}', 
+                                             `Tanggal_Masuk`='{dt_createMasuk.Value.ToString("yyyy-MM-dd")}',
+                                             `Tanggal_Keluar`='{cb_stat.Text}', 
+                                             `Salary`='{tb_salary.Text}', 
+                                             `BPJS`='{bpjs}', 
+                                             `Aktif`= '{aktif}'
+                                    WHERE `NIK` = '{nik}'"
         Console.WriteLine("DB Query : " + masterQuery)
         funcDB.uploadDB(masterQuery)
         MsgBox("Data already updated")
     End Sub
 
-    Private Sub tb_masuk_TextChanged(sender As Object, e As EventArgs)
-
-    End Sub
 
     Private Sub DGV_ReviewMaster_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_ReviewMaster.CellClick
         Dim Nik As String = DGV_ReviewMaster.Rows(e.RowIndex).Cells(0).Value
@@ -478,5 +451,26 @@ Public Class RegisterMaster
 
     Private Sub dt_createKeluar_ValueChanged(sender As Object, e As EventArgs) Handles dt_createKeluar.ValueChanged
         cb_aktif.Text = "Yes"
+    End Sub
+
+    Private Sub b_search_Click(sender As Object, e As EventArgs) Handles b_search.Click
+        Dim masuk As String = dt_masuk.Value.ToString("yyyy-MM-dd")
+        Dim dep As String = cb_department.Text
+        Dim jk As String
+        tb_emp.Text = ""
+        If cb_jk.Text = "Laki-Laki" Then
+            jk = "L"
+        ElseIf cb_jk.Text = "Perempuan" Then
+            jk = "P"
+        Else
+            jk = ""
+        End If
+        filterData(dep, jk, masuk)
+        clearData()
+    End Sub
+
+    Private Sub dt_masuk_ValueChanged(sender As Object, e As EventArgs) Handles dt_masuk.ValueChanged
+        dt_masuk.Format = DateTimePickerFormat.Custom
+        dt_masuk.CustomFormat = "dd/MM/yyyy"
     End Sub
 End Class

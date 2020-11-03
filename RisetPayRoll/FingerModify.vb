@@ -6,6 +6,7 @@ Public Class FingerModify
     Public QueryUtama As String = "SELECT `NO`,`Time_Upload`,`NIK`,`Nama_Karyawan`,`Date_Finger`,`Shift_Finger`,`On_Duty`,`Off_Duty`,`Check_In`,`Check_Out`,`Departement`,`Finger Status`,`RecFinIN`,`RecFinOut` FROM `finger_employer`"
     Public f_filterIn As Boolean = False
     Public f_filterOut As Boolean = False
+    Public f_empSearch As Boolean = False
 
     Protected Overrides ReadOnly Property CreateParams() As CreateParams
         Get
@@ -94,9 +95,6 @@ Public Class FingerModify
             Next
         End If
     End Sub
-
-
-
     Private Sub insertToDgv(ds As DataSet)
         If ds IsNot Nothing Then
 
@@ -146,6 +144,7 @@ Public Class FingerModify
                 End If
             Next
         End If
+        total.Text = DGV_DataModify.Rows.Count
     End Sub
     Private Sub SortingTabel(sortType As Boolean)
         'Console.WriteLine("Query : TEESTTTTTTIng")
@@ -185,22 +184,15 @@ Public Class FingerModify
         insertToDgv(ds)
         Console.WriteLine("Query : " + querycmd)
     End Sub
-    Private Sub dt_day_ValueChanged(sender As Object, e As EventArgs) Handles dt_day.ValueChanged
-        SortingTabel(False)
-    End Sub
 
-    Private Sub cb_shift_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_shift.SelectedIndexChanged
-        SortingTabel(False)
-    End Sub
-
-    Private Sub RadioButton1_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton1.CheckedChanged
-        SortingTabel(False)
-    End Sub
-
-    Private Sub TextBox10_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TextBox10.KeyPress
-        If (e.KeyChar = Chr(13)) Then
+    Private Sub b_search_Click(sender As Object, e As EventArgs) Handles b_search.Click
+        If f_empSearch = True Then
             SortingTabel(True)
+            f_empSearch = False
+        Else
+            SortingTabel(False)
         End If
+
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs)
@@ -304,7 +296,14 @@ Public Class FingerModify
         f_filterOut = False
     End Sub
 
-    Private Sub cb_dep_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_dep.SelectedIndexChanged
-        SortingTabel(False)
+    Private Sub TextBox10_TextChanged(sender As Object, e As EventArgs) Handles TextBox10.TextChanged
+        f_empSearch = True
+    End Sub
+
+    Private Sub b_showAll_Click(sender As Object, e As EventArgs) Handles b_showAll.Click
+        DGV_DataModify.Rows.Clear()
+        Dim DBClass As DataBaseClass = New DataBaseClass
+        Dim ds As DataSet = DBClass.downloadDB(QueryUtama)
+        insertToDgv(ds)
     End Sub
 End Class

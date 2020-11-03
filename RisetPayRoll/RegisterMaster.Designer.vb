@@ -28,6 +28,7 @@ Partial Class RegisterMaster
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.b_search = New System.Windows.Forms.Button()
         Me.b_clear = New System.Windows.Forms.Button()
         Me.dt_masuk = New System.Windows.Forms.DateTimePicker()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -40,7 +41,7 @@ Partial Class RegisterMaster
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.cb_createPosisi = New System.Windows.Forms.ComboBox()
+        Me.cb_dep = New System.Windows.Forms.ComboBox()
         Me.cb_stat = New System.Windows.Forms.ComboBox()
         Me.Label23 = New System.Windows.Forms.Label()
         Me.Label21 = New System.Windows.Forms.Label()
@@ -72,16 +73,16 @@ Partial Class RegisterMaster
         Me.dt_lahir = New System.Windows.Forms.DateTimePicker()
         Me.dt_createKeluar = New System.Windows.Forms.DateTimePicker()
         Me.DGV_ReviewMaster = New System.Windows.Forms.DataGridView()
-        Me.Kolom_Nik = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Kolom_Nama = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.kolom_posisi = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.total_data = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.OpenFileDialogImport = New System.Windows.Forms.OpenFileDialog()
-        Me.cb_dep = New System.Windows.Forms.ComboBox()
+        Me.cb_createPosisi = New System.Windows.Forms.ComboBox()
+        Me.Kolom_Nik = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Kolom_Nama = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.kolom_dep = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -138,6 +139,7 @@ Partial Class RegisterMaster
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.b_search)
         Me.GroupBox1.Controls.Add(Me.b_clear)
         Me.GroupBox1.Controls.Add(Me.dt_masuk)
         Me.GroupBox1.Controls.Add(Me.Label14)
@@ -152,9 +154,18 @@ Partial Class RegisterMaster
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Filter"
         '
+        'b_search
+        '
+        Me.b_search.Location = New System.Drawing.Point(343, 51)
+        Me.b_search.Name = "b_search"
+        Me.b_search.Size = New System.Drawing.Size(57, 23)
+        Me.b_search.TabIndex = 32
+        Me.b_search.Text = "Search"
+        Me.b_search.UseVisualStyleBackColor = True
+        '
         'b_clear
         '
-        Me.b_clear.Location = New System.Drawing.Point(348, 50)
+        Me.b_clear.Location = New System.Drawing.Point(446, 51)
         Me.b_clear.Name = "b_clear"
         Me.b_clear.Size = New System.Drawing.Size(57, 23)
         Me.b_clear.TabIndex = 31
@@ -296,23 +307,24 @@ Partial Class RegisterMaster
         Me.Panel2.Size = New System.Drawing.Size(638, 433)
         Me.Panel2.TabIndex = 2
         '
-        'cb_createPosisi
+        'cb_dep
         '
-        Me.cb_createPosisi.BackColor = System.Drawing.Color.Cyan
-        Me.cb_createPosisi.Enabled = False
-        Me.cb_createPosisi.FormattingEnabled = True
-        Me.cb_createPosisi.Items.AddRange(New Object() {"Laki-laki", "Perempuan"})
-        Me.cb_createPosisi.Location = New System.Drawing.Point(396, 113)
-        Me.cb_createPosisi.Name = "cb_createPosisi"
-        Me.cb_createPosisi.Size = New System.Drawing.Size(110, 21)
-        Me.cb_createPosisi.TabIndex = 44
+        Me.cb_dep.AutoCompleteCustomSource.AddRange(New String() {"PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING", "SMD"})
+        Me.cb_dep.BackColor = System.Drawing.Color.Cyan
+        Me.cb_dep.Enabled = False
+        Me.cb_dep.FormattingEnabled = True
+        Me.cb_dep.Items.AddRange(New Object() {"Laki-laki", "Perempuan"})
+        Me.cb_dep.Location = New System.Drawing.Point(396, 152)
+        Me.cb_dep.Name = "cb_dep"
+        Me.cb_dep.Size = New System.Drawing.Size(110, 21)
+        Me.cb_dep.TabIndex = 45
         '
         'cb_stat
         '
         Me.cb_stat.BackColor = System.Drawing.Color.Cyan
         Me.cb_stat.Enabled = False
         Me.cb_stat.FormattingEnabled = True
-        Me.cb_stat.Items.AddRange(New Object() {"Laki-laki", "Perempuan"})
+        Me.cb_stat.Items.AddRange(New Object() {"Magang"})
         Me.cb_stat.Location = New System.Drawing.Point(396, 191)
         Me.cb_stat.Name = "cb_stat"
         Me.cb_stat.Size = New System.Drawing.Size(110, 21)
@@ -598,7 +610,7 @@ Partial Class RegisterMaster
         Me.DGV_ReviewMaster.BackgroundColor = System.Drawing.SystemColors.Control
         Me.DGV_ReviewMaster.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.DGV_ReviewMaster.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        Me.DGV_ReviewMaster.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Kolom_Nik, Me.Kolom_Nama, Me.kolom_posisi})
+        Me.DGV_ReviewMaster.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Kolom_Nik, Me.Kolom_Nama, Me.kolom_dep})
         Me.DGV_ReviewMaster.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DGV_ReviewMaster.GridColor = System.Drawing.Color.LightGoldenrodYellow
         Me.DGV_ReviewMaster.Location = New System.Drawing.Point(0, 0)
@@ -610,28 +622,6 @@ Partial Class RegisterMaster
         Me.DGV_ReviewMaster.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DGV_ReviewMaster.Size = New System.Drawing.Size(350, 429)
         Me.DGV_ReviewMaster.TabIndex = 1
-        '
-        'Kolom_Nik
-        '
-        Me.Kolom_Nik.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Kolom_Nik.DefaultCellStyle = DataGridViewCellStyle1
-        Me.Kolom_Nik.HeaderText = "NIK"
-        Me.Kolom_Nik.Name = "Kolom_Nik"
-        Me.Kolom_Nik.ReadOnly = True
-        Me.Kolom_Nik.Width = 50
-        '
-        'Kolom_Nama
-        '
-        Me.Kolom_Nama.HeaderText = "Nama Lengkap"
-        Me.Kolom_Nama.Name = "Kolom_Nama"
-        Me.Kolom_Nama.ReadOnly = True
-        '
-        'kolom_posisi
-        '
-        Me.kolom_posisi.HeaderText = "Posisi Karyawan"
-        Me.kolom_posisi.Name = "kolom_posisi"
-        Me.kolom_posisi.ReadOnly = True
         '
         'Panel4
         '
@@ -689,17 +679,38 @@ Partial Class RegisterMaster
         '
         Me.OpenFileDialogImport.FileName = "OpenFileDialog1"
         '
-        'cb_dep
+        'cb_createPosisi
         '
-        Me.cb_dep.AutoCompleteCustomSource.AddRange(New String() {"PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING", "SMD"})
-        Me.cb_dep.BackColor = System.Drawing.Color.Cyan
-        Me.cb_dep.Enabled = False
-        Me.cb_dep.FormattingEnabled = True
-        Me.cb_dep.Items.AddRange(New Object() {"Laki-laki", "Perempuan"})
-        Me.cb_dep.Location = New System.Drawing.Point(396, 152)
-        Me.cb_dep.Name = "cb_dep"
-        Me.cb_dep.Size = New System.Drawing.Size(110, 21)
-        Me.cb_dep.TabIndex = 45
+        Me.cb_createPosisi.BackColor = System.Drawing.Color.Cyan
+        Me.cb_createPosisi.Enabled = False
+        Me.cb_createPosisi.FormattingEnabled = True
+        Me.cb_createPosisi.Items.AddRange(New Object() {"Operator"})
+        Me.cb_createPosisi.Location = New System.Drawing.Point(396, 113)
+        Me.cb_createPosisi.Name = "cb_createPosisi"
+        Me.cb_createPosisi.Size = New System.Drawing.Size(110, 21)
+        Me.cb_createPosisi.TabIndex = 44
+        '
+        'Kolom_Nik
+        '
+        Me.Kolom_Nik.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Kolom_Nik.DefaultCellStyle = DataGridViewCellStyle1
+        Me.Kolom_Nik.HeaderText = "NIK"
+        Me.Kolom_Nik.Name = "Kolom_Nik"
+        Me.Kolom_Nik.ReadOnly = True
+        Me.Kolom_Nik.Width = 50
+        '
+        'Kolom_Nama
+        '
+        Me.Kolom_Nama.HeaderText = "Nama Lengkap"
+        Me.Kolom_Nama.Name = "Kolom_Nama"
+        Me.Kolom_Nama.ReadOnly = True
+        '
+        'kolom_dep
+        '
+        Me.kolom_dep.HeaderText = "Department"
+        Me.kolom_dep.Name = "kolom_dep"
+        Me.kolom_dep.ReadOnly = True
         '
         'RegisterMaster
         '
@@ -766,9 +777,6 @@ Partial Class RegisterMaster
     Friend WithEvents OpenFileDialogImport As OpenFileDialog
     Friend WithEvents total_data As Label
     Friend WithEvents b_clear As Button
-    Friend WithEvents Kolom_Nik As DataGridViewTextBoxColumn
-    Friend WithEvents Kolom_Nama As DataGridViewTextBoxColumn
-    Friend WithEvents kolom_posisi As DataGridViewTextBoxColumn
     Friend WithEvents b_save As Button
     Friend WithEvents b_edit As Button
     Friend WithEvents Label19 As Label
@@ -786,6 +794,10 @@ Partial Class RegisterMaster
     Friend WithEvents Label23 As Label
     Friend WithEvents dt_createKeluar As DateTimePicker
     Friend WithEvents cb_stat As ComboBox
-    Friend WithEvents cb_createPosisi As ComboBox
     Friend WithEvents cb_dep As ComboBox
+    Friend WithEvents b_search As Button
+    Friend WithEvents cb_createPosisi As ComboBox
+    Friend WithEvents Kolom_Nik As DataGridViewTextBoxColumn
+    Friend WithEvents Kolom_Nama As DataGridViewTextBoxColumn
+    Friend WithEvents kolom_dep As DataGridViewTextBoxColumn
 End Class

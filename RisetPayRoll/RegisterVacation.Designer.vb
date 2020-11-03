@@ -53,6 +53,7 @@ Partial Class RegisterVacation
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.tb_dep = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.tb_reason = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -72,7 +73,7 @@ Partial Class RegisterVacation
         Me.tb_nama = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tb_emp = New System.Windows.Forms.TextBox()
-        Me.tb_dep = New System.Windows.Forms.TextBox()
+        Me.b_search = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.DGV_DataModify, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
@@ -223,6 +224,7 @@ Partial Class RegisterVacation
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel2.Controls.Add(Me.b_search)
         Me.Panel2.Controls.Add(Me.b_delete)
         Me.Panel2.Controls.Add(Me.Button1)
         Me.Panel2.Controls.Add(Me.b_showall)
@@ -254,7 +256,7 @@ Partial Class RegisterVacation
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(640, 3)
+        Me.Button1.Location = New System.Drawing.Point(635, 30)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(63, 22)
         Me.Button1.TabIndex = 13
@@ -263,7 +265,7 @@ Partial Class RegisterVacation
         '
         'b_showall
         '
-        Me.b_showall.Location = New System.Drawing.Point(555, 3)
+        Me.b_showall.Location = New System.Drawing.Point(635, 3)
         Me.b_showall.Name = "b_showall"
         Me.b_showall.Size = New System.Drawing.Size(63, 22)
         Me.b_showall.TabIndex = 12
@@ -310,9 +312,9 @@ Partial Class RegisterVacation
         Me.Label13.AutoSize = True
         Me.Label13.Location = New System.Drawing.Point(332, 7)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(68, 13)
+        Me.Label13.Size = New System.Drawing.Size(62, 13)
         Me.Label13.TabIndex = 6
-        Me.Label13.Text = "Departement"
+        Me.Label13.Text = "Department"
         '
         'dt_end
         '
@@ -397,6 +399,15 @@ Partial Class RegisterVacation
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(339, 510)
         Me.Panel4.TabIndex = 21
+        '
+        'tb_dep
+        '
+        Me.tb_dep.BackColor = System.Drawing.Color.Aqua
+        Me.tb_dep.Location = New System.Drawing.Point(145, 119)
+        Me.tb_dep.Name = "tb_dep"
+        Me.tb_dep.ReadOnly = True
+        Me.tb_dep.Size = New System.Drawing.Size(110, 20)
+        Me.tb_dep.TabIndex = 56
         '
         'Label10
         '
@@ -567,14 +578,14 @@ Partial Class RegisterVacation
         Me.tb_emp.Size = New System.Drawing.Size(110, 20)
         Me.tb_emp.TabIndex = 0
         '
-        'tb_dep
+        'b_search
         '
-        Me.tb_dep.BackColor = System.Drawing.Color.Aqua
-        Me.tb_dep.Location = New System.Drawing.Point(145, 119)
-        Me.tb_dep.Name = "tb_dep"
-        Me.tb_dep.ReadOnly = True
-        Me.tb_dep.Size = New System.Drawing.Size(110, 20)
-        Me.tb_dep.TabIndex = 56
+        Me.b_search.Location = New System.Drawing.Point(555, 3)
+        Me.b_search.Name = "b_search"
+        Me.b_search.Size = New System.Drawing.Size(63, 22)
+        Me.b_search.TabIndex = 15
+        Me.b_search.Text = "Search"
+        Me.b_search.UseVisualStyleBackColor = True
         '
         'RegisterVacation
         '
@@ -649,4 +660,5 @@ Partial Class RegisterVacation
     Friend WithEvents Reasons As DataGridViewTextBoxColumn
     Friend WithEvents b_delete As Button
     Friend WithEvents tb_dep As TextBox
+    Friend WithEvents b_search As Button
 End Class

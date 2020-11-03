@@ -110,23 +110,22 @@ Public Class UploadFingerData
     End Sub
 
     Private Sub insertToDgv(Dep As String, tanggal As String)
-        Dim QueryALL As String = $"SELECT `NIK`, `Nama_Karyawan`, DATE_FORMAT(`Date_Finger`,""%d/%m/%Y""), `Shift_Finger`, `On_Duty`, `Off_Duty`, `Check_In`, `Check_Out`, `Departement` FROM `finger_employer` "
+        Dim QueryALL As String = $"SELECT `NIK`, `Nama_Karyawan`, `Date_Finger`, `Shift_Finger`, `On_Duty`, `Off_Duty`, `Check_In`, `Check_Out`, `Departement` FROM `finger_employer` "
         Dim QuerySortTgl As String = $"{QueryALL} WHERE `Date_Finger` = '{tanggal}' "
         Dim QuerySortDep As String = $"{QueryALL} WHERE `Departement` = '{Dep}' "
         Dim QuerySortAll As String = $"{QueryALL} WHERE `Departement` = '{Dep}' AND `Date_Finger` = '{tanggal}'"
         Dim querycmd As String = ""
-        If tanggal = "" And Dep = "" Then
+
+        If dt_upfinger.Text = " " And Dep = "" Then
             querycmd = QueryALL
-        ElseIf tanggal = "" And Dep <> "" Then
+        ElseIf dt_upfinger.Text = " " And Dep <> "" Then
             querycmd = QuerySortDep
-        ElseIf tanggal <> "" And Dep = "" Then
+        ElseIf dt_upfinger.Text <> " " And Dep = "" Then
             querycmd = QuerySortTgl
-        ElseIf tanggal <> "" And Dep <> "" Then
+        ElseIf dt_upfinger.Text <> " " And Dep <> "" Then
             querycmd = QuerySortAll
         End If
-
-
-
+        Console.WriteLine(QuerySortTgl)
 
         'Dibawah ini Contoh Pengambilan data Dari MySql
         Dim DBClass As DataBaseClass = New DataBaseClass ' Inisiasi class yg telah di buat
@@ -138,9 +137,10 @@ Public Class UploadFingerData
             ' ds.tables = nama tabel
             ' rows = baris
             ' item = kolom
+            Dim tgl As Date = ds.Tables(0).Rows(i).Item(2)
             Dim row As String() = New String() {ds.Tables(0).Rows(i).Item(0).ToString,
                                                 ds.Tables(0).Rows(i).Item(1).ToString,
-                                                ds.Tables(0).Rows(i).Item(2).ToString,
+                                                tgl.ToString("dd/MM/yyyy"),
                                                 ds.Tables(0).Rows(i).Item(3).ToString,
                                                 ds.Tables(0).Rows(i).Item(4).ToString,
                                                 ds.Tables(0).Rows(i).Item(5).ToString,
@@ -150,7 +150,6 @@ Public Class UploadFingerData
             'Setelah dapat dalam bentuk array, array tersebut dimasukan kedalam fungsi dibawah
             'DGV_DataModify.Rows.Add(row) : Row tersebut isinya data satu baris yg telah diambil
             DGV_DataModify.Rows.Add(row)
-
             'Di bawah ini hanya untuk memprecantik
             DGV_DataModify.Rows(i).HeaderCell.Value = (i + 1).ToString
             If i Mod 2 = 0 Then
@@ -161,13 +160,7 @@ Public Class UploadFingerData
             total_data.Text = DGV_DataModify.Rows.Count
         Next
     End Sub
-    Private Sub DateTimePicker1_ValueChanged(sender As Object, e As EventArgs) Handles dt_upfinger.ValueChanged
-        Dim datePilihan As String = dt_upfinger.Value.ToString("M/d/yyyy")
-        Dim depPilihan As String = cb_depfinger.Text
-        DGV_DataModify.Rows.Clear()
-        insertToDgv(depPilihan, datePilihan)
-        Console.WriteLine("Done")
-    End Sub
+
 
     Private Sub UploadFingerData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If My.Settings.StatusUser = "admin" Then
@@ -178,21 +171,27 @@ Public Class UploadFingerData
                 cb_depfinger.Items.Add(x)
             Next
         End If
+        dt_upfinger.CustomFormat = " "
+        cb_depfinger.Text = ""
+
     End Sub
 
-    Private Sub cb_depfinger_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_depfinger.SelectedIndexChanged
-        Dim datePilihan As String = dt_upfinger.Value.ToString("M/d/yyyy")
+    Private Sub b_showall_Click(sender As Object, e As EventArgs) Handles b_showall.Click
+        cb_depfinger.Text = ""
+        dt_upfinger.CustomFormat = " "
+        DGV_DataModify.Rows.Clear()
+        insertToDgv("", "")
+    End Sub
+
+    Private Sub b_filter_Click(sender As Object, e As EventArgs) Handles b_filter.Click
+        Dim datePilihan As String = dt_upfinger.Value.ToString("yyyy/MM/dd")
         Dim depPilihan As String = cb_depfinger.Text
         DGV_DataModify.Rows.Clear()
         insertToDgv(depPilihan, datePilihan)
         Console.WriteLine("Done")
     End Sub
 
-    Private Sub b_showall_Click(sender As Object, e As EventArgs) Handles b_showall.Click
-        dt_upfinger.Value = Now
-        cb_depfinger.Text = ""
-        DGV_DataModify.Rows.Clear()
-        insertToDgv("", "")
+    Private Sub dt_upfinger_ValueChanged(sender As Object, e As EventArgs) Handles dt_upfinger.ValueChanged
+        dt_upfinger.CustomFormat = "dd/MM/yyyy"
     End Sub
-
 End Class

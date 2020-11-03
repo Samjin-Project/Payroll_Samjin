@@ -24,7 +24,12 @@ Partial Class ListNoCheck
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DGV_ListCheck = New System.Windows.Forms.DataGridView()
+        Me.kolom_emp = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Kolom_Nama = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.kolom_department = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DateFinger = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.b_search = New System.Windows.Forms.Button()
         Me.b_delete = New System.Windows.Forms.Button()
         Me.b_showall = New System.Windows.Forms.Button()
         Me.cb_dep = New System.Windows.Forms.ComboBox()
@@ -37,10 +42,6 @@ Partial Class ListNoCheck
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.kolom_emp = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Kolom_Nama = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.kolom_department = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DateFinger = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DGV_ListCheck, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
@@ -72,13 +73,42 @@ Partial Class ListNoCheck
         Me.DGV_ListCheck.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         Me.DGV_ListCheck.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
         Me.DGV_ListCheck.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.DGV_ListCheck.Size = New System.Drawing.Size(636, 410)
+        Me.DGV_ListCheck.Size = New System.Drawing.Size(683, 410)
         Me.DGV_ListCheck.TabIndex = 18
+        '
+        'kolom_emp
+        '
+        Me.kolom_emp.FillWeight = 70.0!
+        Me.kolom_emp.HeaderText = "Emp No."
+        Me.kolom_emp.Name = "kolom_emp"
+        Me.kolom_emp.ReadOnly = True
+        '
+        'Kolom_Nama
+        '
+        Me.Kolom_Nama.FillWeight = 165.0399!
+        Me.Kolom_Nama.HeaderText = "Name"
+        Me.Kolom_Nama.Name = "Kolom_Nama"
+        Me.Kolom_Nama.ReadOnly = True
+        '
+        'kolom_department
+        '
+        Me.kolom_department.FillWeight = 90.32571!
+        Me.kolom_department.HeaderText = "Department"
+        Me.kolom_department.Name = "kolom_department"
+        Me.kolom_department.ReadOnly = True
+        '
+        'DateFinger
+        '
+        Me.DateFinger.FillWeight = 116.6964!
+        Me.DateFinger.HeaderText = "Date"
+        Me.DateFinger.Name = "DateFinger"
+        Me.DateFinger.ReadOnly = True
         '
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel2.Controls.Add(Me.b_search)
         Me.Panel2.Controls.Add(Me.b_delete)
         Me.Panel2.Controls.Add(Me.b_showall)
         Me.Panel2.Controls.Add(Me.cb_dep)
@@ -94,8 +124,17 @@ Partial Class ListNoCheck
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(636, 57)
+        Me.Panel2.Size = New System.Drawing.Size(683, 57)
         Me.Panel2.TabIndex = 21
+        '
+        'b_search
+        '
+        Me.b_search.Location = New System.Drawing.Point(555, 2)
+        Me.b_search.Name = "b_search"
+        Me.b_search.Size = New System.Drawing.Size(63, 22)
+        Me.b_search.TabIndex = 15
+        Me.b_search.Text = "Search"
+        Me.b_search.UseVisualStyleBackColor = True
         '
         'b_delete
         '
@@ -108,7 +147,7 @@ Partial Class ListNoCheck
         '
         'b_showall
         '
-        Me.b_showall.Location = New System.Drawing.Point(555, 3)
+        Me.b_showall.Location = New System.Drawing.Point(618, 2)
         Me.b_showall.Name = "b_showall"
         Me.b_showall.Size = New System.Drawing.Size(63, 22)
         Me.b_showall.TabIndex = 12
@@ -204,39 +243,11 @@ Partial Class ListNoCheck
         Me.Label9.TabIndex = 0
         Me.Label9.Text = "Workcenter"
         '
-        'kolom_emp
-        '
-        Me.kolom_emp.FillWeight = 70.0!
-        Me.kolom_emp.HeaderText = "Emp No."
-        Me.kolom_emp.Name = "kolom_emp"
-        Me.kolom_emp.ReadOnly = True
-        '
-        'Kolom_Nama
-        '
-        Me.Kolom_Nama.FillWeight = 165.0399!
-        Me.Kolom_Nama.HeaderText = "Name"
-        Me.Kolom_Nama.Name = "Kolom_Nama"
-        Me.Kolom_Nama.ReadOnly = True
-        '
-        'kolom_department
-        '
-        Me.kolom_department.FillWeight = 90.32571!
-        Me.kolom_department.HeaderText = "Department"
-        Me.kolom_department.Name = "kolom_department"
-        Me.kolom_department.ReadOnly = True
-        '
-        'DateFinger
-        '
-        Me.DateFinger.FillWeight = 116.6964!
-        Me.DateFinger.HeaderText = "Date"
-        Me.DateFinger.Name = "DateFinger"
-        Me.DateFinger.ReadOnly = True
-        '
         'ListNoCheck
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(636, 467)
+        Me.ClientSize = New System.Drawing.Size(683, 467)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.DGV_ListCheck)
         Me.Name = "ListNoCheck"
@@ -266,4 +277,5 @@ Partial Class ListNoCheck
     Friend WithEvents Kolom_Nama As DataGridViewTextBoxColumn
     Friend WithEvents kolom_department As DataGridViewTextBoxColumn
     Friend WithEvents DateFinger As DataGridViewTextBoxColumn
+    Friend WithEvents b_search As Button
 End Class
