@@ -14,22 +14,17 @@ Public Class DataBaseClass
         '        Dim UploadQ As String = "INSERT INTO `master_employer`(`NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Dep_Karyawan`, `TmptLahir_Karyawan`, `TglLahir_Karyawan`, `JKelamin_Karyawan`, `Pendidikan_Karyawan`, `TgllMasuk_Karyawan`, `Status_Karyawan`, `Salary_Karyawan`) 
         '        VALUES ('K200191,'Marlina Agustin','Operator','Rubber Forming','Bekasi','2008-01-13','Perempuan','SMA','2002-20-17','Magang',3524207)"
 
-        Try
-            Console.WriteLine("Query Upload : " + QueryUpload)
-            If connDB.State <> ConnectionState.Open Then
-                connDB.ConnectionString = "server=" & strServer.Trim & ";database=" & strDbase.Trim & ";user=" & strUser.Trim & ";password=" & strPass.Trim & ";Convert Zero Datetime='True'"
-                connDB.Open()
-            End If
-            cmd = New MySqlCommand(QueryUpload, connDB)
-            cmd.CommandTimeout = 200
-            cmd.ExecuteNonQuery()
-            cmd.Dispose()
-            connDB.Close()
-            'Console.WriteLine("Connection Oke")
-        Catch ex As Exception
-            Console.WriteLine(ex.ToString)
-            Console.WriteLine("Connection Error")
-        End Try
+        Console.WriteLine("Query Upload : " + QueryUpload)
+        If connDB.State <> ConnectionState.Open Then
+            connDB.ConnectionString = "server=" & strServer.Trim & ";database=" & strDbase.Trim & ";user=" & strUser.Trim & ";password=" & strPass.Trim & ";Convert Zero Datetime='True'"
+            connDB.Open()
+        End If
+        cmd = New MySqlCommand(QueryUpload, connDB)
+        cmd.CommandTimeout = 200
+        cmd.ExecuteNonQuery()
+        cmd.Dispose()
+        connDB.Close()
+        'Console.WriteLine("Connection Oke")
     End Sub
     Function downloadDB(QueryCMD As String) As DataSet
 

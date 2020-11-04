@@ -12,8 +12,9 @@
         If My.Settings.StatusUser = "admin" Then
             cb_dep.Text = My.Settings.Departement
             cb_dep.Enabled = False
-
+            b_delete.Enabled = False
         Else
+            b_delete.Enabled = True
             cb_dep.Items.Clear()
             For Each x As String In MDIParent1.JenisDepartement
                 cb_dep.Items.Add(x)
@@ -223,6 +224,18 @@
         ExcelColName = S
     End Function
     Public Sub saveExcelFile(ByVal FileName As String)
+
+        Dim flag As Boolean = False
+        MDIParent1.TreeView1.Enabled = flag
+        MDIParent1.MenuStrip.Enabled = flag
+        MDIParent1.ControlBox = flag
+        Me.ControlBox = flag
+        Me.Enabled = flag
+
+        MDIParent1.ToolStripStatusLabelMdi.Text = "Exporting..."
+        MDIParent1.ToolStripProgressBarMdi.Visible = True
+        MDIParent1.ToolStripProgressBarMdi.Value = 0
+
         Dim sheetIndex As Integer
         Dim Ex As Object
         Dim Wb As Object
@@ -244,10 +257,13 @@
 
         Next
 
+        MDIParent1.ToolStripProgressBarMdi.Maximum = DGV_DataModify.Columns.Count * DGV_DataModify.Rows.Count
+        MDIParent1.ToolStripProgressBarMdi.Value = 0
+
         For col = 0 To DGV_DataModify.Columns.Count - 1
             For row = 0 To DGV_DataModify.Rows.Count - 1
                 rawData(row + 1, col) = DGV_DataModify.Rows(row).Cells(col).Value
-
+                MDIParent1.ToolStripProgressBarMdi.Value = MDIParent1.ToolStripProgressBarMdi.Value + 1
             Next
         Next
         ' Calculate the final column letter
@@ -283,10 +299,21 @@
         Ex = Nothing
         ' Collect the unreferenced objects
         GC.Collect()
+
+        flag = True
+        MDIParent1.TreeView1.Enabled = flag
+        MDIParent1.MenuStrip.Enabled = flag
+        MDIParent1.ControlBox = flag
+        Me.ControlBox = flag
+        Me.Enabled = flag
         MsgBox("Exported Successfully.", MsgBoxStyle.Information)
+        MDIParent1.ToolStripStatusLabelMdi.Text = "Status"
+        MDIParent1.ToolStripProgressBarMdi.Visible = True
+        MDIParent1.ToolStripProgressBarMdi.Value = 0
     End Sub
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
+
         Dim saveFileDialog1 As New SaveFileDialog
         saveFileDialog1.Filter = "Excel File|*.xls,*.xlsx"
         saveFileDialog1.Title = "Save an Excel File"
@@ -311,11 +338,12 @@
             Dim ds As DataSet = DBClass.downloadDB(querycmd)
             Dim indexDs As Integer = ds.Tables(0).Rows.Count
             If indexDs > 0 Then
+                Label19.Text = ""
                 tb_nama.Text = ds.Tables(0).Rows(0).Item(0)
                 tb_dep.Text = ds.Tables(0).Rows(0).Item(1)
             Else
-                tb_emp.ForeColor = Color.Red
-                tb_emp.Text = "Data not found"
+                Label19.Text = "Emp Not Found"
+                tb_emp.Text = ""
                 tb_nama.Text = ""
                 tb_dep.Text = ""
             End If
@@ -330,4 +358,5 @@
         DGV_DataModify.Rows.Clear()
         filterData(depPilihan, emp, stDate, endDate)
     End Sub
+
 End Class

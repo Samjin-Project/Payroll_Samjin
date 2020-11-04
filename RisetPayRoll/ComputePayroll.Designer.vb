@@ -50,7 +50,6 @@ Partial Class ComputePayroll
         Me.Label39 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel6 = New System.Windows.Forms.Panel()
-        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.tb_total = New System.Windows.Forms.TextBox()
         Me.tb_sup = New System.Windows.Forms.TextBox()
         Me.tb_deduct = New System.Windows.Forms.TextBox()
@@ -114,7 +113,6 @@ Partial Class ComputePayroll
         Me.Panel2.SuspendLayout()
         Me.Panel6.SuspendLayout()
         Me.Panel5.SuspendLayout()
-        Me.Panel8.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -166,6 +164,7 @@ Partial Class ComputePayroll
         '
         Me.DGV_ReviewDaily.AllowUserToAddRows = False
         Me.DGV_ReviewDaily.AllowUserToDeleteRows = False
+        Me.DGV_ReviewDaily.AllowUserToResizeRows = False
         Me.DGV_ReviewDaily.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
@@ -222,8 +221,11 @@ Partial Class ComputePayroll
         'Panel3
         '
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel3.Controls.Add(Me.b_export)
+        Me.Panel3.Controls.Add(Me.ComboBoxDep)
         Me.Panel3.Controls.Add(Me.b_showall)
         Me.Panel3.Controls.Add(Me.Label51)
+        Me.Panel3.Controls.Add(Me.Label48)
         Me.Panel3.Controls.Add(Me.Label46)
         Me.Panel3.Controls.Add(Me.tb_nameSearch)
         Me.Panel3.Controls.Add(Me.Label45)
@@ -237,7 +239,7 @@ Partial Class ComputePayroll
         '
         'b_showall
         '
-        Me.b_showall.Location = New System.Drawing.Point(228, 38)
+        Me.b_showall.Location = New System.Drawing.Point(233, 52)
         Me.b_showall.Name = "b_showall"
         Me.b_showall.Size = New System.Drawing.Size(70, 22)
         Me.b_showall.TabIndex = 58
@@ -247,7 +249,7 @@ Partial Class ComputePayroll
         'Label51
         '
         Me.Label51.AutoSize = True
-        Me.Label51.Location = New System.Drawing.Point(8, 61)
+        Me.Label51.Location = New System.Drawing.Point(17, 79)
         Me.Label51.Name = "Label51"
         Me.Label51.Size = New System.Drawing.Size(35, 13)
         Me.Label51.TabIndex = 57
@@ -265,7 +267,7 @@ Partial Class ComputePayroll
         'tb_nameSearch
         '
         Me.tb_nameSearch.BackColor = System.Drawing.Color.White
-        Me.tb_nameSearch.Location = New System.Drawing.Point(47, 62)
+        Me.tb_nameSearch.Location = New System.Drawing.Point(71, 79)
         Me.tb_nameSearch.Name = "tb_nameSearch"
         Me.tb_nameSearch.Size = New System.Drawing.Size(155, 20)
         Me.tb_nameSearch.TabIndex = 55
@@ -273,7 +275,7 @@ Partial Class ComputePayroll
         'Label45
         '
         Me.Label45.AutoSize = True
-        Me.Label45.Location = New System.Drawing.Point(-2, 37)
+        Me.Label45.Location = New System.Drawing.Point(17, 54)
         Me.Label45.Name = "Label45"
         Me.Label45.Size = New System.Drawing.Size(48, 13)
         Me.Label45.TabIndex = 54
@@ -282,7 +284,7 @@ Partial Class ComputePayroll
         'tb_empSearch
         '
         Me.tb_empSearch.BackColor = System.Drawing.Color.White
-        Me.tb_empSearch.Location = New System.Drawing.Point(47, 37)
+        Me.tb_empSearch.Location = New System.Drawing.Point(71, 54)
         Me.tb_empSearch.Name = "tb_empSearch"
         Me.tb_empSearch.Size = New System.Drawing.Size(69, 20)
         Me.tb_empSearch.TabIndex = 53
@@ -323,7 +325,7 @@ Partial Class ComputePayroll
         '
         Me.dt_month.CustomFormat = "MMM yyyy"
         Me.dt_month.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dt_month.Location = New System.Drawing.Point(84, 53)
+        Me.dt_month.Location = New System.Drawing.Point(92, 50)
         Me.dt_month.Name = "dt_month"
         Me.dt_month.Size = New System.Drawing.Size(197, 20)
         Me.dt_month.TabIndex = 73
@@ -334,9 +336,9 @@ Partial Class ComputePayroll
         Me.Label43.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label43.Location = New System.Drawing.Point(3, 7)
         Me.Label43.Name = "Label43"
-        Me.Label43.Size = New System.Drawing.Size(148, 18)
+        Me.Label43.Size = New System.Drawing.Size(68, 18)
         Me.Label43.TabIndex = 64
-        Me.Label43.Text = "[Search Condition]"
+        Me.Label43.Text = "[Create]"
         '
         'Label39
         '
@@ -365,7 +367,6 @@ Partial Class ComputePayroll
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel6.AutoScroll = True
         Me.Panel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Panel6.Controls.Add(Me.ProgressBar1)
         Me.Panel6.Controls.Add(Me.tb_total)
         Me.Panel6.Controls.Add(Me.tb_sup)
         Me.Panel6.Controls.Add(Me.tb_deduct)
@@ -419,13 +420,6 @@ Partial Class ComputePayroll
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(935, 545)
         Me.Panel6.TabIndex = 2
-        '
-        'ProgressBar1
-        '
-        Me.ProgressBar1.Location = New System.Drawing.Point(515, 175)
-        Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(331, 54)
-        Me.ProgressBar1.TabIndex = 98
         '
         'tb_total
         '
@@ -907,9 +901,6 @@ Partial Class ComputePayroll
         'Panel8
         '
         Me.Panel8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Panel8.Controls.Add(Me.ComboBoxDep)
-        Me.Panel8.Controls.Add(Me.b_export)
-        Me.Panel8.Controls.Add(Me.Label48)
         Me.Panel8.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel8.Location = New System.Drawing.Point(0, 0)
         Me.Panel8.Name = "Panel8"
@@ -919,15 +910,16 @@ Partial Class ComputePayroll
         'ComboBoxDep
         '
         Me.ComboBoxDep.FormattingEnabled = True
-        Me.ComboBoxDep.Items.AddRange(New Object() {"PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING", "SMD"})
-        Me.ComboBoxDep.Location = New System.Drawing.Point(83, 13)
+        Me.ComboBoxDep.Items.AddRange(New Object() {"ALL", "PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING", "SMD"})
+        Me.ComboBoxDep.Location = New System.Drawing.Point(71, 27)
         Me.ComboBoxDep.Name = "ComboBoxDep"
         Me.ComboBoxDep.Size = New System.Drawing.Size(110, 21)
         Me.ComboBoxDep.TabIndex = 74
+        Me.ComboBoxDep.Text = "ALL"
         '
         'b_export
         '
-        Me.b_export.Location = New System.Drawing.Point(21, 45)
+        Me.b_export.Location = New System.Drawing.Point(233, 25)
         Me.b_export.Name = "b_export"
         Me.b_export.Size = New System.Drawing.Size(75, 23)
         Me.b_export.TabIndex = 73
@@ -937,7 +929,7 @@ Partial Class ComputePayroll
         'Label48
         '
         Me.Label48.AutoSize = True
-        Me.Label48.Location = New System.Drawing.Point(18, 16)
+        Me.Label48.Location = New System.Drawing.Point(3, 30)
         Me.Label48.Name = "Label48"
         Me.Label48.Size = New System.Drawing.Size(62, 13)
         Me.Label48.TabIndex = 72
@@ -966,8 +958,6 @@ Partial Class ComputePayroll
         Me.Panel6.ResumeLayout(False)
         Me.Panel6.PerformLayout()
         Me.Panel5.ResumeLayout(False)
-        Me.Panel8.ResumeLayout(False)
-        Me.Panel8.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1049,7 +1039,6 @@ Partial Class ComputePayroll
     Friend WithEvents ComboBoxDep As ComboBox
     Friend WithEvents b_export As Button
     Friend WithEvents Label48 As Label
-    Friend WithEvents ProgressBar1 As ProgressBar
     Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
     Friend WithEvents ToolStripProgressBar1 As ToolStripProgressBar

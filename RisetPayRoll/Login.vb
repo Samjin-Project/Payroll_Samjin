@@ -29,4 +29,8 @@ Public Class LoginForm
             Close()
         End If
     End Sub
+
+    Private Sub DataBaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DataBaseToolStripMenuItem.Click
+
+    End Sub
 End Class

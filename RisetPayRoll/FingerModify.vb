@@ -19,15 +19,15 @@ Public Class FingerModify
         If My.Settings.StatusUser = "admin" Then
             cb_dep.Text = My.Settings.Departement
             cb_dep.Enabled = False
-            cb_name.Text = My.Settings.NamaUser
-            cb_name.Enabled = False
+            'cb_name.Text = My.Settings.NamaUser
+            'cb_name.Enabled = False
 
         Else
             For Each x As String In MDIParent1.JenisDepartement
                 cb_dep.Items.Add(x)
             Next
-            cb_name.Text = ""
-            cb_name.Enabled = False
+            'cb_name.Text = ""
+            'cb_name.Enabled = False
         End If
 
         RadioButton1.Checked = True
@@ -87,7 +87,20 @@ Public Class FingerModify
         If CheckBox1.Checked = True Then
             For i As Integer = 0 To DGV_DataModify.Rows.Count - 1
                 Console.WriteLine(DGV_DataModify.Rows.Count)
-                DGV_DataModify.Rows(i).Cells(1).Value = True
+                If DGV_DataModify.Rows(i).Cells(1).Value = False Then
+                    DGV_DataModify.Rows(i).Cells(1).Value = True
+                End If
+                'Dim querycmd As String = "UPDATE `finger_employer` SET  "
+                'DGV_DataModify.Rows.Clear()
+                'Dim DBClass As DataBaseClass = New DataBaseClass
+                'Dim ds As DataSet = DBClass.downloadDB(querycmd)
+            Next
+        Else
+            For i As Integer = 0 To DGV_DataModify.Rows.Count - 1
+                Console.WriteLine(DGV_DataModify.Rows.Count)
+                If DGV_DataModify.Rows(i).Cells(1).Value = True Then
+                    DGV_DataModify.Rows(i).Cells(1).Value = False
+                End If
                 'Dim querycmd As String = "UPDATE `finger_employer` SET  "
                 'DGV_DataModify.Rows.Clear()
                 'Dim DBClass As DataBaseClass = New DataBaseClass
@@ -100,7 +113,7 @@ Public Class FingerModify
 
             Dim indexDs As Integer = ds.Tables(0).Rows.Count
             Dim fingerStatus As Boolean
-            Dim UploadEmp As String = "Pak Umar"
+            Dim UploadEmp As String = My.Settings.NamaUser
             For i As Integer = 0 To indexDs - 1 'looping mengambil data perbaris
                 ' ds.tables = nama tabel
                 ' rows = baris
@@ -186,13 +199,14 @@ Public Class FingerModify
     End Sub
 
     Private Sub b_search_Click(sender As Object, e As EventArgs) Handles b_search.Click
-        If f_empSearch = True Then
+
+        If TextBox10.Text <> "" Then
             SortingTabel(True)
             f_empSearch = False
         Else
             SortingTabel(False)
         End If
-
+        CheckBox1.Checked = False
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs)
@@ -294,6 +308,7 @@ Public Class FingerModify
         SortingTabel(False)
         f_filterIn = False
         f_filterOut = False
+        CheckBox1.Checked = False
     End Sub
 
     Private Sub TextBox10_TextChanged(sender As Object, e As EventArgs) Handles TextBox10.TextChanged
@@ -305,5 +320,6 @@ Public Class FingerModify
         Dim DBClass As DataBaseClass = New DataBaseClass
         Dim ds As DataSet = DBClass.downloadDB(QueryUtama)
         insertToDgv(ds)
+        CheckBox1.Checked = False
     End Sub
 End Class

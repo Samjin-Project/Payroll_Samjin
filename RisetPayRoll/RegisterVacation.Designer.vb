@@ -38,6 +38,7 @@ Partial Class RegisterVacation
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.b_search = New System.Windows.Forms.Button()
         Me.b_delete = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.b_showall = New System.Windows.Forms.Button()
@@ -73,7 +74,7 @@ Partial Class RegisterVacation
         Me.tb_nama = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tb_emp = New System.Windows.Forms.TextBox()
-        Me.b_search = New System.Windows.Forms.Button()
+        Me.Label19 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         CType(Me.DGV_DataModify, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
@@ -246,6 +247,15 @@ Partial Class RegisterVacation
         Me.Panel2.Size = New System.Drawing.Size(1370, 57)
         Me.Panel2.TabIndex = 20
         '
+        'b_search
+        '
+        Me.b_search.Location = New System.Drawing.Point(555, 3)
+        Me.b_search.Name = "b_search"
+        Me.b_search.Size = New System.Drawing.Size(63, 22)
+        Me.b_search.TabIndex = 15
+        Me.b_search.Text = "Search"
+        Me.b_search.UseVisualStyleBackColor = True
+        '
         'b_delete
         '
         Me.b_delete.Location = New System.Drawing.Point(555, 29)
@@ -375,6 +385,7 @@ Partial Class RegisterVacation
         '
         Me.Panel4.BackColor = System.Drawing.SystemColors.Control
         Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel4.Controls.Add(Me.Label19)
         Me.Panel4.Controls.Add(Me.tb_dep)
         Me.Panel4.Controls.Add(Me.Label10)
         Me.Panel4.Controls.Add(Me.tb_reason)
@@ -579,14 +590,14 @@ Partial Class RegisterVacation
         Me.tb_emp.Size = New System.Drawing.Size(110, 20)
         Me.tb_emp.TabIndex = 0
         '
-        'b_search
+        'Label19
         '
-        Me.b_search.Location = New System.Drawing.Point(555, 3)
-        Me.b_search.Name = "b_search"
-        Me.b_search.Size = New System.Drawing.Size(63, 22)
-        Me.b_search.TabIndex = 15
-        Me.b_search.Text = "Search"
-        Me.b_search.UseVisualStyleBackColor = True
+        Me.Label19.AutoSize = True
+        Me.Label19.ForeColor = System.Drawing.Color.Red
+        Me.Label19.Location = New System.Drawing.Point(274, 70)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(0, 13)
+        Me.Label19.TabIndex = 57
         '
         'RegisterVacation
         '
@@ -662,4 +673,5 @@ Partial Class RegisterVacation
     Friend WithEvents b_delete As Button
     Friend WithEvents tb_dep As TextBox
     Friend WithEvents b_search As Button
+    Friend WithEvents Label19 As Label
 End Class

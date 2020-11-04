@@ -110,7 +110,7 @@ Partial Class LoginForm
         'DataBaseToolStripMenuItem
         '
         Me.DataBaseToolStripMenuItem.Name = "DataBaseToolStripMenuItem"
-        Me.DataBaseToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
+        Me.DataBaseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.DataBaseToolStripMenuItem.Text = "Data Base"
         '
         'CheckBoxLogin

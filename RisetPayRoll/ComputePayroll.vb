@@ -266,7 +266,28 @@ Public Class ComputePayroll
         ExcelColName = S
     End Function
     Private Sub ComputePayroll_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim querycmd As String = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Status_Karyawan` FROM `master employer`"
+        Dim flag As Boolean = False
+        MDIParent1.TreeView1.Enabled = flag
+        MDIParent1.MenuStrip.Enabled = flag
+        MDIParent1.ControlBox = flag
+        Me.ControlBox = flag
+        Me.Enabled = flag
+
+        MDIParent1.ToolStripStatusLabelMdi.Text = "Loading..."
+        MDIParent1.ToolStripProgressBarMdi.Visible = True
+        MDIParent1.ToolStripProgressBarMdi.Value = 0
+        Me.Cursor = Cursors.WaitCursor
+        normalFilter()
+        flagCb = True
+    End Sub
+
+    Private Sub normalFilter()
+        Dim querycmd As String
+        If ComboBoxDep.Text <> "ALL" Then
+            querycmd = $"SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Status_Karyawan` FROM `master employer` WHERE `Department` = '{ComboBoxDep.Text}'"
+        Else
+            querycmd = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Status_Karyawan` FROM `master employer`"
+        End If
         showEmployelist(querycmd)
     End Sub
 
@@ -274,7 +295,12 @@ Public Class ComputePayroll
         DGV_ReviewDaily.Rows.Clear()
         Dim DBClass As DataBaseClass = New DataBaseClass
         Dim ds As DataSet = DBClass.downloadDB(QueryOnReview)
+
+        Dim flag As Boolean = False
+
         Dim indexDs As Integer = ds.Tables(0).Rows.Count
+        MDIParent1.ToolStripProgressBarMdi.Maximum = indexDs
+        Me.Cursor = Cursors.WaitCursor
         For i As Integer = 0 To indexDs - 1
             Dim row As String() = New String() {ds.Tables(0).Rows(i).Item(0).ToString,
              ds.Tables(0).Rows(i).Item(1).ToString,
@@ -285,7 +311,20 @@ Public Class ComputePayroll
             If i Mod 2 = 1 Then
                 DGV_ReviewDaily.Rows(i).DefaultCellStyle.BackColor = Color.LightGray
             End If
+            MDIParent1.ToolStripProgressBarMdi.Value = i
         Next
+        flag = True
+        MDIParent1.TreeView1.Enabled = flag
+        MDIParent1.MenuStrip.Enabled = flag
+        MDIParent1.ControlBox = flag
+        Me.ControlBox = flag
+        Me.Enabled = flag
+
+        MDIParent1.ToolStripStatusLabelMdi.Text = "Status"
+        MDIParent1.ToolStripProgressBarMdi.Visible = False
+        MDIParent1.ToolStripProgressBarMdi.Value = 0
+
+        Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub detailEmpSal(nik As String)
@@ -311,10 +350,10 @@ Public Class ComputePayroll
             Dim jamsos As Double = ds.Tables(0).Rows(0).Item(4)
             Dim bpjs As Double = ds.Tables(0).Rows(0).Item(5)
             Dim wages As Double = ds.Tables(0).Rows(0).Item(3)
-            Dim deduct As Double = cut + jamsos + bpjs
+            Dim deduct As Double = (basicSal - cut) + jamsos + bpjs
             Dim sup As Double = basicSal + jamsos + bpjs + wages
 
-            tb_potsal.Text = cut.ToString("##,##,###")
+            tb_potsal.Text = (basicSal - cut).ToString("##,##,###")
             tb_ot.Text = ds.Tables(0).Rows(0).Item(2)
             tb_attendance.Text = ds.Tables(0).Rows(0).Item(1)
             tb_otwages.Text = wages.ToString("##,##,###")
@@ -541,8 +580,33 @@ Public Class ComputePayroll
 
 
     Private Sub DGV_ReviewDaily_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_ReviewDaily.CellClick
-        Dim nik As String = DGV_ReviewDaily.Rows(e.RowIndex).Cells(0).Value
-        detailEmpSal(nik)
+        Debug.WriteLine("e.row index :" + e.RowIndex.ToString)
+        If e.RowIndex <> -1 Then
+            Dim nik As String = DGV_ReviewDaily.Rows(e.RowIndex).Cells(0).Value
+            detailEmpSal(nik)
+        End If
+    End Sub
+    Dim flagCb As Boolean = False
+    Private Sub ComboBoxDep_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxDep.SelectedIndexChanged
+        If flagCb = True Then
+            tb_basicSal.Text = ""
+            tb_ot.Text = ""
+            tb_attendance.Text = ""
+            tb_otwages.Text = ""
+            tb_jamsostek.Text = ""
+            tb_bpjs.Text = ""
+            tb_potsal.Text = ""
+            tb_bpjsPot.Text = ""
+            tb_jamsostekPot.Text = ""
+            tb_sup.Text = ""
+            tb_deduct.Text = ""
+            tb_total.Text = ""
+
+            normalFilter()
+        End If
     End Sub
 
+    Private Sub DGV_ReviewDaily_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_ReviewDaily.CellContentClick
+
+    End Sub
 End Class
