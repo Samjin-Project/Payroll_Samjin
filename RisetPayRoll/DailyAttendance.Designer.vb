@@ -135,6 +135,7 @@ Partial Class DailyAttendance
         '
         'cb_depSearch
         '
+        Me.cb_depSearch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_depSearch.FormattingEnabled = True
         Me.cb_depSearch.Items.AddRange(New Object() {"PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING"})
         Me.cb_depSearch.Location = New System.Drawing.Point(71, 63)
@@ -279,13 +280,13 @@ Partial Class DailyAttendance
         '
         'cb_depCreate
         '
+        Me.cb_depCreate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_depCreate.FormattingEnabled = True
         Me.cb_depCreate.Items.AddRange(New Object() {"ALL", "PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING", "SMD"})
         Me.cb_depCreate.Location = New System.Drawing.Point(370, 13)
         Me.cb_depCreate.Name = "cb_depCreate"
         Me.cb_depCreate.Size = New System.Drawing.Size(124, 21)
         Me.cb_depCreate.TabIndex = 42
-        Me.cb_depCreate.Text = "ALL"
         '
         'Label4
         '
@@ -349,6 +350,7 @@ Partial Class DailyAttendance
         'ComboBox4
         '
         Me.ComboBox4.BackColor = System.Drawing.Color.White
+        Me.ComboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox4.FormattingEnabled = True
         Me.ComboBox4.Items.AddRange(New Object() {"Laki-Laki", "Perempuan"})
         Me.ComboBox4.Location = New System.Drawing.Point(72, 62)

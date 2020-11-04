@@ -164,7 +164,7 @@ Public Class RegisterMaster
             End If
 
             If ds.Tables(0).Rows(0).Item(15) = "1" Then
-                cb_aktif.Text = "Yes"
+                cb_aktif.Text = "Ya"
             Else
                 cb_aktif.Text = "Tidak"
             End If

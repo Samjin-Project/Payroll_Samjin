@@ -38,6 +38,7 @@ Partial Class RegisterVacation
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.b_search = New System.Windows.Forms.Button()
         Me.b_delete = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.b_showall = New System.Windows.Forms.Button()
@@ -73,7 +74,6 @@ Partial Class RegisterVacation
         Me.tb_nama = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tb_emp = New System.Windows.Forms.TextBox()
-        Me.b_search = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.DGV_DataModify, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
@@ -246,6 +246,15 @@ Partial Class RegisterVacation
         Me.Panel2.Size = New System.Drawing.Size(1370, 57)
         Me.Panel2.TabIndex = 20
         '
+        'b_search
+        '
+        Me.b_search.Location = New System.Drawing.Point(555, 3)
+        Me.b_search.Name = "b_search"
+        Me.b_search.Size = New System.Drawing.Size(63, 22)
+        Me.b_search.TabIndex = 15
+        Me.b_search.Text = "Search"
+        Me.b_search.UseVisualStyleBackColor = True
+        '
         'b_delete
         '
         Me.b_delete.Location = New System.Drawing.Point(555, 29)
@@ -275,6 +284,7 @@ Partial Class RegisterVacation
         '
         'cb_dep
         '
+        Me.cb_dep.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_dep.FormattingEnabled = True
         Me.cb_dep.Items.AddRange(New Object() {"PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING", "SMD"})
         Me.cb_dep.Location = New System.Drawing.Point(414, 4)
@@ -449,6 +459,7 @@ Partial Class RegisterVacation
         'cb_holtype
         '
         Me.cb_holtype.BackColor = System.Drawing.Color.Cyan
+        Me.cb_holtype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_holtype.FormattingEnabled = True
         Me.cb_holtype.Items.AddRange(New Object() {"Permission", "Sick", "No permission"})
         Me.cb_holtype.Location = New System.Drawing.Point(144, 150)
@@ -578,15 +589,6 @@ Partial Class RegisterVacation
         Me.tb_emp.Name = "tb_emp"
         Me.tb_emp.Size = New System.Drawing.Size(110, 20)
         Me.tb_emp.TabIndex = 0
-        '
-        'b_search
-        '
-        Me.b_search.Location = New System.Drawing.Point(555, 3)
-        Me.b_search.Name = "b_search"
-        Me.b_search.Size = New System.Drawing.Size(63, 22)
-        Me.b_search.TabIndex = 15
-        Me.b_search.Text = "Search"
-        Me.b_search.UseVisualStyleBackColor = True
         '
         'RegisterVacation
         '

@@ -50,6 +50,7 @@ Partial Class FingerModify
         Me.kolom_upload_emp = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.total = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -70,6 +71,7 @@ Partial Class FingerModify
         Me.cb_dep = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.b_showAll = New System.Windows.Forms.Button()
         Me.b_search = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.b_filter = New System.Windows.Forms.Button()
@@ -79,8 +81,6 @@ Partial Class FingerModify
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.dt_day = New System.Windows.Forms.DateTimePicker()
-        Me.b_showAll = New System.Windows.Forms.Button()
-        Me.total = New System.Windows.Forms.Label()
         CType(Me.DGV_DataModify, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel5.SuspendLayout()
@@ -260,6 +260,15 @@ Partial Class FingerModify
         Me.Panel5.Size = New System.Drawing.Size(1370, 25)
         Me.Panel5.TabIndex = 19
         '
+        'total
+        '
+        Me.total.AutoSize = True
+        Me.total.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.total.Location = New System.Drawing.Point(160, 6)
+        Me.total.Name = "total"
+        Me.total.Size = New System.Drawing.Size(0, 13)
+        Me.total.TabIndex = 20
+        '
         'Label17
         '
         Me.Label17.AutoSize = True
@@ -300,6 +309,7 @@ Partial Class FingerModify
         '
         'cb_shift
         '
+        Me.cb_shift.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_shift.FormattingEnabled = True
         Me.cb_shift.Items.AddRange(New Object() {"SHIFT1", "SHIFT2", "SHIFT3", "PENDEK1", "PENDEK2", "PENDEK3", "SIANG", "MALAM", "NONSHIFT", "ALL"})
         Me.cb_shift.Location = New System.Drawing.Point(91, 30)
@@ -407,6 +417,7 @@ Partial Class FingerModify
         '
         'cb_name
         '
+        Me.cb_name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_name.FormattingEnabled = True
         Me.cb_name.Location = New System.Drawing.Point(660, 29)
         Me.cb_name.Name = "cb_name"
@@ -424,6 +435,7 @@ Partial Class FingerModify
         '
         'cb_dep
         '
+        Me.cb_dep.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_dep.FormattingEnabled = True
         Me.cb_dep.Location = New System.Drawing.Point(660, 2)
         Me.cb_dep.Name = "cb_dep"
@@ -467,6 +479,15 @@ Partial Class FingerModify
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(1370, 95)
         Me.Panel4.TabIndex = 47
+        '
+        'b_showAll
+        '
+        Me.b_showAll.Location = New System.Drawing.Point(590, 63)
+        Me.b_showAll.Name = "b_showAll"
+        Me.b_showAll.Size = New System.Drawing.Size(75, 23)
+        Me.b_showAll.TabIndex = 54
+        Me.b_showAll.Text = "Show All"
+        Me.b_showAll.UseVisualStyleBackColor = True
         '
         'b_search
         '
@@ -549,24 +570,6 @@ Partial Class FingerModify
         Me.dt_day.Name = "dt_day"
         Me.dt_day.Size = New System.Drawing.Size(156, 20)
         Me.dt_day.TabIndex = 20
-        '
-        'b_showAll
-        '
-        Me.b_showAll.Location = New System.Drawing.Point(590, 63)
-        Me.b_showAll.Name = "b_showAll"
-        Me.b_showAll.Size = New System.Drawing.Size(75, 23)
-        Me.b_showAll.TabIndex = 54
-        Me.b_showAll.Text = "Show All"
-        Me.b_showAll.UseVisualStyleBackColor = True
-        '
-        'total
-        '
-        Me.total.AutoSize = True
-        Me.total.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.total.Location = New System.Drawing.Point(160, 6)
-        Me.total.Name = "total"
-        Me.total.Size = New System.Drawing.Size(0, 13)
-        Me.total.TabIndex = 20
         '
         'FingerModify
         '
