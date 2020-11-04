@@ -909,6 +909,7 @@ Partial Class ComputePayroll
         '
         'ComboBoxDep
         '
+        Me.ComboBoxDep.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxDep.FormattingEnabled = True
         Me.ComboBoxDep.Items.AddRange(New Object() {"ALL", "PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING", "SMD"})
         Me.ComboBoxDep.Location = New System.Drawing.Point(71, 27)

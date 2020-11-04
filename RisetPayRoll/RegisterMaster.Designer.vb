@@ -42,6 +42,7 @@ Partial Class RegisterMaster
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.cb_dep = New System.Windows.Forms.ComboBox()
+        Me.cb_createPosisi = New System.Windows.Forms.ComboBox()
         Me.cb_stat = New System.Windows.Forms.ComboBox()
         Me.Label23 = New System.Windows.Forms.Label()
         Me.Label21 = New System.Windows.Forms.Label()
@@ -73,16 +74,15 @@ Partial Class RegisterMaster
         Me.dt_lahir = New System.Windows.Forms.DateTimePicker()
         Me.dt_createKeluar = New System.Windows.Forms.DateTimePicker()
         Me.DGV_ReviewMaster = New System.Windows.Forms.DataGridView()
+        Me.Kolom_Nik = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Kolom_Nama = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.kolom_dep = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.total_data = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.OpenFileDialogImport = New System.Windows.Forms.OpenFileDialog()
-        Me.cb_createPosisi = New System.Windows.Forms.ComboBox()
-        Me.Kolom_Nik = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Kolom_Nama = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.kolom_dep = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -201,6 +201,7 @@ Partial Class RegisterMaster
         '
         'cb_jk
         '
+        Me.cb_jk.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_jk.FormattingEnabled = True
         Me.cb_jk.Items.AddRange(New Object() {"Laki-Laki", "Perempuan"})
         Me.cb_jk.Location = New System.Drawing.Point(97, 48)
@@ -219,6 +220,7 @@ Partial Class RegisterMaster
         '
         'cb_department
         '
+        Me.cb_department.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_department.FormattingEnabled = True
         Me.cb_department.Items.AddRange(New Object() {"PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING", "SMD"})
         Me.cb_department.Location = New System.Drawing.Point(97, 21)
@@ -311,6 +313,7 @@ Partial Class RegisterMaster
         '
         Me.cb_dep.AutoCompleteCustomSource.AddRange(New String() {"PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING", "SMD"})
         Me.cb_dep.BackColor = System.Drawing.Color.Cyan
+        Me.cb_dep.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_dep.Enabled = False
         Me.cb_dep.FormattingEnabled = True
         Me.cb_dep.Items.AddRange(New Object() {"Laki-laki", "Perempuan"})
@@ -319,9 +322,22 @@ Partial Class RegisterMaster
         Me.cb_dep.Size = New System.Drawing.Size(110, 21)
         Me.cb_dep.TabIndex = 45
         '
+        'cb_createPosisi
+        '
+        Me.cb_createPosisi.BackColor = System.Drawing.Color.Cyan
+        Me.cb_createPosisi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cb_createPosisi.Enabled = False
+        Me.cb_createPosisi.FormattingEnabled = True
+        Me.cb_createPosisi.Items.AddRange(New Object() {"Operator"})
+        Me.cb_createPosisi.Location = New System.Drawing.Point(396, 113)
+        Me.cb_createPosisi.Name = "cb_createPosisi"
+        Me.cb_createPosisi.Size = New System.Drawing.Size(110, 21)
+        Me.cb_createPosisi.TabIndex = 44
+        '
         'cb_stat
         '
         Me.cb_stat.BackColor = System.Drawing.Color.Cyan
+        Me.cb_stat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_stat.Enabled = False
         Me.cb_stat.FormattingEnabled = True
         Me.cb_stat.Items.AddRange(New Object() {"Magang"})
@@ -423,6 +439,7 @@ Partial Class RegisterMaster
         'cb_aktif
         '
         Me.cb_aktif.BackColor = System.Drawing.Color.Cyan
+        Me.cb_aktif.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_aktif.Enabled = False
         Me.cb_aktif.FormattingEnabled = True
         Me.cb_aktif.Items.AddRange(New Object() {"Ya", "Tidak"})
@@ -434,6 +451,7 @@ Partial Class RegisterMaster
         'cb_bpjs
         '
         Me.cb_bpjs.BackColor = System.Drawing.Color.Cyan
+        Me.cb_bpjs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_bpjs.Enabled = False
         Me.cb_bpjs.FormattingEnabled = True
         Me.cb_bpjs.Items.AddRange(New Object() {"Ya", "Tidak"})
@@ -562,6 +580,7 @@ Partial Class RegisterMaster
         'cb_createJK
         '
         Me.cb_createJK.BackColor = System.Drawing.Color.Cyan
+        Me.cb_createJK.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_createJK.Enabled = False
         Me.cb_createJK.FormattingEnabled = True
         Me.cb_createJK.Items.AddRange(New Object() {"Laki-laki", "Perempuan"})
@@ -623,6 +642,28 @@ Partial Class RegisterMaster
         Me.DGV_ReviewMaster.Size = New System.Drawing.Size(350, 429)
         Me.DGV_ReviewMaster.TabIndex = 1
         '
+        'Kolom_Nik
+        '
+        Me.Kolom_Nik.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Kolom_Nik.DefaultCellStyle = DataGridViewCellStyle1
+        Me.Kolom_Nik.HeaderText = "NIK"
+        Me.Kolom_Nik.Name = "Kolom_Nik"
+        Me.Kolom_Nik.ReadOnly = True
+        Me.Kolom_Nik.Width = 50
+        '
+        'Kolom_Nama
+        '
+        Me.Kolom_Nama.HeaderText = "Nama Lengkap"
+        Me.Kolom_Nama.Name = "Kolom_Nama"
+        Me.Kolom_Nama.ReadOnly = True
+        '
+        'kolom_dep
+        '
+        Me.kolom_dep.HeaderText = "Department"
+        Me.kolom_dep.Name = "kolom_dep"
+        Me.kolom_dep.ReadOnly = True
+        '
         'Panel4
         '
         Me.Panel4.BackColor = System.Drawing.SystemColors.Control
@@ -678,39 +719,6 @@ Partial Class RegisterMaster
         'OpenFileDialogImport
         '
         Me.OpenFileDialogImport.FileName = "OpenFileDialog1"
-        '
-        'cb_createPosisi
-        '
-        Me.cb_createPosisi.BackColor = System.Drawing.Color.Cyan
-        Me.cb_createPosisi.Enabled = False
-        Me.cb_createPosisi.FormattingEnabled = True
-        Me.cb_createPosisi.Items.AddRange(New Object() {"Operator"})
-        Me.cb_createPosisi.Location = New System.Drawing.Point(396, 113)
-        Me.cb_createPosisi.Name = "cb_createPosisi"
-        Me.cb_createPosisi.Size = New System.Drawing.Size(110, 21)
-        Me.cb_createPosisi.TabIndex = 44
-        '
-        'Kolom_Nik
-        '
-        Me.Kolom_Nik.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Kolom_Nik.DefaultCellStyle = DataGridViewCellStyle1
-        Me.Kolom_Nik.HeaderText = "NIK"
-        Me.Kolom_Nik.Name = "Kolom_Nik"
-        Me.Kolom_Nik.ReadOnly = True
-        Me.Kolom_Nik.Width = 50
-        '
-        'Kolom_Nama
-        '
-        Me.Kolom_Nama.HeaderText = "Nama Lengkap"
-        Me.Kolom_Nama.Name = "Kolom_Nama"
-        Me.Kolom_Nama.ReadOnly = True
-        '
-        'kolom_dep
-        '
-        Me.kolom_dep.HeaderText = "Department"
-        Me.kolom_dep.Name = "kolom_dep"
-        Me.kolom_dep.ReadOnly = True
         '
         'RegisterMaster
         '

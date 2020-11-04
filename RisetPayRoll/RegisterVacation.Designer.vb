@@ -285,6 +285,7 @@ Partial Class RegisterVacation
         '
         'cb_dep
         '
+        Me.cb_dep.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_dep.FormattingEnabled = True
         Me.cb_dep.Items.AddRange(New Object() {"PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING", "SMD"})
         Me.cb_dep.Location = New System.Drawing.Point(414, 4)
@@ -460,6 +461,7 @@ Partial Class RegisterVacation
         'cb_holtype
         '
         Me.cb_holtype.BackColor = System.Drawing.Color.Cyan
+        Me.cb_holtype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_holtype.FormattingEnabled = True
         Me.cb_holtype.Items.AddRange(New Object() {"Permission", "Sick", "No permission"})
         Me.cb_holtype.Location = New System.Drawing.Point(144, 150)
@@ -590,14 +592,14 @@ Partial Class RegisterVacation
         Me.tb_emp.Size = New System.Drawing.Size(110, 20)
         Me.tb_emp.TabIndex = 0
         '
-        'Label19
+        'b_search
         '
-        Me.Label19.AutoSize = True
-        Me.Label19.ForeColor = System.Drawing.Color.Red
-        Me.Label19.Location = New System.Drawing.Point(274, 70)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(0, 13)
-        Me.Label19.TabIndex = 57
+        Me.b_search.Location = New System.Drawing.Point(555, 3)
+        Me.b_search.Name = "b_search"
+        Me.b_search.Size = New System.Drawing.Size(63, 22)
+        Me.b_search.TabIndex = 15
+        Me.b_search.Text = "Search"
+        Me.b_search.UseVisualStyleBackColor = True
         '
         'RegisterVacation
         '

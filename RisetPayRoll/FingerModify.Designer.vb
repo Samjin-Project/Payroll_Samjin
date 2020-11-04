@@ -36,6 +36,10 @@ Partial Class FingerModify
         Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DGV_DataModify = New System.Windows.Forms.DataGridView()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.total = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.Label18 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.cb_shift = New System.Windows.Forms.ComboBox()
@@ -128,6 +132,46 @@ Partial Class FingerModify
         Me.Panel1.Size = New System.Drawing.Size(1370, 472)
         Me.Panel1.TabIndex = 18
         '
+        'Panel5
+        '
+        Me.Panel5.BackColor = System.Drawing.Color.Blue
+        Me.Panel5.Controls.Add(Me.total)
+        Me.Panel5.Controls.Add(Me.Label17)
+        Me.Panel5.Controls.Add(Me.Label18)
+        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel5.Location = New System.Drawing.Point(0, 447)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(1370, 25)
+        Me.Panel5.TabIndex = 19
+        '
+        'total
+        '
+        Me.total.AutoSize = True
+        Me.total.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.total.Location = New System.Drawing.Point(160, 6)
+        Me.total.Name = "total"
+        Me.total.Size = New System.Drawing.Size(0, 13)
+        Me.total.TabIndex = 20
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.ForeColor = System.Drawing.Color.White
+        Me.Label17.Location = New System.Drawing.Point(89, 6)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(35, 13)
+        Me.Label17.TabIndex = 14
+        Me.Label17.Text = "Count"
+        '
+        'Label18
+        '
+        Me.Label18.ForeColor = System.Drawing.Color.White
+        Me.Label18.Location = New System.Drawing.Point(3, 6)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(45, 13)
+        Me.Label18.TabIndex = 13
+        Me.Label18.Text = "Total"
+        '
         'Label14
         '
         Me.Label14.AutoSize = True
@@ -149,6 +193,7 @@ Partial Class FingerModify
         '
         'cb_shift
         '
+        Me.cb_shift.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_shift.FormattingEnabled = True
         Me.cb_shift.Items.AddRange(New Object() {"SHIFT1", "SHIFT2", "SHIFT3", "PENDEK1", "PENDEK2", "PENDEK3", "SIANG", "MALAM", "NONSHIFT", "ALL"})
         Me.cb_shift.Location = New System.Drawing.Point(91, 30)
@@ -245,6 +290,24 @@ Partial Class FingerModify
         Me.Label1.TabIndex = 40
         Me.Label1.Text = "Division"
         '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(587, 32)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(67, 13)
+        Me.Label2.TabIndex = 44
+        Me.Label2.Text = "Admin Name"
+        '
+        'cb_name
+        '
+        Me.cb_name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cb_name.FormattingEnabled = True
+        Me.cb_name.Location = New System.Drawing.Point(660, 29)
+        Me.cb_name.Name = "cb_name"
+        Me.cb_name.Size = New System.Drawing.Size(155, 21)
+        Me.cb_name.TabIndex = 43
+        '
         'Label3
         '
         Me.Label3.AutoSize = True
@@ -256,6 +319,7 @@ Partial Class FingerModify
         '
         'cb_dep
         '
+        Me.cb_dep.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_dep.FormattingEnabled = True
         Me.cb_dep.Location = New System.Drawing.Point(660, 2)
         Me.cb_dep.Name = "cb_dep"
@@ -388,175 +452,6 @@ Partial Class FingerModify
         Me.dt_day.Name = "dt_day"
         Me.dt_day.Size = New System.Drawing.Size(156, 20)
         Me.dt_day.TabIndex = 20
-        '
-        'Label18
-        '
-        Me.Label18.ForeColor = System.Drawing.Color.White
-        Me.Label18.Location = New System.Drawing.Point(3, 6)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(45, 13)
-        Me.Label18.TabIndex = 13
-        Me.Label18.Text = "Total"
-        '
-        'Label17
-        '
-        Me.Label17.AutoSize = True
-        Me.Label17.ForeColor = System.Drawing.Color.White
-        Me.Label17.Location = New System.Drawing.Point(89, 6)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(35, 13)
-        Me.Label17.TabIndex = 14
-        Me.Label17.Text = "Count"
-        '
-        'total
-        '
-        Me.total.AutoSize = True
-        Me.total.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.total.Location = New System.Drawing.Point(160, 6)
-        Me.total.Name = "total"
-        Me.total.Size = New System.Drawing.Size(0, 13)
-        Me.total.TabIndex = 20
-        '
-        'Panel5
-        '
-        Me.Panel5.BackColor = System.Drawing.Color.Blue
-        Me.Panel5.Controls.Add(Me.total)
-        Me.Panel5.Controls.Add(Me.Label17)
-        Me.Panel5.Controls.Add(Me.Label18)
-        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel5.Location = New System.Drawing.Point(0, 447)
-        Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(1370, 25)
-        Me.Panel5.TabIndex = 19
-        '
-        'kolom_No
-        '
-        Me.kolom_No.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.kolom_No.DefaultCellStyle = DataGridViewCellStyle13
-        Me.kolom_No.HeaderText = "No"
-        Me.kolom_No.Name = "kolom_No"
-        Me.kolom_No.ReadOnly = True
-        Me.kolom_No.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.kolom_No.Width = 40
-        '
-        'Kolom_Check
-        '
-        Me.Kolom_Check.FillWeight = 71.42857!
-        Me.Kolom_Check.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Kolom_Check.HeaderText = "Check"
-        Me.Kolom_Check.Name = "Kolom_Check"
-        '
-        'Kolom_No_Emp
-        '
-        Me.Kolom_No_Emp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Kolom_No_Emp.DefaultCellStyle = DataGridViewCellStyle14
-        Me.Kolom_No_Emp.HeaderText = "Emp. No."
-        Me.Kolom_No_Emp.Name = "Kolom_No_Emp"
-        Me.Kolom_No_Emp.ReadOnly = True
-        Me.Kolom_No_Emp.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.Kolom_No_Emp.Width = 57
-        '
-        'Kolom_Nama
-        '
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Kolom_Nama.DefaultCellStyle = DataGridViewCellStyle15
-        Me.Kolom_Nama.FillWeight = 102.381!
-        Me.Kolom_Nama.HeaderText = "Name"
-        Me.Kolom_Nama.Name = "Kolom_Nama"
-        Me.Kolom_Nama.ReadOnly = True
-        Me.Kolom_Nama.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Kolom_Day
-        '
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Kolom_Day.DefaultCellStyle = DataGridViewCellStyle16
-        Me.Kolom_Day.FillWeight = 102.381!
-        Me.Kolom_Day.HeaderText = "Day"
-        Me.Kolom_Day.Name = "Kolom_Day"
-        Me.Kolom_Day.ReadOnly = True
-        Me.Kolom_Day.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Kolom_Shift
-        '
-        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Kolom_Shift.DefaultCellStyle = DataGridViewCellStyle17
-        Me.Kolom_Shift.FillWeight = 102.381!
-        Me.Kolom_Shift.HeaderText = "SHIFT"
-        Me.Kolom_Shift.Name = "Kolom_Shift"
-        Me.Kolom_Shift.ReadOnly = True
-        Me.Kolom_Shift.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Kolom_InOut
-        '
-        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Kolom_InOut.DefaultCellStyle = DataGridViewCellStyle18
-        Me.Kolom_InOut.FillWeight = 102.381!
-        Me.Kolom_InOut.HeaderText = "Check In Or Out"
-        Me.Kolom_InOut.Name = "Kolom_InOut"
-        Me.Kolom_InOut.ReadOnly = True
-        Me.Kolom_InOut.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Kolom_FingerTime
-        '
-        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Kolom_FingerTime.DefaultCellStyle = DataGridViewCellStyle19
-        Me.Kolom_FingerTime.FillWeight = 102.381!
-        Me.Kolom_FingerTime.HeaderText = "Finger Time"
-        Me.Kolom_FingerTime.Name = "Kolom_FingerTime"
-        Me.Kolom_FingerTime.ReadOnly = True
-        Me.Kolom_FingerTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Kolom_RecTime
-        '
-        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle20.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle20.ForeColor = System.Drawing.Color.Red
-        DataGridViewCellStyle20.Format = "t"
-        DataGridViewCellStyle20.NullValue = Nothing
-        Me.Kolom_RecTime.DefaultCellStyle = DataGridViewCellStyle20
-        Me.Kolom_RecTime.FillWeight = 102.381!
-        Me.Kolom_RecTime.HeaderText = "Recognized Time"
-        Me.Kolom_RecTime.Name = "Kolom_RecTime"
-        Me.Kolom_RecTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'cb_finger
-        '
-        Me.cb_finger.FillWeight = 102.381!
-        Me.cb_finger.HeaderText = "Finger"
-        Me.cb_finger.Name = "cb_finger"
-        Me.cb_finger.ReadOnly = True
-        '
-        'kolom_departement
-        '
-        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.kolom_departement.DefaultCellStyle = DataGridViewCellStyle21
-        Me.kolom_departement.FillWeight = 102.381!
-        Me.kolom_departement.HeaderText = "Departement"
-        Me.kolom_departement.Name = "kolom_departement"
-        Me.kolom_departement.ReadOnly = True
-        Me.kolom_departement.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'kolom_upload_date
-        '
-        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.kolom_upload_date.DefaultCellStyle = DataGridViewCellStyle22
-        Me.kolom_upload_date.FillWeight = 102.381!
-        Me.kolom_upload_date.HeaderText = "Upload Date"
-        Me.kolom_upload_date.Name = "kolom_upload_date"
-        Me.kolom_upload_date.ReadOnly = True
-        Me.kolom_upload_date.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'kolom_upload_emp
-        '
-        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.kolom_upload_emp.DefaultCellStyle = DataGridViewCellStyle23
-        Me.kolom_upload_emp.FillWeight = 102.381!
-        Me.kolom_upload_emp.HeaderText = "Upload Emp"
-        Me.kolom_upload_emp.Name = "kolom_upload_emp"
-        Me.kolom_upload_emp.ReadOnly = True
-        Me.kolom_upload_emp.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'FingerModify
         '
