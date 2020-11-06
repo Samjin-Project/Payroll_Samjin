@@ -292,21 +292,21 @@ Partial Class FingerModify
         '
         'Label2
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(587, 32)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(67, 13)
-        Me.Label2.TabIndex = 44
-        Me.Label2.Text = "Admin Name"
+        'Me.Label2.AutoSize = True
+        'Me.Label2.Location = New System.Drawing.Point(587, 32)
+        'Me.Label2.Name = "Label2"
+        'Me.Label2.Size = New System.Drawing.Size(67, 13)
+        'Me.Label2.TabIndex = 44
+        'Me.Label2.Text = "Admin Name"
         '
         'cb_name
         '
-        Me.cb_name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cb_name.FormattingEnabled = True
-        Me.cb_name.Location = New System.Drawing.Point(660, 29)
-        Me.cb_name.Name = "cb_name"
-        Me.cb_name.Size = New System.Drawing.Size(155, 21)
-        Me.cb_name.TabIndex = 43
+        'Me.cb_name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        'Me.cb_name.FormattingEnabled = True
+        'Me.cb_name.Location = New System.Drawing.Point(660, 29)
+        'Me.cb_name.Name = "cb_name"
+        'Me.cb_name.Size = New System.Drawing.Size(155, 21)
+        'Me.cb_name.TabIndex = 43
         '
         'Label3
         '
