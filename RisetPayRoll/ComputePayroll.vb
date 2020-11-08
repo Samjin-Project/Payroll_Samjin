@@ -265,7 +265,7 @@ Public Class ComputePayroll
         End If
         ExcelColName = S
     End Function
-    Private Sub ComputePayroll_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub ComputePayroll_Load(sender As Object, e As EventArgs) 'Handles MyBase.Load
         Dim flag As Boolean = False
         MDIParent1.TreeView1.Enabled = flag
         MDIParent1.MenuStrip.Enabled = flag
@@ -397,7 +397,12 @@ Public Class ComputePayroll
         tb_posisi.Text = ""
 
         dt_month.Value = Now
-        Dim querycmd As String = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Status_Karyawan` FROM `master employer`"
+        Dim querycmd As String
+        If ComboBoxDep.Text = "ALL" Or ComboBoxDep.Text = "" Then
+            querycmd = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Status_Karyawan` FROM `master employer`"
+        Else
+            querycmd = $"SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Status_Karyawan` FROM `master employer` WHERE `Department` = '{ComboBoxDep.Text}'"
+        End If
         showEmployelist(querycmd)
     End Sub
 
@@ -606,7 +611,5 @@ Public Class ComputePayroll
         End If
     End Sub
 
-    Private Sub DGV_ReviewDaily_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_ReviewDaily.CellContentClick
 
-    End Sub
 End Class

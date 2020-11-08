@@ -24,12 +24,12 @@ Partial Class RegisterMaster
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.b_search = New System.Windows.Forms.Button()
-        Me.b_clear = New System.Windows.Forms.Button()
         Me.dt_masuk = New System.Windows.Forms.DateTimePicker()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
@@ -97,6 +97,7 @@ Partial Class RegisterMaster
         '
         Me.Panel1.BackColor = System.Drawing.SystemColors.Control
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel1.Controls.Add(Me.Button2)
         Me.Panel1.Controls.Add(Me.Label16)
         Me.Panel1.Controls.Add(Me.GroupBox2)
         Me.Panel1.Controls.Add(Me.GroupBox1)
@@ -106,6 +107,15 @@ Partial Class RegisterMaster
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(992, 134)
         Me.Panel1.TabIndex = 0
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(489, 102)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(57, 23)
+        Me.Button2.TabIndex = 33
+        Me.Button2.Text = "Retrieve"
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'Label16
         '
@@ -140,7 +150,6 @@ Partial Class RegisterMaster
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.b_search)
-        Me.GroupBox1.Controls.Add(Me.b_clear)
         Me.GroupBox1.Controls.Add(Me.dt_masuk)
         Me.GroupBox1.Controls.Add(Me.Label14)
         Me.GroupBox1.Controls.Add(Me.Label15)
@@ -156,21 +165,12 @@ Partial Class RegisterMaster
         '
         'b_search
         '
-        Me.b_search.Location = New System.Drawing.Point(343, 51)
+        Me.b_search.Location = New System.Drawing.Point(446, 51)
         Me.b_search.Name = "b_search"
         Me.b_search.Size = New System.Drawing.Size(57, 23)
         Me.b_search.TabIndex = 32
         Me.b_search.Text = "Search"
         Me.b_search.UseVisualStyleBackColor = True
-        '
-        'b_clear
-        '
-        Me.b_clear.Location = New System.Drawing.Point(446, 51)
-        Me.b_clear.Name = "b_clear"
-        Me.b_clear.Size = New System.Drawing.Size(57, 23)
-        Me.b_clear.TabIndex = 31
-        Me.b_clear.Text = "Clear"
-        Me.b_clear.UseVisualStyleBackColor = True
         '
         'dt_masuk
         '
@@ -203,7 +203,7 @@ Partial Class RegisterMaster
         '
         Me.cb_jk.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_jk.FormattingEnabled = True
-        Me.cb_jk.Items.AddRange(New Object() {"Laki-Laki", "Perempuan"})
+        Me.cb_jk.Items.AddRange(New Object() {"Laki-Laki", "Perempuan", "All"})
         Me.cb_jk.Location = New System.Drawing.Point(97, 48)
         Me.cb_jk.Name = "cb_jk"
         Me.cb_jk.Size = New System.Drawing.Size(155, 21)
@@ -316,7 +316,7 @@ Partial Class RegisterMaster
         Me.cb_dep.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_dep.Enabled = False
         Me.cb_dep.FormattingEnabled = True
-        Me.cb_dep.Items.AddRange(New Object() {"Laki-laki", "Perempuan"})
+        Me.cb_dep.Items.AddRange(New Object() {"PCBA", "Rubber", "Moulding", "Assembling", "Purchasing", "SMD"})
         Me.cb_dep.Location = New System.Drawing.Point(396, 152)
         Me.cb_dep.Name = "cb_dep"
         Me.cb_dep.Size = New System.Drawing.Size(110, 21)
@@ -340,7 +340,7 @@ Partial Class RegisterMaster
         Me.cb_stat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_stat.Enabled = False
         Me.cb_stat.FormattingEnabled = True
-        Me.cb_stat.Items.AddRange(New Object() {"Magang"})
+        Me.cb_stat.Items.AddRange(New Object() {"Magang", "Finish Contract", "Resign"})
         Me.cb_stat.Location = New System.Drawing.Point(396, 191)
         Me.cb_stat.Name = "cb_stat"
         Me.cb_stat.Size = New System.Drawing.Size(110, 21)
@@ -784,7 +784,6 @@ Partial Class RegisterMaster
     Friend WithEvents Label18 As Label
     Friend WithEvents OpenFileDialogImport As OpenFileDialog
     Friend WithEvents total_data As Label
-    Friend WithEvents b_clear As Button
     Friend WithEvents b_save As Button
     Friend WithEvents b_edit As Button
     Friend WithEvents Label19 As Label
@@ -808,4 +807,5 @@ Partial Class RegisterMaster
     Friend WithEvents Kolom_Nik As DataGridViewTextBoxColumn
     Friend WithEvents Kolom_Nama As DataGridViewTextBoxColumn
     Friend WithEvents kolom_dep As DataGridViewTextBoxColumn
+    Friend WithEvents Button2 As Button
 End Class

@@ -160,20 +160,20 @@ Public Class RegisterMaster
             Dim tglMasuk As Date = DateTime.ParseExact(ds.Tables(0).Rows(0).Item(10), "yyyy-MM-dd", Nothing)
             Dim tglKeluar As String = ds.Tables(0).Rows(0).Item(11).ToString
             Dim syaratOut As Integer = 0
-
+            Debug.WriteLine(tglKeluar)
             If tglKeluar.Substring(0, 2).Contains("/") Then
                 syaratOut = CInt(tglKeluar.Substring(4, 4))
             Else
                 syaratOut = CInt(tglKeluar.Substring(6, 4))
-
             End If
-
+            Debug.WriteLine(syaratOut)
             Console.WriteLine("tglOut" + ds.Tables(0).Rows(0).Item(11))
             If syaratOut = 1 Then
-                dt_createKeluar.Format = DateTimePickerFormat.Custom
+                'dt_createKeluar.Format = DateTimePickerFormat.Custom
                 dt_createKeluar.CustomFormat = " "
+                Debug.WriteLine("test 1")
             Else
-                Debug.WriteLine("test")
+                Debug.WriteLine("test 0")
                 dt_createKeluar.CustomFormat = "dd/MM/yyyy"
                 dt_createKeluar.Value = New Date(CInt(tglKeluar.Substring(6, 4)), CInt(tglKeluar.Substring(3, 2)), CInt(tglKeluar.Substring(0, 2)))
             End If
@@ -270,19 +270,6 @@ Public Class RegisterMaster
             clearData()
         End If
     End Sub
-    Private Sub b_clear_Click(sender As Object, e As EventArgs) Handles b_clear.Click
-        dt_masuk.Value = Now
-        cb_jk.Text = ""
-        cb_department.Text = ""
-        tb_emp.Text = ""
-        Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master employer`"
-        dataOnReview(QueryCMD)
-        DGV_Setting_Display()
-        dt_masuk.Format = DateTimePickerFormat.Custom
-        dt_masuk.CustomFormat = " "
-        b_edit.Enabled = False
-        clearData()
-    End Sub
 
     Private Sub b_create_Click(sender As Object, e As EventArgs) Handles b_create.Click
         clearData()
@@ -291,7 +278,8 @@ Public Class RegisterMaster
         b_create.Enabled = False
         b_edit.Enabled = False
         f_create = True
-        dataFill()
+        DGV_ReviewMaster.Enabled = False
+        dataFill("c")
     End Sub
 
     Private Sub b_cancel_Click(sender As Object, e As EventArgs) Handles b_cancel.Click
@@ -312,10 +300,12 @@ Public Class RegisterMaster
             b_save.Visible = True
             b_cancel.Visible = True
         End If
+        DGV_ReviewMaster.Enabled = True
+
     End Sub
 
     Private Sub b_save_Click(sender As Object, e As EventArgs) Handles b_save.Click
-        Dim queryAll As String = "SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master employer`"
+        Dim queryAll As String = "SELECT `NIK`, `Nama_Karyawan`, `Department` FROM `master employer`"
         If tb_empDet.Text = "" Or tb_nama.Text = "" Or cb_createJK.Text = "" Or tb_pob.Text = "" Or tb_pend.Text = "" Or cb_bpjs.Text = "" Or cb_createPosisi.Text = "" Or cb_dep.Text = "" Or cb_stat.Text = "" Or tb_salary.Text = "" Or cb_aktif.Text = "" Then
             MsgBox("Data tidak boleh kosong !", MsgBoxStyle.Exclamation)
         Else
@@ -349,6 +339,7 @@ Public Class RegisterMaster
                 b_cancel.Visible = False
                 b_create.Enabled = True
             End If
+            DGV_ReviewMaster.Enabled = True
             f_create = False
             f_edit = False
         End If
@@ -360,10 +351,11 @@ Public Class RegisterMaster
         b_cancel.Visible = True
         b_edit.Enabled = False
         f_edit = True
-        dataFill()
+        DGV_ReviewMaster.Enabled = False
+        dataFill("e")
     End Sub
 
-    Private Sub dataFill()
+    Private Sub dataFill(ByVal proses As String)
         tb_empDet.ReadOnly = False
         tb_nama.ReadOnly = False
         tb_pob.ReadOnly = False
@@ -372,8 +364,20 @@ Public Class RegisterMaster
         cb_dep.Enabled = True
         cb_stat.Enabled = True
         tb_salary.ReadOnly = False
-        dt_createKeluar.Enabled = True
-        dt_createKeluar.CustomFormat = "dd/MM/yyyy"
+        If proses = "c" Then
+            cb_aktif.Text = "Ya"
+            dt_createKeluar.Enabled = False
+            dt_createKeluar.CustomFormat = " "
+        Else
+            If cb_aktif.Text = "Tidak" Then
+                Debug.WriteLine("ini ada")
+                dt_createKeluar.Enabled = True
+                dt_createKeluar.CustomFormat = "dd/MM/yyyy"
+            Else
+                dt_createKeluar.Enabled = False
+                dt_createKeluar.CustomFormat = " "
+            End If
+        End If
         dt_createMasuk.Enabled = True
         dt_createMasuk.CustomFormat = "dd/MM/yyyy"
         dt_lahir.Enabled = True
@@ -434,8 +438,29 @@ Public Class RegisterMaster
             jk = "P"
         End If
         Dim funcDB As DataBaseClass = New DataBaseClass
-        Dim AC_No As String = tb_empDet.Text.Substring(1, 6)
-        Dim masterQuery As String = $"INSERT INTO `master employer`(`AC_Nomor`,`NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Department`, `Tempat_Lahir`, `Tanggal_Lahir`, `Jenis_Kelamin`, `Pendidikan_Karyawan`, `Tanggal_Masuk`,`Tanggal_Keluar`, `Salary`, `BPJS`, `Aktif`) 
+
+        If tb_empDet.TextLength = 6 Or tb_empDet.TextLength = 7 Then
+            Dim x As Integer = 0
+            If tb_empDet.TextLength = 6 Then
+                x = 5
+            Else
+                x = 6
+            End If
+
+            Dim createOut As String
+            If dt_createKeluar.Enabled = False Then
+                createOut = ""
+            Else
+                createOut = dt_createKeluar.Value.ToString("yyyy-MM-dd")
+            End If
+            Dim aktive As String
+            If cb_aktif.Text = "Ya" Then
+                aktive = "1"
+            Else
+                aktive = "0"
+            End If
+            Dim AC_No As String = tb_empDet.Text.Substring(1, x)
+            Dim masterQuery As String = $"INSERT INTO `master employer`(`AC_Nomor`,`NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Department`, `Tempat_Lahir`, `Tanggal_Lahir`, `Jenis_Kelamin`, `Pendidikan_Karyawan`, `Tanggal_Masuk`,`Tanggal_Keluar`,`Status_Karyawan`, `Salary`, `StatusBPJS`, `StatusAktive`) 
                  VALUES ('{AC_No}',
                          '{tb_empDet.Text}',
                          '{tb_nama.Text}',
@@ -446,14 +471,19 @@ Public Class RegisterMaster
                          '{jk}',
                          '{tb_pend.Text}',
                          '{dt_createMasuk.Value.ToString("yyyy-MM-dd")}',
-                         '{dt_createKeluar.Value.ToString("yyyy-MM-dd")}',
-                         '{cb_stat.Text}'
-                         '{tb_salary.Text}'
-                         '{cb_bpjs.Text}'
-                         '{cb_aktif.Text}')"
-        Console.WriteLine("DB Query : " + masterQuery)
-        funcDB.uploadDB(masterQuery)
-        MsgBox("Data already uploaded")
+                         '{createOut}',
+                         '{cb_stat.Text}',
+                         '{tb_salary.Text}',
+                         '{cb_bpjs.Text}',
+                         '{aktive}')"
+            Console.WriteLine("DB Query : " + masterQuery)
+            funcDB.uploadDB(masterQuery)
+            MsgBox("Data already uploaded")
+
+        Else
+            MsgBox("Wrong Input NIK")
+        End If
+
     End Sub
 
     Private Sub updateData()
@@ -481,8 +511,22 @@ Public Class RegisterMaster
             aktif = "0"
         End If
 
-        Dim AC_No As String = tb_empDet.Text.Substring(1, 6)
-        Dim masterQuery As String = $"UPDATE `master employer` SET `AC_Nomor` ='{AC_No}',
+        If tb_empDet.TextLength = 6 Or tb_empDet.TextLength = 7 Then
+            Dim x As Integer = 0
+            If tb_empDet.TextLength = 6 Then
+                x = 5
+            Else
+                x = 6
+            End If
+            Dim createOut As String
+            If dt_createKeluar.Enabled = False Then
+                createOut = ""
+            Else
+                createOut = dt_createKeluar.Value.ToString("yyyy-MM-dd")
+            End If
+
+            Dim AC_No As String = tb_empDet.Text.Substring(1, x)
+            Dim masterQuery As String = $"UPDATE `master employer` SET `AC_Nomor` ='{AC_No}',
                                              `NIK`='{tb_empDet.Text}', 
                                              `Nama_Karyawan`='{tb_nama.Text}', 
                                              `Posisi_Karyawan`='{cb_createPosisi.Text}', 
@@ -492,22 +536,29 @@ Public Class RegisterMaster
                                              `Jenis_Kelamin`='{jk}', 
                                              `Pendidikan_Karyawan`='{tb_pend.Text}', 
                                              `Tanggal_Masuk`='{dt_createMasuk.Value.ToString("yyyy-MM-dd")}',
-                                             `Tanggal_Keluar`='{dt_createKeluar.Value.ToString("yyyy-MM-dd")}', 
+                                             `Tanggal_Keluar`='{createOut}', 
+                                             `Status_Karyawan`='{cb_stat.Text}',
                                              `Salary`='{tb_salary.Text}', 
                                              `StatusBPJS`='{cb_bpjs.Text}', 
                                              `StatusAktive`= '{cb_aktif.Text}'
                                     WHERE `NIK` = '{nik}'"
-        Console.WriteLine("DB Query : " + masterQuery)
-        funcDB.uploadDB(masterQuery)
-        MsgBox("Data already updated")
+            Console.WriteLine("DB Query : " + masterQuery)
+            funcDB.uploadDB(masterQuery)
+            MsgBox("Data already updated")
+        Else
+            MsgBox("Wrong Input NIK")
+        End If
+
     End Sub
 
 
     Private Sub DGV_ReviewMaster_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_ReviewMaster.CellClick
-        Dim Nik As String = DGV_ReviewMaster.Rows(e.RowIndex).Cells(0).Value
-        detailDataMaster(Nik)
-        b_edit.Enabled = True
-        r_index = e.RowIndex
+        If e.RowIndex <> -1 Then
+            Dim Nik As String = DGV_ReviewMaster.Rows(e.RowIndex).Cells(0).Value
+            detailDataMaster(Nik)
+            b_edit.Enabled = True
+            r_index = e.RowIndex
+        End If
     End Sub
 
     Private Sub dt_createKeluar_ValueChanged(sender As Object, e As EventArgs) Handles dt_createKeluar.ValueChanged
@@ -523,7 +574,7 @@ Public Class RegisterMaster
             jk = "L"
         ElseIf cb_jk.Text = "Perempuan" Then
             jk = "P"
-        Else
+        ElseIf cb_jk.Text = "All" Or cb_jk.Text = "" Then
             jk = ""
         End If
         filterData(dep, jk, masuk)
@@ -534,4 +585,38 @@ Public Class RegisterMaster
         dt_masuk.Format = DateTimePickerFormat.Custom
         dt_masuk.CustomFormat = "dd/MM/yyyy"
     End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `Department` FROM `master employer`"
+        dataOnReview(QueryCMD)
+        DGV_Setting_Display()
+        clearData()
+
+        dt_masuk.CustomFormat = " "
+
+        'button
+        b_save.Visible = False
+        b_edit.Enabled = False
+        b_cancel.Visible = False
+        b_create.Enabled = True
+    End Sub
+
+    Private Sub cb_aktif_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_aktif.SelectedIndexChanged
+        Dim cb As ComboBox = CType(sender, ComboBox)
+
+        If cb.Focused Then
+            If cb_aktif.Text = "Ya" Then
+                Debug.WriteLine("ada")
+                dt_createKeluar.Format = DateTimePickerFormat.Custom
+                dt_createKeluar.CustomFormat = " "
+                dt_createKeluar.Enabled = False
+            Else
+                dt_createKeluar.Format = DateTimePickerFormat.Custom
+                dt_createKeluar.CustomFormat = "dd/MM/yyyy"
+                dt_createKeluar.Enabled = True
+            End If
+
+        End If
+    End Sub
+
 End Class

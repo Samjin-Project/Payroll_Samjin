@@ -82,7 +82,7 @@ Public Class DailyAttendance
         Dim tanggalNow As Integer = dtTanggal
         Debug.WriteLine("rows count " + DGV_SideDaily1.Rows.Count.ToString)
         Try
-            If DGV_SideDaily1.Rows.Count > 1 Then
+            If DGV_SideDaily1.Rows.Count >= 1 Then
                 Dim indexRows As Integer = DGV_SideDaily1.CurrentRow.Index
                 Dim query As String = QueryCMDKosong + $"'{DGV_SideDaily1.Rows(indexRows).Cells(0).Value}'"
                 Dim dsKosong As DataSet = DBClass.downloadDB(query)
@@ -794,6 +794,20 @@ Public Class DailyAttendance
             If DGV_SideDaily1.Rows.Count <> 0 Then
                 Dim nikSyarat As String = DGV_SideDaily1.Rows(0).Cells(0).Value
                 Dim queryGetData As String = $"{queryAll} WHERE `NIK` = '{nikSyarat}' AND DATE_FORMAT(`Date`,""%m"") = {dt_create.Value.ToString("MM")}"
+                showDaily(queryGetData)
+            End If
+        End If
+    End Sub
+
+
+    Private Sub tb_empCreate_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles tb_empCreate.PreviewKeyDown
+        If e.KeyCode = Keys.Enter Then
+            DGV_SideDaily1.Rows.Clear()
+            DGV_ReviewDaily.Rows.Clear()
+            showEmploye($"{QueryCMD}  WHERE `NIK` = '{tb_empCreate.Text}'")
+            If DGV_SideDaily1.Rows.Count <> 0 Then
+                Dim nikSyarat As String = DGV_SideDaily1.Rows(0).Cells(0).Value
+                Dim queryGetData As String = $"{queryAll} WHERE `NIK` = '{nikSyarat}'"
                 showDaily(queryGetData)
             End If
         End If

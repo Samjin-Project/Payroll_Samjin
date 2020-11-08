@@ -144,6 +144,7 @@ Partial Class ListNoCheck
         Me.b_delete.TabIndex = 14
         Me.b_delete.Text = "Delete"
         Me.b_delete.UseVisualStyleBackColor = True
+        Me.b_delete.Visible = False
         '
         'b_showall
         '
