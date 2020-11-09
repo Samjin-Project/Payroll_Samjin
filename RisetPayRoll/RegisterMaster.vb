@@ -212,7 +212,7 @@ Public Class RegisterMaster
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim queryProses As String = "SELECT `status_proses` FROM `aktivitas_proses` WHERE `nama_proses` = `up_master`"
+        Dim queryProses As String = "SELECT `status_proses` FROM `aktivitas_proses` WHERE `nama_proses` = 'up_master'"
         Dim funcDB As DataBaseClass = New DataBaseClass
         Dim proses As DataSet = funcDB.downloadDB(queryProses)
         Dim status_proses As Integer = proses.Tables(0).Rows(0).Item(0)
