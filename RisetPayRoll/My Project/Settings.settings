@@ -3,16 +3,16 @@
   <Profiles />
   <Settings>
     <Setting Name="DB_Server" Type="System.String" Scope="User">
-      <Value Profile="(Default)">192.168.14.235</Value>
+      <Value Profile="(Default)">127.0.0.1</Value>
     </Setting>
     <Setting Name="DB_Name" Type="System.String" Scope="User">
       <Value Profile="(Default)">payroll_db</Value>
     </Setting>
     <Setting Name="DB_User" Type="System.String" Scope="User">
-      <Value Profile="(Default)">superuser</Value>
+      <Value Profile="(Default)">root</Value>
     </Setting>
     <Setting Name="DB_Pass" Type="System.String" Scope="User">
-      <Value Profile="(Default)">payrollsj75</Value>
+      <Value Profile="(Default)">Cicang04121996</Value>
     </Setting>
     <Setting Name="Reso_Width" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>

@@ -24,6 +24,7 @@ Partial Class RegisterMaster
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.CheckBoxRetired = New System.Windows.Forms.CheckBox()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -97,6 +98,7 @@ Partial Class RegisterMaster
         '
         Me.Panel1.BackColor = System.Drawing.SystemColors.Control
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel1.Controls.Add(Me.CheckBoxRetired)
         Me.Panel1.Controls.Add(Me.Button2)
         Me.Panel1.Controls.Add(Me.Label16)
         Me.Panel1.Controls.Add(Me.GroupBox2)
@@ -108,9 +110,19 @@ Partial Class RegisterMaster
         Me.Panel1.Size = New System.Drawing.Size(992, 134)
         Me.Panel1.TabIndex = 0
         '
+        'CheckBoxRetired
+        '
+        Me.CheckBoxRetired.AutoSize = True
+        Me.CheckBoxRetired.Location = New System.Drawing.Point(269, 106)
+        Me.CheckBoxRetired.Name = "CheckBoxRetired"
+        Me.CheckBoxRetired.Size = New System.Drawing.Size(60, 17)
+        Me.CheckBoxRetired.TabIndex = 34
+        Me.CheckBoxRetired.Text = "Retired"
+        Me.CheckBoxRetired.UseVisualStyleBackColor = True
+        '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(489, 102)
+        Me.Button2.Location = New System.Drawing.Point(580, 102)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(57, 23)
         Me.Button2.TabIndex = 33
@@ -121,7 +133,7 @@ Partial Class RegisterMaster
         '
         Me.Label16.AutoSize = True
         Me.Label16.ForeColor = System.Drawing.Color.Blue
-        Me.Label16.Location = New System.Drawing.Point(355, 107)
+        Me.Label16.Location = New System.Drawing.Point(446, 107)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(110, 13)
         Me.Label16.TabIndex = 27
@@ -236,13 +248,13 @@ Partial Class RegisterMaster
         Me.Panel3.Controls.Add(Me.Label10)
         Me.Panel3.Location = New System.Drawing.Point(4, 101)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(289, 26)
+        Me.Panel3.Size = New System.Drawing.Size(252, 26)
         Me.Panel3.TabIndex = 15
         '
         'tb_emp
         '
         Me.tb_emp.BackColor = System.Drawing.Color.White
-        Me.tb_emp.Location = New System.Drawing.Point(130, 3)
+        Me.tb_emp.Location = New System.Drawing.Point(93, 3)
         Me.tb_emp.Name = "tb_emp"
         Me.tb_emp.Size = New System.Drawing.Size(155, 20)
         Me.tb_emp.TabIndex = 11
@@ -251,7 +263,7 @@ Partial Class RegisterMaster
         '
         Me.Label12.AutoSize = True
         Me.Label12.ForeColor = System.Drawing.Color.White
-        Me.Label12.Location = New System.Drawing.Point(79, 6)
+        Me.Label12.Location = New System.Drawing.Point(42, 6)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(48, 13)
         Me.Label12.TabIndex = 14
@@ -808,4 +820,5 @@ Partial Class RegisterMaster
     Friend WithEvents Kolom_Nama As DataGridViewTextBoxColumn
     Friend WithEvents kolom_dep As DataGridViewTextBoxColumn
     Friend WithEvents Button2 As Button
+    Friend WithEvents CheckBoxRetired As CheckBox
 End Class

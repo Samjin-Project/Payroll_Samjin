@@ -12,7 +12,7 @@ Public Class RegisterMaster
         End Get
     End Property
     Private Sub RegisterMaster_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `Department` FROM `master employer`"
+        Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `Department`, `StatusAktive` FROM `master employer`"
         dataOnReview(QueryCMD)
         DGV_Setting_Display()
         clearData()
@@ -95,6 +95,7 @@ Public Class RegisterMaster
                     Else
                         admisionDateOut = Date.ParseExact(DS.Tables(0).Rows(i).Item(10).ToString, "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo).ToString("yyyy-MM-dd")
                     End If
+                    Debug.WriteLine(DS.Tables(0).Rows(i).Item(6))
                     Dim masterQuery As String = $"INSERT INTO `master employer`(`AC_nomor`,`NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Department`, `Tempat_Lahir`, `Tanggal_Lahir`, `Jenis_Kelamin`, `Pendidikan_Karyawan`, `Tanggal_Masuk`,`Tanggal_Keluar`, `Salary`,`StatusBpjs`,`StatusAktive`) 
                  VALUES ('{AC_no }',
                          '{DS.Tables(0).Rows(i).Item(1)}',
@@ -146,6 +147,10 @@ Public Class RegisterMaster
         For i As Integer = 0 To indexDs - 1
             Dim row As String() = New String() {ds.Tables(0).Rows(i).Item(0).ToString, ds.Tables(0).Rows(i).Item(1).ToString, ds.Tables(0).Rows(i).Item(2).ToString}
             DGV_ReviewMaster.Rows.Add(row)
+            Debug.WriteLine(ds.Tables(0).Rows(i).Item(3).ToString)
+            If ds.Tables(0).Rows(i).Item(3).ToString = "False" Then
+                DGV_ReviewMaster.Rows(i).DefaultCellStyle.ForeColor = Color.Blue
+            End If
             DGV_ReviewMaster.Rows(i).HeaderCell.Value = (i + 1).ToString
             If i Mod 2 = 1 Then
                 DGV_ReviewMaster.Rows(i).DefaultCellStyle.BackColor = Color.LightGray
@@ -161,7 +166,10 @@ Public Class RegisterMaster
         Dim indexDs As Integer = ds.Tables(0).Rows.Count
         'Console.WriteLine(ds.GetXml)
         If indexDs > 0 Then
-            Dim tglLahir As Date = DateTime.ParseExact(ds.Tables(0).Rows(0).Item(7), "dd/MM/yyyy", Nothing)
+            Debug.WriteLine(ds.Tables(0).Rows(0).Item(7))
+            Debug.WriteLine(ds.Tables(0).Rows(0).Item(10))
+
+            Dim tglLahir As Date = DateTime.ParseExact(ds.Tables(0).Rows(0).Item(7), "yyyy-MM-dd", Nothing)
             Dim tglMasuk As Date = DateTime.ParseExact(ds.Tables(0).Rows(0).Item(10), "yyyy-MM-dd", Nothing)
             Dim tglKeluar As String = ds.Tables(0).Rows(0).Item(11).ToString
             Dim syaratOut As Integer = 0
@@ -233,15 +241,24 @@ Public Class RegisterMaster
 
     End Sub
     Private Sub filterData(dep As String, jk As String, masuk As String)
-        Dim queryAll As String = "SELECT `NIK`, `Nama_Karyawan`, `Department` FROM `master employer`"
-        Dim querySortDep As String = $"{queryAll} WHERE `Department` = '{dep}'"
-        Dim querySortJK As String = $"{queryAll} WHERE `Jenis_Kelamin` = '{jk}'"
-        Dim querySortAll As String = $"{queryAll} WHERE `Jenis_Kelamin` = '{jk}'AND `Department` = '{dep}'"
+        Dim AktiveStatus As String
+        If CheckBoxRetired.Checked = True Then
+            AktiveStatus = ""
+        Else
+            AktiveStatus = " AND `StatusAktive` = '1'"
+        End If
 
-        Dim queryAllwTime As String = $"{queryAll} WHERE `Tanggal_Masuk` = '{masuk}'"
-        Dim querySortDepwTime As String = $"{queryAll} WHERE `Department` = '{dep}' AND `Tanggal_Masuk` = '{masuk}'"
-        Dim querySortJKwTime As String = $"{queryAll} WHERE `Jenis_Kelamin` = '{jk}' AND `Tanggal_Masuk` = '{masuk}'"
-        Dim querySortAllwTime As String = $"{queryAll} WHERE `Jenis_Kelamin` = '{jk}'AND `Department` = '{dep}' AND `Tanggal_Masuk` = '{masuk}'"
+        Dim queryAll As String = "SELECT `NIK`, `Nama_Karyawan`, `Department`, `StatusAktive` FROM `master employer`"
+        Dim querySortDep As String = $"{queryAll} WHERE `Department` = '{dep}'" + AktiveStatus
+        Dim querySortJK As String = $"{queryAll} WHERE `Jenis_Kelamin` = '{jk}'" + AktiveStatus
+        Dim querySortAll As String = $"{queryAll} WHERE `Jenis_Kelamin` = '{jk}'AND `Department` = '{dep}'" + AktiveStatus
+
+        Dim queryAllwTime As String = $"{queryAll} WHERE `Tanggal_Masuk` = '{masuk}'" + AktiveStatus
+        Dim querySortDepwTime As String = $"{queryAll} WHERE `Department` = '{dep}' AND `Tanggal_Masuk` = '{masuk}'" + AktiveStatus
+        Dim querySortJKwTime As String = $"{queryAll} WHERE `Jenis_Kelamin` = '{jk}' AND `Tanggal_Masuk` = '{masuk}'" + AktiveStatus
+        Dim querySortAllwTime As String = $"{queryAll} WHERE `Jenis_Kelamin` = '{jk}'AND `Department` = '{dep}' AND `Tanggal_Masuk` = '{masuk}'" + AktiveStatus
+
+
 
         Dim querycmd As String = ""
         If dt_masuk.Text = " " Then
@@ -270,10 +287,17 @@ Public Class RegisterMaster
     End Sub
     Private Sub tb_emp_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles tb_emp.PreviewKeyDown
         If e.KeyCode = Keys.Enter Then
+            Dim AktiveStatus As String
+            If CheckBoxRetired.Checked = True Then
+                AktiveStatus = ""
+            Else
+                AktiveStatus = " AND `StatusAktive` = '1'"
+            End If
+
             cb_jk.Text = ""
             cb_department.Text = ""
             Dim nik As String = tb_emp.Text
-            Dim querycmd As String = $"SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan` FROM `master employer` WHERE `NIK` = '{nik}'"
+            Dim querycmd As String = $"SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan`.`StatusAktive` FROM `master employer` WHERE `NIK` = '{nik}'" + AktiveStatus
             dataOnReview(querycmd)
             clearData()
         End If
@@ -313,7 +337,7 @@ Public Class RegisterMaster
     End Sub
 
     Private Sub b_save_Click(sender As Object, e As EventArgs) Handles b_save.Click
-        Dim queryAll As String = "SELECT `NIK`, `Nama_Karyawan`, `Department` FROM `master employer`"
+        Dim queryAll As String = "SELECT `NIK`, `Nama_Karyawan`, `Department`, `StatusAktive` FROM `master employer`"
         If tb_empDet.Text = "" Or tb_nama.Text = "" Or cb_createJK.Text = "" Or tb_pob.Text = "" Or tb_pend.Text = "" Or cb_bpjs.Text = "" Or cb_createPosisi.Text = "" Or cb_dep.Text = "" Or cb_stat.Text = "" Or tb_salary.Text = "" Or cb_aktif.Text = "" Then
             MsgBox("Data tidak boleh kosong !", MsgBoxStyle.Exclamation)
         Else
@@ -475,13 +499,13 @@ Public Class RegisterMaster
                          '{cb_createPosisi.Text}',
                          '{cb_dep.Text}',
                          '{tb_pob.Text}',
-                         '{dt_lahir.Value.ToString("dd/MM/yyyy")}',
+                         '{dt_lahir.Value.ToString("yyyy-MM-dd")}',
                          '{jk}',
                          '{tb_pend.Text}',
                          '{dt_createMasuk.Value.ToString("yyyy-MM-dd")}',
                          '{createOut}',
                          '{cb_stat.Text}',
-                         '{tb_salary.Text}',
+                         '{tb_salary.Text.Replace(".", "")}',
                          '{cb_bpjs.Text}',
                          '{aktive}')"
             Console.WriteLine("DB Query : " + masterQuery)
@@ -540,13 +564,13 @@ Public Class RegisterMaster
                                              `Posisi_Karyawan`='{cb_createPosisi.Text}', 
                                              `Department`='{cb_dep.Text}', 
                                              `Tempat_Lahir`='{tb_pob.Text}', 
-                                             `Tanggal_Lahir`='{dt_lahir.Value.ToString("dd/MM/yyyy")}', 
+                                             `Tanggal_Lahir`='{dt_lahir.Value.ToString("yyyy-MM-dd")}', 
                                              `Jenis_Kelamin`='{jk}', 
                                              `Pendidikan_Karyawan`='{tb_pend.Text}', 
                                              `Tanggal_Masuk`='{dt_createMasuk.Value.ToString("yyyy-MM-dd")}',
                                              `Tanggal_Keluar`='{createOut}', 
                                              `Status_Karyawan`='{cb_stat.Text}',
-                                             `Salary`='{tb_salary.Text}', 
+                                             `Salary`='{tb_salary.Text.Replace(".", "")}', 
                                              `StatusBPJS`='{cb_bpjs.Text}', 
                                              `StatusAktive`= '{cb_aktif.Text}'
                                     WHERE `NIK` = '{nik}'"
@@ -595,7 +619,13 @@ Public Class RegisterMaster
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `Department` FROM `master employer`"
+        Dim AktiveStatus As String
+        If CheckBoxRetired.Checked = True Then
+            AktiveStatus = ""
+        Else
+            AktiveStatus = "WHERE `StatusAktive` = '1'"
+        End If
+        Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `Department`,`StatusAktive` FROM `master employer`" + AktiveStatus
         dataOnReview(QueryCMD)
         DGV_Setting_Display()
         clearData()
@@ -627,4 +657,49 @@ Public Class RegisterMaster
         End If
     End Sub
 
+    Private Sub DGV_ReviewMaster_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles DGV_ReviewMaster.KeyDown, DGV_ReviewMaster.KeyUp
+        If e.KeyCode.Equals(Keys.Up) Then
+            moveUp()
+        End If
+
+        If e.KeyCode.Equals(Keys.Down) Then
+            moveDown()
+        End If
+
+        'e.Handled = True
+    End Sub
+
+    Private Sub moveUp()
+        If DGV_ReviewMaster.RowCount > 0 Then
+
+            If DGV_ReviewMaster.SelectedRows.Count > 0 Then
+                Dim rowCount As Integer = DGV_ReviewMaster.Rows.Count
+                Dim index As Integer = DGV_ReviewMaster.SelectedCells(0).OwningRow.Index
+
+                If index = 0 Then
+                    Return
+                End If
+                Dim Nik As String = DGV_ReviewMaster.Rows(index).Cells(0).Value
+                detailDataMaster(Nik)
+                b_edit.Enabled = True
+                r_index = index
+            End If
+        End If
+    End Sub
+
+    Private Sub moveDown()
+        If DGV_ReviewMaster.RowCount > 0 Then
+            If DGV_ReviewMaster.SelectedRows.Count > 0 Then
+                Dim index As Integer = DGV_ReviewMaster.SelectedCells(0).OwningRow.Index
+                Dim rowCount As Integer = DGV_ReviewMaster.Rows.Count
+                If index = (rowCount - 2) Then
+                    Return
+                End If
+                Dim Nik As String = DGV_ReviewMaster.Rows(index).Cells(0).Value
+                detailDataMaster(Nik)
+                b_edit.Enabled = True
+                r_index = index
+            End If
+        End If
+    End Sub
 End Class
