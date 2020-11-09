@@ -36,8 +36,11 @@ Partial Class ComputePayroll
         Me.KolomPayroll_Posisition = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.KolomPayroll_Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.b_export = New System.Windows.Forms.Button()
+        Me.ComboBoxDep = New System.Windows.Forms.ComboBox()
         Me.b_showall = New System.Windows.Forms.Button()
         Me.Label51 = New System.Windows.Forms.Label()
+        Me.Label48 = New System.Windows.Forms.Label()
         Me.Label46 = New System.Windows.Forms.Label()
         Me.tb_nameSearch = New System.Windows.Forms.TextBox()
         Me.Label45 = New System.Windows.Forms.Label()
@@ -101,9 +104,6 @@ Partial Class ComputePayroll
         Me.tb_posisi = New System.Windows.Forms.TextBox()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Panel8 = New System.Windows.Forms.Panel()
-        Me.ComboBoxDep = New System.Windows.Forms.ComboBox()
-        Me.b_export = New System.Windows.Forms.Button()
-        Me.Label48 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -237,13 +237,32 @@ Partial Class ComputePayroll
         Me.Panel3.Size = New System.Drawing.Size(324, 104)
         Me.Panel3.TabIndex = 0
         '
+        'b_export
+        '
+        Me.b_export.Location = New System.Drawing.Point(233, 25)
+        Me.b_export.Name = "b_export"
+        Me.b_export.Size = New System.Drawing.Size(75, 23)
+        Me.b_export.TabIndex = 73
+        Me.b_export.Text = "Export"
+        Me.b_export.UseVisualStyleBackColor = True
+        '
+        'ComboBoxDep
+        '
+        Me.ComboBoxDep.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBoxDep.FormattingEnabled = True
+        Me.ComboBoxDep.Items.AddRange(New Object() {"ALL", "PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING", "SMD"})
+        Me.ComboBoxDep.Location = New System.Drawing.Point(71, 27)
+        Me.ComboBoxDep.Name = "ComboBoxDep"
+        Me.ComboBoxDep.Size = New System.Drawing.Size(110, 21)
+        Me.ComboBoxDep.TabIndex = 74
+        '
         'b_showall
         '
         Me.b_showall.Location = New System.Drawing.Point(233, 52)
         Me.b_showall.Name = "b_showall"
         Me.b_showall.Size = New System.Drawing.Size(70, 22)
         Me.b_showall.TabIndex = 58
-        Me.b_showall.Text = "Show All"
+        Me.b_showall.Text = "Retrive"
         Me.b_showall.UseVisualStyleBackColor = True
         '
         'Label51
@@ -254,6 +273,15 @@ Partial Class ComputePayroll
         Me.Label51.Size = New System.Drawing.Size(35, 13)
         Me.Label51.TabIndex = 57
         Me.Label51.Text = "Name"
+        '
+        'Label48
+        '
+        Me.Label48.AutoSize = True
+        Me.Label48.Location = New System.Drawing.Point(3, 30)
+        Me.Label48.Name = "Label48"
+        Me.Label48.Size = New System.Drawing.Size(62, 13)
+        Me.Label48.TabIndex = 72
+        Me.Label48.Text = "Department"
         '
         'Label46
         '
@@ -906,35 +934,6 @@ Partial Class ComputePayroll
         Me.Panel8.Name = "Panel8"
         Me.Panel8.Size = New System.Drawing.Size(934, 85)
         Me.Panel8.TabIndex = 64
-        '
-        'ComboBoxDep
-        '
-        Me.ComboBoxDep.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBoxDep.FormattingEnabled = True
-        Me.ComboBoxDep.Items.AddRange(New Object() {"ALL", "PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING", "SMD"})
-        Me.ComboBoxDep.Location = New System.Drawing.Point(71, 27)
-        Me.ComboBoxDep.Name = "ComboBoxDep"
-        Me.ComboBoxDep.Size = New System.Drawing.Size(110, 21)
-        Me.ComboBoxDep.TabIndex = 74
-        Me.ComboBoxDep.Text = "ALL"
-        '
-        'b_export
-        '
-        Me.b_export.Location = New System.Drawing.Point(233, 25)
-        Me.b_export.Name = "b_export"
-        Me.b_export.Size = New System.Drawing.Size(75, 23)
-        Me.b_export.TabIndex = 73
-        Me.b_export.Text = "Export"
-        Me.b_export.UseVisualStyleBackColor = True
-        '
-        'Label48
-        '
-        Me.Label48.AutoSize = True
-        Me.Label48.Location = New System.Drawing.Point(3, 30)
-        Me.Label48.Name = "Label48"
-        Me.Label48.Size = New System.Drawing.Size(62, 13)
-        Me.Label48.TabIndex = 72
-        Me.Label48.Text = "Department"
         '
         'ComputePayroll
         '

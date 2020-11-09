@@ -56,7 +56,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("192.168.14.235")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("127.0.0.1")>  _
         Public Property DB_Server() As String
             Get
                 Return CType(Me("DB_Server"),String)
@@ -80,7 +80,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("superuser")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("root")>  _
         Public Property DB_User() As String
             Get
                 Return CType(Me("DB_User"),String)
@@ -92,7 +92,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("payrollsj75")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Cicang04121996")>  _
         Public Property DB_Pass() As String
             Get
                 Return CType(Me("DB_Pass"),String)
