@@ -260,7 +260,7 @@ Partial Class ComputePayroll
         '
         Me.b_showall.Location = New System.Drawing.Point(233, 52)
         Me.b_showall.Name = "b_showall"
-        Me.b_showall.Size = New System.Drawing.Size(70, 22)
+        Me.b_showall.Size = New System.Drawing.Size(75, 22)
         Me.b_showall.TabIndex = 58
         Me.b_showall.Text = "Retrive"
         Me.b_showall.UseVisualStyleBackColor = True

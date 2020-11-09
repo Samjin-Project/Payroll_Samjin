@@ -34,12 +34,13 @@ Public Class UploadFingerData
         Dim flag As Boolean = False
         MDIParent1.TreeView1.Enabled = flag
         MDIParent1.MenuStrip.Enabled = flag
-        MDIParent1.ControlBox = flag
+        'MDIParent1.ControlBox = flag
 
         GroupBox1.Enabled = flag
         GroupBox1.Enabled = flag
         DGV_DataModify.Enabled = flag
-        Me.ControlBox = flag
+        'Me.ControlBox = flag
+        Me.Cursor = Cursors.WaitCursor
 
         ToolStripStatusLabel1.Text = "Creating..."
         ToolStripProgressBar1.Visible = True
@@ -134,7 +135,7 @@ Public Class UploadFingerData
         ToolStripProgressBar1.Visible = True
         ToolStripProgressBar1.Value = 0
         ToolStripProgressBar1.Maximum = indexRows
-
+        Me.Cursor = Cursors.Default
         MsgBox("UploadExcel Succesfully")
         ToolStripStatusLabel1.Text = "Ready"
         ToolStripProgressBar1.Value = 0
@@ -142,8 +143,20 @@ Public Class UploadFingerData
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        UploadExcel()
-        insertToDgv("", "")
+        Dim queryProses As String = "SELECT * FROM `aktivitas_proses` WHERE 1"
+        Dim queryTempBefore As String = $"UPDATE `aktivitas_proses` SET `nama_proses`='up_finger',`nama_user`='{My.Settings.NamaUser}',`status_proses`='1' WHERE `no` = '1'"
+        Dim queryTempAfter As String = $"UPDATE `aktivitas_proses` SET `nama_proses`='',`nama_user`='',`status_proses`='0' WHERE `no` = '1'"
+        Dim funcDB As DataBaseClass = New DataBaseClass
+        Dim proses As DataSet = funcDB.downloadDB(queryProses)
+        Dim status_proses As Integer = proses.Tables(0).Rows(0).Item(3)
+        If proses.Tables(0).Rows(0).Item(0) = 1 Then
+            funcDB.uploadDB(queryTempBefore)
+            UploadExcel()
+            insertToDgv("", "")
+            funcDB.uploadDB(queryTempBefore)
+        Else
+            MsgBox("Upload Data Tidak Bisa Dilakukan, Server sedang sibuk")
+        End If
     End Sub
 
     Private Sub insertToDgv(Dep As String, tanggal As String)

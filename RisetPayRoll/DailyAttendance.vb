@@ -752,27 +752,41 @@ Public Class DailyAttendance
     End Function
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim Stopwatch As Stopwatch = Stopwatch.StartNew()
-        Dim i As Integer
 
-        If DGV_SideDaily1.Rows.Count <> 0 Then
-            CreateFunction()
-            DGV_SideDaily1.Rows.Clear()
-            DGV_ReviewDaily.Rows.Clear()
-            Try
-                showEmploye(QueryCMD)
-                Dim nikSyarat As String = DGV_SideDaily1.Rows(0).Cells(0).Value
-                Dim queryGetData As String = $"{queryAll} WHERE `NIK` = '{nikSyarat}' AND DATE_FORMAT(`Date`,""%m"") = {dt_create.Value.ToString("MM")}"
-                showDaily(queryGetData)
-            Catch ex As Exception
+        Dim queryProses As String = "SELECT * FROM `aktivitas_proses` WHERE 1"
+        Dim queryTempBefore As String = $"UPDATE `aktivitas_proses` SET `nama_proses`='Ceate_Daily',`nama_user`='{My.Settings.NamaUser}',`status_proses`='1' WHERE `no` = '1'"
+        Dim queryTempAfter As String = $"UPDATE `aktivitas_proses` SET `nama_proses`='',`nama_user`='',`status_proses`='0' WHERE `no` = '1'"
+        Dim funcDB As DataBaseClass = New DataBaseClass
+        Dim proses As DataSet = funcDB.downloadDB(queryProses)
+        Dim status_proses As Integer = proses.Tables(0).Rows(0).Item(3)
+        If proses.Tables(0).Rows(0).Item(0) = 1 Then
+            funcDB.uploadDB(queryTempBefore)
+            Dim Stopwatch As Stopwatch = Stopwatch.StartNew()
+            Dim i As Integer
 
-            End Try
+            If DGV_SideDaily1.Rows.Count <> 0 Then
+                CreateFunction()
+                DGV_SideDaily1.Rows.Clear()
+                DGV_ReviewDaily.Rows.Clear()
+                Try
+                    showEmploye(QueryCMD)
+                    Dim nikSyarat As String = DGV_SideDaily1.Rows(0).Cells(0).Value
+                    Dim queryGetData As String = $"{queryAll} WHERE `NIK` = '{nikSyarat}' AND DATE_FORMAT(`Date`,""%m"") = {dt_create.Value.ToString("MM")}"
+                    showDaily(queryGetData)
+                Catch ex As Exception
+
+                End Try
+            Else
+                MsgBox("Data Karyawan Tidak Tersedia")
+            End If
+            System.Threading.Thread.Sleep(500)
+            Stopwatch.[Stop]()
+            Debug.WriteLine(Stopwatch.ElapsedMilliseconds)
+            funcDB.uploadDB(queryTempAfter)
         Else
-            MsgBox("Data Karyawan Tidak Tersedia")
+            MsgBox("Create Data Tidak Bisa Dilakukan, Server sedang sibuk")
         End If
-        System.Threading.Thread.Sleep(500)
-        Stopwatch.[Stop]()
-        Console.WriteLine(Stopwatch.ElapsedMilliseconds)
+
     End Sub
 
     Private Sub dt_create_ValueChanged(sender As Object, e As EventArgs) Handles dt_create.ValueChanged

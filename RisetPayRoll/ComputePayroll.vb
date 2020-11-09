@@ -544,43 +544,70 @@ Public Class ComputePayroll
     End Function
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim queryProses As String = "SELECT * FROM `aktivitas_proses` WHERE 1"
+        Dim queryTempBefore As String = $"UPDATE `aktivitas_proses` SET `nama_proses`='create_payroll',`nama_user`='{My.Settings.NamaUser}',`status_proses`='1' WHERE `no` = '1'"
+        Dim queryTempAfter As String = $"UPDATE `aktivitas_proses` SET `nama_proses`='',`nama_user`='',`status_proses`='0' WHERE `no` = '1'"
+
+        Dim funcDB As DataBaseClass = New DataBaseClass
+        Dim proses As DataSet = funcDB.downloadDB(queryProses)
+        Dim status_proses As Integer = proses.Tables(0).Rows(0).Item(3)
+        If proses.Tables(0).Rows(0).Item(0) = 1 Then
+            funcDB.uploadDB(queryTempBefore)
+            For Each obj In ComboBoxDep.Items
+                Dim item = TryCast(obj, String)
+                If Not item Is Nothing Then
+                    Console.WriteLine("item : " + item)
+                    createPayroll(item, dt_month.Value)
+                End If
+            Next
+            Dim flag As Boolean = True
+            MDIParent1.TreeView1.Enabled = flag
+            MDIParent1.MenuStrip.Enabled = flag
+            MDIParent1.ControlBox = flag
+
+            Me.ControlBox = flag
+            Panel7.Enabled = flag
+            Panel8.Enabled = flag
+            Panel6.Enabled = flag
+            Panel8.Enabled = flag
+            DGV_ReviewDaily.Enabled = flag
+            Me.ControlBox = flag
+
+            MsgBox("Create Payroll Done")
+            ToolStripStatusLabel1.Text = "Ready"
+            ToolStripProgressBar1.Value = 0
+            ToolStripProgressBar1.Visible = True
+            funcDB.uploadDB(queryTempAfter)
+        Else
+            MsgBox("Upload Data Tidak Bisa Dilakukan, Server sedang sibuk")
+        End If
 
 
-        For Each obj In ComboBoxDep.Items
-            Dim item = TryCast(obj, String)
-            If Not item Is Nothing Then
-                Console.WriteLine("item : " + item)
-                createPayroll(item, dt_month.Value)
-            End If
-        Next
-        Dim flag As Boolean = True
-        MDIParent1.TreeView1.Enabled = flag
-        MDIParent1.MenuStrip.Enabled = flag
-        MDIParent1.ControlBox = flag
-
-        Me.ControlBox = flag
-        Panel7.Enabled = flag
-        Panel8.Enabled = flag
-        Panel6.Enabled = flag
-        Panel8.Enabled = flag
-        DGV_ReviewDaily.Enabled = flag
-        Me.ControlBox = flag
-
-        MsgBox("Create Payroll Done")
-        ToolStripStatusLabel1.Text = "Ready"
-        ToolStripProgressBar1.Value = 0
-        ToolStripProgressBar1.Visible = True
 
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles b_export.Click
-        Dim saveFileDialog1 As New SaveFileDialog
-        saveFileDialog1.Filter = "Excel File|*.xls"
-        saveFileDialog1.Title = "Save an Excel File"
-        saveFileDialog1.ShowDialog()
-        If saveFileDialog1.FileName <> "" Then
-            saveExcelFile(saveFileDialog1.FileName)
+        Dim queryProses As String = "SELECT * FROM `aktivitas_proses` WHERE 1"
+        Dim queryTempBefore As String = $"UPDATE `aktivitas_proses` SET `nama_proses`='ex_payroll',`nama_user`='{My.Settings.NamaUser}',`status_proses`='1' WHERE `no` = '1'"
+        Dim queryTempAfter As String = $"UPDATE `aktivitas_proses` SET `nama_proses`='',`nama_user`='',`status_proses`='0' WHERE `no` = '1'"
+
+        Dim funcDB As DataBaseClass = New DataBaseClass
+        Dim proses As DataSet = funcDB.downloadDB(queryProses)
+        Dim status_proses As Integer = proses.Tables(0).Rows(0).Item(3)
+        If proses.Tables(0).Rows(0).Item(0) = 1 Then
+            funcDB.uploadDB(queryTempBefore)
+            Dim saveFileDialog1 As New SaveFileDialog
+            saveFileDialog1.Filter = "Excel File|*.xls"
+            saveFileDialog1.Title = "Save an Excel File"
+            saveFileDialog1.ShowDialog()
+            If saveFileDialog1.FileName <> "" Then
+                saveExcelFile(saveFileDialog1.FileName)
+            End If
+            funcDB.uploadDB(queryTempAfter)
+        Else
+            MsgBox("Upload Data Tidak Bisa Dilakukan, Server sedang sibuk")
         End If
+
     End Sub
 
 

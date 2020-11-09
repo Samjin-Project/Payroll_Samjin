@@ -314,12 +314,25 @@
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
 
-        Dim saveFileDialog1 As New SaveFileDialog
-        saveFileDialog1.Filter = "Excel File|*.xls,*.xlsx"
-        saveFileDialog1.Title = "Save an Excel File"
-        saveFileDialog1.ShowDialog()
-        If saveFileDialog1.FileName <> "" Then
-            saveExcelFile(saveFileDialog1.FileName)
+        Dim queryProses As String = "SELECT * FROM `aktivitas_proses` WHERE 1"
+        Dim queryTempBefore As String = $"UPDATE `aktivitas_proses` SET `nama_proses`='ex_nocheck',`nama_user`='{My.Settings.NamaUser}',`status_proses`='1' WHERE `no` = '1'"
+        Dim queryTempAfter As String = $"UPDATE `aktivitas_proses` SET `nama_proses`='',`nama_user`='',`status_proses`='0' WHERE `no` = '1'"
+
+        Dim funcDB As DataBaseClass = New DataBaseClass
+        Dim proses As DataSet = funcDB.downloadDB(queryProses)
+        Dim status_proses As Integer = proses.Tables(0).Rows(0).Item(3)
+        If proses.Tables(0).Rows(0).Item(0) = 1 Then
+            funcDB.uploadDB(queryTempBefore)
+            Dim saveFileDialog1 As New SaveFileDialog
+            saveFileDialog1.Filter = "Excel File|*.xls,*.xlsx"
+            saveFileDialog1.Title = "Save an Excel File"
+            saveFileDialog1.ShowDialog()
+            If saveFileDialog1.FileName <> "" Then
+                saveExcelFile(saveFileDialog1.FileName)
+            End If
+            funcDB.uploadDB(queryTempAfter)
+        Else
+            MsgBox("Export Data Tidak Bisa Dilakukan, Server sedang sibuk")
         End If
     End Sub
 

@@ -60,15 +60,17 @@ Public Class RegisterMaster
             Dim result As DialogResult = OpenFileDialogImport.ShowDialog()
 
             If result = DialogResult.OK Then
-
+                Debug.WriteLine("before Conn")
                 CONN = New OleDbConnection("provider=Microsoft.ACE.OLEDB.12.0;" & "data source='" & OpenFileDialogImport.FileName & "';Extended Properties=Excel 12.0 Xml;")
-
                 DA = New OleDbDataAdapter("select * from [Sheet1$]", CONN)
+                Debug.WriteLine("Conn Open")
                 CONN.Open()
+                Debug.WriteLine("ds Clear")
                 DS.Clear()
                 DA.Fill(DS)
                 DGV_ReviewMaster.DataSource = DS.Tables("a")
                 CONN.Close()
+                Debug.WriteLine("Conn Close")
 
                 Dim indexRows As Integer = DS.Tables(0).Rows.Count
                 Console.WriteLine("Tanggal Masuk : " + DS.Tables(0).Rows(2).Item(9))
@@ -83,12 +85,15 @@ Public Class RegisterMaster
                     Else
                         AC_no = DS.Tables(0).Rows(i).Item(1).ToString.Substring(1, 6)
                     End If
-                    Dim admisionDateIn As Date = Date.ParseExact(DS.Tables(0).Rows(i).Item(9), "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
+                    Debug.WriteLine(DS.Tables(0).Rows(i).Item(9).ToString)
+                    '                Dim admisionDateIn As Date = Date.ParseExact(DS.Tables(0).Rows(i).Item(9).ToString, "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
+                    Dim admisionDateIn As Date = DS.Tables(0).Rows(i).Item(9)
+
                     Dim admisionDateOut As String
                     If DS.Tables(0).Rows(i).Item(10).ToString = "" Then
                         admisionDateOut = ""
                     Else
-                        admisionDateOut = Date.ParseExact(DS.Tables(0).Rows(i).Item(10), "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo).ToString("yyyy-MM-dd")
+                        admisionDateOut = Date.ParseExact(DS.Tables(0).Rows(i).Item(10).ToString, "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo).ToString("yyyy-MM-dd")
                     End If
                     Dim masterQuery As String = $"INSERT INTO `master employer`(`AC_nomor`,`NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Department`, `Tempat_Lahir`, `Tanggal_Lahir`, `Jenis_Kelamin`, `Pendidikan_Karyawan`, `Tanggal_Masuk`,`Tanggal_Keluar`, `Salary`,`StatusBpjs`,`StatusAktive`) 
                  VALUES ('{AC_no }',
@@ -212,13 +217,16 @@ Public Class RegisterMaster
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim queryProses As String = "SELECT `status_proses` FROM `aktivitas_proses` WHERE `nama_proses` = 'up_master'"
+        Dim queryProses As String = "SELECT * FROM `aktivitas_proses` WHERE 1"
+        Dim queryTempBefore As String = $"UPDATE `aktivitas_proses` SET `nama_proses`='up_master',`nama_user`='{My.Settings.NamaUser}',`status_proses`='1' WHERE `no` = '1'"
+        Dim queryTempAfter As String = $"UPDATE `aktivitas_proses` SET `nama_proses`='',`nama_user`='',`status_proses`='0' WHERE `no` = '1'"
         Dim funcDB As DataBaseClass = New DataBaseClass
         Dim proses As DataSet = funcDB.downloadDB(queryProses)
-        Dim status_proses As Integer = proses.Tables(0).Rows(0).Item(0)
-
+        Dim status_proses As Integer = proses.Tables(0).Rows(0).Item(3)
         If proses.Tables(0).Rows(0).Item(0) = 1 Then
+            funcDB.uploadDB(queryTempBefore)
             UploadExcel()
+            funcDB.uploadDB(queryTempAfter)
         Else
             MsgBox("Upload Data Tidak Bisa Dilakukan, Server sedang sibuk")
         End If
