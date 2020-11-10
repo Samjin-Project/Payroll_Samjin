@@ -45,7 +45,7 @@ Public Class RegisterMaster
         Dim flag As Boolean = False
         MDIParent1.TreeView1.Enabled = flag
         MDIParent1.MenuStrip.Enabled = flag
-        MDIParent1.ControlBox = flag
+        'MDIParent1.ControlBox = flag
         Me.ControlBox = flag
         Me.Enabled = flag
 
@@ -99,13 +99,17 @@ Public Class RegisterMaster
 
                     Dim tglLahir As Date = DS.Tables(0).Rows(i).Item(6)
                     Debug.WriteLine(tglLahir.ToString("yyyy-MM-dd"))
+                    Dim departement As String = DS.Tables(0).Rows(i).Item(4)
+                    If departement.Contains("Rubber") Then
+                        departement = "Rubber"
+                    End If
 
                     Dim masterQuery As String = $"INSERT INTO `master employer`(`AC_nomor`,`NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Department`, `Tempat_Lahir`, `Tanggal_Lahir`, `Jenis_Kelamin`, `Pendidikan_Karyawan`, `Tanggal_Masuk`,`Tanggal_Keluar`, `Salary`,`StatusBpjs`,`StatusAktive`) 
                  VALUES ('{AC_no }',
                          '{DS.Tables(0).Rows(i).Item(1)}',
                          '{DS.Tables(0).Rows(i).Item(2)}',
                          '{DS.Tables(0).Rows(i).Item(3)}',
-                         '{DS.Tables(0).Rows(i).Item(4)}',
+                         '{departement}',
                          '{DS.Tables(0).Rows(i).Item(5)}',
                          '{tglLahir.ToString("yyyy-MM-dd")}',
                          '{DS.Tables(0).Rows(i).Item(7)}',
@@ -237,7 +241,7 @@ Public Class RegisterMaster
         Dim status_proses As Integer = proses.Tables(0).Rows(0).Item(3)
         If proses.Tables(0).Rows(0).Item(0) = 1 Then
             funcDB.uploadDB(queryTempBefore)
-            UploadExcel()
+            BackgroundWorker1.RunWorkerAsync()
             funcDB.uploadDB(queryTempAfter)
         Else
             MsgBox("Upload Data Tidak Bisa Dilakukan, Server sedang sibuk")
@@ -705,5 +709,9 @@ Public Class RegisterMaster
                 r_index = index
             End If
         End If
+    End Sub
+
+    Private Sub BackgroundWorker1_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
+        UploadExcel()
     End Sub
 End Class

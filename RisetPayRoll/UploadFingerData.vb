@@ -1,4 +1,5 @@
-﻿Imports System.Data.OleDb
+﻿Imports System.ComponentModel
+Imports System.Data.OleDb
 Public Class UploadFingerData
     Protected Overrides ReadOnly Property CreateParams() As CreateParams
         Get
@@ -7,6 +8,9 @@ Public Class UploadFingerData
             Return cp
         End Get
     End Property
+    Public Class ArgumentType
+        Public _ds As DataSet
+    End Class
     Private Sub UploadExcel()
         Dim CONN As OleDbConnection
         Dim DA As OleDbDataAdapter
@@ -15,133 +19,113 @@ Public Class UploadFingerData
 
         On Error Resume Next
         OpenFileDialogImport.Filter = "(*.xlsx)|*.xlsx|(*.xls)|*.xls|All files (*.*)|*.*"
-        OpenFileDialogImport.ShowDialog()
+        Dim result As DialogResult = OpenFileDialogImport.ShowDialog()
+        If result = DialogResult.OK Then
+            CONN = New OleDbConnection("provider=Microsoft.Jet.OLEDB.4.0;" & "data source='" & OpenFileDialogImport.FileName & "';Extended Properties=Excel 8.0;")
+            DA = New OleDbDataAdapter("select * from [Sheet1$]", CONN)
+            CONN.Open()
+            DS.Clear()
+            DA.Fill(DS)
+            CONN.Close()
+            Dim flag As Boolean = False
+            MDIParent1.TreeView1.Enabled = flag
+            MDIParent1.MenuStrip.Enabled = flag
+            GroupBox1.Enabled = flag
+            GroupBox1.Enabled = flag
+            DGV_DataModify.Enabled = flag
+            Button1.Enabled = flag
+            Me.Cursor = Cursors.WaitCursor
+            Me.ControlBox = flag
 
-        CONN = New OleDbConnection("provider=Microsoft.Jet.OLEDB.4.0;" & "data source='" & OpenFileDialogImport.FileName & "';Extended Properties=Excel 8.0;")
-
-        DA = New OleDbDataAdapter("select * from [Sheet1$]", CONN)
-        CONN.Open()
-        DS.Clear()
-        DA.Fill(DS)
-        CONN.Close()
-
+            ToolStripStatusLabel1.Text = "Creating..."
+            ToolStripProgressBar1.Visible = True
+            ToolStripProgressBar1.Maximum = 100
+            'ToolStripProgressBar1.Value = 0
+            Dim args As ArgumentType = New ArgumentType()
+            args._ds = DS
+            BackgroundWorker1.RunWorkerAsync(args)
+        End If
+    End Sub
+    Sub mainExportExcel(ds As DataSet)
         Dim funcDB As DataBaseClass = New DataBaseClass
-        Dim indexRows As Integer = DS.Tables(0).Rows.Count
-        Dim indexCell As Integer = DS.Tables(0).Columns.Count
-        'console.WriteLine($"Row Count {indexRows}")
-        'console.WriteLine($"Cell Count {indexCell}")
-        ''console.WriteLine(DS.GetXml.ToString)
-        Dim flag As Boolean = False
-        MDIParent1.TreeView1.Enabled = flag
-        MDIParent1.MenuStrip.Enabled = flag
-        'MDIParent1.ControlBox = flag
-
-        GroupBox1.Enabled = flag
-        GroupBox1.Enabled = flag
-        DGV_DataModify.Enabled = flag
-        'Me.ControlBox = flag
-        Me.Cursor = Cursors.WaitCursor
-
-        ToolStripStatusLabel1.Text = "Creating..."
-        ToolStripProgressBar1.Visible = True
-        ToolStripProgressBar1.Value = 0
-        ToolStripProgressBar1.Maximum = indexRows
+        Dim indexRows As Integer = ds.Tables(0).Rows.Count
+        Dim indexCell As Integer = ds.Tables(0).Columns.Count
         For i As Integer = 0 To indexRows - 1
-            'console.WriteLine("0")
-            Dim Date_Finger As String = DS.Tables(0).Rows(i).Item(2)
-            'console.WriteLine("opopopo " + Date_Finger)
-            Dim Check_In As String = DS.Tables(0).Rows(i).Item(6).ToString
-            'console.WriteLine("2")
-            Dim Check_Out As String = DS.Tables(0).Rows(i).Item(7).ToString
-            'console.WriteLine("3")
-            ''console.WriteLine(Check_In.Length)
-            ''console.WriteLine(Check_Out.Length)
-            Dim edate = Date_Finger
-            'edate = "1/12/2010"
-            Dim tangal_fin As String() = edate.Split("/")
-            Dim daySub As String = ""
-            If tangal_fin(1).Length = 2 Then
-                daySub = "dd"
-            Else
-                daySub = "d"
-            End If
-            Dim monthSub As String = ""
-            If tangal_fin(0).Length = 2 Then
-                monthSub = "MM"
-            Else
-                monthSub = "M"
-            End If
-            Dim xaxa As String = $"{monthSub}/{daySub}/yyyy"
-            'console.WriteLine("xaxa " + xaxa)
-            Dim expenddt As Date = Date.ParseExact(edate, xaxa, System.Globalization.DateTimeFormatInfo.InvariantInfo)
-            'console.WriteLine("masuk Data " + Date_Finger.ToString + "=" + expenddt.ToString("dd-MMM-yyyy"))
-            Dim queryNIK As String = $"SELECT `NIK`, `DEPARTMENT` FROM `master employer` WHERE `AC_Nomor` = '{DS.Tables(0).Rows(i).Item(0)}'"
-            Dim dsNik As DataSet = funcDB.downloadDB(queryNIK)
-            'console.WriteLine($"Check In " + Check_In.ToString)
-            If Check_In = "" Or Check_Out = "" Then
-                'console.WriteLine("START BOLOS")
+            If ds.Tables(0).Rows(i).Item(2).ToString <> "" Then
+                Debug.WriteLine("date finger: " + ds.Tables(0).Rows(i).Item(2).ToString)
+                Dim Date_Finger As String = ds.Tables(0).Rows(i).Item(2)
+                Dim Check_In As String = ds.Tables(0).Rows(i).Item(6).ToString
+                Dim Check_Out As String = ds.Tables(0).Rows(i).Item(7).ToString
+                Dim edate = Date_Finger
+                Dim tangal_fin As String() = edate.Split("/")
+                Dim daySub As String = ""
+                If tangal_fin(1).Length = 2 Then
+                    daySub = "dd"
+                Else
+                    daySub = "d"
+                End If
+                Dim monthSub As String = ""
+                If tangal_fin(0).Length = 2 Then
+                    monthSub = "MM"
+                Else
+                    monthSub = "M"
+                End If
+                Dim xaxa As String = $"{monthSub}/{daySub}/yyyy"
+                'console.WriteLine("xaxa " + xaxa)
+                Dim expenddt As Date = Date.ParseExact(edate, xaxa, System.Globalization.DateTimeFormatInfo.InvariantInfo)
+                'console.WriteLine("masuk Data " + Date_Finger.ToString + "=" + expenddt.ToString("dd-MMM-yyyy"))
+                Dim queryNIK As String = $"SELECT `NIK`, `DEPARTMENT` FROM `master employer` WHERE `AC_Nomor` = '{ds.Tables(0).Rows(i).Item(0)}'"
+                Dim dsNik As DataSet = funcDB.downloadDB(queryNIK)
+                'console.WriteLine($"Check In " + Check_In.ToString)
+                If dsNik.Tables(0).Rows.Count <> 0 Then
+                    If Check_In = "" Or Check_Out = "" Then
+                        Dim DeleteQuery As String = $"DELETE FROM `finger_employer` WHERE `NIK` = '{dsNik.Tables(0).Rows(0).Item(0).ToString}' AND `Date_Finger` = '{expenddt.ToString("yyyy-MM-dd")}'"
+                        funcDB.uploadDB(DeleteQuery)
+                        Dim masterQuery As String = $"INSERT INTO `finger_employer`(`NIK`,`AC_Nomor`, `Nama_Karyawan`, `Date_Finger`, `Shift_Finger`, `On_Duty`, `Off_Duty`, `Check_In`, `Check_Out`, `Departement`,`Finger Status`) 
+            VALUES ('{dsNik.Tables(0).Rows(0).Item(0).ToString}',
+                    '{ds.Tables(0).Rows(i).Item(0)}',
+                    '{ds.Tables(0).Rows(i).Item(1)}',
+                    '{expenddt.ToString("yyyy-MM-dd")}',
+                    '{ds.Tables(0).Rows(i).Item(3)}',
+                    '{ds.Tables(0).Rows(i).Item(4)}',
+                    '{ds.Tables(0).Rows(i).Item(5)}',
+                    '{ds.Tables(0).Rows(i).Item(6)}',
+                    '{ds.Tables(0).Rows(i).Item(7)}',
+                    '{dsNik.Tables(0).Rows(0).Item(1).ToString}',
+                    '0')"
+                        funcDB.uploadDB(masterQuery)
+                        'console.WriteLine("END BOLOS")
 
-                Dim DeleteQuery As String = $"DELETE FROM `finger_employer` WHERE `NIK` = '{dsNik.Tables(0).Rows(0).Item(0).ToString}' AND `Date_Finger` = '{expenddt.ToString("yyyy-MM-dd")}'"
-                funcDB.uploadDB(DeleteQuery)
-                Dim masterQuery As String = $"INSERT INTO `finger_employer`(`NIK`,`AC_Nomor`, `Nama_Karyawan`, `Date_Finger`, `Shift_Finger`, `On_Duty`, `Off_Duty`, `Check_In`, `Check_Out`, `Departement`,`Finger Status`) 
-                 VALUES ('{dsNik.Tables(0).Rows(0).Item(0).ToString}',
-                         '{DS.Tables(0).Rows(i).Item(0)}',
-                         '{DS.Tables(0).Rows(i).Item(1)}',
-                         '{expenddt.ToString("yyyy-MM-dd")}',
-                         '{DS.Tables(0).Rows(i).Item(3)}',
-                         '{DS.Tables(0).Rows(i).Item(4)}',
-                         '{DS.Tables(0).Rows(i).Item(5)}',
-                         '{DS.Tables(0).Rows(i).Item(6)}',
-                         '{DS.Tables(0).Rows(i).Item(7)}',
-                         '{dsNik.Tables(0).Rows(0).Item(1).ToString}',
-                         '0')"
-                funcDB.uploadDB(masterQuery)
-                'console.WriteLine("END BOLOS")
+                    Else
+                        If Check_In.Length > 4 And Check_Out.Length > 4 Then
+                            Dim DeleteQuery As String = $"DELETE FROM `finger_employer` WHERE `NIK` = '{dsNik.Tables(0).Rows(0).Item(0).ToString}' AND `Date_Finger` = '{expenddt.ToString("yyyy-MM-dd")}'"
+                            funcDB.uploadDB(DeleteQuery)
+                            Dim masterQuery As String = $"INSERT INTO `finger_employer`(`NIK`,`AC_Nomor`, `Nama_Karyawan`, `Date_Finger`, `Shift_Finger`, `On_Duty`, `Off_Duty`, `Check_In`, `Check_Out`, `Departement`,`Finger Status`) 
+            VALUES ('{dsNik.Tables(0).Rows(0).Item(0).ToString}',
+                    '{ds.Tables(0).Rows(i).Item(0)}',
+                    '{ds.Tables(0).Rows(i).Item(1)}',
+                    '{expenddt.ToString("yyyy-MM-dd")}',
+                    '{ds.Tables(0).Rows(i).Item(3)}',
+                    '{ds.Tables(0).Rows(i).Item(4)}',
+                    '{ds.Tables(0).Rows(i).Item(5)}',
+                    '{ds.Tables(0).Rows(i).Item(6)}',
+                    '{ds.Tables(0).Rows(i).Item(7)}',
+                    '{dsNik.Tables(0).Rows(0).Item(1).ToString}',
+                    '1')"
+                            funcDB.uploadDB(masterQuery)
+                        End If
 
-            Else
-                If Check_In.Length > 4 And Check_Out.Length > 4 Then
-                    Dim DeleteQuery As String = $"DELETE FROM `finger_employer` WHERE `NIK` = '{dsNik.Tables(0).Rows(0).Item(0).ToString}' AND `Date_Finger` = '{expenddt.ToString("yyyy-MM-dd")}'"
-                    funcDB.uploadDB(DeleteQuery)
-                    Dim masterQuery As String = $"INSERT INTO `finger_employer`(`NIK`,`AC_Nomor`, `Nama_Karyawan`, `Date_Finger`, `Shift_Finger`, `On_Duty`, `Off_Duty`, `Check_In`, `Check_Out`, `Departement`,`Finger Status`) 
-                 VALUES ('{dsNik.Tables(0).Rows(0).Item(0).ToString}',
-                         '{DS.Tables(0).Rows(i).Item(0)}',
-                         '{DS.Tables(0).Rows(i).Item(1)}',
-                         '{expenddt.ToString("yyyy-MM-dd")}',
-                         '{DS.Tables(0).Rows(i).Item(3)}',
-                         '{DS.Tables(0).Rows(i).Item(4)}',
-                         '{DS.Tables(0).Rows(i).Item(5)}',
-                         '{DS.Tables(0).Rows(i).Item(6)}',
-                         '{DS.Tables(0).Rows(i).Item(7)}',
-                         '{dsNik.Tables(0).Rows(0).Item(1).ToString}',
-                         '1')"
-                    funcDB.uploadDB(masterQuery)
+                    End If
                 End If
 
+                'Catch ex As Exception
+
+                'End Try
             End If
-            ToolStripProgressBar1.Value = i
+            BackgroundWorker1.ReportProgress((i / indexRows) * 100)
         Next
-        ToolStripStatusLabel1.Text = "Done"
-        flag = True
-        MDIParent1.TreeView1.Enabled = flag
-        MDIParent1.MenuStrip.Enabled = flag
-        MDIParent1.ControlBox = flag
 
-        GroupBox1.Enabled = flag
-        GroupBox1.Enabled = flag
-        DGV_DataModify.Enabled = flag
-        Me.ControlBox = flag
-
-        ToolStripStatusLabel1.Text = "Creating..."
-        ToolStripProgressBar1.Visible = True
-        ToolStripProgressBar1.Value = 0
-        ToolStripProgressBar1.Maximum = indexRows
-        Me.Cursor = Cursors.Default
-        MsgBox("UploadExcel Succesfully")
-        ToolStripStatusLabel1.Text = "Ready"
-        ToolStripProgressBar1.Value = 0
-        ToolStripProgressBar1.Visible = True
     End Sub
-
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim queryProses As String = "SELECT * FROM `aktivitas_proses` WHERE 1"
         Dim queryTempBefore As String = $"UPDATE `aktivitas_proses` SET `nama_proses`='up_finger',`nama_user`='{My.Settings.NamaUser}',`status_proses`='1' WHERE `no` = '1'"
@@ -151,9 +135,8 @@ Public Class UploadFingerData
         Dim status_proses As Integer = proses.Tables(0).Rows(0).Item(3)
         If proses.Tables(0).Rows(0).Item(0) = 1 Then
             funcDB.uploadDB(queryTempBefore)
+            'BackgroundWorker1.RunWorkerAsync()
             UploadExcel()
-            insertToDgv("", "")
-            funcDB.uploadDB(queryTempBefore)
         Else
             MsgBox("Upload Data Tidak Bisa Dilakukan, Server sedang sibuk")
         End If
@@ -205,7 +188,6 @@ Public Class UploadFingerData
             If i Mod 2 = 0 Then
                 DGV_DataModify.Rows(i).DefaultCellStyle.BackColor = Color.LightGray
             End If
-
             'menampilkan total data dalan datagrid
             total_data.Text = DGV_DataModify.Rows.Count
         Next
@@ -249,5 +231,37 @@ Public Class UploadFingerData
 
     Private Sub dt_upfinger_ValueChanged(sender As Object, e As EventArgs) Handles dt_upfinger.ValueChanged
         dt_upfinger.CustomFormat = "dd/MM/yyyy"
+    End Sub
+
+    Private Sub BackgroundWorker1_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
+        Dim args As ArgumentType = e.Argument
+        mainExportExcel(args._ds)
+    End Sub
+
+    Private Sub BackgroundWorker1_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles BackgroundWorker1.ProgressChanged
+        Me.ToolStripProgressBar1.Value = e.ProgressPercentage
+    End Sub
+
+    Private Sub BackgroundWorker1_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles BackgroundWorker1.RunWorkerCompleted
+        Dim queryTempAfter As String = $"UPDATE `aktivitas_proses` SET `nama_proses`='',`nama_user`='',`status_proses`='0' WHERE `no` = '1'"
+        Dim funcDB As DataBaseClass = New DataBaseClass
+        insertToDgv("", "")
+        funcDB.uploadDB(queryTempAfter)
+
+        Me.Cursor = Cursors.Default
+        ToolStripStatusLabel1.Text = "Done"
+        Dim flag As Boolean = True
+        MDIParent1.TreeView1.Enabled = flag
+        MDIParent1.MenuStrip.Enabled = flag
+        MDIParent1.ControlBox = flag
+        GroupBox1.Enabled = flag
+        GroupBox1.Enabled = flag
+        DGV_DataModify.Enabled = flag
+        Me.ControlBox = flag
+        MsgBox("UploadExcel Succesfully")
+        Button1.Enabled = flag
+        ToolStripStatusLabel1.Text = "Ready"
+        ToolStripProgressBar1.Value = 0
+        ToolStripProgressBar1.Visible = True
     End Sub
 End Class

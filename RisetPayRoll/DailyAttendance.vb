@@ -266,24 +266,11 @@ Public Class DailyAttendance
         Next
         Return Convert.ToInt32(returnVal)
     End Function
-    Sub subCreateFunc(ByVal sideRowCount As Integer)
-        Dim flagVacation As Boolean = False
-        Dim tempDate As Date
-        Dim flag As Boolean = False
-        MDIParent1.TreeView1.Enabled = flag
-        MDIParent1.MenuStrip.Enabled = flag
-        MDIParent1.ControlBox = flag
-        GroupBox1.Enabled = flag
-        GroupBox2.Enabled = flag
-        DGV_SideDaily1.Enabled = flag
-        Me.ControlBox = flag
 
-        ToolStripStatusLabel1.Text = "Creating..."
-        ToolStripProgressBar1.Visible = True
-        ToolStripProgressBar1.Value = 0
-        ToolStripProgressBar1.Maximum = sideRowCount
-
+    Sub bwCreate(sideRowCount As Integer)
         For i As Integer = 0 To sideRowCount - 1
+            Dim flagVacation As Boolean = False
+            Dim tempDate As Date
             Dim InitDate, NikCreate As String
             InitDate = ""
             If sideRowCount <> 1 Then
@@ -425,10 +412,33 @@ Public Class DailyAttendance
                 Exit For
                 'End If
             Next
-            ToolStripProgressBar1.Value = i
+            BackgroundWorker1.ReportProgress((i / sideRowCount) * 100)
             Debug.WriteLine(i)
         Next
-        ToolStripStatusLabel1.Text = "Done"
+
+    End Sub
+    Sub subCreateFunc(ByVal sideRowCount As Integer)
+
+        Dim flag As Boolean = False
+        MDIParent1.TreeView1.Enabled = flag
+        MDIParent1.MenuStrip.Enabled = flag
+        'MDIParent1.ControlBox = flag
+        GroupBox1.Enabled = flag
+        GroupBox2.Enabled = flag
+        DGV_SideDaily1.Enabled = flag
+        Me.ControlBox = flag
+
+        ToolStripStatusLabel1.Text = "Creating..."
+        ToolStripProgressBar1.Visible = True
+        ToolStripProgressBar1.Value = 0
+        ToolStripProgressBar1.Maximum = 100
+
+        'bw di bawah
+
+        Dim args As ArgumentType = New ArgumentType()
+        args._index = sideRowCount
+        BackgroundWorker1.RunWorkerAsync(args)
+
     End Sub
 
     Sub CreateFunction()
@@ -453,18 +463,6 @@ Public Class DailyAttendance
 
             If testDataOk = True Then
                 subCreateFunc(sideRowCount)
-                Dim flag As Boolean = True
-                MDIParent1.TreeView1.Enabled = flag
-                MDIParent1.MenuStrip.Enabled = flag
-                MDIParent1.ControlBox = flag
-                GroupBox1.Enabled = flag
-                GroupBox2.Enabled = flag
-                DGV_SideDaily1.Enabled = flag
-                Me.ControlBox = flag
-                MsgBox("Create Succces", MsgBoxStyle.OkOnly, "Create")
-                ToolStripProgressBar1.Visible = False
-                ToolStripStatusLabel1.Text = "Ready"
-
             End If
         End If
     End Sub
@@ -754,6 +752,7 @@ Public Class DailyAttendance
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
+
         Dim queryProses As String = "SELECT * FROM `aktivitas_proses` WHERE 1"
         Dim queryTempBefore As String = $"UPDATE `aktivitas_proses` SET `nama_proses`='Ceate_Daily',`nama_user`='{My.Settings.NamaUser}',`status_proses`='1' WHERE `no` = '1'"
         Dim queryTempAfter As String = $"UPDATE `aktivitas_proses` SET `nama_proses`='',`nama_user`='',`status_proses`='0' WHERE `no` = '1'"
@@ -767,23 +766,9 @@ Public Class DailyAttendance
 
             If DGV_SideDaily1.Rows.Count <> 0 Then
                 CreateFunction()
-                DGV_SideDaily1.Rows.Clear()
-                DGV_ReviewDaily.Rows.Clear()
-                Try
-                    showEmploye(QueryCMD)
-                    Dim nikSyarat As String = DGV_SideDaily1.Rows(0).Cells(0).Value
-                    Dim queryGetData As String = $"{queryAll} WHERE `NIK` = '{nikSyarat}' AND DATE_FORMAT(`Date`,""%m"") = {dt_create.Value.ToString("MM")}"
-                    showDaily(queryGetData)
-                Catch ex As Exception
-
-                End Try
             Else
                 MsgBox("Data Karyawan Tidak Tersedia")
             End If
-            System.Threading.Thread.Sleep(500)
-            Stopwatch.[Stop]()
-            Debug.WriteLine(Stopwatch.ElapsedMilliseconds)
-            funcDB.uploadDB(queryTempAfter)
         Else
             MsgBox("Create Data Tidak Bisa Dilakukan, Server sedang sibuk")
         End If
@@ -830,4 +815,47 @@ Public Class DailyAttendance
         End If
     End Sub
 
+    Public Class ArgumentType
+        Public _index As Integer
+    End Class
+    Private Sub BackgroundWorker1_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
+        Dim args As ArgumentType = e.Argument
+        bwCreate(args._index)
+    End Sub
+
+    Private Sub BackgroundWorker1_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles BackgroundWorker1.ProgressChanged
+        Me.ToolStripProgressBar1.Value = e.ProgressPercentage
+    End Sub
+
+    Private Sub BackgroundWorker1_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorker1.RunWorkerCompleted
+        Dim queryTempAfter As String = $"UPDATE `aktivitas_proses` SET `nama_proses`='',`nama_user`='',`status_proses`='0' WHERE `no` = '1'"
+        Dim funcDB As DataBaseClass = New DataBaseClass
+
+        funcDB.uploadDB(queryTempAfter)
+
+        ToolStripStatusLabel1.Text = "Done"
+        DGV_SideDaily1.Rows.Clear()
+        DGV_ReviewDaily.Rows.Clear()
+        Try
+            showEmploye(QueryCMD)
+            Dim nikSyarat As String = DGV_SideDaily1.Rows(0).Cells(0).Value
+            Dim queryGetData As String = $"{queryAll} WHERE `NIK` = '{nikSyarat}' AND DATE_FORMAT(`Date`,""%m"") = {dt_create.Value.ToString("MM")}"
+            showDaily(queryGetData)
+        Catch ex As Exception
+        End Try
+
+        Dim flag As Boolean = True
+        MDIParent1.TreeView1.Enabled = flag
+        MDIParent1.MenuStrip.Enabled = flag
+        'MDIParent1.ControlBox = flag
+        GroupBox1.Enabled = flag
+        GroupBox2.Enabled = flag
+        DGV_SideDaily1.Enabled = flag
+        Me.ControlBox = flag
+        MsgBox("Create Succces", MsgBoxStyle.OkOnly, "Create")
+        ToolStripProgressBar1.Visible = False
+        ToolStripStatusLabel1.Text = "Ready"
+
+
+    End Sub
 End Class

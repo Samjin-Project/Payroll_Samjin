@@ -84,6 +84,7 @@ Partial Class RegisterMaster
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.OpenFileDialogImport = New System.Windows.Forms.OpenFileDialog()
+        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.Panel1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -733,6 +734,9 @@ Partial Class RegisterMaster
         '
         Me.OpenFileDialogImport.FileName = "OpenFileDialog1"
         '
+        'BackgroundWorker1
+        '
+        '
         'RegisterMaster
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -822,4 +826,5 @@ Partial Class RegisterMaster
     Friend WithEvents kolom_dep As DataGridViewTextBoxColumn
     Friend WithEvents Button2 As Button
     Friend WithEvents CheckBoxRetired As CheckBox
+    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
 End Class
