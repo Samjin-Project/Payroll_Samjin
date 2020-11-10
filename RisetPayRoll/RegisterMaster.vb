@@ -95,7 +95,9 @@ Public Class RegisterMaster
                     Else
                         admisionDateOut = Date.ParseExact(DS.Tables(0).Rows(i).Item(10).ToString, "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo).ToString("yyyy-MM-dd")
                     End If
-                    Debug.WriteLine(DS.Tables(0).Rows(i).Item(6))
+                    Dim tglLahir As Date = DS.Tables(0).Rows(i).Item(6)
+                    Debug.WriteLine(tglLahir.ToString("yyyy-MM-dd"))
+
                     Dim masterQuery As String = $"INSERT INTO `master employer`(`AC_nomor`,`NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Department`, `Tempat_Lahir`, `Tanggal_Lahir`, `Jenis_Kelamin`, `Pendidikan_Karyawan`, `Tanggal_Masuk`,`Tanggal_Keluar`, `Salary`,`StatusBpjs`,`StatusAktive`) 
                  VALUES ('{AC_no }',
                          '{DS.Tables(0).Rows(i).Item(1)}',
@@ -103,7 +105,7 @@ Public Class RegisterMaster
                          '{DS.Tables(0).Rows(i).Item(3)}',
                          '{DS.Tables(0).Rows(i).Item(4)}',
                          '{DS.Tables(0).Rows(i).Item(5)}',
-                         '{DS.Tables(0).Rows(i).Item(6)}',
+                         '{tglLahir.ToString("yyyy-MM-dd")}',
                          '{DS.Tables(0).Rows(i).Item(7)}',
                          '{DS.Tables(0).Rows(i).Item(8)}',
                          '{admisionDateIn.ToString("yyyy-MM-dd")}',
