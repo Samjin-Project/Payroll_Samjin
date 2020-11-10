@@ -95,7 +95,7 @@ Public Class DailyAttendance
                     Dim row As String()
                     Dim syaratTgl As Boolean
                     Dim k As Integer = 0
-                    'console.WriteLine("jejak " + jejak.ToString + " index rows " + indexDs.ToString)
+                    Console.WriteLine("jejak " + jejak.ToString + " index rows " + indexDs.ToString)
                     If jejak < indexDs Then
                         Try
                             For z As Integer = 0 To indexDs - 1
@@ -115,36 +115,36 @@ Public Class DailyAttendance
                     'console.WriteLine("Urutan" + (j + 1).ToString)
                     If syaratTgl = True Then
                         row = New String() {ds.Tables(0).Rows(k).Item(0).ToString,
-                    ds.Tables(0).Rows(k).Item(1).ToString,
-                    ds.Tables(0).Rows(k).Item(2).ToString,
-                    ds.Tables(0).Rows(k).Item(3),
-                    ds.Tables(0).Rows(k).Item(4).ToString,
-                    ds.Tables(0).Rows(k).Item(5).ToString,
-                    ds.Tables(0).Rows(k).Item(6).ToString,
-                    ds.Tables(0).Rows(k).Item(7).ToString,
-                    ds.Tables(0).Rows(k).Item(8).ToString,
-                    ds.Tables(0).Rows(k).Item(9).ToString,
-                    ds.Tables(0).Rows(k).Item(10).ToString,
-                    ds.Tables(0).Rows(k).Item(11).ToString,
-                    ds.Tables(0).Rows(k).Item(12).ToString,
-                    ds.Tables(0).Rows(k).Item(13).ToString}
+                        ds.Tables(0).Rows(k).Item(1).ToString,
+                        ds.Tables(0).Rows(k).Item(2).ToString,
+                        ds.Tables(0).Rows(k).Item(3),
+                        ds.Tables(0).Rows(k).Item(4).ToString,
+                        ds.Tables(0).Rows(k).Item(5).ToString,
+                        ds.Tables(0).Rows(k).Item(6).ToString,
+                        ds.Tables(0).Rows(k).Item(7).ToString,
+                        ds.Tables(0).Rows(k).Item(8).ToString,
+                        ds.Tables(0).Rows(k).Item(9).ToString,
+                        ds.Tables(0).Rows(k).Item(10).ToString,
+                        ds.Tables(0).Rows(k).Item(11).ToString,
+                        ds.Tables(0).Rows(k).Item(12).ToString,
+                        ds.Tables(0).Rows(k).Item(13).ToString}
                         jejak = jejak + 1
                     Else
                         'console.WriteLine("ds Kosong")
                         row = New String() {dsKosong.Tables(0).Rows(0).Item(0).ToString,
-                    dsKosong.Tables(0).Rows(0).Item(1).ToString,
-                    "No Check",
-                    dt_create.Value.AddDays((j + 1) - tanggalNow).ToString("dd/MM/yyyy"),
-                    dt_create.Value.AddDays((j + 1) - tanggalNow).ToString("ddd"),
-                    "",
-                    "-",
-                    "-",
-                    "00/00/0000",
-                    "",
-                    "",
-                    "",
-                    "",
-                    dsKosong.Tables(0).Rows(0).Item(2).ToString}
+                        dsKosong.Tables(0).Rows(0).Item(1).ToString,
+                        "No Check",
+                        dt_create.Value.AddDays((j + 1) - tanggalNow).ToString("dd/MM/yyyy"),
+                        dt_create.Value.AddDays((j + 1) - tanggalNow).ToString("ddd"),
+                        "",
+                        "-",
+                        "-",
+                        "00/00/0000",
+                        "",
+                        "",
+                        "",
+                        "",
+                        dsKosong.Tables(0).Rows(0).Item(2).ToString}
                     End If
 
                     DGV_ReviewDaily.Rows.Add(row)
@@ -296,9 +296,9 @@ Public Class DailyAttendance
                 For y As Integer = x To DGV_ReviewDaily.Rows.Count - 1
                     InitDate = DGV_ReviewDaily.Rows(y).Cells(3).Value
                     Dim expenddt As Date = Date.ParseExact(InitDate, "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
-                    Dim F_NIK, F_Nama_Karyawan, Date_Finger, Shift_Finger, RecFinIN, RecFinOut, F_Departement, Finger_Status As String
+                    Dim F_NIK, F_Nama_Karyawan, Shift_Finger, RecFinIN, RecFinOut, F_Departement, Finger_Status As String
                     Dim DBClass As DataBaseClass = New DataBaseClass
-                    Dim QueryCreateAbsen As String = $"SELECT `NIK`,`Nama_Karyawan`,DATE_FORMAT(`Date_Finger`,""%y-%m-%d""),`Shift_Finger`,`RecFinIN`,`RecFinOut`,`Departement`, `Finger Status` FROM `finger_employer` WHERE `NIK` = '{NikCreate}' AND `Date_Finger` = '{expenddt.ToString("yyyy-MM-dd")}'"
+                    Dim QueryCreateAbsen As String = $"SELECT `NIK`,`Nama_Karyawan`,`Date_Finger`,`Shift_Finger`,`RecFinIN`,`RecFinOut`,`Departement`, `Finger Status` FROM `finger_employer` WHERE `NIK` = '{NikCreate}' AND `Date_Finger` = '{expenddt.ToString("yyyy-MM-dd")}'"
                     Dim QueryCekAktive As String = $"SELECT `Tanggal_Keluar` FROM `master employer` WHERE `NIK` = '{NikCreate}' AND `Tanggal_Keluar` = '{expenddt.ToString("yyyy-MM-dd")}'"
                     Dim dsAbsen As DataSet = DBClass.downloadDB(QueryCreateAbsen)
                     Dim dsCekAktive As DataSet = DBClass.downloadDB(QueryCekAktive)
@@ -307,7 +307,7 @@ Public Class DailyAttendance
                     If dsAbsen IsNot Nothing AndAlso dsAbsen.Tables.Count > 0 AndAlso dsAbsen.Tables(0).Rows.Count > 0 Then
                         F_NIK = dsAbsen.Tables(0).Rows(0).Item(0)
                         F_Nama_Karyawan = dsAbsen.Tables(0).Rows(0).Item(1)
-                        Date_Finger = dsAbsen.Tables(0).Rows(0).Item(2)
+                        Dim Date_Finger As Date = dsAbsen.Tables(0).Rows(0).Item(2)
                         Shift_Finger = dsAbsen.Tables(0).Rows(0).Item(3)
                         RecFinIN = dsAbsen.Tables(0).Rows(0).Item(4)
                         RecFinOut = dsAbsen.Tables(0).Rows(0).Item(5)
@@ -346,19 +346,18 @@ Public Class DailyAttendance
                                 If (dsCekVacation.Tables(0).Rows(0).Item(3).ToString = "Permission" Or dsCekVacation.Tables(0).Rows(0).Item(3).ToString = "No permission") And expenddt = vacation Then
                                     kodeAbsen = "0"
                                     'console.WriteLine("CODE permission")
-                                ElseIf dsCekVacation.Tables(0).Rows(0).Item(3).ToString = "Sick" And expenddt = vacation Then
+                                ElseIf dsCekVacation.Tables(0).Rows(0).Item(3).ToString = "Sick" And dsCekVacation.Tables(0).Rows(0).Item(3).ToString = "Annual Leave" And expenddt = vacation Then
                                     kodeAbsen = "1"
                                     'console.WriteLine("CODE sick")
-
                                 End If
                             End If
                             'Dim dateVacation As Nullable(Of Date) = getVcationDate(dsCekVacation, expenddt.ToString("yyyy-MM-dd"))
                             'console.WriteLine(Date_Finger)
-                            Dim hariAbsen As String = (Date.ParseExact(Date_Finger, "yy-MM-dd", System.Globalization.DateTimeFormatInfo.InvariantInfo)).ToString("ddd")
+                            Dim hariAbsen As String = Date_Finger.ToString("ddd")
                             'console.WriteLine("hari " + hariAbsen)
 
                             'console.WriteLine("bolos")
-                            deleteQuery(F_NIK, Date_Finger)
+                            deleteQuery(F_NIK, Date_Finger.ToString("yyyy-MM-dd"))
 
                             If hariAbsen = "Sat" Or hariAbsen = "Sun" Then
                                 statusAbsen = "Unpaid Holiday"
@@ -369,23 +368,24 @@ Public Class DailyAttendance
                                                          '{dsAbsen.Tables(0).Rows(0).Item(0)}',
                                                          '{dsAbsen.Tables(0).Rows(0).Item(1)}',
                                                          '{statusAbsen}',
-                                                         '{dsAbsen.Tables(0).Rows(0).Item(2)}',
+                                                         '{Date_Finger.ToString("yyyy-MM-dd")}',
                                                          '{DGV_ReviewDaily.Rows(y).Cells(4).Value}',
                                                          '{dsAbsen.Tables(0).Rows(0).Item(3)}',
                                                          '',
                                                          '',
-                                                         '{dsAbsen.Tables(0).Rows(0).Item(2)}',
+                                                         '{Date_Finger.ToString("yyyy-MM-dd")}',
                                                          '',
                                                          '',
                                                          '0',
                                                          '0',
                                                          '{dsAbsen.Tables(0).Rows(0).Item(6)}',
                                                          '{kodeAbsen}')"
+
                             Dim DBClassUp As DataBaseClass = New DataBaseClass
                             DBClassUp.uploadDB(QueryInsertCreate)
 
                         Else
-                            Dim QueryCreate As String = $"SELECT `NIK`,`Nama_Karyawan`,DATE_FORMAT(`Date_Finger`,""%y-%m-%d""),`Shift_Finger`,`RecFinIN`,`RecFinOut`,`Departement`, `Finger Status` FROM `finger_employer` WHERE `NIK` = '{NikCreate}' AND `Date_Finger` = '{expenddt.ToString("yyyy-MM-dd")}' AND `RecFinIN` <> '' AND `RecFinOut` <> ''"
+                            Dim QueryCreate As String = $"SELECT `NIK`,`Nama_Karyawan`,`Date_Finger`,`Shift_Finger`,`RecFinIN`,`RecFinOut`,`Departement`, `Finger Status` FROM `finger_employer` WHERE `NIK` = '{NikCreate}' AND `Date_Finger` = '{expenddt.ToString("yyyy-MM-dd")}' AND `RecFinIN` <> '' AND `RecFinOut` <> ''"
                             Dim ds As DataSet = DBClass.downloadDB(QueryCreate)
                             'console.WriteLine("DS : " + ds.Tables.Count.ToString)
                             'console.WriteLine(ds.GetXml)
@@ -396,12 +396,13 @@ Public Class DailyAttendance
                                 Dim JamKerja As Long() = basicTime(ds.Tables(0).Rows(0).Item(0), ds.Tables(0).Rows(0).Item(4), ds.Tables(0).Rows(0).Item(5), ds.Tables(0).Rows(0).Item(3), DGV_ReviewDaily.Rows(y).Cells(4).Value, ds.Tables(0).Rows(0).Item(2))
                                 Dim basic As Long = JamKerja(0)
                                 Dim overTime As Long = JamKerja(1)
-                                deleteQuery(ds.Tables(0).Rows(0).Item(0), ds.Tables(0).Rows(0).Item(2))
+                                Dim dateKerja As Date = ds.Tables(0).Rows(0).Item(2)
+                                deleteQuery(ds.Tables(0).Rows(0).Item(0), dateKerja.ToString("yyyy-MM-dd"))
                                 QueryInsertCreate = $"INSERT INTO `tabel_harian_karyawan1`( `NIK`, `Name`, `Type`, `Date`, `Day`, `Shift`, `Check In`, `Check Out`, `Check Out Date`, `Lateness`, `Early Check Out`, `Basic Time`, `Over Time`, `Department` , `Absen_Paid`) VALUES 
                                                         ('{ds.Tables(0).Rows(0).Item(0)}',
                                                          '{ds.Tables(0).Rows(0).Item(1)}',
                                                          'Check IN',
-                                                         '{ds.Tables(0).Rows(0).Item(2)}',
+                                                         '{dateKerja.ToString("yyyy-MM-dd")}',
                                                          '{DGV_ReviewDaily.Rows(y).Cells(4).Value}',
                                                          '{ds.Tables(0).Rows(0).Item(3)}',
                                                          '{ds.Tables(0).Rows(0).Item(4)}',
@@ -467,8 +468,8 @@ Public Class DailyAttendance
             End If
         End If
     End Sub
-    Function cekDataBulanan(nik As String, cekDate As String) As String
-        Dim dateCekData As Date = Date.ParseExact(cekDate, "yy-MM-dd", System.Globalization.DateTimeFormatInfo.InvariantInfo)
+    Function cekDataBulanan(nik As String, cekDate As Date) As String
+        Dim dateCekData As Date = cekDate
         Dim DBClass As DataBaseClass = New DataBaseClass
         '
         Dim query As String = $"SELECT COUNT(*) FROM `tabel_harian_karyawan1` WHERE `NIK`='{nik}' AND MONTH(`Date`) = '{dateCekData.ToString("MM")}' AND `Absen_Paid` = '0' "
@@ -499,10 +500,10 @@ Public Class DailyAttendance
         Dim nik As String = ds.Tables(0).Rows(rowsData).Item(0)
         Dim nama As String = ds.Tables(0).Rows(rowsData).Item(1)
         Dim dep As String = ds.Tables(0).Rows(rowsData).Item(6)
-        Dim dateMonth As String = ds.Tables(0).Rows(rowsData).Item(2)
+        Dim dateMonth As Date = ds.Tables(0).Rows(rowsData).Item(2)
         Dim nilai As String = ""
         'console.WriteLine("date month : " + dateMonth.ToString)
-        Dim tempDate As Date = Date.ParseExact(dateMonth, "yy-MM-dd", System.Globalization.DateTimeFormatInfo.InvariantInfo)
+        Dim tempDate As Date = dateMonth
         Dim hari As String = tempDate.ToString("dd")
 
         If hari.Substring(0, 1) = "0" Then
@@ -646,8 +647,8 @@ Public Class DailyAttendance
         End If
         Return OutDate
     End Function
-    Function cekLibur(tanggal As String) As Boolean
-        Dim QueryCreate As String = $"SELECT * FROM `hari_kerja` WHERE `Date` = '{tanggal}'"
+    Function cekLibur(tanggal As Date) As Boolean
+        Dim QueryCreate As String = $"SELECT * FROM `hari_kerja` WHERE `Date` = '{tanggal.ToString("yyyy-MM-dd")}'"
         Dim DBClass As DataBaseClass = New DataBaseClass
         Dim ds As DataSet = DBClass.downloadDB(QueryCreate)
         Dim fa As Boolean
@@ -681,13 +682,13 @@ Public Class DailyAttendance
 
         Return ResultSelisih
     End Function
-    Function basicTime(nik As String, timeIn As String, timeOut As String, ShiftData As String, WorkDay As String, tanggal As String) As Long()
+    Function basicTime(nik As String, timeIn As String, timeOut As String, ShiftData As String, WorkDay As String, tanggal As Date) As Long()
         Dim OutputCounter(2) As Long
         Dim tempTimeIn As DateTime = Convert.ToDateTime(timeIn)
         Dim tempTimeOut As DateTime = Convert.ToDateTime(timeOut)
         Dim OutDate As DateTime
         Dim libur As Boolean = cekLibur(tanggal)
-        Dim sDayNow As String = CDate(tanggal).ToString("ddd")
+        Dim sDayNow As String = tanggal.ToString("ddd")
         'console.WriteLine("sDayNow : " + sDayNow)
         'console.WriteLine("tempIN : " + tempTimeIn.ToString)
         'console.WriteLine("tempOUT : " + tempTimeOut.ToString)
@@ -790,10 +791,12 @@ Public Class DailyAttendance
     End Sub
 
     Private Sub dt_create_ValueChanged(sender As Object, e As EventArgs) Handles dt_create.ValueChanged
-        Dim nikSyarat As String = DGV_SideDaily1.Rows(0).Cells(0).Value
-        DGV_ReviewDaily.Rows.Clear()
-        Dim queryGetData As String = $"{queryAll} WHERE `NIK` = '{nikSyarat}' AND DATE_FORMAT(`Date`,""%m"") = {dt_create.Value.ToString("MM")}"
-        showDaily(queryGetData)
+        If DGV_SideDaily1.Rows.Count <> 0 Then
+            Dim nikSyarat As String = DGV_SideDaily1.Rows(0).Cells(0).Value
+            DGV_ReviewDaily.Rows.Clear()
+            Dim queryGetData As String = $"{queryAll} WHERE `NIK` = '{nikSyarat}' AND DATE_FORMAT(`Date`,""%m"") = {dt_create.Value.ToString("MM")}"
+            showDaily(queryGetData)
+        End If
     End Sub
 
     Private Sub cb_depCreate_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_depCreate.SelectedIndexChanged
@@ -826,4 +829,5 @@ Public Class DailyAttendance
             End If
         End If
     End Sub
+
 End Class

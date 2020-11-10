@@ -163,6 +163,7 @@ Public Class FingerModify
         'Console.WriteLine("Query : TEESTTTTTTIng")
         Dim shift As String = cb_shift.Text
         Dim datePilihan As String = dt_day.Value.ToString("yyyy-MM-dd")
+        Dim datePilihan1 As String = dt_date1.Value.ToString("yyyy-MM-dd")
         Dim querycmd As String
         Dim dep As String = cb_dep.Text
         Dim fingTime As String = dt_filter.Value.ToString("HH:mm")
@@ -172,23 +173,24 @@ Public Class FingerModify
                 If shift = "ALL" Then
                     querycmd = $"{QueryUtama} WHERE `Date_Finger` = '{datePilihan}' AND `Departement` = '{dep}' AND `Check_In` >= '{fingTime}' "
                 Else
-                    querycmd = $"{QueryUtama} WHERE `Shift_Finger` = '{shift}' AND `Date_Finger` = '{datePilihan}' AND `Departement` = '{dep}' AND `Check_In` >= '{fingTime}'"
+                    'BETWEEN '1996-07-01' AND '1996-07-31'
+                    querycmd = $"{QueryUtama} WHERE `Shift_Finger` = '{shift}' AND (`Date_Finger` BETWEEN '{datePilihan}' AND '{datePilihan1}' ) AND `Departement` = '{dep}' AND `Check_In` >= '{fingTime}'"
                 End If
             ElseIf f_filterOut = True Then
                 If shift = "ALL" Then
                     querycmd = $"{QueryUtama} WHERE `Date_Finger` = '{datePilihan}' AND `Departement` = '{dep}' AND `Check_Out` >= '{fingTime}' "
                 Else
-                    querycmd = $"{QueryUtama} WHERE `Shift_Finger` = '{shift}' AND `Date_Finger` = '{datePilihan}' AND `Departement` = '{dep}' AND `Check_Out` >= '{fingTime}'"
+                    querycmd = $"{QueryUtama} WHERE `Shift_Finger` = '{shift}' AND (`Date_Finger` BETWEEN '{datePilihan}' AND '{datePilihan1}' ) AND `Departement` = '{dep}' AND `Check_Out` >= '{fingTime}'"
                 End If
             Else
                 If shift = "ALL" Then
                     querycmd = $"{QueryUtama} WHERE `Date_Finger` = '{datePilihan}' AND `Departement` = '{dep}'"
                 Else
-                    querycmd = $"{QueryUtama} WHERE `Shift_Finger` = '{shift}' AND `Date_Finger` = '{datePilihan}' AND `Departement` = '{dep}'"
+                    querycmd = $"{QueryUtama} WHERE `Shift_Finger` = '{shift}' AND (`Date_Finger` BETWEEN '{datePilihan}' AND '{datePilihan1}' ) AND `Departement` = '{dep}'"
                 End If
             End If
         ElseIf sortType = True Then
-            querycmd = $"{QueryUtama} WHERE `Date_Finger` = '{datePilihan}' AND `NIK` = '{TextBox10.Text}' AND `Departement` = '{dep}'"
+            querycmd = $"{QueryUtama} WHERE (`Date_Finger` BETWEEN '{datePilihan}' AND '{datePilihan1}' ) AND `NIK` = '{TextBox10.Text}' AND `Departement` = '{dep}'"
         End If
 
         DGV_DataModify.Rows.Clear()
@@ -294,6 +296,15 @@ Public Class FingerModify
             Console.WriteLine("Harus Kodong : " + DGV_DataModify.Rows(indexRows).Cells(8).Value.ToString)
             If e.ColumnIndex = 8 Then
                 DGV_DataModify.Rows(indexRows).Cells(8).Value = ":"
+                Dim DBClass As DataBaseClass = New DataBaseClass
+                Dim querycmd As String
+                If RadioButton1.Checked = True Then
+                    querycmd = $"UPDATE `finger_employer` SET `recFinIn` = '', `Modified` = 0 WHERE `NIK` = '{Nik}' And `Date_Finger` = '{DateFinger}'"
+                Else
+                    querycmd = $"UPDATE `finger_employer` SET `recFinOut` = '',`Modified` = 0 WHERE `NIK` = '{Nik}' And `Date_Finger` = '{DateFinger}'"
+                End If
+                DBClass.uploadDB(querycmd)
+
             End If
         End If
 
@@ -321,5 +332,21 @@ Public Class FingerModify
         Dim ds As DataSet = DBClass.downloadDB(QueryUtama)
         insertToDgv(ds)
         CheckBox1.Checked = False
+    End Sub
+
+    Private Sub dt_date1_ValueChanged(sender As Object, e As EventArgs) Handles dt_date1.ValueChanged
+        If dt_date1.Value < dt_day.Value Then
+            dt_day.Value = dt_date1.Value
+        End If
+    End Sub
+
+    Private Sub dt_day_ValueChanged(sender As Object, e As EventArgs) Handles dt_day.ValueChanged
+        If dt_date1.Value < dt_day.Value Then
+            dt_date1.Value = dt_day.Value
+        End If
+    End Sub
+
+    Private Sub DGV_DataModify_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_DataModify.CellContentClick
+
     End Sub
 End Class

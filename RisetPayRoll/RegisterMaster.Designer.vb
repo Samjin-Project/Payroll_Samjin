@@ -651,6 +651,7 @@ Partial Class RegisterMaster
         Me.DGV_ReviewMaster.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         Me.DGV_ReviewMaster.RowHeadersWidth = 50
         Me.DGV_ReviewMaster.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.DGV_ReviewMaster.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DGV_ReviewMaster.Size = New System.Drawing.Size(350, 429)
         Me.DGV_ReviewMaster.TabIndex = 1
         '

@@ -54,6 +54,7 @@ Partial Class RegisterVacation
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Label19 = New System.Windows.Forms.Label()
         Me.tb_dep = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.tb_reason = New System.Windows.Forms.TextBox()
@@ -74,7 +75,6 @@ Partial Class RegisterVacation
         Me.tb_nama = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tb_emp = New System.Windows.Forms.TextBox()
-        Me.Label19 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         CType(Me.DGV_DataModify, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
@@ -413,6 +413,13 @@ Partial Class RegisterVacation
         Me.Panel4.Size = New System.Drawing.Size(339, 510)
         Me.Panel4.TabIndex = 21
         '
+        'Label19
+        '
+        Me.Label19.Location = New System.Drawing.Point(0, 0)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(100, 23)
+        Me.Label19.TabIndex = 0
+        '
         'tb_dep
         '
         Me.tb_dep.BackColor = System.Drawing.Color.Aqua
@@ -463,7 +470,7 @@ Partial Class RegisterVacation
         Me.cb_holtype.BackColor = System.Drawing.Color.Cyan
         Me.cb_holtype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_holtype.FormattingEnabled = True
-        Me.cb_holtype.Items.AddRange(New Object() {"Permission", "Sick", "No permission"})
+        Me.cb_holtype.Items.AddRange(New Object() {"Annual Leave", "Permission", "Sick", "No permission"})
         Me.cb_holtype.Location = New System.Drawing.Point(144, 150)
         Me.cb_holtype.Name = "cb_holtype"
         Me.cb_holtype.Size = New System.Drawing.Size(109, 21)
@@ -521,6 +528,7 @@ Partial Class RegisterVacation
         Me.Label4.Size = New System.Drawing.Size(42, 13)
         Me.Label4.TabIndex = 34
         Me.Label4.Text = "Tel No."
+        Me.Label4.Visible = False
         '
         'tb_telp
         '
@@ -529,6 +537,7 @@ Partial Class RegisterVacation
         Me.tb_telp.Name = "tb_telp"
         Me.tb_telp.Size = New System.Drawing.Size(110, 20)
         Me.tb_telp.TabIndex = 33
+        Me.tb_telp.Visible = False
         '
         'Label8
         '
@@ -591,15 +600,6 @@ Partial Class RegisterVacation
         Me.tb_emp.Name = "tb_emp"
         Me.tb_emp.Size = New System.Drawing.Size(110, 20)
         Me.tb_emp.TabIndex = 0
-        '
-        'b_search
-        '
-        Me.b_search.Location = New System.Drawing.Point(555, 3)
-        Me.b_search.Name = "b_search"
-        Me.b_search.Size = New System.Drawing.Size(63, 22)
-        Me.b_search.TabIndex = 15
-        Me.b_search.Text = "Search"
-        Me.b_search.UseVisualStyleBackColor = True
         '
         'RegisterVacation
         '

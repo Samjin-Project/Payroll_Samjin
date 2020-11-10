@@ -95,6 +95,8 @@ Public Class RegisterMaster
                     Else
                         admisionDateOut = Date.ParseExact(DS.Tables(0).Rows(i).Item(10).ToString, "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo).ToString("yyyy-MM-dd")
                     End If
+                    Debug.WriteLine(DS.Tables(0).Rows(i).Item(6))
+
                     Dim tglLahir As Date = DS.Tables(0).Rows(i).Item(6)
                     Debug.WriteLine(tglLahir.ToString("yyyy-MM-dd"))
 
