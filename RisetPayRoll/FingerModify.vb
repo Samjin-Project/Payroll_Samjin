@@ -45,10 +45,16 @@ Public Class FingerModify
 
     Private Sub rec_time_Click(sender As Object, e As EventArgs) Handles rec_time.Click
         For i As Integer = 0 To DGV_DataModify.Rows.Count - 1
-            Console.WriteLine(DGV_DataModify.Rows.Count)
+            'Console.WriteLine(DGV_DataModify.Rows.Count)
             If DGV_DataModify.Rows(i).Cells(1).Value = True Then
-                DGV_DataModify.Rows(i).Cells(8).Value = DateTimePicker1.Value.ToString("HH:mm")
                 Dim recFinger As String = DGV_DataModify.Rows(i).Cells(8).Value
+
+
+                Dim dtimerow As DateTime = CDate(DGV_DataModify.Rows(i).Cells(7).Value)
+                Dim statusCheck As String = DGV_DataModify.Rows(i).Cells(6).Value
+                Dim recFingerTime As DateTime = CDate(recFinger)
+
+                DGV_DataModify.Rows(i).Cells(8).Value = DateTimePicker1.Value.ToString("HH:mm")
                 Dim Nik As String = DGV_DataModify.Rows(i).Cells(2).Value
                 Dim DateFinger As String = dt_day.Value.ToString("yyyy-MM-dd")
                 Dim syaratPanjang As Boolean = recFinger.Length = 5
@@ -58,8 +64,18 @@ Public Class FingerModify
                 Else
                     syaratInput = False
                 End If
+                Dim isRec As Boolean = True
 
-                If syaratInput Then
+                If (dtimerow < recFingerTime And statusCheck = "Check Out") Or (dtimerow > recFingerTime And statusCheck = "Check In") Then
+                    DGV_DataModify.Rows(i).DefaultCellStyle.ForeColor = Color.Red
+                    isRec = False
+                Else
+                    DGV_DataModify.Rows(i).DefaultCellStyle.ForeColor = Color.Black
+                    DGV_DataModify.Rows(i).Cells(8).Style.ForeColor = Color.Red
+
+                End If
+
+                If syaratInput And isRec Then
                     If Convert.ToInt32(recFinger.Substring(0, 2)) < 24 And Convert.ToInt32(recFinger.Substring(3, 2)) < 60 Then
                         Dim DBClass As DataBaseClass = New DataBaseClass
                         Dim querycmd As String
@@ -75,11 +91,11 @@ Public Class FingerModify
                     End If
                 Else
                     Console.WriteLine("Harus Kodong : " + DGV_DataModify.Rows(i).Cells(8).Value.ToString)
-                    If i = 8 Then
-                        DGV_DataModify.Rows(i).Cells(8).Value = ":"
+                        If i = 8 Then
+                            DGV_DataModify.Rows(i).Cells(8).Value = ":"
+                        End If
                     End If
                 End If
-            End If
         Next
     End Sub
 
@@ -272,13 +288,30 @@ Public Class FingerModify
         Dim DateFinger As String = dt_day.Value.ToString("yyyy-MM-dd")
         Dim syaratPanjang As Boolean = recFinger.Length = 5
         Dim syaratInput As Boolean
+
+        Dim dtimerow As DateTime = CDate(DGV_DataModify.Rows(indexRows).Cells(7).Value)
+        Dim statusCheck As String = DGV_DataModify.Rows(indexRows).Cells(6).Value
+        Dim recFingerTime As DateTime = CDate(recFinger)
+
+
         If syaratPanjang Then
             syaratInput = recFinger(2) = ":" And Char.IsDigit(recFinger(0)) And Char.IsDigit(recFinger(1)) And Char.IsDigit(recFinger(3)) And Char.IsDigit(recFinger(4))
         Else
             syaratInput = False
         End If
 
-        If syaratInput Then
+        Dim isrec As Boolean = True
+        If (dtimerow < recFingerTime And statusCheck = "Check Out") Or (dtimerow > recFingerTime And statusCheck = "Check In") Then
+            DGV_DataModify.Rows(indexRows).DefaultCellStyle.ForeColor = Color.Red
+            isRec = False
+        Else
+            DGV_DataModify.Rows(indexRows).DefaultCellStyle.ForeColor = Color.Black
+            DGV_DataModify.Rows(indexRows).Cells(8).Style.ForeColor = Color.Red
+
+        End If
+
+
+        If syaratInput And isrec Then
             If Convert.ToInt32(recFinger.Substring(0, 2)) < 24 And Convert.ToInt32(recFinger.Substring(3, 2)) < 60 Then
                 Dim DBClass As DataBaseClass = New DataBaseClass
                 Dim querycmd As String

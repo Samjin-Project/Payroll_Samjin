@@ -193,7 +193,7 @@
         Dim indexDs As Integer = ds.Tables(0).Rows.Count
         For i As Integer = 0 To indexDs - 1
             Console.WriteLine("date test1: " + ds.Tables(0).Rows(i).Item(3).ToString)
-            Dim dateCekData As Date = DateTime.ParseExact(ds.Tables(0).Rows(i).Item(3).ToString.Substring(0, 10), "dd/MM/yyyy", System.Globalization.DateTimeFormatInfo.InvariantInfo)
+            Dim dateCekData As Date = ds.Tables(0).Rows(i).Item(3)
             Dim row As String() = New String() {ds.Tables(0).Rows(i).Item(1),
             ds.Tables(0).Rows(i).Item(2),
             ds.Tables(0).Rows(i).Item(4),

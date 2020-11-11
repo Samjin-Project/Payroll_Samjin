@@ -4,7 +4,7 @@ Imports System.Linq ' need to add
 Public Class MDIParent1
     Dim widthForm As Integer
     Dim heightForm As Integer
-    Public Shared JenisDepartement As String() = {"PCBA", "RUBBER FORMING", "MOULDING", "ASSEMBLING", "PURCHASING", "SMD"}
+    Public Shared JenisDepartement As String() = {"PCBA", "RUBBER", "MOULDING", "ASSEMBLING", "PURCHASING", "SMD"}
     Private Sub ShowNewForm(ByVal sender As Object, ByVal e As EventArgs)
         'DailyAttendance()
     End Sub

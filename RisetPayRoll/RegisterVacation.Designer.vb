@@ -537,6 +537,7 @@ Partial Class RegisterVacation
         Me.tb_telp.Name = "tb_telp"
         Me.tb_telp.Size = New System.Drawing.Size(110, 20)
         Me.tb_telp.TabIndex = 33
+        Me.tb_telp.Text = "-"
         Me.tb_telp.Visible = False
         '
         'Label8
