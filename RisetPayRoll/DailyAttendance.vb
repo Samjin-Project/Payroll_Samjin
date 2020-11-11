@@ -584,7 +584,7 @@ Public Class DailyAttendance
                                         (
                                             '{nik}',
                                             '{nama}',
-                                            '{dateMonth}',
+                                            '{dateMonth.ToString("yyyy-MM-dd")}',
                                             '{dep}',
                                             '',
                                             '',
