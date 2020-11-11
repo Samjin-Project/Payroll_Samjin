@@ -56,7 +56,6 @@ Public Class RegisterMaster
         Try
             'On Error Resume Next
             OpenFileDialogImport.Filter = "(*.xlsx)|*.xlsx|(*.xls)|*.xls|All files (*.*)|*.*"
-
             Dim result As DialogResult = OpenFileDialogImport.ShowDialog()
 
             If result = DialogResult.OK Then
@@ -71,7 +70,6 @@ Public Class RegisterMaster
                 DGV_ReviewMaster.DataSource = DS.Tables("a")
                 CONN.Close()
                 Debug.WriteLine("Conn Close")
-
                 Dim indexRows As Integer = DS.Tables(0).Rows.Count
                 Console.WriteLine("Tanggal Masuk : " + DS.Tables(0).Rows(2).Item(9))
                 Console.WriteLine("indexRows" + indexRows.ToString)
@@ -241,7 +239,8 @@ Public Class RegisterMaster
         Dim status_proses As Integer = proses.Tables(0).Rows(0).Item(3)
         If proses.Tables(0).Rows(0).Item(0) = 1 Then
             funcDB.uploadDB(queryTempBefore)
-            BackgroundWorker1.RunWorkerAsync()
+            UploadExcel()
+            'BackgroundWorker1.RunWorkerAsync()
             funcDB.uploadDB(queryTempAfter)
         Else
             MsgBox("Upload Data Tidak Bisa Dilakukan, Server sedang sibuk")

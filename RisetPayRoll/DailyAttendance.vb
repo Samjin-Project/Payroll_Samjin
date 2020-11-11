@@ -61,10 +61,10 @@ Public Class DailyAttendance
         End Try
 
     End Sub
-    Function CekTanggal(tanggal As String, rowNow As Integer) As Boolean
-        Dim tempTgl As Integer = Convert.ToInt32(tanggal.Substring(0, 2))
+    Function CekTanggal(tanggal As Date, rowNow As Integer) As Boolean
+        Dim tempTgl As Integer = tanggal.ToString("dd")
         Dim result As Boolean
-        'console.WriteLine("Tgl = " + tempTgl.ToString + ", result = " + rowNow.ToString)
+        Console.WriteLine("Tgl = " + tempTgl.ToString + ", real tgl = " + tanggal.ToString)
         If tempTgl = rowNow + 1 Then
             result = True
         Else
@@ -99,7 +99,8 @@ Public Class DailyAttendance
                     If jejak < indexDs Then
                         Try
                             For z As Integer = 0 To indexDs - 1
-                                syaratTgl = CekTanggal(ds.Tables(0).Rows(z).Item(3), j)
+                                Dim d As Date = ds.Tables(0).Rows(z).Item(3)
+                                syaratTgl = CekTanggal(d, j)
                                 If syaratTgl = True Then
                                     k = z
                                     Exit For
@@ -112,7 +113,7 @@ Public Class DailyAttendance
                     Else
                         syaratTgl = False
                     End If
-                    'console.WriteLine("Urutan" + (j + 1).ToString)
+                    Console.WriteLine("Urutan" + (j + 1).ToString)
                     If syaratTgl = True Then
                         row = New String() {ds.Tables(0).Rows(k).Item(0).ToString,
                         ds.Tables(0).Rows(k).Item(1).ToString,

@@ -246,7 +246,7 @@ Partial Class MDIParent1
         Me.MaximizeBox = False
         Me.MinimumSize = New System.Drawing.Size(1000, 600)
         Me.Name = "MDIParent1"
-        Me.Text = "Payroll System Application 1.0.1.1"
+        Me.Text = "Payroll System Application 1.1.0.0"
         Me.MenuStrip.ResumeLayout(False)
         Me.MenuStrip.PerformLayout()
         Me.StatusStrip.ResumeLayout(False)
