@@ -43,7 +43,13 @@ Public Class UploadFingerData
             'ToolStripProgressBar1.Value = 0
             Dim args As ArgumentType = New ArgumentType()
             args._ds = DS
-            BackgroundWorker1.RunWorkerAsync(args)
+
+            'temporary,,,,,
+            mainExportExcel(DS)
+            insertToDgv("", "")
+
+
+            'BackgroundWorker1.RunWorkerAsync(args)
         End If
     End Sub
     Sub mainExportExcel(ds As DataSet)
@@ -137,6 +143,24 @@ Public Class UploadFingerData
             funcDB.uploadDB(queryTempBefore)
             'BackgroundWorker1.RunWorkerAsync()
             UploadExcel()
+            insertToDgv("", "")
+            funcDB.uploadDB(queryTempAfter)
+
+            Me.Cursor = Cursors.Default
+            ToolStripStatusLabel1.Text = "Done"
+            Dim flag As Boolean = True
+            MDIParent1.TreeView1.Enabled = flag
+            MDIParent1.MenuStrip.Enabled = flag
+            MDIParent1.ControlBox = flag
+            GroupBox1.Enabled = flag
+            GroupBox1.Enabled = flag
+            DGV_DataModify.Enabled = flag
+            Me.ControlBox = flag
+            MsgBox("UploadExcel Succesfully")
+            Button1.Enabled = flag
+            ToolStripStatusLabel1.Text = "Ready"
+            ToolStripProgressBar1.Value = 0
+            ToolStripProgressBar1.Visible = True
         Else
             MsgBox("Upload Data Tidak Bisa Dilakukan, Server sedang sibuk")
         End If
