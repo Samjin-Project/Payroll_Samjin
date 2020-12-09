@@ -116,7 +116,7 @@
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles b_save.Click
-        If cb_holtype.Text = "" Or tb_nama.Text = "" Or tb_emp.Text = "" Or tb_dep.Text = "" Or tb_telp.Text = "" Or tb_reason.Text = "" Then
+        If cb_holtype.Text = "" Or tb_nama.Text = "" Or tb_emp.Text = "" Or tb_dep.Text = "" Or tb_reason.Text = "" Then
             MsgBox("Data tidak boleh kosong !", MsgBoxStyle.Exclamation, "Register Vacation")
         Else
             If uploadData() = True Then

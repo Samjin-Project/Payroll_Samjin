@@ -17,48 +17,46 @@ Public Class FingerModify
     End Property
     Private Sub FingerModify_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If My.Settings.StatusUser = "admin" Then
-            cb_dep.Text = My.Settings.Departement
-            cb_dep.Enabled = False
-            'cb_name.Text = My.Settings.NamaUser
-            'cb_name.Enabled = False
-
+            cb_dep_fin.Text = My.Settings.Departement.ToString
+            cb_dep_fin.Enabled = False
+            Debug.WriteLine(My.Settings.Departement)
         Else
             For Each x As String In MDIParent1.JenisDepartement
-                cb_dep.Items.Add(x)
+                cb_dep_fin.Items.Add(x)
             Next
-            'cb_name.Text = ""
-            'cb_name.Enabled = False
         End If
 
         RadioButton1.Checked = True
         dt_day.Value = DateTime.Now
         DateTimePicker1.Format = DateTimePickerFormat.Custom
         DateTimePicker1.CustomFormat = "HH:mm"
-        cb_dep.Text = "PCBA"
-        Dim dep As String = cb_dep.Text
-        Dim querycmd As String = $"{QueryUtama} WHERE `Date_Finger` = '{dt_day.Value.ToString("yyyy-MM-dd")}' AND `Departement` = '{dep}' "
-        DGV_DataModify.Rows.Clear()
-        Dim DBClass As DataBaseClass = New DataBaseClass
-        Dim ds As DataSet = DBClass.downloadDB(querycmd)
-        insertToDgv(ds)
+        'cb_dep.Text = "PCBA"
+        'Dim dep As String = cb_dep.Text
+        'Dim querycmd As String = $"{QueryUtama} WHERE `Date_Finger` = '{dt_day.Value.ToString("yyyy-MM-dd")}' AND `Departement` = '{dep}' "
+        'DGV_DataModify.Rows.Clear()
+        'Dim DBClass As DataBaseClass = New DataBaseClass
+        'Dim ds As DataSet = DBClass.downloadDB(querycmd)
+        'insertToDgv(ds)
     End Sub
 
     Private Sub rec_time_Click(sender As Object, e As EventArgs) Handles rec_time.Click
         For i As Integer = 0 To DGV_DataModify.Rows.Count - 1
             'Console.WriteLine(DGV_DataModify.Rows.Count)
             If DGV_DataModify.Rows(i).Cells(1).Value = True Then
-                Dim recFinger As String = DGV_DataModify.Rows(i).Cells(8).Value
+                Dim recFinger As String = DateTimePicker1.Value.ToString("HH:mm")
 
 
                 Dim dtimerow As DateTime = CDate(DGV_DataModify.Rows(i).Cells(7).Value)
                 Dim statusCheck As String = DGV_DataModify.Rows(i).Cells(6).Value
-                Dim recFingerTime As DateTime = CDate(recFinger)
+
+                Dim recFingerTime As DateTime
 
                 DGV_DataModify.Rows(i).Cells(8).Value = DateTimePicker1.Value.ToString("HH:mm")
                 Dim Nik As String = DGV_DataModify.Rows(i).Cells(2).Value
                 Dim DateFinger As String = dt_day.Value.ToString("yyyy-MM-dd")
                 Dim syaratPanjang As Boolean = recFinger.Length = 5
                 Dim syaratInput As Boolean
+                Debug.WriteLine("L : " + recFinger.Length.ToString)
                 If syaratPanjang Then
                     syaratInput = recFinger(2) = ":" And Char.IsDigit(recFinger(0)) And Char.IsDigit(recFinger(1)) And Char.IsDigit(recFinger(3)) And Char.IsDigit(recFinger(4))
                 Else
@@ -66,6 +64,8 @@ Public Class FingerModify
                 End If
                 Dim isRec As Boolean = True
 
+                'If recFinger <> "" And recFinger <> ":" Then
+                recFingerTime = CDate(recFinger)
                 If (dtimerow < recFingerTime And statusCheck = "Check Out") Or (dtimerow > recFingerTime And statusCheck = "Check In") Then
                     DGV_DataModify.Rows(i).DefaultCellStyle.ForeColor = Color.Red
                     isRec = False
@@ -74,7 +74,10 @@ Public Class FingerModify
                     DGV_DataModify.Rows(i).Cells(8).Style.ForeColor = Color.Red
 
                 End If
+                'End If
 
+                Debug.WriteLine("syarat input : " + syaratInput.ToString)
+                Debug.WriteLine("isRec : " + isRec.ToString)
                 If syaratInput And isRec Then
                     If Convert.ToInt32(recFinger.Substring(0, 2)) < 24 And Convert.ToInt32(recFinger.Substring(3, 2)) < 60 Then
                         Dim DBClass As DataBaseClass = New DataBaseClass
@@ -91,11 +94,11 @@ Public Class FingerModify
                     End If
                 Else
                     Console.WriteLine("Harus Kodong : " + DGV_DataModify.Rows(i).Cells(8).Value.ToString)
-                        If i = 8 Then
-                            DGV_DataModify.Rows(i).Cells(8).Value = ":"
-                        End If
+                    If i = 8 Then
+                        DGV_DataModify.Rows(i).Cells(8).Value = ":"
                     End If
                 End If
+            End If
         Next
     End Sub
 
@@ -181,28 +184,27 @@ Public Class FingerModify
         Dim datePilihan As String = dt_day.Value.ToString("yyyy-MM-dd")
         Dim datePilihan1 As String = dt_date1.Value.ToString("yyyy-MM-dd")
         Dim querycmd As String
-        Dim dep As String = cb_dep.Text
+        Dim dep As String = cb_dep_fin.Text
         Dim fingTime As String = dt_filter.Value.ToString("HH:mm")
 
         If sortType = False Then
             If f_filterIn = True Then
                 If shift = "ALL" Then
-                    querycmd = $"{QueryUtama} WHERE `Date_Finger` = '{datePilihan}' AND `Departement` = '{dep}' AND `Check_In` >= '{fingTime}' "
+                    querycmd = $"{QueryUtama} WHERE `Date_Finger` = '{datePilihan}' AND `Departement` = '{dep}' AND `Check_In` >= '{fingTime}'"
                 Else
-                    'BETWEEN '1996-07-01' AND '1996-07-31'
-                    querycmd = $"{QueryUtama} WHERE `Shift_Finger` = '{shift}' AND (`Date_Finger` BETWEEN '{datePilihan}' AND '{datePilihan1}' ) AND `Departement` = '{dep}' AND `Check_In` >= '{fingTime}'"
+                    querycmd = $"{QueryUtama} WHERE `Shift_Finger` LIKE '{shift}' AND (`Date_Finger` BETWEEN '{datePilihan}' AND '{datePilihan1}' ) AND `Departement` = '{dep}' AND `Check_In` >= '{fingTime}'"
                 End If
             ElseIf f_filterOut = True Then
                 If shift = "ALL" Then
                     querycmd = $"{QueryUtama} WHERE `Date_Finger` = '{datePilihan}' AND `Departement` = '{dep}' AND `Check_Out` >= '{fingTime}' "
                 Else
-                    querycmd = $"{QueryUtama} WHERE `Shift_Finger` = '{shift}' AND (`Date_Finger` BETWEEN '{datePilihan}' AND '{datePilihan1}' ) AND `Departement` = '{dep}' AND `Check_Out` >= '{fingTime}'"
+                    querycmd = $"{QueryUtama} WHERE `Shift_Finger` LIKE '{shift}' AND (`Date_Finger` BETWEEN '{datePilihan}' AND '{datePilihan1}' ) AND `Departement` = '{dep}' AND `Check_Out` >= '{fingTime}'"
                 End If
             Else
                 If shift = "ALL" Then
                     querycmd = $"{QueryUtama} WHERE `Date_Finger` = '{datePilihan}' AND `Departement` = '{dep}'"
                 Else
-                    querycmd = $"{QueryUtama} WHERE `Shift_Finger` = '{shift}' AND (`Date_Finger` BETWEEN '{datePilihan}' AND '{datePilihan1}' ) AND `Departement` = '{dep}'"
+                    querycmd = $"{QueryUtama} WHERE `Shift_Finger` LIKE '{shift}' AND (`Date_Finger` BETWEEN '{datePilihan}' AND '{datePilihan1}' ) AND `Departement` = '{dep}' AND (`Check_Out` <> '' OR `Check_In` <> '') "
                 End If
             End If
         ElseIf sortType = True Then
@@ -217,7 +219,6 @@ Public Class FingerModify
     End Sub
 
     Private Sub b_search_Click(sender As Object, e As EventArgs) Handles b_search.Click
-
         If TextBox10.Text <> "" Then
             SortingTabel(True)
             f_empSearch = False
@@ -288,10 +289,16 @@ Public Class FingerModify
         Dim DateFinger As String = dt_day.Value.ToString("yyyy-MM-dd")
         Dim syaratPanjang As Boolean = recFinger.Length = 5
         Dim syaratInput As Boolean
-
-        Dim dtimerow As DateTime = CDate(DGV_DataModify.Rows(indexRows).Cells(7).Value)
-        Dim statusCheck As String = DGV_DataModify.Rows(indexRows).Cells(6).Value
-        Dim recFingerTime As DateTime = CDate(recFinger)
+        Dim dtimerow As DateTime
+        Dim statusCheck As String
+        Dim recFingerTime As DateTime
+        Try
+            dtimerow = CDate(DGV_DataModify.Rows(indexRows).Cells(7).Value)
+            statusCheck = DGV_DataModify.Rows(indexRows).Cells(6).Value
+            recFingerTime = CDate(recFinger)
+        Catch ex As Exception
+            Exit Sub
+        End Try
 
 
         If syaratPanjang Then
@@ -362,7 +369,11 @@ Public Class FingerModify
     Private Sub b_showAll_Click(sender As Object, e As EventArgs) Handles b_showAll.Click
         DGV_DataModify.Rows.Clear()
         Dim DBClass As DataBaseClass = New DataBaseClass
-        Dim ds As DataSet = DBClass.downloadDB(QueryUtama)
+        Dim q As String = QueryUtama
+        If cb_dep_fin.Enabled = False Then
+            q = QueryUtama + $" WHERE `Departement` = '{cb_dep_fin.Text}'"
+        End If
+        Dim ds As DataSet = DBClass.downloadDB(q)
         insertToDgv(ds)
         CheckBox1.Checked = False
     End Sub
@@ -379,7 +390,4 @@ Public Class FingerModify
         End If
     End Sub
 
-    Private Sub DGV_DataModify_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_DataModify.CellContentClick
-
-    End Sub
 End Class

@@ -46,9 +46,7 @@ Public Class UploadFingerData
 
             'temporary,,,,,
             mainExportExcel(DS)
-            insertToDgv("", "")
-
-
+            'insertToDgv("", "")
             'BackgroundWorker1.RunWorkerAsync(args)
         End If
     End Sub
@@ -58,13 +56,22 @@ Public Class UploadFingerData
         Dim indexCell As Integer = ds.Tables(0).Columns.Count
         For i As Integer = 0 To indexRows - 1
             If ds.Tables(0).Rows(i).Item(2).ToString <> "" Then
-                Debug.WriteLine("date finger: " + ds.Tables(0).Rows(i).Item(2).ToString)
+                'Dim t As Date = ds.Tables(0).Rows(i).Item(2)
+                'Debug.WriteLine("date finger: " + ds.Tables(0).Rows(i).Item(2).ToString("yyyy-MM-dd"))
+
                 Dim Date_Finger As String = ds.Tables(0).Rows(i).Item(2)
+
                 Dim Check_In As String = ds.Tables(0).Rows(i).Item(6).ToString
                 Dim Check_Out As String = ds.Tables(0).Rows(i).Item(7).ToString
+                Dim On_Duty As String = ds.Tables(0).Rows(i).Item(4).ToString
+                Dim Off_duty As String = ds.Tables(0).Rows(i).Item(5).ToString
+                Debug.WriteLine("In: " + Check_In)
+                Debug.WriteLine("Out: " + Check_Out)
+
                 Dim edate = Date_Finger
                 Dim tangal_fin As String() = edate.Split("/")
                 Dim daySub As String = ""
+                Dim dateFinger As String = ""
                 If tangal_fin(1).Length = 2 Then
                     daySub = "dd"
                 Else
@@ -77,47 +84,74 @@ Public Class UploadFingerData
                     monthSub = "M"
                 End If
                 Dim xaxa As String = $"{monthSub}/{daySub}/yyyy"
-                'console.WriteLine("xaxa " + xaxa)
                 Dim expenddt As Date = Date.ParseExact(edate, xaxa, System.Globalization.DateTimeFormatInfo.InvariantInfo)
-                'console.WriteLine("masuk Data " + Date_Finger.ToString + "=" + expenddt.ToString("dd-MMM-yyyy"))
-                Dim queryNIK As String = $"SELECT `NIK`, `DEPARTMENT` FROM `master employer` WHERE `AC_Nomor` = '{ds.Tables(0).Rows(i).Item(0)}'"
+                Dim syaratNik As String
+
+
+                If ds.Tables(0).Rows(i).Item(0).ToString.Contains("A") Or ds.Tables(0).Rows(i).Item(0).ToString.Contains("K") Then
+                    syaratNik = $"`NIK` = '{ds.Tables(0).Rows(i).Item(0)}'"
+                Else
+                    syaratNik = $"`AC_Nomor` = '{ds.Tables(0).Rows(i).Item(0)}'"
+                End If
+
+                Dim queryNIK As String = $"SELECT `NIK`, `DEPARTMENT` FROM `master employer` WHERE {syaratNik}"
                 Dim dsNik As DataSet = funcDB.downloadDB(queryNIK)
-                'console.WriteLine($"Check In " + Check_In.ToString)
                 If dsNik.Tables(0).Rows.Count <> 0 Then
                     If Check_In = "" Or Check_Out = "" Then
                         Dim DeleteQuery As String = $"DELETE FROM `finger_employer` WHERE `NIK` = '{dsNik.Tables(0).Rows(0).Item(0).ToString}' AND `Date_Finger` = '{expenddt.ToString("yyyy-MM-dd")}'"
                         funcDB.uploadDB(DeleteQuery)
                         Dim masterQuery As String = $"INSERT INTO `finger_employer`(`NIK`,`AC_Nomor`, `Nama_Karyawan`, `Date_Finger`, `Shift_Finger`, `On_Duty`, `Off_Duty`, `Check_In`, `Check_Out`, `Departement`,`Finger Status`) 
-            VALUES ('{dsNik.Tables(0).Rows(0).Item(0).ToString}',
-                    '{ds.Tables(0).Rows(i).Item(0)}',
-                    '{ds.Tables(0).Rows(i).Item(1)}',
-                    '{expenddt.ToString("yyyy-MM-dd")}',
-                    '{ds.Tables(0).Rows(i).Item(3)}',
-                    '{ds.Tables(0).Rows(i).Item(4)}',
-                    '{ds.Tables(0).Rows(i).Item(5)}',
-                    '{ds.Tables(0).Rows(i).Item(6)}',
-                    '{ds.Tables(0).Rows(i).Item(7)}',
-                    '{dsNik.Tables(0).Rows(0).Item(1).ToString}',
-                    '0')"
+                        VALUES ('{dsNik.Tables(0).Rows(0).Item(0).ToString}',
+                        '{ds.Tables(0).Rows(i).Item(0)}',
+                        '{ds.Tables(0).Rows(i).Item(1)}',
+                        '{expenddt.ToString("yyyy-MM-dd")}',
+                        '{ds.Tables(0).Rows(i).Item(3)}',
+                        '{ds.Tables(0).Rows(i).Item(4)}',
+                        '{ds.Tables(0).Rows(i).Item(5)}',
+                        '{ds.Tables(0).Rows(i).Item(6)}',
+                        '{ds.Tables(0).Rows(i).Item(7)}',
+                        '{dsNik.Tables(0).Rows(0).Item(1).ToString}',
+                        '0')"
                         funcDB.uploadDB(masterQuery)
                         'console.WriteLine("END BOLOS")
 
                     Else
                         If Check_In.Length > 4 And Check_Out.Length > 4 Then
+                            Dim C_in As Date
+                            Dim C_out As Date
+                            Dim On_d As Date
+                            Dim Off_d As Date
+
+                            If Check_In.Contains("/") And Check_Out.Contains("/") Then
+                                C_in = ds.Tables(0).Rows(i).Item(6)
+                                C_out = ds.Tables(0).Rows(i).Item(7)
+                                On_d = ds.Tables(0).Rows(i).Item(4)
+                                Off_d = ds.Tables(0).Rows(i).Item(5)
+
+                                Check_In = Format(C_in, "HH:mm").ToString
+                                Check_Out = Format(C_out, "HH:mm").ToString
+                                On_Duty = Format(On_d, "HH:mm").ToString
+                                Off_duty = Format(Off_d, "HH:mm").ToString
+
+                                Debug.WriteLine("IN JOOOOOOOOOOOOOOOOOON")
+                            End If
+
+
+
                             Dim DeleteQuery As String = $"DELETE FROM `finger_employer` WHERE `NIK` = '{dsNik.Tables(0).Rows(0).Item(0).ToString}' AND `Date_Finger` = '{expenddt.ToString("yyyy-MM-dd")}'"
                             funcDB.uploadDB(DeleteQuery)
                             Dim masterQuery As String = $"INSERT INTO `finger_employer`(`NIK`,`AC_Nomor`, `Nama_Karyawan`, `Date_Finger`, `Shift_Finger`, `On_Duty`, `Off_Duty`, `Check_In`, `Check_Out`, `Departement`,`Finger Status`) 
-            VALUES ('{dsNik.Tables(0).Rows(0).Item(0).ToString}',
-                    '{ds.Tables(0).Rows(i).Item(0)}',
-                    '{ds.Tables(0).Rows(i).Item(1)}',
-                    '{expenddt.ToString("yyyy-MM-dd")}',
-                    '{ds.Tables(0).Rows(i).Item(3)}',
-                    '{ds.Tables(0).Rows(i).Item(4)}',
-                    '{ds.Tables(0).Rows(i).Item(5)}',
-                    '{ds.Tables(0).Rows(i).Item(6)}',
-                    '{ds.Tables(0).Rows(i).Item(7)}',
-                    '{dsNik.Tables(0).Rows(0).Item(1).ToString}',
-                    '1')"
+                            VALUES ('{dsNik.Tables(0).Rows(0).Item(0).ToString}',
+                            '{ds.Tables(0).Rows(i).Item(0)}',
+                            '{ds.Tables(0).Rows(i).Item(1)}',
+                            '{expenddt.ToString("yyyy-MM-dd")}',
+                            '{ds.Tables(0).Rows(i).Item(3)}',
+                            '{On_Duty}',
+                            '{Off_duty}',
+                            '{Check_In}',
+                            '{Check_Out}',
+                            '{dsNik.Tables(0).Rows(0).Item(1).ToString}',
+                            '1')"
                             funcDB.uploadDB(masterQuery)
                         End If
 

@@ -72,7 +72,20 @@
             DGV_ListCheck.Rows.Clear()
         End If
     End Sub
+    Dim 
     Private Sub ListNoCheck_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        If My.Settings.StatusUser = "admin" Then
+            cb_dep.Text = My.Settings.Departement.ToString
+            cb_dep.Enabled = False
+            Debug.WriteLine(My.Settings.Departement)
+
+        Else
+            For Each x As String In MDIParent1.JenisDepartement
+                cb_dep.Items.Add(x)
+            Next
+        End If
+
         Dim querycmd As String = $"SELECT `NIK`, `Name`, `Department`,`Date` FROM `tabel_harian_karyawan1` WHERE `Type` = 'No Check' AND `Department` = '{cb_dep.Text}'"
         dataOnSide(querycmd)
         dt_start.CustomFormat = " "
@@ -83,11 +96,11 @@
         dt_start.CustomFormat = "dd/MM/yyyy"
     End Sub
     Private Sub b_showall_Click(sender As Object, e As EventArgs) Handles b_showall.Click
-        cb_dep.Text = ""
+        'cb_dep.Text = ""
         nik.Text = ""
         dt_start.CustomFormat = " "
         dt_end.CustomFormat = " "
-        Dim querycmd As String = $"SELECT `NIK`, `Name`, `Department`,`Date` FROM `tabel_harian_karyawan1` WHERE `Type` = 'No Check'"
+        Dim querycmd As String = $"SELECT `NIK`, `Name`, `Department`,`Date` FROM `tabel_harian_karyawan1` WHERE `Type` = 'No Check' AND `Department` = '{cb_dep.Text}'"
         dataOnSide(querycmd)
     End Sub
 

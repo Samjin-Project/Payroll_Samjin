@@ -29,13 +29,13 @@ Partial Class MDIParent1
         Dim TreeNode3 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Daily Attendance")
         Dim TreeNode4 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Compute Payroll")
         Dim TreeNode5 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Upload Finger Data")
-        Dim TreeNode6 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("List No Check")
-        Dim TreeNode7 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("User", New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode2, TreeNode3, TreeNode4, TreeNode5, TreeNode6})
+        Dim TreeNode6 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("User", New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode2, TreeNode3, TreeNode4, TreeNode5})
+        Dim TreeNode7 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("List No Check")
         Dim TreeNode8 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Finger Modify")
         Dim TreeNode9 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Register Vacation")
         Dim TreeNode10 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("View Daily Attendance")
-        Dim TreeNode11 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Admin", New System.Windows.Forms.TreeNode() {TreeNode8, TreeNode9, TreeNode10})
-        Dim TreeNode12 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Attendance App", New System.Windows.Forms.TreeNode() {TreeNode7, TreeNode11})
+        Dim TreeNode11 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Admin", New System.Windows.Forms.TreeNode() {TreeNode7, TreeNode8, TreeNode9, TreeNode10})
+        Dim TreeNode12 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Attendance App", New System.Windows.Forms.TreeNode() {TreeNode6, TreeNode11})
         Me.MenuStrip = New System.Windows.Forms.MenuStrip()
         Me.FileMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
@@ -152,11 +152,11 @@ Partial Class MDIParent1
         TreeNode4.Text = "Compute Payroll"
         TreeNode5.Name = "UploadFingerDataNode"
         TreeNode5.Text = "Upload Finger Data"
-        TreeNode6.Name = "ListNoCheckNode"
-        TreeNode6.Text = "List No Check"
-        TreeNode7.Name = "AprovalChild"
-        TreeNode7.Text = "User"
-        TreeNode7.ToolTipText = "Admin"
+        TreeNode6.Name = "AprovalChild"
+        TreeNode6.Text = "User"
+        TreeNode6.ToolTipText = "Admin"
+        TreeNode7.Name = "ListNoCheckNode"
+        TreeNode7.Text = "List No Check"
         TreeNode8.Name = "FingerModifyNode"
         TreeNode8.Text = "Finger Modify"
         TreeNode9.Name = "RegisterVacationNode"
@@ -246,7 +246,7 @@ Partial Class MDIParent1
         Me.MaximizeBox = False
         Me.MinimumSize = New System.Drawing.Size(1000, 600)
         Me.Name = "MDIParent1"
-        Me.Text = "Payroll System Application 1.1.0.3"
+        Me.Text = "Payroll System Application 1.1.0.6"
         Me.MenuStrip.ResumeLayout(False)
         Me.MenuStrip.PerformLayout()
         Me.StatusStrip.ResumeLayout(False)

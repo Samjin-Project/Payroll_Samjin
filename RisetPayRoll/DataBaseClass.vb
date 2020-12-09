@@ -10,6 +10,20 @@ Public Class DataBaseClass
     Dim strUser As String = My.Settings.DB_User  'Database user
     Dim strPass As String = My.Settings.DB_Pass     'Database password
 
+    Public Function cekKoneksi() As Boolean
+        If connDB.State <> ConnectionState.Open Then
+            connDB.ConnectionString = "server=" & strServer.Trim & ";database=" & strDbase.Trim & ";user=" & strUser.Trim & ";password=" & strPass.Trim & ";Convert Zero Datetime='True'"
+            connDB.Open()
+            If connDB.State = ConnectionState.Open Then
+                connDB.Close()
+                Return True
+            Else
+                connDB.Close()
+                Return False
+            End If
+        End If
+    End Function
+
     Public Sub uploadDB(ByVal QueryUpload As String)
         '        Dim UploadQ As String = "INSERT INTO `master_employer`(`NIK`, `Nama_Karyawan`, `Posisi_Karyawan`, `Dep_Karyawan`, `TmptLahir_Karyawan`, `TglLahir_Karyawan`, `JKelamin_Karyawan`, `Pendidikan_Karyawan`, `TgllMasuk_Karyawan`, `Status_Karyawan`, `Salary_Karyawan`) 
         '        VALUES ('K200191,'Marlina Agustin','Operator','Rubber Forming','Bekasi','2008-01-13','Perempuan','SMA','2002-20-17','Magang',3524207)"

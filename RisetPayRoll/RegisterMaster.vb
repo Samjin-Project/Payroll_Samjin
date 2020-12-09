@@ -12,7 +12,7 @@ Public Class RegisterMaster
         End Get
     End Property
     Private Sub RegisterMaster_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `Department`, `StatusAktive` FROM `master employer`"
+        Dim QueryCMD As String = "SELECT `NIK`, `Nama_Karyawan`, `Department`, `StatusAktive` FROM `master employer` WHERE `StatusAktive` = '1'"
         dataOnReview(QueryCMD)
         DGV_Setting_Display()
         clearData()
@@ -193,8 +193,14 @@ Public Class RegisterMaster
                 Debug.WriteLine("test 1")
             Else
                 Debug.WriteLine("test 0")
+
                 dt_createKeluar.CustomFormat = "dd/MM/yyyy"
-                dt_createKeluar.Value = New Date(CInt(tglKeluar.Substring(6, 4)), CInt(tglKeluar.Substring(3, 2)), CInt(tglKeluar.Substring(0, 2)))
+                Debug.WriteLine(tglKeluar.Length)
+                If tglKeluar.Length = 21 Then
+                    dt_createKeluar.Value = New Date(CInt(tglKeluar.Substring(5, 4)), CInt(tglKeluar.Substring(0, 2)), CInt(tglKeluar.Substring(3, 1)))
+                Else
+                    dt_createKeluar.Value = New Date(CInt(tglKeluar.Substring(6, 4)), CInt(tglKeluar.Substring(0, 2)), CInt(tglKeluar.Substring(3, 2)))
+                End If
             End If
             Dim gaji As Double = ds.Tables(0).Rows(0).Item(13)
 
@@ -213,7 +219,7 @@ Public Class RegisterMaster
             tb_pend.Text = ds.Tables(0).Rows(0).Item(9).ToString
             dt_createMasuk.CustomFormat = "dd/MM/yyyy"
             dt_createMasuk.Value = tglMasuk
-            cb_stat.SelectedItem = ds.Tables(0).Rows(0).Item(12).ToString
+            cb_stat.Text = ds.Tables(0).Rows(0).Item(12).ToString
             tb_salary.Text = gaji.ToString("##,##,###")
 
             If ds.Tables(0).Rows(0).Item(14) = "1" Then
@@ -304,7 +310,7 @@ Public Class RegisterMaster
             cb_jk.Text = ""
             cb_department.Text = ""
             Dim nik As String = tb_emp.Text
-            Dim querycmd As String = $"SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan`.`StatusAktive` FROM `master employer` WHERE `NIK` = '{nik}'" + AktiveStatus
+            Dim querycmd As String = $"SELECT `NIK`, `Nama_Karyawan`, `Posisi_Karyawan`,`StatusAktive` FROM `master employer` WHERE `NIK` = '{nik}'" + AktiveStatus
             dataOnReview(querycmd)
             clearData()
         End If
@@ -512,7 +518,7 @@ Public Class RegisterMaster
                          '{dt_createMasuk.Value.ToString("yyyy-MM-dd")}',
                          '{createOut}',
                          '{cb_stat.Text}',
-                         '{tb_salary.Text.Replace(".", "")}',
+                         '{tb_salary.Text.Replace(",", "")}',
                          '{cb_bpjs.Text}',
                          '{aktive}')"
             Console.WriteLine("DB Query : " + masterQuery)
@@ -577,7 +583,7 @@ Public Class RegisterMaster
                                              `Tanggal_Masuk`='{dt_createMasuk.Value.ToString("yyyy-MM-dd")}',
                                              `Tanggal_Keluar`='{createOut}', 
                                              `Status_Karyawan`='{cb_stat.Text}',
-                                             `Salary`='{tb_salary.Text.Replace(".", "")}', 
+                                             `Salary`='{tb_salary.Text.Replace(",", "")}', 
                                              `StatusBPJS`='{cb_bpjs.Text}', 
                                              `StatusAktive`= '{cb_aktif.Text}'
                                     WHERE `NIK` = '{nik}'"
@@ -713,4 +719,5 @@ Public Class RegisterMaster
     Private Sub BackgroundWorker1_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
         UploadExcel()
     End Sub
+
 End Class

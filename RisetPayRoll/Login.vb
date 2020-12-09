@@ -1,19 +1,28 @@
 ﻿Imports System.Data.SqlClient
 Public Class LoginForm
+    Dim DBmaster As DataBaseClass = New DataBaseClass
     Private Sub Btn_login_Click(sender As Object, e As EventArgs) Handles Btn_login.Click
-        Dim query As String = $"SELECT COUNT(*) FROM `user_admin` WHERE BINARY `Username` = '{box_user.Text}' AND BINARY `Password` = '{box_pass.Text}'"
-        Dim DBmaster As DataBaseClass = New DataBaseClass
-        Dim Akun As DataSet = DBmaster.downloadDB(query)
+        Try
+            If DBmaster.cekKoneksi = False Then
+                Label4.Visible = True
+            Else
+                Dim query As String = $"SELECT COUNT(*) FROM `user_admin` WHERE BINARY `Username` = '{box_user.Text}' AND BINARY `Password` = '{box_pass.Text}'"
+                Dim Akun As DataSet = DBmaster.downloadDB(query)
+                If Akun.Tables(0).Rows(0).Item(0) = 0 Then
+                    Label3.Visible = True
+                Else
+                    'MessageBox.Show("login berhasil !")
+                    FlagData()
+                    'Me.Hide()
+                    MDIParent1.Show()
+                    Close()
+                End If
+            End If
 
-        If Akun.Tables(0).Rows(0).Item(0) = 0 Then
-            Label3.Visible = True
-        Else
-            'MessageBox.Show("login berhasil !")
-            FlagData()
-            'Me.Hide()
-            MDIParent1.Show()
-            Close()
-        End If
+        Catch ex As Exception
+            Label4.Visible = True
+        End Try
+
     End Sub
 
     Private Sub FlagData()
@@ -32,10 +41,21 @@ Public Class LoginForm
         MessageBoxIcon.Exclamation)
             Me.Close()
         End If
+
+        'Try
         If My.Settings.StatusLogin = True Then
-            MDIParent1.Show()
-            Close()
+            If DBmaster.cekKoneksi = False Then
+                Label4.Visible = True
+                Debug.WriteLine("error")
+            Else
+                MDIParent1.Show()
+                Close()
+            End If
         End If
+        'Catch ex As Exception
+        'Label4.Visible = True
+        'End Try
+
     End Sub
 
     Private Function AlreadyRunning() As Boolean
