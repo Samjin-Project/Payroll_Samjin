@@ -10,9 +10,17 @@
 
     Private Sub RegisterVacation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If My.Settings.StatusUser = "admin" Then
-            cb_dep.Text = My.Settings.Departement
-            cb_dep.Enabled = False
-            b_delete.Enabled = False
+            If My.Settings.Departement.ToString = "PCBA" Then
+                cb_dep.Items.Clear()
+                cb_dep.Items.Add("PCBA")
+                cb_dep.Items.Add("SMD")
+                cb_dep.Text = My.Settings.Departement.ToString
+
+            Else
+                cb_dep.Text = My.Settings.Departement.ToString
+                cb_dep.Enabled = False
+                b_delete.Enabled = False
+            End If
         Else
             b_delete.Enabled = True
             cb_dep.Items.Clear()
@@ -25,6 +33,9 @@
 
         Dim QueryCMD As String = $"SELECT `NIK`, `Status_Approval`, `Nama_Karyawan`, `Vacation_Code`, `StartVacation_Date`, 
         `EndVacation_Date`,  `Department`,`Reason` FROM `approval_vacation` WHERE `Status_Approval` = 'Yes'"
+        If cb_dep.Enabled = False Or cb_dep.Text = "PCBA" Or cb_dep.Text = "SMD" Then
+            QueryCMD = QueryCMD + $" AND `Department` = '{My.Settings.Departement.ToString}'"
+        End If
         dataOnSide(QueryCMD)
         b_delete.Enabled = True
     End Sub
@@ -189,6 +200,10 @@
 
         Dim QueryCMD As String = $"SELECT `NIK`, `Status_Approval`, `Nama_Karyawan`, `Vacation_Code`, `StartVacation_Date`, 
         `EndVacation_Date`,  `Department`,`Reason` FROM `approval_vacation` WHERE `Status_Approval` = 'Yes'"
+        If cb_dep.Enabled = False Or cb_dep.Text = "PCBA" Or cb_dep.Text = "SMD" Then
+            QueryCMD = QueryCMD + $" WHERE `Departement` = '{cb_dep.Text}'"
+        End If
+
         dataOnSide(QueryCMD)
         Console.WriteLine("Done")
     End Sub

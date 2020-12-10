@@ -17,9 +17,16 @@ Public Class FingerModify
     End Property
     Private Sub FingerModify_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If My.Settings.StatusUser = "admin" Then
-            cb_dep_fin.Text = My.Settings.Departement.ToString
-            cb_dep_fin.Enabled = False
-            Debug.WriteLine(My.Settings.Departement)
+            If My.Settings.Departement.ToString = "PCBA" Then
+                cb_dep_fin.Items.Clear()
+                cb_dep_fin.Items.Add("PCBA")
+                cb_dep_fin.Items.Add("SMD")
+                cb_dep_fin.Text = My.Settings.Departement.ToString
+            Else
+                cb_dep_fin.Text = My.Settings.Departement.ToString
+                cb_dep_fin.Enabled = False
+                Debug.WriteLine(My.Settings.Departement)
+            End If
         Else
             For Each x As String In MDIParent1.JenisDepartement
                 cb_dep_fin.Items.Add(x)
@@ -370,7 +377,7 @@ Public Class FingerModify
         DGV_DataModify.Rows.Clear()
         Dim DBClass As DataBaseClass = New DataBaseClass
         Dim q As String = QueryUtama
-        If cb_dep_fin.Enabled = False Then
+        If cb_dep_fin.Enabled = False Or cb_dep_fin.Text = "PCBA" Or cb_dep_fin.Text = "SMD" Then
             q = QueryUtama + $" WHERE `Departement` = '{cb_dep_fin.Text}'"
         End If
         Dim ds As DataSet = DBClass.downloadDB(q)

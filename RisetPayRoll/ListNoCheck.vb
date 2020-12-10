@@ -72,14 +72,20 @@
             DGV_ListCheck.Rows.Clear()
         End If
     End Sub
-    Dim 
+
     Private Sub ListNoCheck_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         If My.Settings.StatusUser = "admin" Then
-            cb_dep.Text = My.Settings.Departement.ToString
-            cb_dep.Enabled = False
-            Debug.WriteLine(My.Settings.Departement)
-
+            If My.Settings.Departement.ToString = "PCBA" Then
+                cb_dep.Items.Clear()
+                cb_dep.Items.Add("PCBA")
+                cb_dep.Items.Add("SMD")
+                cb_dep.Text = My.Settings.Departement.ToString
+            Else
+                cb_dep.Text = My.Settings.Departement.ToString
+                cb_dep.Enabled = False
+                Debug.WriteLine(My.Settings.Departement)
+            End If
         Else
             For Each x As String In MDIParent1.JenisDepartement
                 cb_dep.Items.Add(x)

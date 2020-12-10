@@ -83,6 +83,7 @@ Partial Class ViewDailyAttendance
         Me.KolomHasil_D30 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.KolomHasil_D31 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.KolomHasil_Total = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -100,6 +101,7 @@ Partial Class ViewDailyAttendance
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Button1)
         Me.GroupBox1.Controls.Add(Me.b_clear)
         Me.GroupBox1.Controls.Add(Me.Button2)
         Me.GroupBox1.Controls.Add(Me.Panel3)
@@ -127,7 +129,7 @@ Partial Class ViewDailyAttendance
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(730, 49)
+        Me.Button2.Location = New System.Drawing.Point(483, 53)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 23)
         Me.Button2.TabIndex = 42
@@ -518,6 +520,15 @@ Partial Class ViewDailyAttendance
         Me.KolomHasil_Total.Name = "KolomHasil_Total"
         Me.KolomHasil_Total.Width = 56
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(579, 53)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 44
+        Me.Button1.Text = "Retrive"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'ViewDailyAttendance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -595,4 +606,5 @@ Partial Class ViewDailyAttendance
     Friend WithEvents KolomHasil_D31 As DataGridViewTextBoxColumn
     Friend WithEvents KolomHasil_Total As DataGridViewTextBoxColumn
     Friend WithEvents b_clear As Button
+    Friend WithEvents Button1 As Button
 End Class

@@ -15,10 +15,17 @@
     End Property
     Private Sub ViewDailyAttendance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If My.Settings.StatusUser = "admin" Then
-            cb_dep.Text = My.Settings.Departement
-            cb_dep.Enabled = False
-            cb_name.Text = My.Settings.NamaUser
-            cb_name.Enabled = False
+            If My.Settings.Departement.ToString = "PCBA" Then
+                cb_dep.Items.Clear()
+                cb_dep.Items.Add("PCBA")
+                cb_dep.Items.Add("SMD")
+                cb_dep.Text = My.Settings.Departement
+            Else
+                cb_dep.Text = My.Settings.Departement
+                cb_dep.Enabled = False
+                cb_name.Text = My.Settings.NamaUser
+                cb_name.Enabled = False
+            End If
 
         Else
             For Each x As String In MDIParent1.JenisDepartement
@@ -30,8 +37,8 @@
 
         SetDoubleBuffered(DGV_ReviewDaily)
         cb_dep.Text = "PCBA"
-        Dim query As String = $"{QueryCMD} WHERE `Department` = '{cb_dep.Text}' AND MONTH(`DateMonth`) = {dt_filter.Value.ToString("MM")}"
-        showData(query)
+        'Dim query As String = $"{QueryCMD} WHERE `Department` = '{cb_dep.Text}' AND MONTH(`DateMonth`) = {dt_filter.Value.ToString("MM")}"
+        'showData(query)
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -302,12 +309,6 @@
         flag = True
     End Sub
 
-    Private Sub cb_dep_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_dep.SelectedIndexChanged
-        tb_emp.Text = ""
-        Dim dep As String = cb_dep.Text
-        Dim tgl As String = dt_filter.Value.ToString("MMM yyy")
-        filterDataDep(dep, tgl)
-    End Sub
 
     Private Sub tb_emp_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles tb_emp.PreviewKeyDown
         If e.KeyCode = Keys.Enter Then
@@ -318,4 +319,10 @@
         End If
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        tb_emp.Text = ""
+        Dim dep As String = cb_dep.Text
+        Dim tgl As String = dt_filter.Value.ToString("MMM yyy")
+        filterDataDep(dep, tgl)
+    End Sub
 End Class
